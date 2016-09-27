@@ -1,4 +1,4 @@
-package reporting.com.HTMLReports;
+package runnerAndSteps;
 
 import org.junit.runner.RunWith;
 
@@ -14,8 +14,8 @@ import cucumber.api.junit.Cucumber;
 //************************************** CSS Portal***********************************
 
 		(format = {"pretty", "html:target/html/result.html"},
-		 features = "src/test/resource/SanityTestScript.feature")          /// Run this for SHAKEOUT
-        //features = "src/test/resource/RegressionTests.feature")           /// Run this for Regression
+		 //features = "src/test/resource/SanityTestScript.feature")          /// Run this for SHAKEOUT
+        features = "src/test/resource/RegressionTests.feature")           /// Run this for Regression
       // features = "src/test/resource/wip.feature") ///wip 
 
 

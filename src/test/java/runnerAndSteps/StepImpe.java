@@ -1,4 +1,4 @@
-package reporting.com.HTMLReports;
+package runnerAndSteps;
 
 
 import java.sql.DriverManager;
@@ -19,6 +19,12 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import reporting.com.HTMLReports.BillingHistoryPage;
+import reporting.com.HTMLReports.DBUtilities;
+import reporting.com.HTMLReports.ForgotYourPasswordPage;
+import reporting.com.HTMLReports.HomePage;
+import reporting.com.HTMLReports.LandingPage;
+import reporting.com.HTMLReports.MakeAPaymentPage;
 
 public class StepImpe {
  //********************************************** following is before and after *****************************************
