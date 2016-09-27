@@ -34,7 +34,14 @@ public class LandingPage extends DBUtilities {
 			Thread.sleep(3000);
 			String name = data.get(i).get(1);
 			System.out.println(" and the name is+++++" +name);
-			if(name.equals("Current_Bill")||name.equals("Pay")||name.equals("Submit")||name.equals("Cancel")){
+			if(name.equals("Current_Bill")
+					||name.equals("Pay")
+					||name.equals("Submit")
+					||name.equals("Cancel")
+					||name.equals("Date")
+					||name.equals("Type")
+					||name.equals("Amount")
+					){
 				Thread.sleep(3000);
 				//DBUtilities createXpath = new DBUtilities(driver);
 				//String myxpath = createXpath.xpathMakerById(name);
