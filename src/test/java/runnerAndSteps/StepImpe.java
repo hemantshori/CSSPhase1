@@ -74,11 +74,11 @@ public class StepImpe {
 
 
 	@And("^I hit Enter$")
-
-public LandingPage I_hit_Enter() throws InterruptedException
+     public LandingPage I_hit_Enter() throws InterruptedException
 	{
    PageFactory.initElements(driver, LandingPage.class).hitEnter();
-		Thread.sleep(6000);
+		Thread.sleep(1000);
+		
 		 return PageFactory.initElements(driver, LandingPage.class);
 	}
 	

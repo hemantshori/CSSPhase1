@@ -1,7 +1,7 @@
 @wip
 Feature: this is just a wip
 
-  Scenario Outline: Covers tests around billing history check, Scenario 189
+  Scenario Outline: DCSSP-450,DCSSP-451,DCSSP-457, PAYMENTS, To make payment from RHS "PAY" button.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -9,21 +9,26 @@ Feature: this is just a wip
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "<ButtonName>"
-    And I check I am on "Billing History" page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                   |
-      | Item2 | Understanding Your Charges |
-      | Item3 | Pending Transactions       |
-      | Item4 | Completed Transactions     |
-      | Item5 | Date                       |
-      | Item6 | Type                       |
-      | Item7 | Amount                     |
-      | Item8 | 5% discount!               |
-      | Item9 | Understanding Your Charges |
-    And I will see message "Your highest billing month was in"
-    And I will see message "Your lowest billing month was in"
-    And I will see message "Your average daily cost for the last 12 months is"
+    And I check I am on "MakePayment" page
+    And I enter then details as
+      | Fields        | Value           |
+      | PaymentAmount | <PaymentAmount> |
+      | NameOnCard    | <Name on Card>  |
+      | CardNumber    | <Card Number>   |
+      | ExpiryMonth   | <Expiry Month>  |
+      | ExpiryYear    | <Expiry Year>   |
+      | SecurityCode  | <Security Code> |
+    And I click on "Submit"
+    Then I see "<Message>" displayed
+    And I check I am on "MakePayment" page
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      | Graph Message                             |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Billing History | Residential - Electricity Billing History |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code | Message                                    |
+      | CSS        | UserNameInput | PasswordInput | Jane     | Dbresults1 | Pay        | 689608083     |               | Mary Test    | 4007000000027 | 11           | 20          | 112           | Mandatory field!                           |
+      | CSS        | UserNameInput | PasswordInput | Jane     | Dbresults1 | Pay        | 689608083     | 20            |              | 4007000000027 | 11           | 20          | 112           | Mandatory field!                           |
+      | CSS        | UserNameInput | PasswordInput | Jane     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    |               | 11           | 20          | 112           | Mandatory field!                           |
+      | CSS        | UserNameInput | PasswordInput | Jane     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 |              | 20          | 112           | Mandatory field!                           |
+      | CSS        | UserNameInput | PasswordInput | Jane     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 | 11           |             | 112           | Mandatory field!                           |
+      | CSS        | UserNameInput | PasswordInput | Jane     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 | 11           | 20          |               | Mandatory field!                           |
+      | CSS        | UserNameInput | PasswordInput | Jane     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000    | 11           | 20          | 112           | The credit card number is invalid.         |
+  #    | CSS        | UserNameInput | PasswordInput | Jane     | Dbresults11 | Pay        | 689608083     | 5.00          | Mary Test    | 4007000000027 | 11           | 20          | 112           | Thank you, your payment has been received. |
