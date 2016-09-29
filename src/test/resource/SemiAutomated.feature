@@ -1,3 +1,5 @@
+ 
+ @wip
  Feature: This is a semiautomated test, in between scrript 1 and 2, CAPTCHA needs to be resolved and the link from mail has to be copied before 2nd script is executed.
   Scenario Outline: DCSSP-493 :As a user I want to login to the CSS using my email address so that I can access my information
     Given I want to login to portal "<PortalName>"
@@ -37,7 +39,7 @@
 
     Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password  | email                         | wrong email         | Message                                                |
-      | CSS        | CSS2        | UserNameInput | PasswordInput | Jane      | Dbresults1 | hemant.shori@dbresults.com.au | blah_blah@gmail.com | Invalid Username, Email or Password. Please try again. |
+      | CSS        | CSS2        | UserNameInput | PasswordInput | Mary      | Dbresults1 | hemant.shori@dbresults.com.au | blah_blah@gmail.com | Invalid Username, Email or Password. Please try again. |
 
      #################################################################################################################################
      ## Resolve CAPTCHA
@@ -51,7 +53,7 @@
 
 
 
-@wip
+
   Scenario Outline: DCSSP-548: all; DCSSP-550: all >> cancelling change of password and successful change of password to reaccess account
     Given I want to login to portal "<PortalName>"
     And "<Item>" is displayed as "<ItemName>"

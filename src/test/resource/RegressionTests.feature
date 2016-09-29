@@ -809,20 +809,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | item1 | Your account has already been activated. Please click the button below. |
     Then I click on "wtSubmitButton3"
     And I check I am on "Login" page
-    And I click on "Create Account"
-    And I enter then details as new
-      | Fields                    | Value             |
-      | InputAccountNumber        | <Account Number2> |
-      | InputBillName             | <BillName2>       |
-      | InputIdentificationNumber | <SSN2>            |
-    And I click on "checkbox" checkbox
-    And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
-    And I check I am on "Account Already Registered." page
-    Then I see text "Already Registered!" displayed
-    And I see text "Make sure you have checked your Junk or Spam Folder, to re-send the email, please click on the button below." displayed
 
-    # And I click on "RE-SEND EMAIL"
     Examples: 
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        |
       | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 211-02-0091 |
@@ -893,7 +880,8 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   | Mobile Number1 | HomePhone Number1 | WorkPhone Number1 | Mobile Number2 | HomePhone Number2 | WorkPhone Number2 | Address Line1                | Address Line2 | City          | State | Post Code | DropDownValue1           | DropDownField     | Email                   |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | (999) 11-g     | (999) 989-1122    | (888) 777-6654    | (903) 888-7161 | (99) 77-60        | (88) 71           | Apt. 26, 30 Saint Francis Pl |               | San Francisco | CA    | 94107     | United States of America | CountriesComboBox | email@Dbresults1.com.au |
 
-  Scenario Outline: DCSSP-520: Already registered or already activated
+
+  Scenario Outline: DCSSP-520: Already registered or already activated and user tries again.
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
     And I enter then details as new
@@ -905,7 +893,6 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Account Already Activated" page
-    And I see text "Account Already Activated" displayed
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                                |
       | item1 | Your account has already been activated. Please click the button below. |
@@ -920,11 +907,80 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "checkbox" checkbox
     And I click on "Submit"
     Then I see "Please wait while we retrieve your account..." displayed
+    And I check I am on "Registration" page
+    And I enter then details as new
+      | Fields          | Value               |
+      | Email           | <Email Address1>    |
+      | Username        | <Choose UserName1>  |
+      | NewPassword     | <Choose Password1>  |
+      | ConfirmPassword | <Confirm Password1> |
+      | Hint            | <Hint1>             |
+    And I select "<DropDownValue1>" from "<DropDownField>"
+    And I click on "Submit"
+     And I check I am on "Registration Confirmation" page
+    And I see text "Registration Confirmation" displayed
+ Examples: 
+      | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
+      | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
+
+
+  Scenario Outline: Continue with 520
+    Given I want to login to portal "<PortalName>"
+ And I click on "Create Account"
+    And I enter then details as new
+      | Fields                    | Value             |
+      | InputAccountNumber        | <Account Number2> |
+      | InputBillName             | <BillName2>       |
+      | InputIdentificationNumber | <SSN2>            |
+    And I click on "checkbox" checkbox
+    And I click on "Submit"
     And I check I am on "Account Already Registered" page
-    And I see text "Already Registered!" displayed
-    And I see text "Make sure you have checked your Junk or Spam Folder, to re-send the email, please click on the button below." displayed
-    And I click on "ReSendEmailButton"
+    Then I see text "Already Registered!" displayed
+
 
     Examples: 
-      | PortalName | Account Number1 | BillName1         | SSN1        | Account Number2 | BillName2           | SSN2        |
-      | CSS        | 1019172054      | automan, johntest | 829-33-7070 | 5133801785      | User, AutomationOne | 999-99-4321 |
+      | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
+      | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
+  
+      
+   
+  Scenario Outline: DCSSP-493 :As a user I want to login to the CSS using my email address so that I can access my information. This will keep runing the validations till CAPTCHA
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Settings"
+    And I click on "EditSettings"
+    And I enter then details as
+      | Fields | Value   |
+      | Email  | <email> |
+    And I click on "Submit"
+    And I click on "Sign Out"
+    And I check I am on "Login" page
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <email>    |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I check I am on "Dashboard" page
+    And I click on "Sign Out"
+    And I enter then details as
+      | Fields        | Value         |
+      | UserNameInput | <wrong email> |
+      | PasswordInput | <Password>    |
+    And I hit Enter
+    Then I see "<Message>" displayed
+    Given I want to login to portal "<PortalName2>"
+    And I click on "Forgot Password?"
+     And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <email> |
+      And I hit Enter
+      Then i see "Invalid human validation. Please try again." displayed
+
+    Examples: 
+      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password  | email                         | wrong email         | Message                                                |
+      | CSS        | CSS2        | UserNameInput | PasswordInput | Mary      | Dbresults1 | hemant.shori@dbresults.com.au | blah_blah@gmail.com | Invalid Username, Email or Password. Please try again. |
+      

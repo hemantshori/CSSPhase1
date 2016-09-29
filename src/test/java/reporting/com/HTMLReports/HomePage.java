@@ -25,16 +25,16 @@ public class HomePage extends DBUtilities {
 		//driver.get("https://dev-ssc.dbresults.com.au/CSSPortal/");
         
         //****************************************************************************************************************
-		}else if(arg1.equals("CSS2")){driver.get("https://dbresults-tst.outsystemsenterprise.com/CSSPortal/LoginPage.aspx");
+		}else if(arg1.equals("CSS2")){driver.get("https://test-ssc.dbresults.com.au/CSSPortal/Login.aspx");
 		}else if(arg1.equals("UAP")){
 			
 				//driver.get("https://dbresults.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
 				//following is for SIT
-		        driver.get("https://dbresults-tst.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
+		      //  driver.get("https://dbresults-tst.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
 				// for dev
 				//driver.get("https://dbresults-dev.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
 				}
-	     else if(arg1.equals("copyFromMail")){
+	     else if(arg1.equals("copyFromMail")){           // this is for semi-automated tests as the link will be coming from the received mail
         //following is for SIT
    driver.get("https://dbresults-tst.outsystemsenterprise.com/AccountMgmt/ResetPassword.aspx?Token=8d47cdf4-c3cd-4901-b4c8-fda94a1e59e0");
  }
