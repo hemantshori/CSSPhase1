@@ -101,7 +101,7 @@ public class StepImpe {
 				||arg1.equals("HintInfoIcon")
 				||arg1.equals("wtSubmitButton3")      // to do ask M lara to change thename ....this is for Reset Password
 				||arg1.equals("Cancel")){
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath2 = createXpath.xpathMakerById(arg1);
 			driver.findElement(By.xpath(myxpath2)).click();

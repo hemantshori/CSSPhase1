@@ -395,14 +395,6 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Payments"
     And I click on "Make a Payment"
     And I check I am on "MakePayment" page
-    And "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName            |
-      | Item1 | Total Due           |
-      | Item2 | Payment Amount      |
-      | Item3 | Name on Card        |
-      | Item4 | Card Number         |
-      | Item5 | Expiry Date (mm/yy) |
-      | Item6 | Security Code       |
     And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
     And I enter then details as
       | Fields        | Value           |
