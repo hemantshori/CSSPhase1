@@ -247,10 +247,12 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 |              | 20          | 112           | Mandatory field!                   |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 | 11           |             | 112           | Mandatory field!                   |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 | 11           | 20          |               | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000    | 11           | 20          | 112           | The credit card number is invalid. |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000    | 11           | 20          | 223           | The credit card number is invalid. |
 
   #    | CSS        | UserNameInput | PasswordInput | mary     | Dbresults11 | Pay        | 689608083     | 5.00          | Mary Test    | 4007000000027 | 11           | 20          | 112           | Thank you, your payment has been received. |
-  Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS "PAY" button.
+
+
+Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS "PAY" button.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -268,11 +270,12 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | ExpiryYear    | <Expiry Year>   |
       | SecurityCode  | <Security Code> |
     And I click on "Submit"
-    Then I see "<Message>" displayed
+     Then I see text "<Message>" displayed
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code | Message                                    |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 2.00          | Mary Test    | 4007000000027 | 11           | 20          | 112           | Thank you, your payment has been received. |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 1.10          | Mary Test    | 4007000000027 |05           | 20          | 113           | Thank you, your payment has been received. |
+
 
   #########################################################################
   ###############################EDIT SETTINGS##################################
@@ -806,7 +809,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        |
       | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 211-02-0091 |
 
-  @wip
+
   Scenario Outline: DCSSP-489 As a user I want my name displayed in the portal so that I know I'm currently logged in
     Given I want to login to portal "<PortalName>"
     And I enter then details as

@@ -84,6 +84,7 @@ public class LandingPage extends DBUtilities {
     		  DBUtilities checkElementDisplayed = new DBUtilities(driver);
         	  String myxpath=checkElementDisplayed.xpathMakerSpanClass(arg1);
         	 // Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());     todo fix it later
+        	  
     	  }else{
     	  DBUtilities checkElementDisplayed = new DBUtilities(driver);
     	  String myxpath=checkElementDisplayed.xpathMakerBySpanID(arg1);
@@ -109,7 +110,7 @@ public class LandingPage extends DBUtilities {
       driver.getPageSource().contains(arg1);
   Assert.assertTrue(" Varification failed as " +arg1 +"NOT FOUND",driver.getPageSource().contains(arg1));
 	//  Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
-	  
+
 	  if(driver.findElements(By.xpath(myxpath)).size() != 0){
 			System.out.println("Element is Present");
 			}else{

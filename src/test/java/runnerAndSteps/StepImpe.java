@@ -96,7 +96,7 @@ public class StepImpe {
 				||arg1.equals("BillingHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
 				||arg1.equals("EditSettings")
-				||arg1.equals("Submit")
+//				||arg1.equals("Submit")
 				||arg1.equals("PasswordInfoIcon")
 				||arg1.equals("HintInfoIcon")
 				||arg1.equals("wtSubmitButton3")      // to do ask M lara to change thename ....this is for Reset Password
@@ -106,6 +106,13 @@ public class StepImpe {
 			String myxpath2 = createXpath.xpathMakerById(arg1);
 			driver.findElement(By.xpath(myxpath2)).click();
 			
+		}
+		else if (arg1.equals("Submit")){
+                  DBUtilities createXpath = new DBUtilities(driver);
+			String myxpath2 = createXpath.xpathMakerById(arg1);
+			System.out.println("iam herrerererererrererere");
+			driver.findElement(By.xpath(myxpath2)).click();
+			Thread.sleep(5000);
 		}
 			
 		else if (arg1.equals("Welcome")){
