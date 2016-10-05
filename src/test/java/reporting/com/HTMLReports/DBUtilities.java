@@ -47,6 +47,7 @@ public class DBUtilities extends XPathGenerator {
 	 {
 		 DBUtilities createXpath = new DBUtilities(driver);
 		 String myXpath = createXpath.xpathMakerByClass(arg1);
+		 System.out.println("successfully dispays hint which was marked as infoicon before" +arg1);
 		 //String myXpath2 = createXpath.xpathMakerContainsText(arg2);
 		 Assert.assertTrue(driver.findElement(By.xpath(myXpath)).isDisplayed()); 
 		 Actions action = new Actions(driver);

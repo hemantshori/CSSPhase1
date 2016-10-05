@@ -110,7 +110,6 @@ public class StepImpe {
 		else if (arg1.equals("Submit")){
                   DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath2 = createXpath.xpathMakerById(arg1);
-			System.out.println("iam herrerererererrererere");
 			driver.findElement(By.xpath(myxpath2)).click();
 			Thread.sleep(5000);
 		}

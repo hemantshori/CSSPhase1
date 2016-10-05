@@ -825,7 +825,7 @@ Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS 
       | PortalName | UserNameField | PasswordField | UserName | Password   | Welcome Message |
       | CSS        | UserNameInput | PasswordInput | Mary     | Dbresults1 | Welcome         |
 
-  Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: covers update of info (excludes ccb check)
+Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: covers update of info (excludes ccb check)
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -844,7 +844,7 @@ Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS 
       | MobilePhone | <Mobile Number1>    |
       | HomePhone   | <HomePhone Number1> |
       | WorkPhone   | <WorkPhone Number1> |
-    And I hover on "InfoTooltip OSInline" to verify "(999) 999-9999" is displayed
+    And I hover on "hint" to verify "(999) 999-9999" is displayed
     And I click on "Submit"
     Then I see "Mobile format invalid. Expected format: (999) 999-9999" displayed
     And I enter then details as
