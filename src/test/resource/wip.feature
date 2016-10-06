@@ -1,4 +1,4 @@
-@wip
+
 Feature: this is just a wip
   Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: covers update of info (excludes ccb check)
     Given I want to login to portal "<PortalName>"
