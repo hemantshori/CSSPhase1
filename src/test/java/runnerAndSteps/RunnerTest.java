@@ -13,14 +13,14 @@ import cucumber.api.junit.Cucumber;
 // OCT***********************************
 
 (format = { "pretty", "html:target/html/result.html" },
-    //for SHAKEOUT
+    //*********************for SHAKEOUT*************************************
 		// features = "src/test/resource/SanityTestScript.feature") /// Run this
 		
-    //for Regression
+    //****************for Regression****************************
 		 features = "src/test/resource/RegressionTests.feature") /// Run this
 		
-    //for wip
-		//features = "src/test/resource/wip.feature") /// wip
+    //********************for wip********************************
+	//	features = "src/test/resource/wip.feature") /// wip
 
 // ************************************** Admin
 // Portal***********************************

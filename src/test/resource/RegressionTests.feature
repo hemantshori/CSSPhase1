@@ -1,4 +1,4 @@
-
+@wip
 Feature: To test the functionality of Appication as described in Jira Stories for Iteration 1
 
   Scenario Outline: User views the menu items, Test 1, DCSSP-245, DCSSP-533 Description: User views the menu items Epic: Common Components
@@ -15,17 +15,12 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName          |
       | item1 | Logo on main page |
-      #| item1 | Dashboard         |
       | item2 | Usage             |
       | item3 | Billing History   |
       | item4 | Payments          |
-      | item5 | Stop & Transfer   |
       | item6 | Accounts          |
-      | item7 | Contact Us        |
       | item8 | Settings          |
       | item9 | Sign Out          |
-    And I click on "<ButtonName>"
-    Then I will see message "Feature is currently in development"
     When I view the left hand panel of screen
     Then I see "<ServiceName>" displayed
     Then I see "<AccountNumber>" displayed
@@ -44,21 +39,11 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I click on "<ButtonName>"
     Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName        |
-      | item1 | Comparison      |
-      | item2 | Usage History   |
-      | item3 | Goals & Targets |
-      | item4 | Tips & Tricks   |
+      | Item  | ItemName      |
+      #| item1 | Comparison    |
+      | item2 | Usage History |
     And I click on "<ButtonName2>"
     Then I see "Residential - Electricity Usage History" displayed
-    And I click on "<ButtonName3>"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName           |
-      | item1 | Logo on main page  |
-      | item1 | Faults & Enquiries |
-      | item2 | Report Outage      |
-      | item3 | Locations          |
-    And I will see message "Feature is currently in development"
     Then I see "5% discount!" displayed
 
     Examples: 
@@ -82,7 +67,6 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item4 | Set Up eBilling     |
       | item1 | Logo on main page   |
     And I click on "<LinkName>"
-    And I will see message "Feature is currently in development"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | LinkName            |
@@ -250,9 +234,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000    | 11           | 20          | 223           | The credit card number is invalid. |
 
   #    | CSS        | UserNameInput | PasswordInput | mary     | Dbresults11 | Pay        | 689608083     | 5.00          | Mary Test    | 4007000000027 | 11           | 20          | 112           | Thank you, your payment has been received. |
-
-
-Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS "PAY" button.
+  Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS "PAY" button.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -270,12 +252,11 @@ Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS 
       | ExpiryYear    | <Expiry Year>   |
       | SecurityCode  | <Security Code> |
     And I click on "Submit"
-     Then I see text "<Message>" displayed
+    Then I see text "<Message>" displayed
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code | Message                                    |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 1.10          | Mary Test    | 4007000000027 |05           | 20          | 113           | Thank you, your payment has been received. |
-
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 1.10          | Mary Test    | 4007000000027 | 05           | 20          | 113           | Thank you, your payment has been received. |
 
   #########################################################################
   ###############################EDIT SETTINGS##################################
@@ -320,7 +301,7 @@ Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email          | Message                                    |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com | Your changes have been saved successfully. |
 
-  Scenario Outline: DCSSP-433, DCSSP-162 Edit Settings>> reset pwd
+  Scenario Outline: DCSSP-433, DCSSP-550 (reset password is manual), DCSSP-162 Edit Settings>> reset pwd
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -809,7 +790,6 @@ Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS 
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        |
       | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 211-02-0091 |
 
-
   Scenario Outline: DCSSP-489 As a user I want my name displayed in the portal so that I know I'm currently logged in
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -825,7 +805,7 @@ Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS 
       | PortalName | UserNameField | PasswordField | UserName | Password   | Welcome Message |
       | CSS        | UserNameInput | PasswordInput | Mary     | Dbresults1 | Welcome         |
 
-Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: covers update of info (excludes ccb check)
+  Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: covers update of info (excludes ccb check)
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -875,7 +855,6 @@ Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: co
       | PortalName | UserNameField | PasswordField | UserName | Password   | Mobile Number1 | HomePhone Number1 | WorkPhone Number1 | Mobile Number2 | HomePhone Number2 | WorkPhone Number2 | Address Line1                | Address Line2 | City          | State | Post Code | DropDownValue1           | DropDownField     | Email                   |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | (999) 11-g     | (999) 989-1122    | (888) 777-6654    | (903) 888-7161 | (99) 77-60        | (88) 71           | Apt. 26, 30 Saint Francis Pl |               | San Francisco | CA    | 94107     | United States of America | CountriesComboBox | email@Dbresults1.com.au |
 
-
   Scenario Outline: DCSSP-520: Already registered or already activated and user tries again.
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
@@ -912,16 +891,16 @@ Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: co
       | Hint            | <Hint1>             |
     And I select "<DropDownValue1>" from "<DropDownField>"
     And I click on "Submit"
-     And I check I am on "Registration Confirmation" page
+    And I check I am on "Registration Confirmation" page
     And I see text "Registration Confirmation" displayed
- Examples: 
+
+    Examples: 
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
       | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
 
-
   Scenario Outline: Continue with 520
     Given I want to login to portal "<PortalName>"
- And I click on "Create Account"
+    And I click on "Create Account"
     And I enter then details as new
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number2> |
@@ -932,13 +911,10 @@ Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: co
     And I check I am on "Account Already Registered" page
     Then I see text "Already Registered!" displayed
 
-
     Examples: 
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
       | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
-  
-      
-   
+
   Scenario Outline: DCSSP-493 :As a user I want to login to the CSS using my email address so that I can access my information. This will keep runing the validations till CAPTCHA
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -969,13 +945,12 @@ Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: co
     Then I see "<Message>" displayed
     Given I want to login to portal "<PortalName2>"
     And I click on "Forgot Password?"
-     And I enter then details as
-      | Fields        | Value      |
+    And I enter then details as
+      | Fields        | Value   |
       | UserNameInput | <email> |
-      And I hit Enter
-      Then i see "Invalid human validation. Please try again." displayed
+    And I hit Enter
+    Then i see "Invalid human validation. Please try again." displayed
 
     Examples: 
-      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password  | email                         | wrong email         | Message                                                |
-      | CSS        | CSS2        | UserNameInput | PasswordInput | Mary      | Dbresults1 | hemant.shori@dbresults.com.au | blah_blah@gmail.com | Invalid Username, Email or Password. Please try again. |
-      
+      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | email                         | wrong email         | Message                                                |
+      | CSS        | CSS2        | UserNameInput | PasswordInput | Mary     | Dbresults1 | hemant.shori@dbresults.com.au | blah_blah@gmail.com | Invalid Username, Email or Password. Please try again. |
