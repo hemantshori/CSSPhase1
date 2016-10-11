@@ -254,7 +254,7 @@ public class DBUtilities extends XPathGenerator {
 			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			 // the abopve will read the cucumber table and input values on screen as per provided in table
 			 
-			 public void enterCucumbertableValuesInUI (DataTable table) 
+			 public void enterCucumbertableValuesInUI (DataTable table) throws InterruptedException 
 			 {
 
 					
@@ -262,14 +262,14 @@ public class DBUtilities extends XPathGenerator {
 						
 						for (int i = 1; i <data.size(); i++){
 							String name = data.get(i).get(1);
-							System.out.println(i);
+							System.out.println("The table length is ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" +i);
 							
 						DBUtilities createXpath = new DBUtilities(driver);
 					  String myXpath = createXpath.xpathMakerByInputId(data.get(i).get(0));
 					  driver.findElement(By.xpath(myXpath)).clear();
-					  
+					  Thread.sleep(500);
 					  driver.findElement(By.xpath(myXpath)).sendKeys(data.get(i).get(1));
-							  
+						System.out.println("Entering value in table " +myXpath +"as" +name);  
 						}
 					
 			 }

@@ -646,14 +646,13 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I click on "Submit"
     Then I see "Invalid email address. Please try again." displayed
-    Then I see "Email expected!" displayed
     And I enter then details as new
       | Fields          | Value               |
       | Email           | <Email Address3>    |
       | Username        | <Choose UserName3>  |
       | NewPassword     | <Choose Password3>  |
       | ConfirmPassword | <Confirm Password3> |
-    And I hit Enter
+   
     And I click on "Submit"
     Then I see "Username already exists. Please try again." displayed
     And I enter then details as new
@@ -661,25 +660,26 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Username        | <Choose UserName4>  |
       | NewPassword     | <Choose Password4>  |
       | ConfirmPassword | <Confirm Password4> |
-    And I hit Enter
+  
     And I click on "Submit"
     Then I see "Invalid password. Please try again." displayed
     And I enter then details as new
       | Fields          | Value               |
       | NewPassword     | <Choose Password5>  |
       | ConfirmPassword | <Confirm Password5> |
-    And I hit Enter
+    
     And I click on "Submit"
     Then I see "Passwords do not match. Please try again." displayed
     And I click on "Cancel"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
     And I click on "Cancel"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    And I check I am on "Login" page
+    
 
     Examples: 
-      | PortalName | Account Number1 | BillName1  | SSN1        | Email Address1                    | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 | Email Address2 | Choose Password2 | Confirm Password2 | Email Address3             | Choose UserName3 | Choose Password3 | Confirm Password3 | Choose UserName4 | Choose Password4 | Confirm Password4 | Choose Password5 | Confirm Password5 |
-      | CSS        | 8970235184      | Pan, Peter | 888-99-8761 | ellen.truefeldt@Dbresults1.com.au | PeterPan1        | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   | ellentruefeldt | Dbresults11      | Dbresults11       | ellen.truefeldt2@gmail.com | bob              | Dbresults11      | Dbresults11       | TestUser4        | dbr              | dbr               | Dbresults11      | hi                |
+      | PortalName | Account Number1 | BillName1  | SSN1        | Email Address1                   | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 | Email Address2 | Choose Password2 | Confirm Password2 | Email Address3             | Choose UserName3 | Choose Password3 | Confirm Password3 | Choose UserName4 | Choose Password4 | Confirm Password4 | Choose Password5 | Confirm Password5 |
+      | CSS        | 8970235184      | Pan, Peter | 888-99-8761 | ellen.truefeldt@Dbresults.com.au | PeterPan1        | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   | ellentruefeldt | Dbresults11      | Dbresults11       | ellen.truefeldt2@gmail.com | bob              | Dbresults11      | Dbresults11       | TestUser4        | dbr              | dbr               | Dbresults11      | hi                |
+ 
 
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS; DCSSP-459: scenario 1, 2, 3
     Given I want to login to portal "<PortalName>"
