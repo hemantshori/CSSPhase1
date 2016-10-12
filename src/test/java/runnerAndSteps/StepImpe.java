@@ -30,8 +30,8 @@ public class StepImpe {
  //********************************************** following is before and after *****************************************
 	WebDriver driver;
 	private String bolt;
-	@Before("@wip")
-	//@Before()
+	//@Before("@wip")
+	@Before()
 	  public void startUp() {
 //	    driver = new FirefoxDriver();
 //	    driver.manage().window().maximize();
@@ -46,8 +46,8 @@ public class StepImpe {
 	    
 	}
 		// **************disable to leave browser open***************************************
-		 @After("@wip")
-	//@After()
+		// @After("@wip")
+	@After()
 		  public void tearDown() {	
 		    driver.quit();
 		   	  }

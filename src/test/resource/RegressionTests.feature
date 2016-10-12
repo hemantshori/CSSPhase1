@@ -1,4 +1,5 @@
 
+
 Feature: To test the functionality of Appication as described in Jira Stories for Iteration 1
 
   Scenario Outline: User views the menu items, Test 1, DCSSP-245, DCSSP-533 Description: User views the menu items Epic: Common Components
