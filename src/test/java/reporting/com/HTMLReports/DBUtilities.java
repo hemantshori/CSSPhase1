@@ -262,7 +262,7 @@ public class DBUtilities extends XPathGenerator {
 						
 						for (int i = 1; i <data.size(); i++){
 							String name = data.get(i).get(1);
-							System.out.println("The table length is ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" +i);
+							System.out.println("The table length is .." +data.size());
 							
 						DBUtilities createXpath = new DBUtilities(driver);
 					  String myXpath = createXpath.xpathMakerByInputId(data.get(i).get(0));

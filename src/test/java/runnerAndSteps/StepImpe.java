@@ -46,11 +46,11 @@ public class StepImpe {
 	    
 	}
 		// **************disable to leave browser open***************************************
-		 @After("@wip")
-	//@After()
-		  public void tearDown() {	
-		    driver.quit();
-		   	  }
+//		 @After("@wip")
+//	//@After()
+//		  public void tearDown() {	
+//		    driver.quit();
+//		   	  }
 	//******************************************************************************   
 	    
    
@@ -93,6 +93,7 @@ public class StepImpe {
 		if(arg1.equals("Current_Bill")
 				||arg1.equals("InfoIcon")
 				||arg1.equals("Pay")
+				||arg1.equals("Current_Bill")
 				||arg1.equals("ReSendEmailButton")
 				||arg1.equals("PasswordSaveButton")
 				||arg1.equals("BillingHistoryButton")
@@ -306,7 +307,16 @@ public class StepImpe {
 	
 	}
 
+
+	//*****************************************************************************************
+	//**********************************************PDF FILE ***********************
+	//*****************************************************************************************
 	
+	
+	@Then("^I see a pdf document with name \"(.*?)\" generated$")
+	public void i_see_a_pdf_document_with_name_generated(String arg1) throws Throwable {
+
+	}
 	
 	
 

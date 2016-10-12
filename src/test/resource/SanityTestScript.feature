@@ -1,4 +1,4 @@
-@wip
+
 Feature: To test the basic functionality of Appication ....to be used for shakeout script
 
   Scenario Outline: User views the menu items, Test 1, DCSSP-245 Description: User views the menu items Epic: Common Components
