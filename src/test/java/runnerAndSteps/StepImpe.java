@@ -46,11 +46,11 @@ public class StepImpe {
 	    
 	}
 		// **************disable to leave browser open***************************************
-//		 @After("@wip")
-//	//@After()
-//		  public void tearDown() {	
-//		    driver.quit();
-//		   	  }
+		 @After("@wip")
+	//@After()
+		  public void tearDown() {	
+		    driver.quit();
+		   	  }
 	//******************************************************************************   
 	    
    
