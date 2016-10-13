@@ -1,7 +1,7 @@
 
 
 Feature: To test the functionality of Appication as described in Jira Stories for Iteration 1
-
+@ShakeOut
   Scenario Outline: User views the menu items, Test 1, DCSSP-245, DCSSP-533 Description: User views the menu items Epic: Common Components
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
