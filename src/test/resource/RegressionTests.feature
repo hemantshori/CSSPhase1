@@ -1,5 +1,5 @@
 
-
+@Regression
 Feature: To test the functionality of Appication as described in Jira Stories for Iteration 1
 @ShakeOut
   Scenario Outline: User views the menu items, Test 1, DCSSP-245, DCSSP-533 Description: User views the menu items Epic: Common Components
@@ -30,7 +30,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | ServiceName              | AccountNumber          | Address                                                |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Accounts   | Residential: Electricity | Account No. 2411617223 | Apt. 201, 300 Mission Street, San Francisco, CA, 94105 |
-
+@ShakeOut
   Scenario Outline: Check Usage Menu Item List Test 1, DCSSP-245 Description: User views the menu items Epic: Common Components
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -50,7 +50,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | ServiceName              | ButtonName2   | ButtonName3 |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Usage      | Residential: Electricity | Usage History | Contact Us  |
-
+@ShakeOut
   Scenario Outline: Check User Menu Item List Test 1, DCSSP-245 Description: check for feature under development
     Given I want to login to portal "<PortalName>"
     And I enter then details as
