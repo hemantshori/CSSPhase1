@@ -1,52 +1,35 @@
+@Regression
+Feature: Some feature
 
-Feature: this is just a wip
-
-   Scenario Outline: DCSSP-67: Account Financial History (all)
+  Scenario Outline: DCSSP-493: Invalid Login using email (scenario 3); DCSSP-551: Password Hint during login; DCSSP-28: Account locked after no of unsuccessful login attempts
     Given I want to login to portal "<PortalName>"
     And I enter then details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
+      | Fields        | Value               |
+      | UserNameInput | <UserName or Email> |
+      | PasswordInput | <Invalid Password1> |
     And I hit Enter
-    When I click on "Accounts"
-    And I click on "Account Financial History"
-    And I check I am on "Activity History" page
-    And I select "<DropDownValue1>" from "<DropDownField>"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                  |
-      | Item2 | Account Financial History |
-      | Item3 | Date                      |
-      | Item4 | Type                      |
-      | Item5 | Amount                    |
-      | Item6 | Balance                   |
-    And table is sorted based on "descending" "Date"
-    And if there are "more than" "12 transactions" I click on "ALL TRANSACTIONS"
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownValue1     | DropDownField    |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Account 2411617223 | AccountsComboBox |
- 
- 
- 
- 
-
- 
- 
-Scenario Outline: DCSSP-644: User views sample PDF when they 'View Current Bill'
-    Given I want to login to portal "<PortalName>"
+    Then I see "<message1>" displayed
     And I enter then details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
+      | Fields        | Value               |
+      | UserNameInput | <UserName or Email> |
+      | PasswordInput | <Invalid Password2> |
     And I hit Enter
-    When I click on "Current_Bill"
-   Then I see a pdf document with name "Current Bill" generated
-    And I will see "Account Number:" displayed
-    And I will see "Total Amount Due:" displayed
-    And I will see "Due Date:" displayed
-    And I will see "SELFSERVE.CLOUD" displayed
+    Then I see "<message1>" displayed
+    And I enter then details as
+      | Fields        | Value               |
+      | UserNameInput | <UserName or Email> |
+      | PasswordInput | <Invalid Password3> |
+    And I hit Enter
+    Then I see "<message2>" displayed
+    And I enter then details as
+      | Fields        | Value               |
+      | UserNameInput | <UserName or Email> |
+      | PasswordInput | <Invalid Password4> |
+    And I hit Enter
+    And I check I am on "Locked Account" page
+    And I click on "<Button2>"
+    And I check I am on "Forgot Your Password?" page
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
- 
+      | PortalName | UserNameOrEmailField | InvalidPasswordField | UserName or Email | Invalid Password1 | Invalid Password2 | Invalid Password3 | Password4 | message1                                               | Button2 | message2                                                          |
+      | CSS        | UserNameOrEmailInput | InvalidPasswordInput | mary              | sss               | sdfg              | sfdg              | sgfsd     | Invalid Username, Email or Password. Please try again. | Reset   | Invalid Username, Email or Password. Password Hint: life is life. |

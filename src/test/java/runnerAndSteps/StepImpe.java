@@ -39,14 +39,14 @@ public class StepImpe {
 	    
 	    
 	    
-	    
+	    // the location of the driver is been changed to match with remote server setting.....  HS
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
 		driver = new ChromeDriver();
 	    driver.manage().window().maximize();
 	    
 	}
 		// **************disable to leave browser open***************************************
-		// @After("@wip")
+
 	@After()
 		  public void tearDown() {	
 		    driver.quit();
@@ -99,7 +99,7 @@ public class StepImpe {
 				||arg1.equals("BillingHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
 				||arg1.equals("EditSettings")
-//				||arg1.equals("Submit")
+				||arg1.equals("Reset")
 				||arg1.equals("PasswordInfoIcon")
 				||arg1.equals("HintInfoIcon")
 				||arg1.equals("wtSubmitButton3")      // to do ask M lara to change thename ....this is for Reset Password
