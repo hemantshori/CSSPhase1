@@ -1,35 +1,48 @@
-@Regression
-Feature: Some feature
 
-  Scenario Outline: DCSSP-493: Invalid Login using email (scenario 3); DCSSP-551: Password Hint during login; DCSSP-28: Account locked after no of unsuccessful login attempts
+Feature: Some feature
+@wip
+
+  Scenario Outline: DCSSP-758: This is for defect 758, email address should not be duplicated with edit settings option. This should not accept the duplicate email address.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
-      | Fields        | Value               |
-      | UserNameInput | <UserName or Email> |
-      | PasswordInput | <Invalid Password1> |
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
     And I hit Enter
-    Then I see "<message1>" displayed
+    And I check I am on "Dashboard" page
+    And I click on "Settings"
+    And I click on "EditSettings"
+    And I check I am on "EditSettings" page
     And I enter then details as
-      | Fields        | Value               |
-      | UserNameInput | <UserName or Email> |
-      | PasswordInput | <Invalid Password2> |
+      | Fields | Value   |
+      | Email  | <email> |
     And I hit Enter
-    Then I see "<message1>" displayed
-    And I enter then details as
-      | Fields        | Value               |
-      | UserNameInput | <UserName or Email> |
-      | PasswordInput | <Invalid Password3> |
-    And I hit Enter
-    Then I see "<message2>" displayed
-    And I enter then details as
-      | Fields        | Value               |
-      | UserNameInput | <UserName or Email> |
-      | PasswordInput | <Invalid Password4> |
-    And I hit Enter
-    And I check I am on "Locked Account" page
-    And I click on "<Button2>"
-    And I check I am on "Forgot Your Password?" page
+    Then I see "Email address already exists. Please try again." displayed
 
     Examples: 
-      | PortalName | UserNameOrEmailField | InvalidPasswordField | UserName or Email | Invalid Password1 | Invalid Password2 | Invalid Password3 | Password4 | message1                                               | Button2 | message2                                                          |
-      | CSS        | UserNameOrEmailInput | InvalidPasswordInput | mary              | sss               | sdfg              | sfdg              | sgfsd     | Invalid Username, Email or Password. Please try again. | Reset   | Invalid Username, Email or Password. Password Hint: life is life. |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | email                         |
+      | CSS        | UserNameInput | PasswordInput | Michael     | Dbresults1 | hemant.shori@dbresults.com.au |
+
+  Scenario Outline: DCSSP-67: Account Financial History (all)
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    When I click on "Accounts"
+    And I click on "Account Financial History"
+    And I check I am on "Account Financial History" page
+    Then I see "Account Financial History" displayed
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | Item3 | Date     |
+      | Item4 | Type     |
+      | Item5 | Amount   |
+      | Item6 | Balance  |
+    And table is sorted based on "descending" "Date"
+    And if there are "more than" "12 transactions" I click on "ALL TRANSACTIONS"
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownValue1     | DropDownField    |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Account 2411617223 | AccountsComboBox |

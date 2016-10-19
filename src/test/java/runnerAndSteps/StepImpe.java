@@ -40,7 +40,7 @@ public class StepImpe {
 	    
 	    
 	    // the location of the driver is been changed to match with remote server setting.....  HS
-		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CSS\\workspace\\chromedriver.exe");
 		driver = new ChromeDriver();
 	    driver.manage().window().maximize();
 	    

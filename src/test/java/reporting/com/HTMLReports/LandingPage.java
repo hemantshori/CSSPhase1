@@ -144,6 +144,8 @@ public class LandingPage extends DBUtilities {
       
       // checks high and lower values and verify that the correct result is displayed in correct format
       public void compareValueOneToValueTwo(String arg1, String arg2){
+    	  
+    	  
     	  DBUtilities createXpath = new DBUtilities(driver);
     		String myxpath = createXpath.xpathMakerById(arg1);
     		String currentBill = driver.findElement(By.xpath(myxpath)).getText();
