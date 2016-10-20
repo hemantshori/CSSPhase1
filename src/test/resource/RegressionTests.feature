@@ -973,7 +973,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   | email                         |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | hemant.shori@dbresults.com.au |
 
-        Scenario Outline: DCSSP-745: This is just to verify the display text when clicking certain buttons
+  Scenario Outline: DCSSP-758: This is for defect 758, email address should not be duplicated with edit settings option. This should not accept the duplicate email address.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -984,6 +984,9 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Set Up Direct Debit"
     Then I see text "Please contact" displayed
     Then I see text "to set up your Direct Debit" displayed
+    And I click on "Set Up eBilling"
+    Then I see text "Please contact" displayed
+    Then I see text "to set up eBilling" displayed
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | 

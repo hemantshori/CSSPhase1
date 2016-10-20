@@ -12,6 +12,10 @@ Feature: Some feature
     And I click on "Set Up Direct Debit"
     Then I see text "Please contact" displayed
     Then I see text "to set up your Direct Debit" displayed
+       And I click on "Set Up eBilling"
+       Then I see text "Please contact" displayed
+    Then I see text "to set up eBilling" displayed
+    
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email                         |
