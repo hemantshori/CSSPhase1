@@ -80,17 +80,17 @@ public class LandingPage extends DBUtilities {
 
       public void checkUIElementIsDisplayed (String arg1) throws InterruptedException
     	  {
-    	  if (arg1.equals("Please wait while we retrieve your account...")){
+    	  if (arg1.equals("Please wait while we retrieve your account...")|| arg1.equals("Please contact Simply Energy on 13 88 08 to set up your Direct Debit")){
     		  DBUtilities checkElementDisplayed = new DBUtilities(driver);
         	  String myxpath=checkElementDisplayed.xpathMakerSpanClass(arg1);
-        	 // Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());     todo fix it later
+        	  Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());  
         	  
     	  }else{
     	  DBUtilities checkElementDisplayed = new DBUtilities(driver);
     	  String myxpath=checkElementDisplayed.xpathMakerBySpanID(arg1);
     	  System.out.println("**" +myxpath);
     	  Thread.sleep(1000);
-		  Assert.assertTrue(" Varification failede as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
+		  Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
 		  
     	  if(driver.findElements(By.xpath(myxpath)).size() != 0){
 				System.out.println("Element is Present");

@@ -240,6 +240,7 @@ public class StepImpe {
 	@Then("^I see text \"(.*?)\" displayed$")
 	public void i_see_text_displayed(String arg1) throws Throwable {
       LandingPage AU = PageFactory.initElements(driver, LandingPage.class);
+      Thread.sleep(1000);
       AU.checkUIElementTEXTIsDisplayed(arg1);
 	}
 	//check i am on right page

@@ -972,3 +972,19 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email                         |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | hemant.shori@dbresults.com.au |
+
+        Scenario Outline: DCSSP-745: This is just to verify the display text when clicking certain buttons
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I check I am on "Dashboard" page
+    And I click on "Set Up Direct Debit"
+    Then I see text "Please contact" displayed
+    Then I see text "to set up your Direct Debit" displayed
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | 
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | 
