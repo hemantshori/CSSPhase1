@@ -119,6 +119,7 @@ public class DBUtilities extends XPathGenerator {
 			 driver.switchTo().window(child_window);
 			  
 			 String newPageURL= driver.switchTo().window(child_window).getCurrentUrl();
+			 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++" +newPageURL);
 			 Assert.assertEquals(arg1, newPageURL);
 			 }
 			 }
@@ -172,68 +173,7 @@ public class DBUtilities extends XPathGenerator {
 	                robot.keyRelease(java.awt.event.KeyEvent.VK_ENTER);
 			 }
 
-			 
-			 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			 //++++++++++++++++++++++++++++++++++ XPATH GENERATOR++++++++++++++++++++++++++++++++++++++++
-			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//			 
-//			 public String xpathMaker(String buttonName)
-//			    {
-//				String xpath = "//*[text()='"+buttonName+"']";
-//				 return xpath;
-//			    }
-//			 public String xpathMakerById(String buttonName)
-//			    {
-//				String xpath = "//*[contains(@id, '"+buttonName+"')]";
-//				System.out.println("Button found*** " +xpath);
-//				 return xpath;
-//			    }
-//			 public String xpathMakerForInputField(String fieldName)
-//			    {
-//				String xpath = "//*[@id='"+fieldName+"']";
-//				System.out.println(" its " +xpath);
-//				 return xpath;
-//			    }
-//			 public String xpathMakerBySpanID(String buttonName)
-//			    {
-//				String xpath = "//span[text()='"+buttonName+"']";
-//				 //contains(text()
-//						 //String xpath = "//span[contains(text()='"+buttonName+"']";
-//				            
-//				 return xpath;
-//			    }
-//			 public String xpathMakerContainsText(String buttonName)
-//			    {
-//				String xpath = "//*[contains(text(),'"+buttonName+"')]";
-//				 return xpath;
-//			    }
-//			//span[@class='nav-selection']
-//			 public String xpathMakerSpanClass(String buttonName)
-//			    {
-//				String xpath = "//span[@class='"+buttonName+"']";
-//				 return xpath;
-//			    }
-//			 // for input fields with input id
-//			 public String xpathMakerByInputId(String arg1)
-//			    {
-//				  String xpath = "//input[contains(@id, '"+arg1+"')]";
-//				System.out.println("Element found*** " +xpath);
-//				 return xpath;
-//			    }
-//			 public String xpathMakerByClass(String buttonName)
-//			    {
-//				//*[@class = 'InfoTooltip OSInline']
-//				String xpath = "//*[@class ='"+buttonName+"']";
-//				 return xpath;
-//			    }
-//			 
-//			 //xpath creation by type
-//			 public String xpathMakerByType(String name)
-//			    {
-//				String xpath = "//*[@type ='"+name+"']";
-//				 return xpath;
-//			    }
-			 
+
 			 
 			 public void generateException(String arg1)
 			 {
@@ -329,8 +269,45 @@ public class DBUtilities extends XPathGenerator {
 			 }
 			 
 		
+			 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 //++++++++++++++++++++++++++++++++++PopUp handlers++++++++++++++++++++++++++++++++++++++++
+			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 
+			 public void readAllPDFAndCheckTextPresent (String arg1)
+			 {
+//				 protected String getLastWindow() {
+//					    return session().getEval("var windowId; for(var x in selenium.browserbot.openedWindows ){windowId=x;} ");
+//					}
+
+//					@Test
+//					public void testTextInPDF() {
+//					    session().click("link=View PDF");
+//					    String popupName = getLastWindow();
+//					    session().waitForPopUp(popupName, PAGE_LOAD_TIMEOUT);
+//					    session().selectWindow(popupName);
+//
+//					    session().windowMaximize();
+//					    session().windowFocus();
+//					    Thread.sleep(3000);
+//
+//					    session().keyDownNative("17"); // Stands for CTRL key
+//					    session().keyPressNative("65"); // Stands for A "ascii code for A"
+//					    session().keyUpNative("17"); //Releases CTRL key
+//					    Thread.sleep(1000);
+//
+//					    session().keyDownNative("17"); // Stands for CTRL key
+//					    session().keyPressNative("67"); // Stands for C "ascii code for C"
+//					    session().keyUpNative("17"); //Releases CTRL key
+//
+//					    TextTransfer textTransfer = new TextTransfer();
+//					    assertTrue(textTransfer.getClipboardContents().contains("Some text in my pdf"));
+//					}
+				 
+			 }
 			 
 			 
+			 
+			
 			 
 			 
 			 

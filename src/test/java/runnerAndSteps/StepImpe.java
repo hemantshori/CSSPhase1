@@ -35,10 +35,7 @@ public class StepImpe {
 	  public void startUp() {
 //	    driver = new FirefoxDriver();
 //	    driver.manage().window().maximize();
-	    
-	    
-	    
-	    
+
 	    // the location of the driver is been changed to match with remote server setting.....  HS
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CSS\\workspace\\chromedriver.exe");
 		driver = new ChromeDriver();
@@ -316,7 +313,10 @@ public class StepImpe {
 	
 	@Then("^I see a pdf document with name \"(.*?)\" generated$")
 	public void i_see_a_pdf_document_with_name_generated(String arg1) throws Throwable {
-
+     System.out.println("Yes******************* pdf is open");
+     DBUtilities moveControlToNewWindow = new DBUtilities(driver);
+     moveControlToNewWindow.passControlToNewWindow(arg1);
+     
 	}
 	
 	

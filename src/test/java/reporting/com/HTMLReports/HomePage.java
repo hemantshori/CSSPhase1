@@ -16,8 +16,8 @@ public class HomePage extends DBUtilities {
 		if(arg1.equals("CSS")){
 			
 			//************************************** SET  TEST Environment ***********************************************
-			
-		//driver.get("https://dbresults.outsystemsenterprise.com/CSSPortal/");
+			//for production
+		//driver.get("https://ssc.dbresults.com.au/CSSPortal");
 		//following is for SIT
 
 			driver.get("https://test-ssc.dbresults.com.au/CSSPortal/");
