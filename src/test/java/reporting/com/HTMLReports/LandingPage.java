@@ -89,7 +89,7 @@ public class LandingPage extends DBUtilities {
     	  DBUtilities checkElementDisplayed = new DBUtilities(driver);
     	  String myxpath=checkElementDisplayed.xpathMakerBySpanID(arg1);
     	  System.out.println("**" +myxpath);
-    	  Thread.sleep(1000);
+    	  //Thread.sleep(1000);
 		  Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
 		  
     	  if(driver.findElements(By.xpath(myxpath)).size() != 0){

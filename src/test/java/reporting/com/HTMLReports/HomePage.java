@@ -19,7 +19,6 @@ public class HomePage extends DBUtilities {
 			//for production
 		//driver.get("https://ssc.dbresults.com.au/CSSPortal");
 		//following is for SIT
-
 			driver.get("https://test-ssc.dbresults.com.au/CSSPortal/");
 		// for dev
 		//driver.get("https://dev-ssc.dbresults.com.au/CSSPortal/");

@@ -30,7 +30,7 @@ public class StepImpe {
  //********************************************** following is before and after *****************************************
 	WebDriver driver;
 	private String bolt;
-	//@Before("@wip")
+	
 	@Before()
 	  public void startUp() {
 //	    driver = new FirefoxDriver();

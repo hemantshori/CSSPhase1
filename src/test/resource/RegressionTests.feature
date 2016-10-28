@@ -765,28 +765,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card    | Card Number   | Expiry Month | Expiry Year | Security Code |
       | CSS        | UserNameInput | PasswordInput | michael  | Dbresults1 | Pay        | Account 1071805034 | 10            | another payment | 4007000000027 | 11           | 20          | 112           |
 
-  Scenario Outline: DCSSP-520: Already registered or already activated
-    Given I want to login to portal "<PortalName>"
-    And I click on "Create Account"
-    And I enter then details as new
-      | Fields                    | Value             |
-      | InputAccountNumber        | <Account Number1> |
-      | InputBillName             | <BillName1>       |
-      | InputIdentificationNumber | <SSN1>            |
-    And I click on "checkbox" checkbox
-    And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
-    And I check I am on "Account Already Activated" page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                                                |
-      | item1 | Your account has already been activated. Please click the button below. |
-    Then I click on "wtSubmitButton3"
-    And I check I am on "Login" page
-
-    Examples: 
-      | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        |
-      | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 211-02-0091 |
-
+  
   Scenario Outline: DCSSP-489 As a user I want my name displayed in the portal so that I know I'm currently logged in
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -852,6 +831,29 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   | Mobile Number1 | HomePhone Number1 | WorkPhone Number1 | Mobile Number2 | HomePhone Number2 | WorkPhone Number2 | Address Line1                | Address Line2 | City          | State | Post Code | DropDownValue1           | DropDownField     | Email                   |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | (999) 11-g     | (999) 989-1122    | (888) 777-6654    | (903) 888-7161 | (99) 77-60        | (88) 71           | Apt. 26, 30 Saint Francis Pl |               | San Francisco | CA    | 94107     | United States of America | CountriesComboBox | email@Dbresults1.com.au |
 
+Scenario Outline: DCSSP-520: Already registered or already activated
+    Given I want to login to portal "<PortalName>"
+    And I click on "Create Account"
+    And I enter then details as new
+      | Fields                    | Value             |
+      | InputAccountNumber        | <Account Number1> |
+      | InputBillName             | <BillName1>       |
+      | InputIdentificationNumber | <SSN1>            |
+    And I click on "checkbox" checkbox
+    And I click on "Submit"
+    Then I see "Please wait while we retrieve your account..." displayed
+    And I check I am on "Account Already Activated" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                                                |
+      | item1 | Your account has already been activated. Please click the button below. |
+    Then I click on "wtSubmitButton3"
+    And I check I am on "Login" page
+
+    Examples: 
+      | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        |
+      | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 211-02-0091 |
+
+
   Scenario Outline: DCSSP-520: Already registered or already activated and user tries again.
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
@@ -895,7 +897,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
       | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
 
-  Scenario Outline: Continue with 520
+  Scenario Outline: Continue with 520, Scenario 2: User registers and their account is not activated
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
     And I enter then details as new
