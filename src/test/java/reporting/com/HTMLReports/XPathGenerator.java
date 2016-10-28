@@ -69,6 +69,13 @@ public class XPathGenerator {
 		 return xpath;
 	    }
 
-	
+	 
+	 //xpath creation by ClassName
+	 public String xpathMakerByTextInClass(String text)
+	    {
+		String xpath = "//*[contains(@class, '"+text+"')]";
+		
+		 return xpath;
+	    }
 	
 }

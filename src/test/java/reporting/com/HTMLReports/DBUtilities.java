@@ -148,6 +148,35 @@ public class DBUtilities extends XPathGenerator {
 				   return datentime;
 			  }
 
+			 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 //++++++++++++++++++++++++++++++++++Read table Rows and compare to an expected number++++++++++++++++++++++++++++++++++++++++
+			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 
+			 public void readAndCompareTableRows(String arg1, String arg2 ,int arg3)
+			 {
+				 System.out.println("Balley balley ni taur ni punjabban di");
+				  DBUtilities createXpath = new DBUtilities(driver);
+					 String myXpath = createXpath.xpathMakerByTextInClass(arg1);
+					
+					 System.out.println("So the xpath for table is " +myXpath);
+					// List<WebElement> rows = driver.findElements(By.xpath(myXpath));
+					 List<WebElement> rows = driver.findElements(By.xpath(myXpath));
+					 System.out.println("Balley balley ni taur ni punjabban di Total number of rows :"+ rows.size());
+					 
+			 }
+			 
+			 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 //++++++++++++++++++++++++++++++++++Check Dropdown value displayed by default++++++++++++++++++++++++++++++++++++++++
+			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		  public void checkDropDownDefaultValue(String arg2)
+		  {
+			 
+			  DBUtilities createXpath = new DBUtilities(driver);
+				 String myXpath = createXpath.xpathMakerContainsText(arg2);
+			System.out.println("Successfully displays in combo box" + myXpath);
+				
+				 Assert.assertTrue(driver.findElement(By.xpath(myXpath)).isDisplayed()); 
+		  }
 	
 			 
 			 public static void uploadAnAttachmentFile() throws AWTException, InterruptedException

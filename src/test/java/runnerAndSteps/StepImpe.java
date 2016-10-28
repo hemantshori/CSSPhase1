@@ -19,6 +19,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import reporting.com.HTMLReports.AccountFinancialHistorypage;
 import reporting.com.HTMLReports.BillingHistoryPage;
 import reporting.com.HTMLReports.DBUtilities;
 import reporting.com.HTMLReports.ForgotYourPasswordPage;
@@ -96,6 +97,7 @@ public class StepImpe {
 				||arg1.equals("BillingHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
 				||arg1.equals("EditSettings")
+				||arg1.equals("AllTransactions")
 				||arg1.equals("Reset")
 				||arg1.equals("PasswordInfoIcon")
 				||arg1.equals("HintInfoIcon")
@@ -130,13 +132,7 @@ public class StepImpe {
 		}
 		
 	}
-	
-	// following is for dropdowns
-//	@Then("^I \"(.*?)\" from \"(.*?)\" dropdown$")
-//	public void i_from_dropdown(String arg1, String arg2) throws Throwable {
-//		PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
-//	}
-	
+
 	@Given("^I select \"(.*?)\" from \"(.*?)\"$")
 	public void i_select_from(String arg1, String arg2) throws Throwable {
 		PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
@@ -247,6 +243,14 @@ public class StepImpe {
 		  
 		  System.out.println(" on correct page " +arg1);
 	}
+	
+	// check the dropdown displays expected
+	@Then("^\"(.*?)\" displays \"(.*?)\" by default$")
+	public void displays_by_default(String arg1, String arg2) throws Throwable {
+		PageFactory.initElements(driver, AccountFinancialHistorypage.class).checkDropDownDefaultValue(arg2);
+
+	}
+
 
 	//***************************************** GRAPH CHECKS *********************
 	@Then("^the graph for \"(.*?)\" is displayed$")
@@ -320,5 +324,16 @@ public class StepImpe {
 	}
 	
 	
+	//*****************************************************************************************
+	//**********************************************Verify Table Rows ***********************
+	//*****************************************************************************************
+	
+	
+	@Then("^I verify the \"(.*?)\" count is \"(.*?)\" to \"(.*?)\"$")
+	public void i_verify_the_count_is_to(String arg1, String arg2, int arg3) throws Throwable {
+		PageFactory.initElements(driver, AccountFinancialHistorypage.class).readAndCompareTableRows(arg1, arg2, arg3);
+	 
+	}
+
 
 }
