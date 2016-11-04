@@ -23,6 +23,7 @@ import reporting.com.HTMLReports.AccountFinancialHistorypage;
 import reporting.com.HTMLReports.BillingHistoryPage;
 import reporting.com.HTMLReports.DBUtilities;
 import reporting.com.HTMLReports.ForgotYourPasswordPage;
+import reporting.com.HTMLReports.GoalsAndTargetsPage;
 import reporting.com.HTMLReports.HomePage;
 import reporting.com.HTMLReports.LandingPage;
 import reporting.com.HTMLReports.MakeAPaymentPage;
@@ -83,6 +84,9 @@ public class StepImpe {
 	}
 	
 	
+	
+	
+	
 	@And("^I click on \"(.*?)\"$")
 	public void i_click_on(String arg1) throws Throwable {
 		// give time for page loading
@@ -94,13 +98,14 @@ public class StepImpe {
 				||arg1.equals("Current_Bill")
 				||arg1.equals("ReSendEmailButton")
 				||arg1.equals("PasswordSaveButton")
-				||arg1.equals("BillingHistoryButton")
+				||arg1.equals("ActivityHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
 				||arg1.equals("EditSettings")
 				||arg1.equals("AllTransactions")
 				||arg1.equals("Reset")
 				||arg1.equals("PasswordInfoIcon")
 				||arg1.equals("HintInfoIcon")
+				||arg1.equals("SetGoal")		
 				||arg1.equals("wtSubmitButton3")      // to do ask M lara to change thename ....this is for Reset Password
 				||arg1.equals("Cancel")){
 			Thread.sleep(3000);
@@ -135,7 +140,11 @@ public class StepImpe {
 
 	@Given("^I select \"(.*?)\" from \"(.*?)\"$")
 	public void i_select_from(String arg1, String arg2) throws Throwable {
+		if(arg1.equals("SetGoal")){
+			PageFactory.initElements(driver, GoalsAndTargetsPage.class).xpathMakerById1AndId2(arg1, arg2);
+		}else{
 		PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
+	}
 	}
 	// check for field text and text boxes
 	@And("^I enter then details as$")

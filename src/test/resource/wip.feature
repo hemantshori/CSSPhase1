@@ -1,6 +1,34 @@
 Feature: Some feature
 
   @wip
+  Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Usage"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName        |
+      | Item1 | Usage History   |
+      | item1 | Goals & Targets |
+    And I click on "Goals & Targets"
+    Then I check I am on "Goals and Targets" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName        |
+      | Item3 | Goals & Targets |
+      | Item4 | Starter         |
+      | Item6 | Saver           |
+      | Item7 | Eco             |
+      | Item7 | Custom          |
+    And I select "SetGoal" from "Column1"
+
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
+
   Scenario Outline: DCSSP-67 : As a user I want to view my account’s financial history so that I can review the account's transactions over a period of time
     Given I want to login to portal "<PortalName>"
     And I enter then details as

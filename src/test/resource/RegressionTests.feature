@@ -407,7 +407,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   ############################    LHS successful payment  back to billing    ############################
   ######################################################################
   #############################################################ALL IS WELLLLLLLLLLLLLLLL#####################################################
-  Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS
+   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -440,8 +440,8 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName        |
       | Item1 | Receipt Sent To |
-    And I click on "BillingHistoryButton"
-    And I check I am on "Billing History" page
+    And I click on "ActivityHistoryButton"
+    And I check I am on "Activity History" page
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |

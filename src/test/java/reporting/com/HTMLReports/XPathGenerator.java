@@ -77,5 +77,13 @@ public class XPathGenerator {
 		
 		 return xpath;
 	    }
+	 
+	 public String xpathMakerById1AndId2(String arg1,String arg2)
+	    {
+		String xpath = "//*[contains(@id, '"+arg1+"')][contains(@id, '"+arg2+"')]";
+		
+		System.out.println(" its " +xpath);
+		 return xpath;
+	    }
 	
 }
