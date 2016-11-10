@@ -228,13 +228,13 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code | Message                            |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     |               | Mary Test    | 4007000000027 | 11           | 20          | 112           | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            |              | 4007000000027 | 11           | 20          | 112           | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    |               | 11           | 20          | 112           | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 |              | 20          | 112           | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 | 11           |             | 112           | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000027 | 11           | 20          |               | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 20            | Mary Test    | 4007000000    | 11           | 20          | 223           | The credit card number is invalid. |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        |     689608083 |               | Mary Test    | 4007000000027 |           11 |          20 |           112 | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        |     689608083 |            20 |              | 4007000000027 |           11 |          20 |           112 | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        |     689608083 |            20 | Mary Test    |               |           11 |          20 |           112 | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        |     689608083 |            20 | Mary Test    | 4007000000027 |              |          20 |           112 | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        |     689608083 |            20 | Mary Test    | 4007000000027 |           11 |             |           112 | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        |     689608083 |            20 | Mary Test    | 4007000000027 |           11 |          20 |               | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        |     689608083 |            20 | Mary Test    |    4007000000 |           11 |          20 |           223 | The credit card number is invalid. |
 
   #    | CSS        | UserNameInput | PasswordInput | mary     | Dbresults11 | Pay        | 689608083     | 5.00          | Mary Test    | 4007000000027 | 11           | 20          | 112           | Thank you, your payment has been received. |
   Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS "PAY" button.
@@ -259,7 +259,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code | Message                                    |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | 689608083     | 1.10          | Mary Test    | 4007000000027 | 05           | 20          | 113           | Thank you, your payment has been received. |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        |     689608083 |          1.10 | Mary Test    | 4007000000027 |           05 |          20 |           113 | Thank you, your payment has been received. |
 
   #########################################################################
   ###############################EDIT SETTINGS##################################
@@ -369,7 +369,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | Account Number | Name On Bill | SSN         | Invalid Account Number |
-      | CSS        | 3900923980     | Joy, Vance   | 999-91-1111 | 123                    |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 |                    123 |
 
   ########################## TO DO ADD PAYMENT VERIFICATIONS#####################################################
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451: Scenario 1, Scenario 2 Test 1, To make payment from LHS
@@ -397,17 +397,17 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code | Message                            |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |               | Mary Test    | 4007000000027 | 11           | 20          | 112           | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 | 20            | Mary Test    |               | 11           | 20          | 112           | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 | 20            | Mary Test    | 4007000000027 | 11           |             | 112           | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 | 20            | Mary Test    | 4007000000027 | 11           | 20          |               | Mandatory field!                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 | 20            | Mary Test    | 4007000000    | 11           | 20          | 112           | The credit card number is invalid. |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |               | Mary Test    | 4007000000027 |           11 |          20 |           112 | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |            20 | Mary Test    |               |           11 |          20 |           112 | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |            20 | Mary Test    | 4007000000027 |           11 |             |           112 | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |            20 | Mary Test    | 4007000000027 |           11 |          20 |               | Mandatory field!                   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |            20 | Mary Test    |    4007000000 |           11 |          20 |           112 | The credit card number is invalid. |
 
   ######################################################################
   ############################    LHS successful payment  back to billing    ############################
   ######################################################################
   #############################################################ALL IS WELLLLLLLLLLLLLLLL#####################################################
-   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS
+  Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -442,10 +442,16 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item1 | Receipt Sent To |
     And I click on "ActivityHistoryButton"
     And I check I am on "Activity History" page
+    And "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName         |
+      | Item1 | Activity History |
+      | Item1 | Date             |
+      | Item1 | Activity         |
+      | Item1 | Description      |
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 | 2.20          | Mary Test    | 4007000000027 | 11           | 20          | 112           |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          2.20 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
 
   ######################################################################
   ############################    LHS successful payment  back to make another payment    ############################
@@ -488,7 +494,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card    | Card Number   | Expiry Month | Expiry Year | Security Code |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 | 10            | another payment | 4007000000027 | 11           | 20          | 112           |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |            10 | another payment | 4007000000027 |           11 |          20 |           112 |
 
   #############################################################################################################################################################################################
   #############################################################################################################################################################################################
@@ -583,7 +589,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | Account Number1 | BillName1  | SSN1        |
-      | CSS        | 8970235184      | Pan, Peter | 888-99-8761 |
+      | CSS        |      8970235184 | Pan, Peter | 888-99-8761 |
 
   Scenario Outline: DCSSP-414: As a user I want to enter my user details so that I can complete the registration process
     Given I want to login to portal "<PortalName>"
@@ -676,7 +682,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | Account Number1 | BillName1  | SSN1        | Email Address1                   | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 | Email Address2 | Choose Password2 | Confirm Password2 | Email Address3             | Choose UserName3 | Choose Password3 | Confirm Password3 | Choose UserName4 | Choose Password4 | Confirm Password4 | Choose Password5 | Confirm Password5 |
-      | CSS        | 8970235184      | Pan, Peter | 888-99-8761 | ellen.truefeldt@Dbresults.com.au | PeterPan1        | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   | ellentruefeldt | Dbresults11      | Dbresults11       | ellen.truefeldt2@gmail.com | bob              | Dbresults11      | Dbresults11       | TestUser4        | dbr              | dbr               | Dbresults11      | hi                |
+      | CSS        |      8970235184 | Pan, Peter | 888-99-8761 | ellen.truefeldt@Dbresults.com.au | PeterPan1        | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   | ellentruefeldt | Dbresults11      | Dbresults11       | ellen.truefeldt2@gmail.com | bob              | Dbresults11      | Dbresults11       | TestUser4        | dbr              | dbr               | Dbresults11      | hi                |
 
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS; DCSSP-459: scenario 1, 2, 3
     Given I want to login to portal "<PortalName>"
@@ -721,7 +727,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Pay        | Account 1071805034 | 20            | happy Test   | 4007000000027 | 11           | 20          | 112           |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Pay        | Account 1071805034 |            20 | happy Test   | 4007000000027 |           11 |          20 |           112 |
 
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451: Scenario 1, Scenario 2 Test 1, To make payment from LHS; DCSSP-459: scenario 4
     Given I want to login to portal "<PortalName>"
@@ -763,9 +769,8 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card    | Card Number   | Expiry Month | Expiry Year | Security Code |
-      | CSS        | UserNameInput | PasswordInput | michael  | Dbresults1 | Pay        | Account 1071805034 | 10            | another payment | 4007000000027 | 11           | 20          | 112           |
+      | CSS        | UserNameInput | PasswordInput | michael  | Dbresults1 | Pay        | Account 1071805034 |            10 | another payment | 4007000000027 |           11 |          20 |           112 |
 
-  
   Scenario Outline: DCSSP-489 As a user I want my name displayed in the portal so that I know I'm currently logged in
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -829,9 +834,9 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | Mobile Number1 | HomePhone Number1 | WorkPhone Number1 | Mobile Number2 | HomePhone Number2 | WorkPhone Number2 | Address Line1                | Address Line2 | City          | State | Post Code | DropDownValue1           | DropDownField     | Email                   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | (999) 11-g     | (999) 989-1122    | (888) 777-6654    | (903) 888-7161 | (99) 77-60        | (88) 71           | Apt. 26, 30 Saint Francis Pl |               | San Francisco | CA    | 94107     | United States of America | CountriesComboBox | email@Dbresults1.com.au |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | (999) 11-g     | (999) 989-1122    | (888) 777-6654    | (903) 888-7161 | (99) 77-60        | (88) 71           | Apt. 26, 30 Saint Francis Pl |               | San Francisco | CA    |     94107 | United States of America | CountriesComboBox | email@Dbresults1.com.au |
 
-Scenario Outline: DCSSP-520: Already registered or already activated
+  Scenario Outline: DCSSP-520: Already registered or already activated
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
     And I enter then details as new
@@ -851,8 +856,7 @@ Scenario Outline: DCSSP-520: Already registered or already activated
 
     Examples: 
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        |
-      | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 211-02-0091 |
-
+      | CSS        |      9353248310 | Da Vinci, Leonardo | 777-78-7807 |      4415168071 | Test, Simon | 211-02-0091 |
 
   Scenario Outline: DCSSP-520: Already registered or already activated and user tries again.
     Given I want to login to portal "<PortalName>"
@@ -895,7 +899,7 @@ Scenario Outline: DCSSP-520: Already registered or already activated
 
     Examples: 
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
-      | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
+      | CSS        |      9353248310 | Da Vinci, Leonardo | 777-78-7807 |      4415168071 | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
 
   Scenario Outline: Continue with 520, Scenario 2: User registers and their account is not activated
     Given I want to login to portal "<PortalName>"
@@ -912,7 +916,7 @@ Scenario Outline: DCSSP-520: Already registered or already activated
 
     Examples: 
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
-      | CSS        | 9353248310      | Da Vinci, Leonardo | 777-78-7807 | 4415168071      | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
+      | CSS        |      9353248310 | Da Vinci, Leonardo | 777-78-7807 |      4415168071 | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
 
   Scenario Outline: DCSSP-493 :As a user I want to login to the CSS using my email address so that I can access my information. This will keep runing the validations till CAPTCHA
     Given I want to login to portal "<PortalName>"
@@ -991,11 +995,10 @@ Scenario Outline: DCSSP-520: Already registered or already activated
     Then I see text "to set up eBilling" displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | 
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | 
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
 
-      
-   Scenario Outline: DCSSP-67 : As a user I want to view my account’s financial history so that I can review the account's transactions over a period of time
+  Scenario Outline: DCSSP-67 : As a user I want to view my account’s financial history so that I can review the account's transactions over a period of time
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -1021,3 +1024,40 @@ Scenario Outline: DCSSP-520: Already registered or already activated
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email                         | DropDownValue1     | DropDownField   | DropDownValue2 | DropDownField2  |
       | CSS        | UserNameInput | PasswordInput | Mary     | Dbresults1 | hemant.shori@dbresults.com.au | Account 0370837468 | AccountComboBox |     5133801785 | AccountComboBox |
+
+  Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Payments"
+    And I click on "Make a Payment"
+    And I check I am on "MakePayment" page
+    And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
+    And I enter then details as
+      | Fields        | Value           |
+      | PaymentAmount | <PaymentAmount> |
+      | NameOnCard    | <Name on Card>  |
+      | CardNumber    | <Card Number>   |
+      | ExpiryMonth   | <Expiry Month>  |
+      | ExpiryYear    | <Expiry Year>   |
+      | SecurityCode  | <Security Code> |
+    And I click on "Submit"
+    And I check I am on "PaymentConfirm" page
+    Then I see "Thank you, your payment has been received." displayed
+    And I capture "wt49_block_wtColumn2"
+    And I click on "ActivityHistoryButton"
+    And "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName    |
+      | Item1 | Date        |
+      | Item1 | Activity    |
+      | Item1 | Description |
+    And I check I am on "Activity History" page
+    Then I see "Activity History" displayed
+    And I Check "Wrapper" contains "wt49_block_wtColumn2"
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          0.11 | Mary Test    | 4007000000027 |           11 |          20 |           112 |

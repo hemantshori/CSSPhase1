@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -32,6 +33,7 @@ public class StepImpe {
  //********************************************** following is before and after *****************************************
 	WebDriver driver;
 	private String bolt;
+	static String Capture;
 	
 	@Before()
 	  public void startUp() {
@@ -46,10 +48,10 @@ public class StepImpe {
 	}
 		// **************disable to leave browser open***************************************
 
-	@After()
-		  public void tearDown() {	
-		    driver.quit();
-		   	  }
+//	@After()
+//		  public void tearDown() {	
+//		    driver.quit();
+//		   	  }
 	//******************************************************************************   
 	    
    
@@ -67,6 +69,48 @@ public class StepImpe {
 	 
 
 	// *****************************************************following are steps******************************************
+	
+
+	// ********************************************************************************************************************************
+	//**************************************** Capture element from Page************************************************************
+	
+	@Given("^I capture \"(.*?)\"$")
+	public String i_capture(String arg1) throws Throwable {
+		
+
+			
+			DBUtilities createXpath = new DBUtilities(driver);
+			String myxpath = createXpath.xpathMakerById(arg1);
+			System.out.println(myxpath);
+			
+			WebElement xyz = driver.findElement(By.xpath(myxpath));
+			StepImpe.Capture= xyz.getText();
+			System.out.println("the payment id is " +Capture);
+			return Capture;
+  
+	}
+
+	@Then("^I Check \"(.*?)\" contains \"(.*?)\"$")
+	public void i_Check_contains(String arg1, String arg2) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath = createXpath.xpathMakerById(arg1);
+		System.out.println(myxpath);
+		String elementToBeSearched = StepImpe.Capture;
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
+	     DBUtilities t1 = new DBUtilities(driver);
+	     t1.isTextPresent(elementToBeSearched);
+		
+		
+		
+	}
+
+	
+	
+	
+	
+	//*************************************************************************************************************************
+	
+	
 	@Given("^I want to login to portal \"(.*?)\"$")
 	public void i_want_to_login_to_portal(String arg1) throws Throwable {
 		HomePage home = PageFactory.initElements(driver, HomePage.class);
@@ -101,6 +145,7 @@ public class StepImpe {
 				||arg1.equals("ActivityHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
 				||arg1.equals("EditSettings")
+				||arg1.equals("ButtonShowAll")
 				||arg1.equals("AllTransactions")
 				||arg1.equals("Reset")
 				||arg1.equals("PasswordInfoIcon")
@@ -141,7 +186,8 @@ public class StepImpe {
 	@Given("^I select \"(.*?)\" from \"(.*?)\"$")
 	public void i_select_from(String arg1, String arg2) throws Throwable {
 		if(arg1.equals("SetGoal")){
-			PageFactory.initElements(driver, GoalsAndTargetsPage.class).xpathMakerById1AndId2(arg1, arg2);
+			String myxpath = PageFactory.initElements(driver, GoalsAndTargetsPage.class).xpathMakerById1AndId2(arg1, arg2);
+			driver.findElement(By.xpath(myxpath)).click();
 		}else{
 		PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
 	}
@@ -177,7 +223,7 @@ public class StepImpe {
 	//*********************************************** read popup message********************************************
 	@Then("^I see \"(.*?)\" displayed on popup and I click \"(.*?)\"$")
 	public void i_see_displayed_on_popup_and_I_click(String arg1, String arg2) throws Throwable {
-
+   Thread.sleep(2000);
 		PageFactory.initElements(driver, DBUtilities.class).checkPopUpMessage(arg1);
 		PageFactory.initElements(driver, DBUtilities.class).clickOnPopUP(arg2);
 
@@ -214,7 +260,6 @@ public class StepImpe {
     
   
 		}
-
 
 	
 	

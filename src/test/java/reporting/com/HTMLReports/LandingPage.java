@@ -39,6 +39,8 @@ public class LandingPage extends DBUtilities {
 					||name.equals("Submit")
 					||name.equals("Cancel")
 					||name.equals("Date")
+					||name.equals("Activity")
+					||name.equals("Description")
 					||name.equals("Type")
 					||name.equals("Amount")
 					){
