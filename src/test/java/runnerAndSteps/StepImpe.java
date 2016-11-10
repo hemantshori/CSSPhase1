@@ -48,10 +48,10 @@ public class StepImpe {
 	}
 		// **************disable to leave browser open***************************************
 
-//	@After()
-//		  public void tearDown() {	
-//		    driver.quit();
-//		   	  }
+	@After()
+		  public void tearDown() {	
+		    driver.quit();
+		   	  }
 	//******************************************************************************   
 	    
    
@@ -148,6 +148,7 @@ public class StepImpe {
 				||arg1.equals("ButtonShowAll")
 				||arg1.equals("AllTransactions")
 				||arg1.equals("Reset")
+				||arg1.equals("MenuIcon")
 				||arg1.equals("PasswordInfoIcon")
 				||arg1.equals("HintInfoIcon")
 				||arg1.equals("SetGoal")		
