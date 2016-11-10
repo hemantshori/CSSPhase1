@@ -1,42 +1,22 @@
 Feature: Some feature
 
   @wip
-  Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
+  Scenario Outline: User views the feedback messages when they click Direct Debit, Test 1 DCSSP-780 Description: Epic:
     Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
     And I enter then details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I click on "Payments"
-    And I click on "Make a Payment"
-    And I check I am on "MakePayment" page
-    And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
-    And I enter then details as
-      | Fields        | Value           |
-      | PaymentAmount | <PaymentAmount> |
-      | NameOnCard    | <Name on Card>  |
-      | CardNumber    | <Card Number>   |
-      | ExpiryMonth   | <Expiry Month>  |
-      | ExpiryYear    | <Expiry Year>   |
-      | SecurityCode  | <Security Code> |
-    And I click on "Submit"
-    And I check I am on "PaymentConfirm" page
-    Then I see "Thank you, your payment has been received." displayed
-    And I capture "wt49_block_wtColumn2"
-    And I click on "ActivityHistoryButton"
-    And I check I am on "Activity History" page
-    And "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName    |
-      | Item1 | Date        |
-      | Item1 | Activity    |
-      | Item1 | Description |
-    Then I see "Activity History" displayed
-    And I Check "Wrapper" contains "wt49_block_wtColumn2"
+    And I click on "Set Up eBilling"
+    Then I see "Please contact Simply Energy on 13 88 08 to set up eBilling" displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          0.11 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      | ServiceName              | AccountNumber          | Address                                                |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling | Residential: Electricity | Account No. 2411617223 | Apt. 201, 300 Mission Street, San Francisco, CA, 94105 |
 
   Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.
     Given I want to login to portal "<PortalName>"
