@@ -1077,7 +1077,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then I see "Please contact Simply Energy on 13 88 08 to set up eBilling" displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |                                                 |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |                                                 
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling | 
       
       
