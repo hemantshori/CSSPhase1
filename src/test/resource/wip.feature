@@ -15,8 +15,8 @@ Feature: Some feature
     Then I see "Please contact Simply Energy on 13 88 08 to set up eBilling" displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      | ServiceName              | AccountNumber          | Address                                                |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling | Residential: Electricity | Account No. 2411617223 | Apt. 201, 300 Mission Street, San Francisco, CA, 94105 |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |                                                 |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling | 
 
   Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.
     Given I want to login to portal "<PortalName>"

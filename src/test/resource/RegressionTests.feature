@@ -1061,3 +1061,28 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          0.11 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
+      
+      
+  Scenario Outline: User views the feedback messages when they click Direct Debit, Test 1 DCSSP-780 Description: Epic:
+    Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Set Up eBilling"
+    Then I see "Please contact Simply Energy on 13 88 08 to set up eBilling" displayed
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |                                                 |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling | 
+      
+      
+      
+      
+      
+      
+      
