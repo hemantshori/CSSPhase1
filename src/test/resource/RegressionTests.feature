@@ -1061,9 +1061,8 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          0.11 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
-      
-      
-  Scenario Outline: User views the feedback messages when they click Direct Debit, Test 1 DCSSP-780 Description: Epic:
+
+   Scenario Outline: User views the feedback messages when they click Direct Debit, Test 1 DCSSP-780, DCSSP-781 Description: Epic:
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
@@ -1075,14 +1074,60 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I click on "Set Up eBilling"
     Then I see "Please contact Simply Energy on 13 88 08 to set up eBilling" displayed
+     And I click on "Set Up Direct Debit"
+    Then I see "Please contact Simply Energy on 13 88 08 to set up your Direct Debit" displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |                                                 
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling | 
-      
-      
-      
-      
-      
-      
-      
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling |
+
+  Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.
+    Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName         |
+      | Item1 | Mandatory Fields |
+      | Item1 | Sign In          |
+      | Item1 | Forgot Password? |
+      | Item1 | Create Account   |
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Usage"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName        |
+      | Item1 | Usage History   |
+      | item1 | Goals & Targets |
+    And I click on "Goals & Targets"
+    Then I check I am on "Goals and Targets" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName        |
+      | Item3 | Goals & Targets |
+      | Item4 | Starter         |
+      | Item6 | Saver           |
+      | Item7 | Eco             |
+      | Item7 | Custom          |
+    And I select "SetGoal" from "Column1"
+    Then I see "This goal will be applied for the next 12 months. Your goal traker will reset to the selected goal. Are you sure you want to update your goals?" displayed on popup and I click "OK"
+    Then I see "5% Starter Goal" displayed
+    And I click on "Sign Out"
+    And I check I am on "Login" page
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I check I am on "Dashboard" page
+    And I click on "Usage"
+    And I click on "Goals & Targets"
+    Then I check I am on "Goals and Targets" page
+    Then I see "5% Starter Goal" displayed
+    And I click on "MenuIcon"
+    And I click on "Remove Goal"
+    Then I see "Are you sure you want to remove your savings goal?" displayed on popup and I click "OK"
+    Then I see "Goal removed successfully." displayed
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |

@@ -82,7 +82,8 @@ public class LandingPage extends DBUtilities {
 
       public void checkUIElementIsDisplayed (String arg1) throws InterruptedException
     	  {
-    	  if (arg1.equals("Please wait while we retrieve your account...")|| arg1.equals("Please contact Simply Energy on 13 88 08 to set up your Direct Debit")){
+    	//  if (arg1.equals("Please wait while we retrieve your account...")|| arg1.equals("Please contact Simply Energy on 13 88 08 to set up your Direct Debit")){
+    		  if (arg1.equals("Please wait while we retrieve your account...")){
     		  DBUtilities checkElementDisplayed = new DBUtilities(driver);
         	  String myxpath=checkElementDisplayed.xpathMakerSpanClass(arg1);
         	  Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());  

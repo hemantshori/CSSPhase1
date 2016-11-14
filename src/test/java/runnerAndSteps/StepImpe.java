@@ -127,9 +127,8 @@ public class StepImpe {
 		 return PageFactory.initElements(driver, LandingPage.class);
 	}
 	
-	
-	
-	
+
+
 	
 	@And("^I click on \"(.*?)\"$")
 	public void i_click_on(String arg1) throws Throwable {

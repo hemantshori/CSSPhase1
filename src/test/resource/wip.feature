@@ -1,7 +1,15 @@
 Feature: Some feature
 
   @wip
- 
+
+    
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling |
+      
+      
+      
   Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
@@ -49,9 +57,6 @@ Feature: Some feature
     Then I see "Are you sure you want to remove your savings goal?" displayed on popup and I click "OK"
     Then I see "Goal removed successfully." displayed
 
-    #sign out
-    #login again
-    #remove goals and target
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
