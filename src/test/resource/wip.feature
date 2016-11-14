@@ -1,7 +1,20 @@
 Feature: Some feature
 
   @wip
-
+ Scenario Outline: User views the feedback messages when they click Direct Debit, Test 1 DCSSP-780, DCSSP-781 Description: Epic:
+    Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Set Up eBilling"
+    Then I see "Please contact Simply Energy on 13 88 08 to set up eBilling" displayed
+     And I click on "Set Up Direct Debit"
+    Then I see "Please contact Simply Energy on 13 88 08 to set up your Direct Debit" displayed
     
 
     Examples: 

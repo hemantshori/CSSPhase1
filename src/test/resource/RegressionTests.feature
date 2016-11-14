@@ -362,7 +362,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
+    #Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
     And I click on "Sign In"
     And I check I am on "Login" page
@@ -601,7 +601,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN1>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
+   # Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
     And I click on "Sign In"
     And I check I am on "Login" page
@@ -614,7 +614,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "checkbox" checkbox
     And I hit Enter
     And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
+    #Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
     And I click on "Cancel"
     And I check I am on "Login" page
@@ -626,7 +626,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN1>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
+ #   Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
     And I click on "PasswordInfoIcon"
     Then I see "Password must include a minimum of 8 characters, 1 upper case character, 1 numeric or special character." displayed
@@ -846,7 +846,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN1>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
+   # Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Account Already Activated" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                                |
@@ -868,7 +868,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN1>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
+    #Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Account Already Activated" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                                |
@@ -883,7 +883,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN2>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
-    Then I see "Please wait while we retrieve your account..." displayed
+ #   Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
     And I enter then details as new
       | Fields          | Value               |
