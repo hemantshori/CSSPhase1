@@ -1131,3 +1131,36 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
+      
+   Scenario Outline: User changes password with password strength. DCSSP-790 Description: Change password rule
+    Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Settings"
+    And I check I am on "Settings" page
+    And I click on "EditSettings"
+    And I check I am on "EditSettings" page
+    And I enter then details as
+      | Fields                 | Value            |
+      | CurrentPasswordInput   | <Password>       |
+      | NewPasswordInput       | <NewPassword>    |
+      | NewPasswordConfirm     | <NewPassConfirm> |
+      | UserDataExtention_Hint | <UDETable>       |
+    And I click on "Submit"
+    Then I see "<Message>" displayed
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | NewPassword | NewPassConfirm | UDETable         | Message                                    |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | abc         |                |                  | Your password is too short                 |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |      123456 |                |                  | Your password contains sequences           |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | mattlara    |                |                  | Medium                                     |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase1   |                |                  | Strong                                     |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase@1  |                |                  | Very Strong                                |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | DBResults1  | DBResults1     | ApplesandOranges | Your changes have been saved successfully. |
+      | CSS        | UserNameInput | PasswordInput | Michael  | DBResults1 | Dbresults1  | Dbresults1     | ApplesandOranges | Your changes have been saved successfully. |

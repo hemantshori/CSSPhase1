@@ -1,7 +1,39 @@
 Feature: Some feature
 
-  @wip
- Scenario Outline: User views the feedback messages when they click Direct Debit, Test 1 DCSSP-780, DCSSP-781 Description: Epic:
+  
+  
+  
+  
+ Scenario Outline: DCSSP-433, DCSSP-550 (reset password is manual), DCSSP-162 Edit Settings>> reset pwd
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Settings"
+    And I check I am on "Setting" page
+    And I click on "EditSettings"
+    And I check I am on "EditSettings" page
+    And I enter then details as new
+      | Fields                  | Value                  |
+      | CurrentPasswordInput    | <Current Password>     |
+      | NewPasswordInput        | <New Password>         |
+      | NewPasswordConfirmInput | <Confirm New Password> |
+    And I click on "Submit"
+    Then I see "<Message>" displayed
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | Current Password | New Password | Confirm New Password | Message                                                           |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Dbresults1       | Dbresults1   |                      | New Password and Confirm Password do not match. Please try again. |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Dbresults1       |              | Dbresults1           | New Password and Confirm Password do not match. Please try again. |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 |                  | Dbresults1   | Dbresults1           | Please input your current password to change your new password.   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Dbresults1       | DBR          | DBR                  | New Password is invalid. Please try again.                        |
+ 
+ 
+ 
+   @wip
+  Scenario Outline: User changes password with password strength. DCSSP-790 Description: Change password rule
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
@@ -11,18 +43,29 @@ Feature: Some feature
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I click on "Set Up eBilling"
-    Then I see "Please contact Simply Energy on 13 88 08 to set up eBilling" displayed
-     And I click on "Set Up Direct Debit"
-    Then I see "Please contact Simply Energy on 13 88 08 to set up your Direct Debit" displayed
-    
+    And I click on "Settings"
+    And I check I am on "Settings" page
+    And I click on "EditSettings"
+    And I check I am on "EditSettings" page
+    And I enter then details as
+      | Fields                 | Value            |
+      | CurrentPasswordInput   | <Password>       |
+      | NewPasswordInput       | <NewPassword>    |
+      | NewPasswordConfirm     | <NewPassConfirm> |
+      | UserDataExtention_Hint | <UDETable>       |
+    And I click on "Submit"
+    Then I see "<Message>" displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling |
-      
-      
-      
+      | PortalName | UserNameField | PasswordField | UserName | Password   | NewPassword | NewPassConfirm | UDETable         | Message                                    |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | abc         |                |                  | Your password is too short                 |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |      123456 |                |                  | Your password contains sequences           |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | mattlara    |                |                  | Medium                                     |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase1   |                |                  | Strong                                     |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase@1  |                |                  | Very Strong                                |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | DBResults1  | DBResults1     | ApplesandOranges | Your changes have been saved successfully. |
+      | CSS        | UserNameInput | PasswordInput | Michael  | DBResults1 | Dbresults1  | Dbresults1     | ApplesandOranges | Your changes have been saved successfully. |
+
   Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
@@ -53,11 +96,11 @@ Feature: Some feature
     And I select "SetGoal" from "Column1"
     Then I see "This goal will be applied for the next 12 months. Your goal traker will reset to the selected goal. Are you sure you want to update your goals?" displayed on popup and I click "OK"
     Then I see "5% Starter Goal" displayed
-     And I click on "Sign Out"
+    And I click on "Sign Out"
     And I check I am on "Login" page
     And I enter then details as
       | Fields        | Value      |
-     | UserNameInput | <UserName> |
+      | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I check I am on "Dashboard" page
