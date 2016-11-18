@@ -17,10 +17,10 @@ import cucumber.api.junit.Cucumber;
 	//	 features = "src/test/resource/SanityTestScript.feature") 
 		
     //****************for Regression****************************
-	//	 features = "src/test/resource/RegressionTests.feature") 
+		 features = "src/test/resource/RegressionTests.feature") 
 		
     //********************for wip********************************
-		features = "src/test/resource/wip.feature") /// wip
+	//	features = "src/test/resource/wip.feature") /// wip
 
      //**** Production STUB ************************************
  
