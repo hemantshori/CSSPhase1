@@ -334,7 +334,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   ######################################################################################################################
   ###############################                 ACCOUNT REGISTRATION                ##################################
   ######################################################################################################################
-  Scenario Outline: DCSSP-413 Scenario 1: User accesses the registration page
+ Scenario Outline: DCSSP-413 Scenario 1: User accesses the registration page
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
     And I check I am on "Regist" page
@@ -364,13 +364,27 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     #Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
-    And I click on "Sign In"
-    And I check I am on "Login" page
+    And I enter then details as new
+      | Fields                    | Value            |
+      | InputAccountNumber        | <Account Number> |
+      | InputBillName             | <Name On Bill>   |
+      | InputIdentificationNumber | <SSN>            |
+    Then I see "You must accept the Terms and Conditions to proceed" displayed
+    And I click on "checkbox" checkbox
+    And I click on "Submit"
+    And I enter then details as
+      | Fields               | Value      |
+      | NewPassword | <Password> |
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName  |
+      | item2 | <Message> |
 
     Examples: 
-      | PortalName | Account Number | Name On Bill | SSN         | Invalid Account Number |
-      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 |                    123 |
-
+      | PortalName | Account Number | Name On Bill | SSN         | Password   | Message                             |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | abc        | Your password is not strong enough. |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | mattlara   | Your password is not very secure.   |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | CSSPhase1  | Your password is strong.            |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | CSSPhase@1 | Your password is very secure!       |
   ########################## TO DO ADD PAYMENT VERIFICATIONS#####################################################
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451: Scenario 1, Scenario 2 Test 1, To make payment from LHS
     Given I want to login to portal "<PortalName>"
@@ -601,7 +615,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN1>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
-   # Then I see "Please wait while we retrieve your account..." displayed
+    # Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
     And I click on "Sign In"
     And I check I am on "Login" page
@@ -626,7 +640,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN1>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
- #   Then I see "Please wait while we retrieve your account..." displayed
+    #   Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
     And I click on "PasswordInfoIcon"
     Then I see "Password must include a minimum of 8 characters, 1 upper case character, 1 numeric or special character." displayed
@@ -846,7 +860,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN1>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
-   # Then I see "Please wait while we retrieve your account..." displayed
+    # Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Account Already Activated" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                                |
@@ -883,7 +897,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | InputIdentificationNumber | <SSN2>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
- #   Then I see "Please wait while we retrieve your account..." displayed
+    #   Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
     And I enter then details as new
       | Fields          | Value               |
@@ -1062,7 +1076,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          0.11 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
 
-   Scenario Outline: User views the feedback messages when they click Direct Debit, Test 1 DCSSP-780, DCSSP-781 Description: Epic:
+  Scenario Outline: User views the feedback messages when they click Direct Debit, Test 1 DCSSP-780, DCSSP-781 Description: Epic:
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
@@ -1074,7 +1088,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I click on "Set Up eBilling"
     Then I see "Please contact Simply Energy on 13 88 08 to set up eBilling" displayed
-     And I click on "Set Up Direct Debit"
+    And I click on "Set Up Direct Debit"
     Then I see "Please contact Simply Energy on 13 88 08 to set up your Direct Debit" displayed
 
     Examples: 
@@ -1131,8 +1145,8 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
-      
-   Scenario Outline: User changes password with password strength. DCSSP-790 Description: Change password rule
+
+  Scenario Outline: User changes password with password strength. DCSSP-790 Description: Change password rule
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
@@ -1153,14 +1167,16 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | NewPasswordConfirm     | <NewPassConfirm> |
       | UserDataExtention_Hint | <UDETable>       |
     And I click on "Submit"
-    Then I see "<Message>" displayed
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName  |
+      | item2 | <Message> |
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | NewPassword | NewPassConfirm | UDETable         | Message                                    |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | abc         |                |                  | Your password is too short                 |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |      123456 |                |                  | Your password contains sequences           |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | mattlara    |                |                  | Medium                                     |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase1   |                |                  | Strong                                     |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase@1  |                |                  | Very Strong                                |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | abc         |                |                  | Your password is not strong enough.        |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |      123456 |                |                  | Your password is not strong enough.        |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | mattlara    |                |                  | Your password is not very secure.          |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase1   |                |                  | Your password is strong.                   |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase@1  |                |                  | Your password is very secure!              |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | DBResults1  | DBResults1     | ApplesandOranges | Your changes have been saved successfully. |
       | CSS        | UserNameInput | PasswordInput | Michael  | DBResults1 | Dbresults1  | Dbresults1     | ApplesandOranges | Your changes have been saved successfully. |

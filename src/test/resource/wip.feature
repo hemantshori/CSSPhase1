@@ -1,38 +1,8 @@
 Feature: Some feature
 
+  @wip
   
-  
-  
-  
- Scenario Outline: DCSSP-433, DCSSP-550 (reset password is manual), DCSSP-162 Edit Settings>> reset pwd
-    Given I want to login to portal "<PortalName>"
-    And I enter then details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    And I click on "Settings"
-    And I check I am on "Setting" page
-    And I click on "EditSettings"
-    And I check I am on "EditSettings" page
-    And I enter then details as new
-      | Fields                  | Value                  |
-      | CurrentPasswordInput    | <Current Password>     |
-      | NewPasswordInput        | <New Password>         |
-      | NewPasswordConfirmInput | <Confirm New Password> |
-    And I click on "Submit"
-    Then I see "<Message>" displayed
 
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | Current Password | New Password | Confirm New Password | Message                                                           |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Dbresults1       | Dbresults1   |                      | New Password and Confirm Password do not match. Please try again. |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Dbresults1       |              | Dbresults1           | New Password and Confirm Password do not match. Please try again. |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 |                  | Dbresults1   | Dbresults1           | Please input your current password to change your new password.   |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Dbresults1       | DBR          | DBR                  | New Password is invalid. Please try again.                        |
- 
- 
- 
-   @wip
   Scenario Outline: User changes password with password strength. DCSSP-790 Description: Change password rule
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
