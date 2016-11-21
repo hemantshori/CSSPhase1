@@ -1,42 +1,8 @@
 Feature: Some feature
 
-  @wip
-  
+ @wip
 
-  Scenario Outline: User changes password with password strength. DCSSP-790 Description: Change password rule
-    Given I want to login to portal "<PortalName>"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName |
-      | item1 | Logo     |
-    And I enter then details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    And I click on "Settings"
-    And I check I am on "Settings" page
-    And I click on "EditSettings"
-    And I check I am on "EditSettings" page
-    And I enter then details as
-      | Fields                 | Value            |
-      | CurrentPasswordInput   | <Password>       |
-      | NewPasswordInput       | <NewPassword>    |
-      | NewPasswordConfirm     | <NewPassConfirm> |
-      | UserDataExtention_Hint | <UDETable>       |
-    And I click on "Submit"
-    Then I see "<Message>" displayed
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | NewPassword | NewPassConfirm | UDETable         | Message                                    |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | abc         |                |                  | Your password is too short                 |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |      123456 |                |                  | Your password contains sequences           |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | mattlara    |                |                  | Medium                                     |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase1   |                |                  | Strong                                     |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase@1  |                |                  | Very Strong                                |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | DBResults1  | DBResults1     | ApplesandOranges | Your changes have been saved successfully. |
-      | CSS        | UserNameInput | PasswordInput | Michael  | DBResults1 | Dbresults1  | Dbresults1     | ApplesandOranges | Your changes have been saved successfully. |
-
-  Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.
+  Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal. DCSSP-128
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName         |
@@ -66,6 +32,20 @@ Feature: Some feature
     And I select "SetGoal" from "Column1"
     Then I see "This goal will be applied for the next 12 months. Your goal traker will reset to the selected goal. Are you sure you want to update your goals?" displayed on popup and I click "OK"
     Then I see "5% Starter Goal" displayed
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName   |
+      | Item1 | Lighting   |
+      | Item2 | Heating    |
+      | Item3 | Cooling    |
+      | Item4 | Appliances |
+    And I click on "Lighting"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                                                                   |
+      | Item1 | Turning off your lights when you                |
+      | Item2 | Replace your lightbulbs with LED       |
+      | Item3 | Make sure you are using the right lightbulb for the fixture |
+      | Item4 | Use motion-detection light outdoors, as they are not in use a lot of the time.             |
+      | Item5 | Consider using timer-based lights during the week when you are at work.                    |
     And I click on "Sign Out"
     And I check I am on "Login" page
     And I enter then details as
@@ -82,11 +62,19 @@ Feature: Some feature
     And I click on "Remove Goal"
     Then I see "Are you sure you want to remove your savings goal?" displayed on popup and I click "OK"
     Then I see "Goal removed successfully." displayed
-
+    And I click on "Lighting"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                                                                   |
+      | Item1 | Turning off your lights when you                |
+      | Item2 | Replace your lightbulbs with LED       |
+      | Item3 | Make sure you are using the right lightbulb for the fixture |
+      | Item4 | Use motion-detection light outdoors, as they are not in use a lot of the time.             |
+      | Item5 | Consider using timer-based lights during the week when you are at work.                    |
+   # to do....add top 10 (configurable) after UAP is automated.
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
-
+ @wip
   Scenario Outline: DCSSP-67 : As a user I want to view my account’s financial history so that I can review the account's transactions over a period of time
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -113,7 +101,7 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email                         | DropDownValue1     | DropDownField   | DropDownValue2 | DropDownField2  |
       | CSS        | UserNameInput | PasswordInput | Mary     | Dbresults1 | hemant.shori@dbresults.com.au | Account 0370837468 | AccountComboBox |     5133801785 | AccountComboBox |
-
+@wip
   Scenario Outline: DCSSP-758: This is for defect 758, email address should not be duplicated with edit settings option. This should not accept the duplicate email address.
     Given I want to login to portal "<PortalName>"
     And I enter then details as

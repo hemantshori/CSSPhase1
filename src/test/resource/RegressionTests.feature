@@ -1095,7 +1095,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling |
 
-  Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.
+  Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal. DCSSP-128
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName         |
@@ -1125,6 +1125,20 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I select "SetGoal" from "Column1"
     Then I see "This goal will be applied for the next 12 months. Your goal traker will reset to the selected goal. Are you sure you want to update your goals?" displayed on popup and I click "OK"
     Then I see "5% Starter Goal" displayed
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName   |
+      | Item1 | Lighting   |
+      | Item2 | Heating    |
+      | Item3 | Cooling    |
+      | Item4 | Appliances |
+    And I click on "Lighting"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                                                                   |
+      | Item1 | Turning off your lights when you                |
+      | Item2 | Replace your lightbulbs with LED       |
+      | Item3 | Make sure you are using the right lightbulb for the fixture |
+      | Item4 | Use motion-detection light outdoors, as they are not in use a lot of the time.             |
+      | Item5 | Consider using timer-based lights during the week when you are at work.                    |
     And I click on "Sign Out"
     And I check I am on "Login" page
     And I enter then details as
@@ -1141,7 +1155,15 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Remove Goal"
     Then I see "Are you sure you want to remove your savings goal?" displayed on popup and I click "OK"
     Then I see "Goal removed successfully." displayed
-
+    And I click on "Lighting"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                                                                   |
+      | Item1 | Turning off your lights when you                |
+      | Item2 | Replace your lightbulbs with LED       |
+      | Item3 | Make sure you are using the right lightbulb for the fixture |
+      | Item4 | Use motion-detection light outdoors, as they are not in use a lot of the time.             |
+      | Item5 | Consider using timer-based lights during the week when you are at work.                    |
+   # to do....add top 10 (configurable) after UAP is automated.
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
