@@ -334,7 +334,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   ######################################################################################################################
   ###############################                 ACCOUNT REGISTRATION                ##################################
   ######################################################################################################################
- Scenario Outline: DCSSP-413 Scenario 1: User accesses the registration page
+  Scenario Outline: DCSSP-413 Scenario 1: User accesses the registration page
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
     And I check I am on "Regist" page
@@ -373,7 +373,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "checkbox" checkbox
     And I click on "Submit"
     And I enter then details as
-      | Fields               | Value      |
+      | Fields      | Value      |
       | NewPassword | <Password> |
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName  |
@@ -385,6 +385,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | mattlara   | Your password is not very secure.   |
       | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | CSSPhase1  | Your password is strong.            |
       | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | CSSPhase@1 | Your password is very secure!       |
+
   ########################## TO DO ADD PAYMENT VERIFICATIONS#####################################################
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451: Scenario 1, Scenario 2 Test 1, To make payment from LHS
     Given I want to login to portal "<PortalName>"
@@ -1133,12 +1134,12 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item4 | Appliances |
     And I click on "Lighting"
     Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                                                                   |
-      | Item1 | Turning off your lights when you                |
-      | Item2 | Replace your lightbulbs with LED       |
-      | Item3 | Make sure you are using the right lightbulb for the fixture |
-      | Item4 | Use motion-detection light outdoors, as they are not in use a lot of the time.             |
-      | Item5 | Consider using timer-based lights during the week when you are at work.                    |
+      | Item  | ItemName                                                                       |
+      | Item1 | Turning off your lights when you                                               |
+      | Item2 | Replace your lightbulbs with LED                                               |
+      | Item3 | Make sure you are using the right lightbulb for the fixture                    |
+      | Item4 | Use motion-detection light outdoors, as they are not in use a lot of the time. |
+      | Item5 | Consider using timer-based lights during the week when you are at work.        |
     And I click on "Sign Out"
     And I check I am on "Login" page
     And I enter then details as
@@ -1157,13 +1158,14 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then I see "Goal removed successfully." displayed
     And I click on "Lighting"
     Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                                                                   |
-      | Item1 | Turning off your lights when you                |
-      | Item2 | Replace your lightbulbs with LED       |
-      | Item3 | Make sure you are using the right lightbulb for the fixture |
-      | Item4 | Use motion-detection light outdoors, as they are not in use a lot of the time.             |
-      | Item5 | Consider using timer-based lights during the week when you are at work.                    |
-   # to do....add top 10 (configurable) after UAP is automated.
+      | Item  | ItemName                                                                       |
+      | Item1 | Turning off your lights when you                                               |
+      | Item2 | Replace your lightbulbs with LED                                               |
+      | Item3 | Make sure you are using the right lightbulb for the fixture                    |
+      | Item4 | Use motion-detection light outdoors, as they are not in use a lot of the time. |
+      | Item5 | Consider using timer-based lights during the week when you are at work.        |
+
+    # to do....add top 10 (configurable) after UAP is automated.
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
@@ -1202,3 +1204,18 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | CSSPhase@1  |                |                  | Your password is very secure!              |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | DBResults1  | DBResults1     | ApplesandOranges | Your changes have been saved successfully. |
       | CSS        | UserNameInput | PasswordInput | Michael  | DBResults1 | Dbresults1  | Dbresults1     | ApplesandOranges | Your changes have been saved successfully. |
+
+  Scenario Outline: DCSSP-644: Open PDF bill and verify
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I check I am on "Dashboard" page
+    And I click on "Current_Bill"
+    Then I see a pdf document with name "https://test-ssc.dbresults.com.au/CSSPortal/Dashboard.aspx" generated
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |

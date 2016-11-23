@@ -372,8 +372,8 @@ public class StepImpe {
 	@Then("^I see a pdf document with name \"(.*?)\" generated$")
 	public void i_see_a_pdf_document_with_name_generated(String arg1) throws Throwable {
      System.out.println("Yes******************* pdf is open");
-     DBUtilities moveControlToNewWindow = new DBUtilities(driver);
-     moveControlToNewWindow.passControlToNewWindow(arg1);
+    // DBUtilities moveControlToNewWindow = new DBUtilities(driver);
+     new DBUtilities(driver).passControlToNewWindow(arg1);
      
 	}
 	

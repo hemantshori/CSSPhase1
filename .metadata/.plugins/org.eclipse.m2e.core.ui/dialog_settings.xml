@@ -2,6 +2,9 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\HShori.DBRESULTS\CSS"/>
+			<item value="C:\Users\HShori.DBRESULTS\git"/>
+			<item value="C:\Users\HShori.DBRESULTS\git\CSSPhase1UAP"/>
 			<item value="C:\Users\HShori.DBRESULTS\git\CSSPhase1"/>
 		</list>
 		<list key="projectNameTemplate">

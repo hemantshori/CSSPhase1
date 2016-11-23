@@ -1,1 +1,15 @@
 2016-10-21 13:09:44,633 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2016-11-22 11:03:28,112 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2016-11-22 11:04:36,629 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: reporting:com.CSS:0.0.1-SNAPSHOT @ C:\Users\HShori.DBRESULTS\git\CSSPhase1UAP\pom.xml.
+2016-11-22 11:04:39,808 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /com.CSS/src/main/java
+2016-11-22 11:04:39,810 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /com.CSS/src/test/java
+2016-11-22 11:04:39,965 [Worker-7] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 11 sec
+2016-11-22 11:04:41,939 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-11-22 11:04:41,939 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\HShori.DBRESULTS\git\CSSPhase1UAP\src\main\resources
+2016-11-22 11:04:41,945 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-11-22 11:04:41,946 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\HShori.DBRESULTS\git\CSSPhase1UAP\src\test\resources
+2016-11-22 11:04:51,024 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-11-22 11:04:51,024 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\HShori.DBRESULTS\git\CSSPhase1UAP\src\main\resources
+2016-11-22 11:04:51,026 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-11-22 11:04:51,026 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\HShori.DBRESULTS\git\CSSPhase1UAP\src\test\resources
+2016-11-23 08:51:22,709 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.

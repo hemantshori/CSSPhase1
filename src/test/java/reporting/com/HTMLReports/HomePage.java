@@ -27,7 +27,7 @@ public class HomePage extends DBUtilities {
 		}else if(arg1.equals("CSS2")){driver.get("https://test-ssc.dbresults.com.au/CSSPortal/Login.aspx");
 		}else if(arg1.equals("UAP")){
 			
-				//driver.get("https://dbresults.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
+				driver.get("https://test-ssc.dbresults.com.au/utilityadminportal/");
 				//following is for SIT
 		      //  driver.get("https://dbresults-tst.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
 				// for dev
@@ -42,8 +42,12 @@ public class HomePage extends DBUtilities {
 			driver.get("https://dbresults-tst.outsystemsenterprise.com/AccountMgmt/ResetPassword.aspx?Token=bf138cb5-7b10-43ac-9610-5775e29e5fe1");
 		}
 			
-		
+		System.out.println("********************************************************************"
+			
+				+ "************************TESTING "+arg1+"*****************************************************");
 	}
+	
+	
 	
 	
 }

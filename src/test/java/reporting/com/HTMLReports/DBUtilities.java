@@ -120,6 +120,7 @@ public class DBUtilities extends XPathGenerator {
 			  
 			 String newPageURL= driver.switchTo().window(child_window).getCurrentUrl();
 			 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++" +newPageURL);
+			 System.out.println(arg1);
 			 Assert.assertEquals(arg1, newPageURL);
 			 }
 			 }
