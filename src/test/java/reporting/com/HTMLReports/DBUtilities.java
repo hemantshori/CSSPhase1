@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -155,7 +156,7 @@ public class DBUtilities extends XPathGenerator {
 			 
 			 public void readAndCompareTableRows(String arg1, String arg2 ,int arg3)
 			 {
-				 System.out.println("Balley balley ni taur ni punjabban di");
+				 
 				  DBUtilities createXpath = new DBUtilities(driver);
 					 String myXpath = createXpath.xpathMakerByTextInClass(arg1);
 					
@@ -163,6 +164,33 @@ public class DBUtilities extends XPathGenerator {
 					// List<WebElement> rows = driver.findElements(By.xpath(myXpath));
 					 List<WebElement> rows = driver.findElements(By.xpath(myXpath));
 					 System.out.println("Balley balley ni taur ni punjabban di Total number of rows :"+ rows.size());
+					 
+			 }
+			 
+			 
+			 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 //++++++++++++++++++++++++++++++++++Read table Rows and compare to an expected number++++++++++++++++++++++++++++++++++++++++
+			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 
+			 public void readTable(String arg1)
+			 {
+				 System.out.println("Balley balley ni taur ni punjabban di");
+				  DBUtilities createXpath = new DBUtilities(driver);
+					 String myXpath = createXpath.xpathMakerById(arg1);
+					
+					 System.out.println("So the xpath for table is " +myXpath);
+					// List<WebElement> rows = driver.findElements(By.xpath(myXpath));
+					 
+					 List<WebElement> rows = driver.findElements(By.xpath(myXpath));
+					 System.out.println("Balley balley ni taur ni punjabban di Total number of rows :"+ rows.size());
+					
+					 List<WebElement> rowElements = driver.findElements(By.tagName("tr"));
+					 System.out.println(rowElements.size());
+					 String Table_data = driver.findElement(By.xpath(myXpath)).getText();
+					 System.out.println(" chakk bai"    +Table_data);
+					
+					 
+					 
 					 
 			 }
 			 

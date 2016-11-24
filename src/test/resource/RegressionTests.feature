@@ -53,7 +53,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Usage      | Residential: Electricity | Usage History | Contact Us  |
 
   @ShakeOut
-  Scenario Outline: Check User Menu Item List Test 1, DCSSP-245 Description: check for feature under development
+  Scenario Outline: Check User Menu Item List Test 1, DCSSP-745 Description: check for feature under development
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
