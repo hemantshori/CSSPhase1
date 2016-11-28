@@ -422,7 +422,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   ############################    LHS successful payment  back to billing    ############################
   ######################################################################
   #############################################################ALL IS WELLLLLLLLLLLLLLLL#####################################################
-  Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
+ Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -457,9 +457,9 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item1 | Receipt Sent To |
     And I click on "ActivityHistoryButton"
     And I check I am on "Activity History" page
+    Then I see "Activity History" displayed
     And "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName         |
-      | Item1 | Activity History |
       | Item1 | Date             |
       | Item1 | Activity         |
       | Item1 | Description      |
@@ -467,6 +467,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          2.20 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
+ 
 
   ######################################################################
   ############################    LHS successful payment  back to make another payment    ############################

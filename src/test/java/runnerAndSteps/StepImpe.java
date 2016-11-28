@@ -48,10 +48,10 @@ public class StepImpe {
 	}
 		// **************disable to leave browser open***************************************
 
-	@After()
-		  public void tearDown() {	
-		    driver.quit();
-		   	  }
+//	@After()
+//		  public void tearDown() {	
+//		    driver.quit();
+//		   	  }
 	//******************************************************************************   
 	    
    
@@ -401,6 +401,6 @@ public class StepImpe {
 	
 	@Given("^I read the table on \"(.*?)\" page$")
 	public void i_read_the_table_on_page(String arg1) throws Throwable {
-		 new DBUtilities(driver).readTable(arg1);
+		 new DBUtilities(driver).readTableAndCaptureInString(arg1);
 	}
 }

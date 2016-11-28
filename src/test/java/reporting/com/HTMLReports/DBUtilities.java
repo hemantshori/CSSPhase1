@@ -172,7 +172,7 @@ public class DBUtilities extends XPathGenerator {
 			 //++++++++++++++++++++++++++++++++++Read table Rows and compare to an expected number++++++++++++++++++++++++++++++++++++++++
 			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			 
-			 public void readTable(String arg1)
+			 public void readTableAndCaptureInString(String arg1)
 			 {
 				 System.out.println("Balley balley ni taur ni punjabban di");
 				  DBUtilities createXpath = new DBUtilities(driver);
