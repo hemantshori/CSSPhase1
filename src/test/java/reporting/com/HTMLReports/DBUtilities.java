@@ -199,12 +199,17 @@ public class DBUtilities extends XPathGenerator {
 			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		  public void checkDropDownDefaultValue(String arg2)
 		  {
-			 
-			  DBUtilities createXpath = new DBUtilities(driver);
-				 String myXpath = createXpath.xpathMakerContainsText(arg2);
-			System.out.println("Successfully displays in combo box" + myXpath);
-				
-				 Assert.assertTrue(driver.findElement(By.xpath(myXpath)).isDisplayed()); 
+
+			DBUtilities createXpath = new DBUtilities(driver);
+			String myXpath = createXpath.xpathMakerContainsText(arg2);
+			WebElement dropdownValue = driver.findElement(By.xpath(myXpath));
+		//	 assertTrue(isElementPresent(By.id(myXpath)));
+			
+//			dropdownValue.isDisplayed();
+//			
+//			String visibleValue = dropdownValue.getText();
+//			System.out.println(visibleValue);
+//			Assert.assertEquals(arg2, visibleValue);
 		  }
 	
 			 

@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
@@ -301,7 +302,11 @@ public class StepImpe {
 	// check the dropdown displays expected
 	@Then("^\"(.*?)\" displays \"(.*?)\" by default$")
 	public void displays_by_default(String arg1, String arg2) throws Throwable {
-		PageFactory.initElements(driver, AccountFinancialHistorypage.class).checkDropDownDefaultValue(arg2);
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myXpath = createXpath.xpathMakerContainsText(arg2);
+		WebElement dropdownValue = driver.findElement(By.xpath(myXpath));
+		System.out.println(dropdownValue.getText());
+		PageFactory.initElements(driver, AccountFinancialHistorypage.class).isTextPresent(arg2);
 
 	}
 
