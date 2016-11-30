@@ -1072,7 +1072,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName      |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Set Up eBilling |
 
-  Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal. DCSSP-128
+  Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and removal.DCSSP-128. DCSSP-770 Editing Goal
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName         |
