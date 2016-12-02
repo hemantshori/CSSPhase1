@@ -64,7 +64,7 @@ Feature: Some feature
       | MailingAddressL2 | <MAddress> |
     And I click on "Submit"
     Then I see "OverrideAddressConfirmation" displayed on popup and I click "Cancel"
-    And I check I am on the "EditSettings" page
+    And I check I am on "EditSettings" page
     Then I see "<MAddressOld>" displayed
 
     Examples: 

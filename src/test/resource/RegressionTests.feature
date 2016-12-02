@@ -422,7 +422,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   ############################    LHS successful payment  back to billing    ############################
   ######################################################################
   #############################################################ALL IS WELLLLLLLLLLLLLLLL#####################################################
- Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
+  Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -459,15 +459,14 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I check I am on "Activity History" page
     Then I see "Activity History" displayed
     And "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName         |
-      | Item1 | Date             |
-      | Item1 | Activity         |
-      | Item1 | Description      |
+      | Item  | ItemName    |
+      | Item1 | Date        |
+      | Item1 | Activity    |
+      | Item1 | Description |
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          2.20 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
- 
 
   ######################################################################
   ############################    LHS successful payment  back to make another payment    ############################
@@ -1014,8 +1013,6 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
 
- 
-
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -1196,8 +1193,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
 
-  
- Scenario Outline: DCSSP-67 : As a user I want to view my account’s financial history so that I can review the account's transactions over a period of time
+  Scenario Outline: DCSSP-67 : As a user I want to view my account’s financial history so that I can review the account's transactions over a period of time
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -1247,3 +1243,76 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password  | email                  |
       | CSS        | UserNameInput | PasswordInput | Mlara    | dbresults | mlara@dbresults.com.au |
+
+      
+      Scenario Outline: DCSSP-730: update Profile Address Scenario 1
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Settings"
+    And I check I am on "Setting" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item    | ItemName      |
+      # | Item1   | Profile       |
+      # | Item2   | Settings      |
+      | Item3   | User Name     |
+      | Item4   | First Name    |
+      | Item6   | Last Name     |
+      | Item7   | Date of Birth |
+      | Item8   | Preferences   |
+      | Item9   | Language      |
+      | Item10  | Contact       |
+      | Item11  | Security      |
+      | Item11  | Security      |
+      | Item11  | Hint          |
+      | Item 11 | ******        |
+    And I click on "EditSettings"
+    And I check I am on "EditSettings" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | Item2 | Submit   |
+      | Item3 | Cancel   |
+    And I enter then details as
+      | Fields           | Value      |
+      | Email            | <email>    |
+      | MailingAddressL2 | <MAddress> |
+    And I click on "Submit"
+    Then I see "Correspondence for all your accounts will be sent to the updated mailing address.  Click 'OK' to proceed or 'Cancel' to return to the Settings page." displayed on popup and I click "OK"
+  #  Then I see "<Message>" displayed
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | email          | MAddress               | Message                                    |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com |                        |   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com | DBResult123s@gmail.com | Your changes have been saved successfully. |
+
+  Scenario Outline: DCSSP-730: update Profile Address Scenario 2
+    Given I want to login to portal "<PortalName>"
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Settings"
+    And I check I am on "Setting" page
+    And I click on "EditSettings"
+    And I check I am on "EditSettings" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | Item2 | Submit   |
+      | Item3 | Cancel   |
+    And I enter then details as
+      | Fields           | Value      |
+      | Email            | <email>    |
+      | MailingAddressL2 | <MAddress> |
+    And I click on "Submit"
+    Then I see "Correspondence for all your accounts will be sent to the updated mailing address.  Click 'OK' to proceed or 'Cancel' to return to the Settings page." displayed on popup and I click "Cancel"
+    And I check I am on "EditSettings" page
+   # Then I see "<MAddressOld>" displayed
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | email          | MAddress | Message                                    | MAddressOld |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com | TestLine | Your changes have been saved successfully. | DBResults   |
+      
