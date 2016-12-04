@@ -2,7 +2,7 @@
 Feature: To test the functionality of Appication as described in Jira Stories for Iteration 1
 
   @ShakeOut
-  Scenario Outline: User views the menu items, Test 1, DCSSP-245, DCSSP-533 Description: User views the menu items Epic: Common Components
+  Scenario Outline: User views the menu items, Test 1, DCSSP-245, DCSSP-533, DCSSP-832 Description: User views the menu items Epic: Common Components
     Given I want to login to portal "<PortalName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
@@ -13,6 +13,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PasswordInput | <Password> |
     And I hit Enter
     And I check I am on "Dashboard" page
+    Then I see "highcharts-tracker" displayed
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName          |
       | item1 | Logo on main page |
@@ -60,6 +61,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
+    Then I see "highcharts-tracker" displayed
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName            |
       | Item1 | Current_Bill        |
