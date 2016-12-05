@@ -19,6 +19,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import cucumber.api.DataTable;
 
@@ -367,6 +368,21 @@ public class DBUtilities extends XPathGenerator {
 //					}
 				 
 			 }
+			 
+			 // reads and prints all values from a dropdown list, chosen by id
+			 public void ReadAndPrintAllDropdownValues(String arg1) throws InterruptedException
+		      {
+
+		    	  String myxpath= new DBUtilities(driver).xpathMakerById(arg1);
+		    	  WebElement wb = driver.findElement(By.xpath(myxpath));
+		    	  Select mySelect = new Select(wb);
+		    	  List<WebElement> options = mySelect.getOptions();
+		    	  for (int i =0 ; i < options.size(); i++){
+		    		  System.out.println(options.get(i).getText());
+		    	  }
+		      }
+		      
+			 
 			 
 			 
 			 

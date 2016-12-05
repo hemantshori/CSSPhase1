@@ -1,7 +1,13 @@
 package runnerAndSteps;
 
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -24,6 +30,7 @@ import cucumber.api.java.en.When;
 import reporting.com.HTMLReports.AccountFinancialHistorypage;
 import reporting.com.HTMLReports.BillingHistoryPage;
 import reporting.com.HTMLReports.DBUtilities;
+import reporting.com.HTMLReports.EditSettingsPage;
 import reporting.com.HTMLReports.ForgotYourPasswordPage;
 import reporting.com.HTMLReports.GoalsAndTargetsPage;
 import reporting.com.HTMLReports.HomePage;
@@ -35,6 +42,8 @@ public class StepImpe {
 	WebDriver driver;
 	private String bolt;
 	static String Capture;
+	static String datePattern;
+	ArrayList<String> patternArray;
 	
 	@Before()
 	  public void startUp() {
@@ -42,9 +51,26 @@ public class StepImpe {
 //	    driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CSS\\workspace\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CTang\\git\\SSCP\\chromedriver.exe");
 		driver = new ChromeDriver();
 	    driver.manage().window().maximize();
+	    FileInputStream in;
+	    BufferedReader br;
+	    patternArray = new ArrayList<String>();
+	    
+	    // get the pattern of dates for regular expression processing
+	    try {
+	    	in = new FileInputStream("list_of_date_patterns.txt");	 
+	    	br = new BufferedReader(new InputStreamReader(in));
+	    	String line = null;
+			while ((line = br.readLine()) != null) {
+				patternArray.add(line.trim());
+			}
+	    }
+	    catch (IOException ie){
+	    	ie.printStackTrace();
+	    }
+	    
 	    
 	}
 		// **************disable to leave browser open***************************************
@@ -172,6 +198,11 @@ public class StepImpe {
 				String myxpath3 = createXpath2.xpathMakerContainsText(arg1);
 				driver.findElement(By.xpath(myxpath3)).click();
 			}
+		else if (arg1.equals("Save")){
+			DBUtilities createXpath3 = new DBUtilities(driver);
+			String myxpath4 = createXpath3.xpathMakerByValue(arg1);
+			driver.findElement(By.xpath(myxpath4)).click();
+		}
 		else {
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath = createXpath.xpathMaker(arg1);
@@ -186,13 +217,73 @@ public class StepImpe {
 
 	@Given("^I select \"(.*?)\" from \"(.*?)\"$")
 	public void i_select_from(String arg1, String arg2) throws Throwable {
+		
+//		if (patternArray.contains(arg1)){
+//			datePattern = arg1;
+//		}
+		
 		if(arg1.equals("SetGoal")){
 			String myxpath = PageFactory.initElements(driver, GoalsAndTargetsPage.class).xpathMakerById1AndId2(arg1, arg2);
 			driver.findElement(By.xpath(myxpath)).click();
 		}else{
-		PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
+			PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
+		}
 	}
+	
+	@Given("^I check element with \"(.*?)\" as \"(.*?)\" matches pattern \"(.*?)\"$")
+	public void i_check_matches_pattern(String elementSpecifier, String arg1, String arg2) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath;
+		String content;
+		
+		if (elementSpecifier.equals("id") ){
+			myxpath = createXpath.xpathMakerById(arg1);
+		}
+		else if (elementSpecifier.equals("class")){
+			myxpath = createXpath.xpathMakerByTextInClass(arg1);
+		}
+		else {
+			myxpath = createXpath.xpathMakerContainsText(arg1);
+		}
+		
+		content = driver.findElement(By.xpath(myxpath)).getText();
+		//System.out.println("Found text: " + content );
+		PageFactory.initElements(driver, EditSettingsPage.class).checkDatePattern(content, arg2);
+			
 	}
+	
+	// FOR ELEMENTS THAT NEED MULTIPLE XPATH IDENTIFIERS
+	@Given("^I check that an element with \"(.*?)\" as \"(.*?)\" and \"(.*?)\" as \"(.*?)\" matches pattern \"(.*?)\"$")
+	public void i_check_that_matches_pattern(String elementSpecifier1, String arg1, String elementSpecifier2,  String arg2, String pattern) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath;
+		String content;
+		myxpath =createXpath.multipleConditionXpath(new String[]{elementSpecifier1, elementSpecifier2}, new String[]{arg1, arg2});
+
+		System.out.println(myxpath);
+		content = driver.findElement(By.xpath(myxpath)).getText();
+		PageFactory.initElements(driver, EditSettingsPage.class).checkDatePattern(content, pattern);
+			
+	}
+	
+
+	// ONLY USE AS LAST RESORT
+	@Given("^I check element with xpath \"(.*?)\" matches pattern \"(.*?)\"$")
+	public void i_check_that_an_element_with_xpath_matches(String myxpath, String pattern) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String content;
+		System.out.println(myxpath);
+		content = driver.findElement(By.xpath(myxpath)).getText();
+		PageFactory.initElements(driver, EditSettingsPage.class).checkDatePattern(content, pattern);
+			
+	}
+	
+	@Given("^I print all values from dropdown \"(.*?)\"$")
+	public void i_print_all_values_from_dropdown(String arg1) throws Throwable {
+		PageFactory.initElements(driver, DBUtilities.class).ReadAndPrintAllDropdownValues(arg1);
+		
+	}
+	
 	// check for field text and text boxes
 	@And("^I enter then details as$")
 	public void I_enter_then_details_as(DataTable table) throws Throwable {

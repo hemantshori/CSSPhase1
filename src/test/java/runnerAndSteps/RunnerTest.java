@@ -12,12 +12,12 @@ import cucumber.api.junit.Cucumber;
 // ************************************** CSS Portal as on 17/10/2016
 // OCT***********************************
 
-(format = { "pretty", "html:target/html/result.html" },  tags = {"@Regression"},
+(format = { "pretty", "html:target/html/result.html" },  tags = {"@wip"},
     //*********************for SHAKEOUT*************************************
 	//	 features = "src/test/resource/SanityTestScript.feature") 
 		
     //****************for Regression****************************
-	 features = "src/test/resource/RegressionTests.feature") 
+	 features = "src/test/resource/wip.feature") 
 		
     //********************for wip********************************
 	//	features = "src/test/resource/wip.feature") /// wip

@@ -11,7 +11,44 @@ public class XPathGenerator {
 			this.driver = dr;
 			}
 	 
-	
+	 // generic xpath creator for multiple identifiers. Currently only supports id, class and text
+	 public String multipleConditionXpath(String[] specifiers, String[] arguments) throws Exception{
+		StringBuilder strb = new StringBuilder();
+		
+		if (specifiers.length != arguments.length){
+			throw new Exception();
+		}
+		
+		for (int i = 0; i< specifiers.length; i++){
+			String addition;
+			System.out.println(specifiers[i]);
+			if (specifiers[i].equals("id")){
+				addition = xpathMakerById(arguments[i]);
+			}
+			else if (specifiers[i].equals("class")){
+				addition = xpathMakerByClass(arguments[i]);
+			}
+			else {
+				addition = xpathMakerContainsText(arguments[i]);
+			}
+			
+			if (i != 0){
+				
+				// to remove the preceeding characters for identifiers after the first one
+				// change this if the standard for the other xpath creator functions change
+				addition = addition.substring(3);
+				
+			}
+			
+			strb.append(addition);
+			
+		}
+		System.out.println(strb.toString());
+		return strb.toString();
+		 
+	 }
+	 
+	 
 	 public String xpathMaker(String buttonName)
 	    {
 		String xpath = "//*[text()='"+buttonName+"']";
@@ -83,6 +120,12 @@ public class XPathGenerator {
 		String xpath = "//*[contains(@id, '"+arg1+"')][contains(@id, '"+arg2+"')]";
 		
 		System.out.println(" its " +xpath);
+		 return xpath;
+	    }
+	 
+	 public String xpathMakerByValue(String arg1)
+	    {
+		String xpath = "//*[contains(@value, '"+arg1+"')]";
 		 return xpath;
 	    }
 	
