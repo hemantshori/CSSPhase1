@@ -916,25 +916,26 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
-      | CSS        |      9353248310 | Da Vinci, Leonardo | 777-78-7807 |      4415168071 | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
+    # | CSS        |      9353248310 | Da Vinci, Leonardo | 777-78-7807 |      4415168071 | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
+      | CSS        |      9353248310 | Da Vinci, Leonardo | 777-78-7807 |      9474110792 | Shaw,Stuart | 1234-99-321 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
 
   Scenario Outline: Continue with 520, Scenario 2: User registers and their account is not activated
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
     And I enter then details as new
       | Fields                    | Value             |
-      | InputAccountNumber        | <Account Number2> |
-      | InputBillName             | <BillName2>       |
-      | InputIdentificationNumber | <SSN2>            |
+      | InputAccountNumber        | <Account Number> |
+      | InputBillName             | <BillName>       |
+      | InputIdentificationNumber | <SSN>            |
     And I click on "checkbox" checkbox
     And I click on "Submit"
     And I check I am on "Account Already Registered" page
     Then I see text "Already Registered!" displayed
 
-    Examples: 
-      | PortalName | Account Number1 | BillName1          | SSN1        | Account Number2 | BillName2   | SSN2        | Email Address1     | Choose UserName1 | Choose Password1 | Confirm Password1 | Hint1        | DropDownField      | DropDownValue1 |
-      | CSS        |      9353248310 | Da Vinci, Leonardo | 777-78-7807 |      4415168071 | Test, Simon | 998-11-1515 | timepass@gmail.com | Simon            | Dbresults1       | Dbresults1        | life is life | LanguagePreference | English (GB)   |
-
+      Examples: 
+      | PortalName | Account Number | BillName    | SSN         |
+      | CSS        |     9474110792 | Shaw,Stuart | 1234-99-321 |
+      
   Scenario Outline: DCSSP-493 :As a user I want to login to the CSS using my email address so that I can access my information. This will keep runing the validations till CAPTCHA
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -973,7 +974,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
     Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | email                         | wrong email         | Message                                                |
-      | CSS        | CSS2        | UserNameInput | PasswordInput | Mary     | Dbresults1 | hemant.shori@dbresults.com.au | blah_blah@gmail.com | Invalid Username, Email or Password. Please try again. |
+      | CSS        | CSS2        | UserNameInput | PasswordInput | Mary     | Dbresults1 | test3@dbresults.com.au | blah_blah@gmail.com | Invalid Username, Email or Password. Please try again. |
 
   Scenario Outline: DCSSP-758: This is for defect 758, email address should not be duplicated with edit settings option. This should not accept the duplicate email address.
     Given I want to login to portal "<PortalName>"
@@ -1246,8 +1247,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PortalName | UserNameField | PasswordField | UserName | Password  | email                  |
       | CSS        | UserNameInput | PasswordInput | Mlara    | dbresults | mlara@dbresults.com.au |
 
-      
-      Scenario Outline: DCSSP-730: update Profile Address Scenario 1
+  Scenario Outline: DCSSP-730: update Profile Address Scenario 1
     Given I want to login to portal "<PortalName>"
     And I enter then details as
       | Fields        | Value      |
@@ -1283,11 +1283,11 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | MailingAddressL2 | <MAddress> |
     And I click on "Submit"
     Then I see "Correspondence for all your accounts will be sent to the updated mailing address.  Click 'OK' to proceed or 'Cancel' to return to the Settings page." displayed on popup and I click "OK"
-  #  Then I see "<Message>" displayed
 
+    #  Then I see "<Message>" displayed
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email          | MAddress               | Message                                    |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com |                        |   |
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com |                        |                                            |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com | DBResult123s@gmail.com | Your changes have been saved successfully. |
 
   Scenario Outline: DCSSP-730: update Profile Address Scenario 2
@@ -1312,9 +1312,8 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     Then I see "Correspondence for all your accounts will be sent to the updated mailing address.  Click 'OK' to proceed or 'Cancel' to return to the Settings page." displayed on popup and I click "Cancel"
     And I check I am on "EditSettings" page
-   # Then I see "<MAddressOld>" displayed
 
+    # Then I see "<MAddressOld>" displayed
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email          | MAddress | Message                                    | MAddressOld |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com | TestLine | Your changes have been saved successfully. | DBResults   |
-      
