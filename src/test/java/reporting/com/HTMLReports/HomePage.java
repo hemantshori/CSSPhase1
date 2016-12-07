@@ -22,6 +22,8 @@ public class HomePage extends DBUtilities {
 			driver.get("https://test-ssc.dbresults.com.au/CSSPortal/");
 		// for dev
 		//driver.get("https://dev-ssc.dbresults.com.au/CSSPortal/");
+			// for p10
+		//driver.get("https://dbresults-p10-dev.outsystemscloud.com/CSSPortal");
         
         //****************************************************************************************************************
 		}else if(arg1.equals("CSS2")){driver.get("https://test-ssc.dbresults.com.au/CSSPortal/Login.aspx");

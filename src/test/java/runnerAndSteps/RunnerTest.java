@@ -22,9 +22,9 @@ import cucumber.api.junit.Cucumber;
     //********************for wip********************************
 	//	features = "src/test/resource/wip.feature") /// wip
 
-     //**** Production STUB ************************************
+     //**** p10 ************************************
  
-    //   features = "src/test/resource/Production_Stubs.feature") 
+   //    features = "src/test/resource/p10.feature") 
 
 // ************************************** Admin
 // Portal***********************************
