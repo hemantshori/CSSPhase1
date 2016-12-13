@@ -89,6 +89,21 @@ public class DBUtilities extends XPathGenerator {
 	 		 System.out.println("Clicking on " +arg1.toUpperCase());	 
 	 	 }
 
+	 	 
+	 	 // check that element is read Only
+	 	 
+	 	 public void elementIsreadOnly(String arg1)
+	 	 {
+	 		 
+	 		 DBUtilities createXpath = new DBUtilities(driver);
+			 String myXpath = createXpath.xpathMakerById(arg1);
+	 		 WebElement some_element = driver.findElement(By.xpath(myXpath));
+	 	    String readonly = some_element.getAttribute("readonly");
+	 	    Assert.assertNotNull(readonly);
+	 	 }
+	 	 
+	 	 
+	 	 
 		 public void hitEnter() {
 	    	
 		 Actions action = new Actions(driver); 

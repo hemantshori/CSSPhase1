@@ -49,10 +49,10 @@ public class StepImpe {
 	}
 		// **************disable to leave browser open***************************************
 
-	@After()
-		  public void tearDown() {	
-		    driver.quit();
-		   	  }
+//	@After()
+//		  public void tearDown() {	
+//		    driver.quit();
+//		   	  }
 	//******************************************************************************   
 	    
    
@@ -139,12 +139,18 @@ public class StepImpe {
 		if(arg1.equals("Current_Bill")
 				||arg1.equals("InfoIcon")
 				||arg1.equals("Pay")
+				||arg1.equals("Next")
+				||arg1.equals("wtTaxPayerDetailsNextBT")
 				||arg1.equals("Current_Bill")
+				||arg1.equals("wtDeclarationNextBT")
+				||arg1.equals("wtMonthlyReturnNextBT")
+				||arg1.equals("wtACTWagesPaidNextBt")
 				||arg1.equals("ReSendEmailButton")
 				||arg1.equals("PasswordSaveButton")
 				||arg1.equals("ActivityHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
 				||arg1.equals("EditSettings")
+				||arg1.equals("Submit")
 				||arg1.equals("ButtonShowAll")
 				||arg1.equals("AllTransactions")
 				||arg1.equals("Reset")
@@ -214,6 +220,11 @@ public class StepImpe {
  
 	}
 
+	// CHECK ELEMENT IS READ ONLY
+	@Then("^I check \"(.*?)\" is readonly$")
+	public void i_check_is(String arg1) throws Throwable {
+		PageFactory.initElements(driver, DBUtilities.class).elementIsreadOnly(arg1);
+	}
 	
 	// this is for checking checkbox
 	@Given("^I click on \"(.*?)\" checkbox$")

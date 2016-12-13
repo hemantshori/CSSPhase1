@@ -1,4 +1,4 @@
-@wip
+@TSSRegression
 Feature: Some feature
 
   

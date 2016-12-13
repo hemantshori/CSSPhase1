@@ -42,7 +42,11 @@ public class LandingPage extends DBUtilities {
 					||name.equals("Activity")
 					||name.equals("Description")
 					||name.equals("Type")
+					||name.equals("SaveAndExit")
+					||name.equals("Next")
+					||name.equals("Save")
 					||name.equals("Amount")
+					||name.equals("wtACTWagesPaidBackBt")
 					){
 				Thread.sleep(3000);
 				//DBUtilities createXpath = new DBUtilities(driver);
