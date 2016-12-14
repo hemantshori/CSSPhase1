@@ -28,6 +28,7 @@ public class HomePage extends DBUtilities {
         //****************************************************************************************************************
 		}else if(arg1.equals("CSS2")){driver.get("https://test-ssc.dbresults.com.au/CSSPortal/Login.aspx");
 		}else if(arg1.equals("TSS")){driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Home.aspx");
+		}else if(arg1.equals("Tax_Registration")){driver.get("https://test-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
 		}else if(arg1.equals("UAP")){
 			
 				driver.get("https://test-ssc.dbresults.com.au/utilityadminportal/");

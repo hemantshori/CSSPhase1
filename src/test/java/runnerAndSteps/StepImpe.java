@@ -204,9 +204,17 @@ public class StepImpe {
 	public void I_enter_then_details_as(DataTable table) throws Throwable {
 
      PageFactory.initElements(driver, DBUtilities.class).enterCucumbertableValuesInUI(table);
-		Thread.sleep(2000);
+	//In test	
+     //Thread.sleep(2000);
 		
 		}
+	
+	// simple wait
+	@Then("^I wait for \"(.*?)\" millisecond$")
+	public void i_wait_for_millisecond(long arg1) throws Throwable {
+		Thread.sleep(arg1);
+	}
+
 
 	@And("^I enter then details as new$")
 	public void enterCucumberTableValuesInUI(DataTable table) throws InterruptedException{
