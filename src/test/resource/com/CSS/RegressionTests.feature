@@ -347,33 +347,29 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item2 | Logo           |
       | Date  | SSN            |
       | Item  | Submit         |
-      # | Item  | Already have an Account? |
+       | Item  | Already have an Account? |
       | Item  | Sign In        |
     And I enter then details as new
       | Fields                    | Value                    |
       | InputAccountNumber        | <Invalid Account Number> |
       | InputBillName             | <Name On Bill>           |
       | InputIdentificationNumber | <SSN>                    |
+    And I wait for "1000" millisecond
     And I click on "checkbox" checkbox
     And I click on "Submit"
     Then I see "Account details cannot be found. Please try again." displayed
+     Given I want to login to portal "<PortalName>"
+    And I click on "Create Account"
+    And I check I am on "Regist" page
     And I enter then details as new
       | Fields                    | Value            |
       | InputAccountNumber        | <Account Number> |
       | InputBillName             | <Name On Bill>   |
       | InputIdentificationNumber | <SSN>            |
+      And I wait for "1000" millisecond
     And I click on "checkbox" checkbox
     And I click on "Submit"
-    #Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
-    And I enter then details as new
-      | Fields                    | Value            |
-      | InputAccountNumber        | <Account Number> |
-      | InputBillName             | <Name On Bill>   |
-      | InputIdentificationNumber | <SSN>            |
-    Then I see "You must accept the Terms and Conditions to proceed" displayed
-    And I click on "checkbox" checkbox
-    And I click on "Submit"
     And I enter then details as
       | Fields      | Value      |
       | NewPassword | <Password> |
@@ -382,11 +378,12 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | item2 | <Message> |
 
     Examples: 
-      | PortalName | Account Number | Name On Bill | SSN         | Password   | Message                             |
-      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | abc        | Your password is not strong enough. |
-      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | mattlara   | Your password is not very secure.   |
-      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | CSSPhase1  | Your password is strong.            |
-      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | CSSPhase@1 | Your password is very secure!       |
+      | PortalName | Account Number | Name On Bill | SSN         | Password   | Message                             | Invalid Account Number |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111  | abc        | Your password is not strong enough. |                    123 |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | mattlara   | Your password is not very secure.   |                    123 |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | CSSPhase1  | Your password is strong.            |                    123 |
+      | CSS        |     3900923980 | Joy, Vance   | 999-91-1111 | CSSPhase@1 | Your password is very secure!       |                    123 |
+
 
   ########################## TO DO ADD PAYMENT VERIFICATIONS#####################################################
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451: Scenario 1, Scenario 2 Test 1, To make payment from LHS
