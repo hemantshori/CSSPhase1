@@ -228,7 +228,7 @@ Feature: Some feature
       | TSS        | UserNameInput | PasswordInput | bob      | dbresults |
 
   
-  @tss
+
  Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
     Given I want to login to portal "<PortalName>"
     And I enter then details as

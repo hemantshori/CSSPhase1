@@ -23,7 +23,8 @@ import cucumber.api.junit.Cucumber;
 //****************for TSS Regression****************************
    features = "src/test/resource/com/TSS/wip.feature") 
 
-		
+//*********************Testing TANG 
+//features = "src/test/resource/com/TSS/TANG_TSSPhase1.feature") 
   
 
 public class TSSRunnerTest {
