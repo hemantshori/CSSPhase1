@@ -225,6 +225,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | ExpiryYear    | <Expiry Year>   |
       | SecurityCode  | <Security Code> |
     And I click on "Submit"
+    And I wait for "4000" millisecond
     Then I see "<Message>" displayed
     And I check I am on "MakePayment" page
 

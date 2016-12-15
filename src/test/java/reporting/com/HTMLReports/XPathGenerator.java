@@ -20,7 +20,7 @@ public class XPathGenerator {
 	 public String xpathMakerById(String buttonName)
 	    {
 		String xpath = "//*[contains(@id, '"+buttonName+"')]";
-		System.out.println("Button found*** " +xpath);
+		System.out.println("xpath ::*** " +xpath);
 		 return xpath;
 	    }
 	 public String xpathMakerForInputField(String fieldName)
@@ -52,6 +52,12 @@ public class XPathGenerator {
 	 public String xpathMakerByInputId(String arg1)
 	    {
 		  String xpath = "//input[contains(@id, '"+arg1+"')]";
+		System.out.println("Element found*** " +xpath);
+		 return xpath;
+	    }
+	 public String xpathMakerByTextAreaId(String arg1)
+	    {
+		  String xpath = "//textarea[contains(@id, '"+arg1+"')]";
 		System.out.println("Element found*** " +xpath);
 		 return xpath;
 	    }

@@ -49,10 +49,10 @@ public class StepImpe {
 	}
 		// **************disable to leave browser open***************************************
 
-	@After()
-		  public void tearDown() {	
-		    driver.quit();
-		   	  }
+//	@After()
+//		  public void tearDown() {	
+//		    driver.quit();
+//		   	  }
 	//******************************************************************************   
 	    
    
@@ -166,13 +166,7 @@ public class StepImpe {
 			driver.findElement(By.xpath(myxpath2)).click();
 			
 		}
-		else if (arg1.equals("Submit")){
-                  DBUtilities createXpath = new DBUtilities(driver);
-			String myxpath2 = createXpath.xpathMakerById(arg1);
-			driver.findElement(By.xpath(myxpath2)).click();
-			Thread.sleep(5000);
-		}
-			
+
 		else if (arg1.equals("Welcome")){
 				DBUtilities createXpath2 = new DBUtilities(driver);
 				String myxpath3 = createXpath2.xpathMakerContainsText(arg1);

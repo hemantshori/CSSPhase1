@@ -280,7 +280,7 @@ public class DBUtilities extends XPathGenerator {
 			 
 			 public void enterCucumbertableValuesInUI (DataTable table) throws InterruptedException 
 			 {
-
+				 		String myXpath;
 					
 						List<List<String>> data = table.raw();
 						
@@ -289,9 +289,19 @@ public class DBUtilities extends XPathGenerator {
 							System.out.println("The table length is .." +data.size());
 							
 						DBUtilities createXpath = new DBUtilities(driver);
-					  String myXpath = createXpath.xpathMakerByInputId(data.get(i).get(0));
-				
-					  driver.findElement(By.xpath(myXpath)).clear();
+						try {
+							  myXpath = createXpath.xpathMakerByInputId(data.get(i).get(0));
+							  System.out.println(i);
+							  System.out.println(myXpath);
+							  driver.findElement(By.xpath(myXpath)).clear();
+						  }
+						  catch (Exception e){
+							  System.out.println("Cannot find an input field! Now trying to find a textarea field...");
+							  myXpath = createXpath.xpathMakerByTextAreaId(data.get(i).get(0));
+							  System.out.println(i);
+							  System.out.println(myXpath);
+							  driver.findElement(By.xpath(myXpath)).clear();
+						  }
 					  driver.findElement(By.xpath(myXpath)).click();
 					 
 					  driver.findElement(By.xpath(myXpath)).sendKeys(data.get(i).get(1));

@@ -20,7 +20,12 @@ import cucumber.api.junit.Cucumber;
 	 features = "src/test/resource/com/CSS/RegressionTests.feature") 
 		
     //********************for wip********************************
-	//	features = "src/test/resource/com/CSS/wip.feature") /// wip
+		//features = "src/test/resource/com/CSS/wip.feature") /// wip
+
+
+//  *********************Testing TANG 
+//features = "src/test/resource/com/TSS/TANG_TSSPhase1.feature") 
+
 
      //**** p10 ************************************
  
