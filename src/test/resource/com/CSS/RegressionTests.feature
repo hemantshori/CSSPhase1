@@ -301,6 +301,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Fields | Value   |
       | Email  | <email> |
     And I click on "Submit"
+     And I check I am on "Settings" page
     Then I see "<Message>" displayed
 
     Examples: 
@@ -969,7 +970,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Fields        | Value   |
       | UserNameInput | <email> |
     And I hit Enter
-    Then I see "Invalid human validation. Please try again." displayed
+    Then I see "You must check the CAPTCHA box to proceed. Please try again" displayed
 
     Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | email                         | wrong email         | Message                                                |
