@@ -49,10 +49,10 @@ public class StepImpe {
 	}
 		// **************disable to leave browser open***************************************
 
-	@After()
-		  public void tearDown() {	
-		    driver.quit();
-		   	  }
+//	@After()
+//		  public void tearDown() {	
+//		    driver.quit();
+//		   	  }
 	//******************************************************************************   
 	    
    
@@ -142,6 +142,7 @@ public class StepImpe {
 				||arg1.equals("Next")
 				||arg1.equals("wtTaxPayerDetailsNextBT")
 				||arg1.equals("Current_Bill")
+				||arg1.equals("wtDeclarationConfirmBT")
 				||arg1.equals("wtDeclarationNextBT")
 				||arg1.equals("wtMonthlyReturnNextBT")
 				||arg1.equals("wtACTWagesPaidNextBt")
