@@ -42,7 +42,7 @@ public class StepImpe {
 //	    driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CSS\\workspace\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CTang\\Documents\\chromedriver.exe");
 		driver = new ChromeDriver();
 	    driver.manage().window().maximize();
 	    
@@ -140,9 +140,18 @@ public class StepImpe {
 				||arg1.equals("InfoIcon")
 				||arg1.equals("Pay")
 				||arg1.equals("Next")
+				||arg1.equals("Search")
+				||arg1.equals("Serch")
+				||arg1.equals("Edit")
+				||arg1.equals("MessageEdit")
+				||arg1.equals("Save")
+				||arg1.equals("Cancel")
+				||arg1.equals("AddNew")
+				||arg1.equals("Delete")
+				||arg1.equals("SummarySubmit")
+				||arg1.equals("PageText_TextCode")
 				||arg1.equals("wtTaxPayerDetailsNextBT")
 				||arg1.equals("Current_Bill")
-				||arg1.equals("wtDeclarationConfirmBT")
 				||arg1.equals("wtDeclarationNextBT")
 				||arg1.equals("wtMonthlyReturnNextBT")
 				||arg1.equals("wtACTWagesPaidNextBt")
@@ -160,7 +169,7 @@ public class StepImpe {
 				||arg1.equals("HintInfoIcon")
 				||arg1.equals("SetGoal")		
 				||arg1.equals("wtSubmitButton3")      // to do ask M lara to change thename ....this is for Reset Password
-				||arg1.equals("Cancel")){
+				){
 			Thread.sleep(3000);
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath2 = createXpath.xpathMakerById(arg1);
