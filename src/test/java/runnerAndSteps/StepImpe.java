@@ -148,17 +148,22 @@ public class StepImpe {
 				||arg1.equals("Cancel")
 				||arg1.equals("AddNew")
 				||arg1.equals("Delete")
+				||arg1.equals("ClaimingACTProportion_Yes")
+				||arg1.equals("Answer_TypeAnnual")
+				||arg1.equals("YearOfReturn")
 				||arg1.equals("SummarySubmit")
 				||arg1.equals("PageText_TextCode")
-				||arg1.equals("wtTaxPayerDetailsNextBT")
+				||arg1.equals("TaxPayerDetailsNext")
 				||arg1.equals("Current_Bill")
-				||arg1.equals("wtDeclarationNextBT")
-				||arg1.equals("wtMonthlyReturnNextBT")
-				||arg1.equals("wtACTWagesPaidNextBt")
+				||arg1.equals("DeclarationNext")
+				||arg1.equals("DeclarationConfirm")
+				||arg1.equals("MonthlyReturnNext")
+				||arg1.equals("ACTWagesPaidNext")
 				||arg1.equals("ReSendEmailButton")
 				||arg1.equals("PasswordSaveButton")
 				||arg1.equals("ActivityHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
+				||arg1.equals("ConfirmForSubmission")
 				||arg1.equals("EditSettings")
 				||arg1.equals("Submit")
 				||arg1.equals("ButtonShowAll")
@@ -204,7 +209,7 @@ public class StepImpe {
 	}
 	}
 	// check for field text and text boxes
-	@And("^I enter then details as$")
+	@And("^I enter the details as$")
 	public void I_enter_then_details_as(DataTable table) throws Throwable {
 
      PageFactory.initElements(driver, DBUtilities.class).enterCucumbertableValuesInUI(table);
