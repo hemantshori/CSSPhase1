@@ -91,20 +91,32 @@ public class StepImpe {
   
 	}
 
-	@Then("^I Check \"(.*?)\" contains \"(.*?)\"$")
+	@Then("^I check \"(.*?)\" contains \"(.*?)\"$")
 	public void i_Check_contains(String arg1, String arg2) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
 		String myxpath = createXpath.xpathMakerById(arg1);
-		System.out.println(myxpath);
-		String elementToBeSearched = StepImpe.Capture;
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
-	     DBUtilities t1 = new DBUtilities(driver);
-	     t1.isTextPresent(elementToBeSearched);
-		
-		
-		
+//		System.out.println(myxpath);
+//		String elementToBeSearched = StepImpe.Capture;
+//		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
+//	     DBUtilities t1 = new DBUtilities(driver);
+//	     t1.isTextPresent(elementToBeSearched);
+		WebElement inputBox = driver.findElement(By.xpath(myxpath));
+		String boxContents = inputBox.getAttribute("value");
+		System.out.println("boxContents: " + boxContents);
+		System.out.println("arg2: " + arg2);
+		Assert.assertTrue(boxContents.equals(arg2));
 	}
-
+	
+	@Then("^I check \"(.*?)\" is empty$")
+	public void i_check_is_empty(String arg1) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath = createXpath.xpathMakerById(arg1);
+		WebElement inputBox = driver.findElement(By.xpath(myxpath));
+		Assert.assertTrue(inputBox.isDisplayed());
+		String boxContents = inputBox.getAttribute("value");
+		Assert.assertTrue(boxContents.isEmpty());
+	}
+	
 	
 	
 	
@@ -150,6 +162,7 @@ public class StepImpe {
 				||arg1.equals("Delete")
 				||arg1.equals("ClaimingACTProportion_Yes")
 				||arg1.equals("Answer_TypeAnnual")
+				||arg1.equals("Answer_TypeMonthly")
 				||arg1.equals("YearOfReturn")
 				||arg1.equals("SummarySubmit")
 				||arg1.equals("PageText_TextCode")
@@ -159,6 +172,7 @@ public class StepImpe {
 				||arg1.equals("DeclarationConfirm")
 				||arg1.equals("MonthlyReturnNext")
 				||arg1.equals("ACTWagesPaidNext")
+				||arg1.equals("ACTWagesPaidBack")
 				||arg1.equals("ReSendEmailButton")
 				||arg1.equals("PasswordSaveButton")
 				||arg1.equals("ActivityHistoryButton")
