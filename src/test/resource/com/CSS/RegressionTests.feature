@@ -43,7 +43,6 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "<ButtonName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName      |
-      #| item1 | Comparison    |
       | item2 | Usage History |
     And I click on "<ButtonName2>"
     Then I see "Residential - Electricity Usage History" displayed

@@ -1,4 +1,4 @@
-@TSSRegression
+
 Feature: Some feature
 
   Scenario Outline: DTSP-252 : Create generic Login screen
@@ -98,7 +98,7 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password  |
       | TSS        | UserNameInput | PasswordInput | bob      | dbresults |
 
-      
+      @TSSRegression
       Scenario Outline: DTSP-252 : Create generic Login screen
     DTSP-277 : As an end user, I want to be able to view the left navigation panel so that I can quickly access the functions I need (Phase 1)
     DTSP-227: Receive an email after form is submitted
@@ -144,23 +144,23 @@ Feature: Some feature
       | Fields       | Value        |
       | PhoneNumber  | 610422184033 |
       | EmailAddress |              |
-    And I check "wtDeclarationNextBT" is readonly
+    And I check "ConfirmBT" is readonly
     And I enter then details as
       | Fields          | Value       |
       | PersonFullName  | test        |
       | LegalEntityName | Test2       |
       | PhoneNumber     |             |
       | EmailAddress    | abc@abc.com |
-    And I check "wtDeclarationNextBT" is readonly
+    And I check "ConfirmBT" is readonly
     And I enter then details as
       | Fields          | Value        |
       | PersonFullName  | test         |
       | LegalEntityName | Test2        |
       | PhoneNumber     | 610422184033 |
       | EmailAddress    | abc@abc.com  |
-    And I click on "wtDeclarationNextBT"
+    And I click on "ConfirmBT"
     And I wait for "1000" millisecond
-   # And I click on "checkbox" checkbox
+    And I click on "checkbox" checkbox
     And I click on "Submit"
 # the last bit needs to be worked on
     Examples: 

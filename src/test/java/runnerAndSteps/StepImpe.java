@@ -42,7 +42,8 @@ public class StepImpe {
 //	    driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CTang\\Documents\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		
 		driver = new ChromeDriver();
 	    driver.manage().window().maximize();
 	    
@@ -152,7 +153,8 @@ public class StepImpe {
 				||arg1.equals("PageText_TextCode")
 				||arg1.equals("wtTaxPayerDetailsNextBT")
 				||arg1.equals("Current_Bill")
-				||arg1.equals("wtDeclarationNextBT")
+				//||arg1.equals("wtDeclarationNextBT")
+				||arg1.equals("ConfirmBT")
 				||arg1.equals("wtMonthlyReturnNextBT")
 				||arg1.equals("wtACTWagesPaidNextBt")
 				||arg1.equals("ReSendEmailButton")
