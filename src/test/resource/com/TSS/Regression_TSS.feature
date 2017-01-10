@@ -1,11 +1,9 @@
-
 Feature: Some feature
 
   Scenario Outline: DTSP-252 : Create generic Login screen
     DTSP-277 : As an end user, I want to be able to view the left navigation panel so that I can quickly access the functions I need (Phase 1)
     DTSP-227: Receive an email after form is submitted
     DTSP-28 : As an end user, I want to be able to submit a Monthly Payroll Tax Return Form, so that my Payroll Tax Return is lodged
-
 
     Given I want to login to portal "<PortalName>"
     And I enter then details as
@@ -98,8 +96,8 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password  |
       | TSS        | UserNameInput | PasswordInput | bob      | dbresults |
 
-      @TSSRegression
-      Scenario Outline: DTSP-252 : Create generic Login screen
+  @TSSRegression
+  Scenario Outline: DTSP-252 : Create generic Login screen
     DTSP-277 : As an end user, I want to be able to view the left navigation panel so that I can quickly access the functions I need (Phase 1)
     DTSP-227: Receive an email after form is submitted
     DTSP-28 : As an end user, I want to be able to submit a Monthly Payroll Tax Return Form, so that my Payroll Tax Return is lodged
@@ -115,10 +113,9 @@ Feature: Some feature
       | Item  | ItemName   |
       | item9 | Lodgements |
     And I click on "Payroll Tax"
-    #And I check "wtTaxPayerDetailsNextBT" is readonly
     And I check I am on "Payroll Lodgement Form" page
+    And I click on "Monthly Return"
     And I select "<YORInput>" from "<YearOfReturnField>"
-    # And I check "wtTaxPayerDetailsNextBT" is readonly
     And I select "<MORInput>" from "<MonthOfReturnField>"
     And I click on "wtTaxPayerDetailsNextBT"
     And I wait for "1000" millisecond
@@ -153,16 +150,18 @@ Feature: Some feature
       | EmailAddress    | abc@abc.com |
     And I check "ConfirmBT" is readonly
     And I enter then details as
-      | Fields          | Value        |
-      | PersonFullName  | test         |
-      | LegalEntityName | Test2        |
-      | PhoneNumber     | 610422184033 |
-      | EmailAddress    | abc@abc.com  |
+      | Fields          | Value           |
+      | PersonFullName  | test            |
+      | LegalEntityName | Test2           |
+      | Employer        | abc corporation |
+      | PhoneNumber     |    610422184033 |
+      | EmailAddress    | abc@abc.com     |
     And I click on "ConfirmBT"
     And I wait for "1000" millisecond
     And I click on "checkbox" checkbox
     And I click on "Submit"
-# the last bit needs to be worked on
+
+    # the last bit needs to be worked on
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password  | YearOfReturnField | YORInput | MonthOfReturnField | MORInput |
       # | TSS        | UserNameInput | PasswordInput | hemant.shori | USBcoffee1 | YearOfReturn      |     2016 | MonthOfReturn      | January  |
