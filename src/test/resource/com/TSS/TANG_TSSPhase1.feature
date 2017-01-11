@@ -3,7 +3,7 @@ Feature: Some feature
   @tss
   Scenario Outline: DTSP-54 : As a DB Portal Administrator I want to search for a message so that I can quickly access the message I want to view
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -12,7 +12,7 @@ Feature: Some feature
     Then I see text "Feedback Message Text" displayed
     Then I see text "Feedback Msg Code" displayed
     Then I see text "Description" displayed
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value        |
       | SearchInput | AusWideWages |
     Then I click on "Search"

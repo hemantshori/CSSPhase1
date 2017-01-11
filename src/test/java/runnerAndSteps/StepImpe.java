@@ -2,6 +2,7 @@ package runnerAndSteps;
 
 
 import java.sql.DriverManager;
+import java.util.regex.Pattern;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -147,7 +148,8 @@ public class StepImpe {
 	public void i_click_on(String arg1) throws Throwable {
 		// give time for page loading
 		Thread.sleep(1000);
-		
+		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the calendar popup
+
 		if(arg1.equals("Current_Bill")
 				||arg1.equals("InfoIcon")
 				||arg1.equals("Pay")
@@ -156,14 +158,30 @@ public class StepImpe {
 				||arg1.equals("Serch")
 				||arg1.equals("Edit")
 				||arg1.equals("MessageEdit")
-				||arg1.equals("Save")
+				||arg1.equals("TaxPayerDetailsSave")
+				||arg1.equals("SaveAndExit")
 				||arg1.equals("Cancel")
 				||arg1.equals("AddNew")
 				||arg1.equals("Delete")
+				||arg1.equals("RemoveLine")
+				||arg1.equals("GroupMember_UNSURE")
+				||arg1.equals("ConfirmBack")
+				||arg1.equals("DeclarationBack")
+				||arg1.equals("AddTotalWages")
+				||arg1.equals("DateBusinessStart")
+				||arg1.equals("DateBusinessLiable")
+				||arg1.equals("TaxPayerDetailsNext")
+				||arg1.equals("MonthlyReturnBack")
+				||arg1.equals("PayrollNext")
+				||arg1.equals("RefundDetailsNext")
 				||arg1.equals("ClaimingACTProportion_Yes")
+				||arg1.equals("BackBt")
+				||arg1.equals("Refunds_NO")
+				||arg1.equals("DBResultsSG_Theme_wt6_block_wtActions_wt8")
 				||arg1.equals("Answer_TypeAnnual")
 				||arg1.equals("Answer_TypeMonthly")
 				||arg1.equals("YearOfReturn")
+				||arg1.equals("CorrectInfoDeclared")
 				||arg1.equals("SummarySubmit")
 				||arg1.equals("PageText_TextCode")
 				||arg1.equals("TaxPayerDetailsNext")
@@ -199,8 +217,29 @@ public class StepImpe {
 		else if (arg1.equals("Welcome")){
 				DBUtilities createXpath2 = new DBUtilities(driver);
 				String myxpath3 = createXpath2.xpathMakerContainsText(arg1);
-				driver.findElement(By.xpath(myxpath3)).click();
+				
 			}
+		// for calendar stuff found in the PAYROLL TAX INFORMATION part of the tax registration page
+		else if (datePattern.matcher(arg1).matches()){
+			DBUtilities createXpath = new DBUtilities(driver);
+			String myxpath4 = createXpath.xpathMakerContainsCustomField("dyc-date", arg1);
+			try {
+				driver.findElement(By.xpath(myxpath4)).click();
+			}
+			catch (Exception e){
+				for (int i = 0; i < 100; i++){
+					System.out.println("(" + myxpath4 + ")[" + i + "]");
+					try {
+						driver.findElement(By.xpath("(" + myxpath4 + ")[" + i + "]")).click();
+						break;
+					}
+					catch (Exception e2){
+						System.out.println();
+					}
+				}
+				
+			}
+		}
 		else {
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath = createXpath.xpathMaker(arg1);
