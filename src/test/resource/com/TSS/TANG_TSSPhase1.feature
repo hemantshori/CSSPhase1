@@ -3,7 +3,7 @@ Feature: Some feature
   @tss
   Scenario Outline: DTSP-54 : As a DB Portal Administrator I want to search for a message so that I can quickly access the message I want to view
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -12,7 +12,7 @@ Feature: Some feature
     Then I see text "Feedback Message Text" displayed
     Then I see text "Feedback Msg Code" displayed
     Then I see text "Description" displayed
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value        |
       | SearchInput | AusWideWages |
     Then I click on "Search"
@@ -20,7 +20,7 @@ Feature: Some feature
       | Item  | ItemName                                                                                   |
       | item2 | InvalidAusWideWages                                                                        |
       | item3 | Your Aus wide group wages (including ACT) must be equal to or greater than your ACT wages. |
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value   |
       | SearchInput | Success |
     Then I click on "Search"
@@ -28,7 +28,7 @@ Feature: Some feature
       | Item  | ItemName                                   |
       | item2 | SuccessSaveForm                            |
       | item3 | Your changes have been successfully saved. |
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value   |
       | SearchInput | Invalid |
     Then I click on "Search"
@@ -49,7 +49,7 @@ Feature: Some feature
   @tss
   Scenario Outline: DTSP-55 : As a DB Portal Administrator I want to edit a message's description so that I can customise the description for an organisation
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -68,13 +68,13 @@ Feature: Some feature
     Then I see "Are you sure?" displayed on popup and I click "OK"
     Then I click on "Edit"
     Then I select "<DropDownOption>" from "<DropDownName>"
-    And I enter then details as
+    And I enter the details as
       | Fields           | Value |
       | Text_Description | TEST  |
     Then I click on "Save"
     Then I click on "Edit"
     Then I select "<DropDownOption>" from "<DropDownName>"
-    And I enter then details as
+    And I enter the details as
       | Fields           | Value                                                                                      |
       | Text_Description | Your Aus wide group wages (including ACT) must be equal to or greater than your ACT wages. |
     Then I click on "Save"
@@ -88,7 +88,7 @@ Feature: Some feature
     								DTSP-57 :As a DB Portal Administrator I want to delete a message so that I can remove messages no longer required
 
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -106,7 +106,7 @@ Feature: Some feature
     Then I see "Are you sure?" displayed on popup and I click "OK"
     Then I click on "AddNew"
     Then I select "<DropDownOption>" from "<DropDownName>"
-    And I enter then details as
+    And I enter the details as
       | Fields           | Value |
       | Text_Description | TEST  |
     Then I click on "Save"
@@ -130,7 +130,7 @@ Feature: Some feature
   @tss
   Scenario Outline: DTSP-233: As a DB Portal Administrator, I want to be able to search/add/edit/remove the tool tips displayed on forms so that I can help the end user better understand the form field/s
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -142,7 +142,7 @@ Feature: Some feature
       | item4 | Is Active |
     Then I see text "Description" displayed
     # check for search
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value    |
       | SearchInput | Password |
     Then I click on "Serch"
@@ -158,7 +158,7 @@ Feature: Some feature
       | item2 | ForgotPasswordEmailLine2  |
       | item2 | ResetPasswordLine1        |
       | item2 | ForgotPasswordEmailLine1  |
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value |
       | SearchInput |       |
     
@@ -177,7 +177,7 @@ Feature: Some feature
     Then I click on "Edit"
     Then I click on "PageText_TextCode"
     Then I click on "RegistrationConfirmationLine1"
-    And I enter then details as
+    And I enter the details as
       | Fields               | Value |
       | PageText_Description | TEST  |
     Then I click on "Save"
@@ -186,7 +186,7 @@ Feature: Some feature
     Then I click on "Edit"
     Then I click on "PageText_TextCode"
     Then I click on "RegistrationConfirmationLine1"
-    And I enter then details as
+    And I enter the details as
       | Fields               | Value                         |
       | PageText_Description | RegistrationConfirmationLine1 |
     Then I click on "Save"
@@ -202,7 +202,7 @@ Feature: Some feature
     Then I click on "AddNew"
     Then I click on "PageText_TextCode"
     Then I click on "RegistrationConfirmationLine1"
-    And I enter then details as
+    And I enter the details as
       | Fields               | Value                         |
       | PageText_Description | RegistrationConfirmationLine1 |
     Then I click on "Save"
@@ -219,7 +219,7 @@ Feature: Some feature
   @tss
   Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -235,7 +235,7 @@ Feature: Some feature
     And I click on "ACTWagesPaidNext"
     And I click on "MonthlyReturnNext"
     Then I wait for "3500" millisecond
-    And I enter then details as
+    And I enter the details as
       | Fields          | Value          |
       | PersonFullName  | TEST           |
       | LegalEntityName | TEST           |
@@ -256,7 +256,7 @@ Feature: Some feature
   @tss
   Scenario Outline: DTSP-358: As an end user, I want to be able to submit my Annual Payroll Tax Return Form
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -277,7 +277,7 @@ Feature: Some feature
     Then I click on "ACTWagesPaidNext"
     Then I click on "MonthlyReturnNext"
    	And I wait for "3000" millisecond
-    And I enter then details as
+    And I enter the details as
       | Fields          | Value        |
       | PersonFullName  | test         |
       | LegalEntityName | Test2        |
