@@ -13,7 +13,7 @@ import cucumber.api.junit.Cucumber;
 // ************************************** CSS Portal as on 17/10/2016
 // OCT***********************************
 
-(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSSRegression"},
+(format = { "pretty", "html:target/html/result.html" },  tags = {"@wip"},
     //*********************for SHAKE	OUT*************************************
 	//	 features = "src/test/resource/com/CSS/SanityTestScript.feature") 
 		
@@ -22,7 +22,6 @@ import cucumber.api.junit.Cucumber;
 
 //****************for TSS Regression****************************
  //  features = "src/test/resource/com/TSS/TANG_TSSPhase1.feature") 
-
 		
   
 

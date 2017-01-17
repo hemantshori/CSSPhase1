@@ -23,6 +23,13 @@ public class XPathGenerator {
 		System.out.println("xpath ::*** " +xpath);
 		 return xpath;
 	    }
+
+	 public String xpathMakerByExactId(String buttonName)
+	    {
+		String xpath = "//*[@id='"+buttonName+"']";
+		System.out.println("xpath ::*** " +xpath);
+		 return xpath;
+	    }	
 	 public String xpathMakerForInputField(String fieldName)
 	    {
 		String xpath = "//*[@id='"+fieldName+"']";
@@ -90,6 +97,11 @@ public class XPathGenerator {
 		
 		System.out.println(" its " +xpath);
 		 return xpath;
-	    }
+	    }	
+	 public String xpathMakerContainsCustomField(String arg1, String arg2){
+		 String xpath = "//*[contains(@" + arg1 + ", '"+arg2+"')]";
+		 System.out.println(" its " +xpath);
+		 return xpath;
+	 }
 	
 }
