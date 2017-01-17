@@ -1342,12 +1342,10 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email          | MAddress | Message                                    | MAddressOld |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com | TestLine | Your changes have been saved successfully. | DBResults   |
+            
+
       
-<<<<<<< HEAD
-      
-      # this is to test branching
-      
-=======
+
        ##########################################################################################
       ###################  User Access Stories##################################################
       ##########################################################################################
@@ -1437,4 +1435,6 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | UAP        | UserNameInput | PasswordInput | Bob      | Dbresults1 |
       | UAP        | UserNameInput | PasswordInput | Leonardo | Dbresults1 |
->>>>>>> master
+
+
+      # this is to test branching2
