@@ -437,14 +437,6 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Payments"
     And I click on "Make a Payment"
     And I check I am on "MakePayment" page
-    And "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName            |
-      | Item1 | Total Due           |
-      | Item2 | Payment Amount      |
-      | Item3 | Name on Card        |
-      | Item4 | Card Number         |
-      | Item5 | Expiry Date (mm/yy) |
-      | Item6 | Security Code       |
     And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
     And I enter then details as
       | Fields        | Value           |
@@ -457,22 +449,20 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     And I check I am on "PaymentConfirm" page
     Then I see "Thank you, your payment has been received." displayed
-    And "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName        |
-      | Item1 | Receipt Sent To |
+    And I capture "ReceiptNumberId"
     And I click on "ActivityHistoryButton"
-    And I check I am on "Activity History" page
-    Then I see "Activity History" displayed
     And "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName    |
       | Item1 | Date        |
       | Item1 | Activity    |
       | Item1 | Description |
+    And I check I am on "Activity History" page
+    Then I see "Activity History" displayed
+    And I Check "Wrapper" contains "ReceiptNumberId"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          2.20 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
-
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          0.11 | Mary Test    | 4007000000027 |           11 |          20 |           112 |  
   ######################################################################
   ############################    LHS successful payment  back to make another payment    ############################
   ######################################################################
@@ -1054,7 +1044,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     And I check I am on "PaymentConfirm" page
     Then I see "Thank you, your payment has been received." displayed
-    And I capture "wt49_block_wtColumn2"
+    And I capture "ReceiptNumberId"
     And I click on "ActivityHistoryButton"
     And "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName    |
@@ -1063,7 +1053,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item1 | Description |
     And I check I am on "Activity History" page
     Then I see "Activity History" displayed
-    And I Check "Wrapper" contains "wt49_block_wtColumn2"
+    And I Check "Wrapper" contains "ReceiptNumberId"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |

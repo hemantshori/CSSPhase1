@@ -89,7 +89,7 @@ public class StepImpe {
 			
 			WebElement xyz = driver.findElement(By.xpath(myxpath));
 			StepImpe.Capture= xyz.getText();
-			System.out.println("the payment id is " +Capture);
+			System.out.println("object that is captured is " +Capture);
 			return Capture;
   
 	}
@@ -208,13 +208,18 @@ public class StepImpe {
 			Thread.sleep(3000);
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath2 = createXpath.xpathMakerById(arg1);
-			driver.findElement(By.xpath(myxpath2)).click();
+			WebElement button = driver.findElement(By.xpath(myxpath2));
+			
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);",button);
+			button.click();
 			
 		}
 
 		else if (arg1.equals("Welcome")){
 				DBUtilities createXpath2 = new DBUtilities(driver);
 				String myxpath3 = createXpath2.xpathMakerContainsText(arg1);
+<<<<<<< HEAD
 				
 			}
 		// for calendar stuff found in the PAYROLL TAX INFORMATION part of the tax registration page
@@ -236,6 +241,13 @@ public class StepImpe {
 					}
 				}
 				
+=======
+				WebElement button = driver.findElement(By.xpath(myxpath3));
+				
+				JavascriptExecutor executor = (JavascriptExecutor)driver;
+				executor.executeScript("arguments[0].scrollIntoView(true);",button);
+				button.click();
+>>>>>>> workInProgress
 			}
 		}
 		else {
