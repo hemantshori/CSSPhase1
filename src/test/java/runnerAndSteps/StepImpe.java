@@ -7,6 +7,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -50,10 +51,10 @@ public class StepImpe {
 	}
 		// **************disable to leave browser open***************************************
 
-	@After()
-		  public void tearDown() {	
-		    driver.quit();
-		   	  }
+//	@After()
+//		  public void tearDown() {	
+//		    driver.quit();
+//		   	  }
 	//******************************************************************************   
 	    
    
@@ -87,7 +88,7 @@ public class StepImpe {
 			
 			WebElement xyz = driver.findElement(By.xpath(myxpath));
 			StepImpe.Capture= xyz.getText();
-			System.out.println("the payment id is " +Capture);
+			System.out.println("object that is captured is " +Capture);
 			return Capture;
   
 	}
@@ -175,14 +176,22 @@ public class StepImpe {
 			Thread.sleep(3000);
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath2 = createXpath.xpathMakerById(arg1);
-			driver.findElement(By.xpath(myxpath2)).click();
+			WebElement button = driver.findElement(By.xpath(myxpath2));
+			
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);",button);
+			button.click();
 			
 		}
 
 		else if (arg1.equals("Welcome")){
 				DBUtilities createXpath2 = new DBUtilities(driver);
 				String myxpath3 = createXpath2.xpathMakerContainsText(arg1);
-				driver.findElement(By.xpath(myxpath3)).click();
+				WebElement button = driver.findElement(By.xpath(myxpath3));
+				
+				JavascriptExecutor executor = (JavascriptExecutor)driver;
+				executor.executeScript("arguments[0].scrollIntoView(true);",button);
+				button.click();
 			}
 		else {
 			DBUtilities createXpath = new DBUtilities(driver);
