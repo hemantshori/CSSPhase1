@@ -2,6 +2,7 @@ package runnerAndSteps;
 
 
 import java.sql.DriverManager;
+import java.util.regex.Pattern;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -93,20 +94,32 @@ public class StepImpe {
   
 	}
 
-	@Then("^I Check \"(.*?)\" contains \"(.*?)\"$")
+	@Then("^I check \"(.*?)\" contains \"(.*?)\"$")
 	public void i_Check_contains(String arg1, String arg2) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
 		String myxpath = createXpath.xpathMakerById(arg1);
-		System.out.println(myxpath);
-		String elementToBeSearched = StepImpe.Capture;
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
-	     DBUtilities t1 = new DBUtilities(driver);
-	     t1.isTextPresent(elementToBeSearched);
-		
-		
-		
+//		System.out.println(myxpath);
+//		String elementToBeSearched = StepImpe.Capture;
+//		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
+//	     DBUtilities t1 = new DBUtilities(driver);
+//	     t1.isTextPresent(elementToBeSearched);
+		WebElement inputBox = driver.findElement(By.xpath(myxpath));
+		String boxContents = inputBox.getAttribute("value");
+		System.out.println("boxContents: " + boxContents);
+		System.out.println("arg2: " + arg2);
+		Assert.assertTrue(boxContents.equals(arg2));
 	}
-
+	
+	@Then("^I check \"(.*?)\" is empty$")
+	public void i_check_is_empty(String arg1) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath = createXpath.xpathMakerById(arg1);
+		WebElement inputBox = driver.findElement(By.xpath(myxpath));
+		Assert.assertTrue(inputBox.isDisplayed());
+		String boxContents = inputBox.getAttribute("value");
+		Assert.assertTrue(boxContents.isEmpty());
+	}
+	
 	
 	
 	
@@ -137,7 +150,8 @@ public class StepImpe {
 	public void i_click_on(String arg1) throws Throwable {
 		// give time for page loading
 		Thread.sleep(1000);
-		
+		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the calendar popup
+
 		if(arg1.equals("Current_Bill")
 				||arg1.equals("InfoIcon")
 				||arg1.equals("Pay")
@@ -146,22 +160,40 @@ public class StepImpe {
 				||arg1.equals("Serch")
 				||arg1.equals("Edit")
 				||arg1.equals("MessageEdit")
-				||arg1.equals("Save")
+				||arg1.equals("TaxPayerDetailsSave")
+				||arg1.equals("SaveAndExit")
 				||arg1.equals("Cancel")
 				||arg1.equals("AddNew")
 				||arg1.equals("Delete")
+				||arg1.equals("RemoveLine")
+				||arg1.equals("GroupMember_UNSURE")
+				||arg1.equals("ConfirmBack")
+				||arg1.equals("DeclarationBack")
+				||arg1.equals("AddTotalWages")
+				||arg1.equals("DateBusinessStart")
+				||arg1.equals("DateBusinessLiable")
+				||arg1.equals("TaxPayerDetailsNext")
+				||arg1.equals("MonthlyReturnBack")
+				||arg1.equals("PayrollNext")
+				||arg1.equals("RefundDetailsNext")
+				||arg1.equals("ClaimingACTProportion_Yes")
+				||arg1.equals("BackBt")
+				||arg1.equals("Refunds_NO")
+				||arg1.equals("DBResultsSG_Theme_wt6_block_wtActions_wt8")
+				||arg1.equals("Answer_TypeAnnual")
+				||arg1.equals("Answer_TypeMonthly")
+				||arg1.equals("YearOfReturn")
+				||arg1.equals("CorrectInfoDeclared")
 				||arg1.equals("SummarySubmit")
 				||arg1.equals("PageText_TextCode")
-				||arg1.equals("wtTaxPayerDetailsNextBT")
+				||arg1.equals("TaxPayerDetailsNext")
 				||arg1.equals("Current_Bill")
-				//||arg1.equals("wtDeclarationNextBT")
-				||arg1.equals("ConfirmBT")
-				||arg1.equals("wtMonthlyReturnNextBT")
-				||arg1.equals("wtACTWagesPaidNextBt")
+
 				||arg1.equals("ReSendEmailButton")
 				||arg1.equals("PasswordSaveButton")
 				||arg1.equals("ActivityHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
+				||arg1.equals("ConfirmForSubmission")
 				||arg1.equals("EditSettings")
 				||arg1.equals("Submit")
 				||arg1.equals("ButtonShowAll")
@@ -183,8 +215,29 @@ public class StepImpe {
 		else if (arg1.equals("Welcome")){
 				DBUtilities createXpath2 = new DBUtilities(driver);
 				String myxpath3 = createXpath2.xpathMakerContainsText(arg1);
-				driver.findElement(By.xpath(myxpath3)).click();
+				
 			}
+		// for calendar stuff found in the PAYROLL TAX INFORMATION part of the tax registration page
+		else if (datePattern.matcher(arg1).matches()){
+			DBUtilities createXpath = new DBUtilities(driver);
+			String myxpath4 = createXpath.xpathMakerContainsCustomField("dyc-date", arg1);
+			try {
+				driver.findElement(By.xpath(myxpath4)).click();
+			}
+			catch (Exception e){
+				for (int i = 0; i < 100; i++){
+					System.out.println("(" + myxpath4 + ")[" + i + "]");
+					try {
+						driver.findElement(By.xpath("(" + myxpath4 + ")[" + i + "]")).click();
+						break;
+					}
+					catch (Exception e2){
+						System.out.println();
+					}
+				}
+				
+			}
+		}
 		else {
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath = createXpath.xpathMaker(arg1);
@@ -215,7 +268,7 @@ public class StepImpe {
 	}
 	}
 	// check for field text and text boxes
-	@And("^I enter then details as$")
+	@And("^I enter the details as$")
 	public void I_enter_then_details_as(DataTable table) throws Throwable {
 
      PageFactory.initElements(driver, DBUtilities.class).enterCucumbertableValuesInUI(table);

@@ -298,9 +298,11 @@ public class DBUtilities extends XPathGenerator {
 							  myXpath = createXpath.xpathMakerByInputId(data.get(i).get(0));
 							  System.out.println(i);
 							  System.out.println(myXpath);
+							  System.out.println("Is " + myXpath + " Interactable? " + driver.findElement(By.xpath(myXpath)).isEnabled());
 							  driver.findElement(By.xpath(myXpath)).clear();
 						  }
 						  catch (Exception e){
+							  e.printStackTrace();
 							  System.out.println("Cannot find an input field! Now trying to find a textarea field...");
 							  myXpath = createXpath.xpathMakerByTextAreaId(data.get(i).get(0));
 							  System.out.println(i);
