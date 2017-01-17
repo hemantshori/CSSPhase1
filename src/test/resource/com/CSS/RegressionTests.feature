@@ -43,7 +43,6 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "<ButtonName>"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName      |
-      #| item1 | Comparison    |
       | item2 | Usage History |
     And I click on "<ButtonName2>"
     Then I see "Residential - Electricity Usage History" displayed
@@ -1339,8 +1338,103 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     And I click on "Submit"
     Then I see "Correspondence for all your accounts will be sent to the updated mailing address.  Click 'OK' to proceed or 'Cancel' to return to the Settings page." displayed on popup and I click "Cancel"
     And I check I am on "EditSettings" page
-
     # Then I see "<MAddressOld>" displayed
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | email          | MAddress | Message                                    | MAddressOld |
       | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | test4@test.com | TestLine | Your changes have been saved successfully. | DBResults   |
+            
+
+      
+
+       ##########################################################################################
+      ###################  User Access Stories##################################################
+      ##########################################################################################
+      Scenario Outline: Testing User Roles DCSSP-929 Description: User should be able to access CSSPortal Epic: Portal Admin
+    Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I check I am on "Dashboard" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName   |
+      | item1 | Usage      |
+      | item2 | Billing    |
+      | item3 | Payments   |
+      | item4 | Outages    |
+      | item5 | Accounts   |
+      | item6 | Account    |
+      | item7 | Settings   |
+      | item8 | Sign Out   |
+      | item9 | Lodgements |
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 |
+      | CSS        | UserNameInput | PasswordInput | Mary     | Dbresults1 |
+
+  Scenario Outline: Testing User Roles DCSSP-929 Description: User should be able to access CSSPortal Epic: Portal Admin
+    Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I check I am on "Invalid Permissions" page
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | CSS        | UserNameInput | PasswordInput | Bob      | Dbresults1 |
+      | CSS        | UserNameInput | PasswordInput | Leonardo | Dbresults1 |
+
+  Scenario Outline: Testing User Roles DCSSP-930 Description: User should be able to access UAP Epic: Portal Admin
+    Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Given I want to login to portal "UAP"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName              |
+      | item1 | Installation Settings |
+      | item2 | Application Settings  |
+      | item3 | Resource Management   |
+      | item4 | Manage Users          |
+      | item5 | Sign Out              |
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | UAP        | UserNameInput | PasswordInput | Lisa     | Dbresults1 |
+      | UAP        | UserNameInput | PasswordInput | Mary     | Dbresults1 |
+
+  Scenario Outline: Testing User Roles DCSSP-929 Description: User should be able to access CSSPortal Epic: Portal Admin
+    Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
+    And I enter then details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Given I want to login to portal "UAP"
+    And I check I am on "Invalid Permissions" page
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | UAP        | UserNameInput | PasswordInput | Bob      | Dbresults1 |
+      | UAP        | UserNameInput | PasswordInput | Leonardo | Dbresults1 |
+
+
+      # this is to test branching2
