@@ -219,7 +219,7 @@ public class StepImpe {
 		else if (arg1.equals("Welcome")){
 				DBUtilities createXpath2 = new DBUtilities(driver);
 				String myxpath3 = createXpath2.xpathMakerContainsText(arg1);
-<<<<<<< HEAD
+
 				
 			}
 		// for calendar stuff found in the PAYROLL TAX INFORMATION part of the tax registration page
@@ -241,13 +241,12 @@ public class StepImpe {
 					}
 				}
 				
-=======
-				WebElement button = driver.findElement(By.xpath(myxpath3));
+				WebElement button = driver.findElement(By.xpath(myxpath4));
 				
 				JavascriptExecutor executor = (JavascriptExecutor)driver;
 				executor.executeScript("arguments[0].scrollIntoView(true);",button);
 				button.click();
->>>>>>> workInProgress
+
 			}
 		}
 		else {
