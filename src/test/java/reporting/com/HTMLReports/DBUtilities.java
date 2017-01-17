@@ -81,7 +81,12 @@ public class DBUtilities extends XPathGenerator {
 	 		}
 	 
 	 	}
-	 	  
+	 	  // Scroll down the page , NOT READY YET
+	 	
+	 	public void scrollDownThePage(String arg1) throws InterruptedException{
+	 	System.out.println(" Scrolling down the  page");
+	 
+	 	}
 	// action performed on element(coming as arg)
 	 	 public void actionPerformedClick (String arg1)
 	 	 {

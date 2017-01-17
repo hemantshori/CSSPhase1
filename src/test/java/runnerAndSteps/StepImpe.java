@@ -7,6 +7,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -195,6 +196,14 @@ public class StepImpe {
 		}
 		
 	}
+	
+	//scroll down the page
+	@Given("^I scroll down the page$")
+	public void i_scroll_down_the_page() throws Throwable {
+		  JavascriptExecutor jse = (JavascriptExecutor) driver;
+		    jse.executeScript("window.scrollBy(0,250)", "");
+	}
+
 
 	@Given("^I select \"(.*?)\" from \"(.*?)\"$")
 	public void i_select_from(String arg1, String arg2) throws Throwable {

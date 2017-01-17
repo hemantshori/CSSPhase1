@@ -287,9 +287,12 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item9   | Language      |
       | Item10  | Contact       |
       | Item11  | Security      |
-      | Item11  | Security      |
       | Item11  | Hint          |
       | Item 11 | ******        |
+    And I scroll down the page
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
     Then "<Item>" is displayed as "<ItemName>"
@@ -315,6 +318,9 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I click on "Settings"
     And I check I am on "Setting" page
+    And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
     And I enter then details as new
@@ -562,6 +568,9 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I enter then details as
       | Fields | Value   |
@@ -810,6 +819,9 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I click on "Settings"
     And I check I am on "Setting" page
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName   |
@@ -942,6 +954,9 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I enter then details as
       | Fields | Value   |
@@ -983,6 +998,9 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I check I am on "Dashboard" page
     And I click on "Settings"
+    And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
     And I enter then details as
@@ -1184,6 +1202,9 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     And I hit Enter
     And I click on "Settings"
     And I check I am on "Settings" page
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
     And I enter then details as
@@ -1297,6 +1318,9 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
       | Item11  | Security      |
       | Item11  | Hint          |
       | Item 11 | ******        |
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
     Then "<Item>" is displayed as "<ItemName>"
@@ -1325,7 +1349,10 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     And I hit Enter
     And I click on "Settings"
     And I check I am on "Setting" page
-    And I click on "EditSettings"
+       And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
+    And I click on "EditSettings" 
     And I check I am on "EditSettings" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
