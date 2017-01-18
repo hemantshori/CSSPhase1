@@ -43,17 +43,18 @@ public class StepImpe {
 //	    driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CTang\\Documents\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		
 		driver = new ChromeDriver();
 	    driver.manage().window().maximize();
 	    
 	}
 		// **************disable to leave browser open***************************************
 
-//	@After()
-//		  public void tearDown() {	
-//		    driver.quit();
-//		   	  }
+	@After()
+		  public void tearDown() {	
+		    driver.quit();
+		   	  }
 	//******************************************************************************   
 	    
    
@@ -257,7 +258,6 @@ public class StepImpe {
 				||arg1.equals("DeclarationConfirm")
 				||arg1.equals("MonthlyReturnNext")
 				||arg1.equals("ACTWagesPaidNext")
-				||arg1.equals("ACTWagesPaidBackBt2")
 				||arg1.equals("ReSendEmailButton")
 				||arg1.equals("PasswordSaveButton")
 				||arg1.equals("ActivityHistoryButton")
