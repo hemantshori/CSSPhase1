@@ -1,20 +1,89 @@
-Feature: Wip in stuff.
+Feature: wip
 
-  @wip
-  Scenario Outline: DTSP-354: As an end user, I want to be able to submit my Payroll Tax Registration form
-    Given I want to login to portal "TSS"
+  @done
+  Scenario Outline: DTSP-7: As an end user, I want to be able to log into the portal using my portal credentials, so that I can access self service related functions
+    #scenario 1: Same year check
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+    And I hit Enter
+    #scenario 1: Scenario 1: Mandatory fields not filled in
+    Then I see text "Required field!" displayed
+    #scenario 3:
+    And I enter the details as
+      | Fields        | Value     |
+      | UserNameInput | WRONG     |
+      | PasswordInput | ALSOWRONG |
+    And I hit Enter
+    Then I see text "Invalid Username, Email or Password. Please try again." displayed
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Given I want to login to portal "Tax_Registration_Delete"
-    Then I click on "DBResultsSG_Theme_wt6_block_wtActions_wt8"
-    Then I see "Are you sure you want to delete all registration data?" displayed on popup and I click "OK"
-    Then I wait for "2000" millisecond
+    And I check I am on "HomePage" page
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS        | UserNameInput | PasswordInput | jscott   | Dbresults1 | 12345678901 | 12345678901 |
+
+  @done
+  Scenario Outline: DTSP-378: As a user I want the ability to enter my business details on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
+    Then "<Item>" is displayed as "<ItemName>"
+      #Scenario 1 (Part 1): User views the registration form
+      | Item   | ItemName                                                  |
+      | item2  | Select Business Type                                      |
+      | item3  | Employer Name                                             |
+      | item4  | Business Trading Name                                     |
+      | item5  | Australian Business Number (ABN)                          |
+      | item6  | Australian Company Name (ACN)                             |
+      | item7  | Business Address                                          |
+      | item7  | Country                                                   |
+      | item7  | Address Line 1                                            |
+      | item7  | Address Line 2                                            |
+      | item7  | Suburb / City                                             |
+      | item7  | Territory / State                                         |
+      | item7  | Postcode                                                  |
+      | item7  | Postal Address                                            |
+      | item7  | Address where Business Records are located (Jurisdiction) |
+      | item7  | Contact Person                                            |
+      | item7  | Title                                                     |
+      | item7  | First Name                                                |
+      | item7  | Last Name                                                 |
+      | item7  | Contact Phone Number                                      |
+      | item7  | Email                                                     |
+      | item7  | Prefered Communication Method                             |
+      | item7  | Postal Address                                            |
+      | item 7 | Next                                                      |
+    #Scenario 2: User has a different postal address than business address (element 16)
+    Then I see checkbox "CheckBusinessAdress" as selected
+    Then I click on button "CheckBusinessAdress"
+    Then I check "Address_AddressLine3" is empty
+    Then I check "Address_AddressLine4" is empty
+    Then I check "Address_City2" is empty
+    Then I check "Address_PostCode2" is empty
+    #Scenario 3: User has a different business records address than business address (element 17)
+    Then I see checkbox "CheckSameAsJurisdiction" as selected
+    Then I click on button "CheckSameAsJurisdiction"
+    Then I check "Address_AddressLine5" is empty
+    Then I check "Address_AddressLine6" is empty
+    Then I check "Address_City3" is empty
+    Then I check "Address_PostCode3" is empty
+    #Scenario 4: User has a different contact person address than business address (element 25)
+    Then I see checkbox "ContactPerson_PostalAddressId" as selected
+    Then I click on button "ContactPerson_PostalAddressId"
+    Then I check "Address_AddressLine7" is empty
+    Then I check "Address_AddressLine8" is empty
+    Then I check "Address_City4" is empty
+    Then I check "Address_PostCode4" is empty
+    #Scenario 1 (PART 2);
+    Then I click on button "CheckBusinessAdress"
+    Then I click on button "CheckSameAsJurisdiction"
+    Then I click on button "ContactPerson_PostalAddressId"
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Miss" from "ContactPerson_Title"
     Then I select "SMS" from "CommunicationMethodId"
@@ -32,100 +101,56 @@ Feature: Wip in stuff.
       | ContactPerson_PhoneNumber |           33333333 |
       | ContactPerson_Email       | TEST@TEST          |
     Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on "TaxPayerDetailsNext"
-    Then I wait for "2000" millisecond
-    Then I click on "ACTWagesPaidNext"
-    Then I wait for "2000" millisecond
-    # Scenario 2
-    Then I click on "MonthlyReturnBack"
-    Then I wait for "2000" millisecond
-    Then I click on "ACTWagesPaidNext"
-    Then I wait for "2000" millisecond
-    Then I click on "DateBusinessStart"
-    Then I click on "20170102"
-    Then I click on "DateBusinessLiable"
-    Then I click on "20170103"
-    Then I enter the details as
-      | Fields               | Value |
-      | NumberOfEmployees    |    33 |
-      | RequestJustification | TEST  |
-    Then I enter the details as
-      | Fields | Value |
-    Then I click on "GroupMember_UNSURE"
-    Then I wait for "2000" millisecond
-    Then I click on "PayrollNext"
-    #scenario 3
-    #Then "<Item>" is displayed as "<ItemName>"
-    #| Item  | ItemName                        |
-    #| item2 | Set Up Bank Account for Refunds |
-    #| item3 | BSB                             |
-    #| item4 | Bank Account Number             |
-    Then I enter the details as
-      | Fields                               | Value    |
-      | RegistrationAnswer_BSB               | 333-333  |
-      | RegistrationAnswer_BankAccountNumber | 22222222 |
-      | RegistrationAnswer_BankAccountName   | TEST     |
-    Then I click on "Refunds_NO"
-    Then I click on "RefundDetailsNext"
-    Then I wait for "2000" millisecond
-    And I enter the details as
-      | Fields                                              | Value       |
-      | Declarer                                            | test        |
-      | Organisation                                        | Test2       |
-      | wt138_block_wtContent_wtRegistrationAnswer_Employer | test        |
-      | ContactPhone                                        |    33333333 |
-      | EmailAddress                                        | abc@abc.com |
-    Then I click on "CorrectInfoDeclared"
-    Then I click on "DeclarationNext"
+    Then I click on button "TaxPayerDetailsNext"
     Then I wait for "2000" millisecond
     Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                          |
-      | item2 | Business Details                  |
-      | item3 | Jurisdiction Address              |
-      | item4 | Business Trading Name             |
-      | item5 | Business Activity Details         |
-      | item6 | Control and Financial Interest    |
-      | item7 | Payroll Tax Information           |
-      | item7 | Business Activity in the ACT      |
-      | item7 | Grouping for Payroll Tax Purposes |
-      | item7 | Refund Details                    |
-      | item7 | Declaration                       |
-    Then I check I am on "Tax Registration Summary" page
-    Then I click on "BackBt"
-    Then I wait for "2000" millisecond
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName      |
-      | item2 | Declarer      |
-      | item3 | Organisation  |
-      | item4 | Employer      |
-      | item5 | Contact Phone |
-      | item6 | Email Address |
-    Then I click on "DeclarationNext"
-    Then I wait for "2000" millisecond
+      #Scenario 1 (Part 2): User views the registration form
+      | Item  | ItemName                                         |
+      | item2 | Business Activity Details                        |
+      | item3 | Business Activity Elsewhere in Australia         |
+      | item4 | Business Activity Category                       |
+      | item5 | Control and Financial Interest                   |
+      | item6 | (shares, beneficiaries if greater than 20% each) |
+      | item7 | Relationship Type                                |
 
-    #"ABN already registered."
-    #Then I click on "ConfirmBack"
-    #Then I enter the details as
-    #| Fields                   | Value     |
-    #| TotalWagesYear           | 1111-1111 |
-    #| TaxableACTWages          |       100 |
-    #| AusWideTaxableWages      |       100 |
-    #| GroupAusWideTaxableWages |       100 |
-    #Then I click on "AddTotalWages"
-    #Then I see text "Remove" displayed
-    #Then I click on "RemoveLine"
-    #Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "Cancel"
-    #Then I click on "RemoveLine"
-    #Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob   | dbresults | 12345678901 | 12345678901 |
+      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | dbresults | 12345678901 | 12345678901 |
 
   @done
-  Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
+  Scenario Outline: DTSP-379: As a user I want the ability to enter my Business Activity Details on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
+    Then I select "Miss" from "ContactPerson_Title"
+    Then I select "SMS" from "CommunicationMethodId"
+    Then I enter the details as
+      | Fields                    | Value              |
+      | EmployerName              | DB RESULTS PTY LTD |
+      | BusinessTradingName       | DB RESULTS PTY LTD |
+      | RegistrationAnswer_ABN    |        97110187767 |
+      | RegistrationAnswer_ACN    |          110187767 |
+      | AddressLine1              | TEST               |
+      | Address_City              | TEST               |
+      | PostCode                  |               3333 |
+      | ContactPerson_FirstName   | TEST               |
+      | ContactPerson_LastName    | TEST               |
+      | ContactPerson_PhoneNumber |           33333333 |
+      | ContactPerson_Email       | TEST@TEST          |
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on button "TaxPayerDetailsNext"
+    Then I wait for "2000" millisecond
+    #Scenario 1: User views Business Activity Details details
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                         |
+      | item2 | Business Activity Details                        |
+      | item3 | Business Activity Elsewhere in Australia         |
+      | item4 | Business Activity Category                       |
+      | item5 | Control and Financial Interest                   |
+      | item6 | (shares, beneficiaries if greater than 20% each) |
+      | item7 | Relationship Type                                |
+    #Scenario 2: User navigates to the previous section
+    Then I click on button "ACTWagesPaidBackBt"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                  |
       | item2 | Select Business Type                                      |
@@ -133,12 +158,56 @@ Feature: Wip in stuff.
       | item4 | Business Trading Name                                     |
       | item5 | Australian Business Number (ABN)                          |
       | item6 | Australian Company Name (ACN)                             |
-      | item7 | Business Address                                          |
-      | item7 | Postal Address                                            |
       | item7 | Address where Business Records are located (Jurisdiction) |
-      | item7 | Contact Person                                            |
       | item7 | Prefered Communication Method                             |
       | item7 | Postal Address                                            |
+      | item7 | Next                                                      |
+    Then I click on button "TaxPayerDetailsNext"
+    # Scenario 4: User adds another control and financial interest contact
+    Then I wait for "2000" millisecond
+    #Then I select "Mrs." from "wtControlAndFinancialInterestTitle"
+    Then I enter the details as
+      | Fields                                | Value |
+      | ControlAndFinancialInterest_FirstName | TEST  |
+      | ControlAndFinancialInterest_LastName  | TEST  |
+    Then I select "Account Manager" from "ControlAndFinancialInterestRelationshipType"
+    Then I select "Miss" from "ControlAndFinancialInterestTitle"
+    Then I click on button "AddControlFinancialInterestButton"
+    Then I wait for "2000" millisecond
+    #doesn't seem to be a way to differentiate between already added records and the record input fields
+    Then "ControlAndFinancialInterestListRecord$ctl00$wt7$wtControlAndFinancialInterestTitle" displays "Miss" by default
+    Then I check "ControlAndFinancialInterestListRecord_ctl00_wt7_wtControlAndFinancialInterest_FirstName" contains "TEST"
+    Then I check "ControlAndFinancialInterestListRecord_ctl00_wt7_wtControlAndFinancialInterest_LastName" contains "TEST"
+    Then "ControlAndFinancialInterestListRecord$ctl00$wt7$wtControlAndFinancialInterestRelationshipType" displays "Account Manager" by default
+    Then I see text "Remove" displayed
+    #Scenario 5: User removes a control and financial interest contact
+    Then I click on "Remove"
+    Then I see "Are you sure you want to remove this contact?" displayed on popup and I click "Cancel"
+    Then I click on "Remove"
+    Then I see "Are you sure you want to remove this contact?" displayed on popup and I click "OK"
+    #Scenario 3: User navigates to the next section
+    Then I click on button "ACTWagesPaidNext"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                                                     |
+      | item2 | Business Activity in the ACT                                                 |
+      | item3 | Date Business Commenced Employing in ACT                                     |
+      | item4 | Date Business Became Liable in the ACT (or                                   |
+      | item5 | Number of Employees in your ACT Business                                     |
+      | item6 | Grouping for Payroll Tax Purposes                                            |
+      | item7 | Are you a member of a group?                                                 |
+      | item7 | As an eligible employer, do you wish to apply for annual lodgement approval? |
+      | item7 | Annual Lodgement Request Justification                                       |
+      | item7 | Contact Person for Payroll Tax                                               |
+
+    Examples: 
+      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
+      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | dbresults | 12345678901 | 12345678901 |
+
+  @done
+  Scenario Outline: DTSP-381: As a user I want the ability to enter my refund details on the Tax Registration form so that I can register for Payroll Tax, DTSP-382: As a user I want the ability to complete the declaration on the Tax Registration form so that I can register for Payroll Tax
+    Given I want to login to portal "<PortalName>"
+    And I check I am on "Tax Registration Form" page
+    Then I wait for "2000" millisecond
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Miss" from "ContactPerson_Title"
     Then I select "SMS" from "CommunicationMethodId"
@@ -161,28 +230,6 @@ Feature: Wip in stuff.
     Then I wait for "2000" millisecond
     Then I click on "ACTWagesPaidNext"
     Then I wait for "2000" millisecond
-    # Scenario 1
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                                                     |
-      | item2 | Date Business Commenced Employing in ACT (or Recommenced)                    |
-      | item3 | Date Business Became Liable in the ACT (or Reactivated its Liability)        |
-      | item4 | Number of Employees in your ACT Business                                     |
-      | item5 | Business Activity in the ACT                                                 |
-      | item6 | Are you a member of a group?                                                 |
-      | item7 | Grouping for Payroll Tax Purposes                                            |
-      | item7 | Total Taxable Wages for the five previous financial years                    |
-      | item7 | As an eligible employer, do you wish to apply for annual lodgement approval? |
-      | item7 | Annual Lodgement Request Justification                                       |
-      | item7 | Contact Person for Payroll Tax                                               |
-    # Scenario 2
-    Then I click on "MonthlyReturnBack"
-    Then I wait for "2000" millisecond
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                         |
-      | item2 | Business Activity Elsewhere in Australia         |
-      | item3 | Control and Financial Interest                   |
-      | item4 | (shares, beneficiaries if greater than 20% each) |
-    Then I click on "ACTWagesPaidNext"
     Then I click on "DateBusinessStart"
     Then I click on "20170102"
     Then I click on "DateBusinessLiable"
@@ -191,246 +238,114 @@ Feature: Wip in stuff.
       | Fields               | Value |
       | NumberOfEmployees    |    33 |
       | RequestJustification | TEST  |
-    Then I enter the details as
-      | Fields | Value |
     Then I click on "GroupMember_UNSURE"
     Then I click on "PayrollNext"
     Then I wait for "2000" millisecond
-    #scenario 3
+    #381 Scenario 1: User views Refund details
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                        |
       | item2 | Set Up Bank Account for Refunds |
       | item3 | BSB                             |
       | item4 | Bank Account Number             |
-    Then I click on "ConfirmBack"
+    Then I click on button "ConfirmBack"
     Then I wait for "2000" millisecond
-    #scenario 4
-    Then I enter the details as
-      | Fields                   | Value     |
-      | TotalWagesYear           | 1111-1111 |
-      | TaxableACTWages          |       100 |
-      | AusWideTaxableWages      |       100 |
-      | GroupAusWideTaxableWages |       100 |
-    Then I click on "AddTotalWages"
-    Then I see text "Remove" displayed
-    Then I click on "RemoveLine"
-    Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "Cancel"
-    
-    #scenario 5
-    Then I click on "RemoveLine"
-    Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
-
-    Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob      | dbresults | 12345678901 | 12345678901 |
-
-  @done
-  Scenario Outline: DTSP-355
-    Given I want to login to portal "<PortalName>"
-    And I check I am on "Tax Registration Form" page
-    Then I wait for "2000" millisecond
-    Then I select "Company" from "SelectBusinessTypeCode"
-    Then I select "Miss" from "ContactPerson_Title"
-    Then I select "SMS" from "CommunicationMethodId"
-		#scenario 2: ABN/ACN combination verified against ABR, and the Organisation name entered does not match Organisation name returned from ABR (3rd party verification) 
-    
-    Then I enter the details as
-      | Fields                    | Value             |
-      | EmployerName              | DB RESULTS PTY LT |
-      | BusinessTradingName       | DB RESULTS PTY LT |
-      | RegistrationAnswer_ABN    |       97110187767 |
-      | RegistrationAnswer_ACN    |         110187767 |
-      | AddressLine1              | TEST              |
-      | Address_City              | TEST              |
-      | PostCode                  |              3333 |
-      | ContactPerson_FirstName   | TEST              |
-      | ContactPerson_LastName    | TEST              |
-      | ContactPerson_PhoneNumber |          33333333 |
-      | ContactPerson_Email       | TEST@TEST         |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on "TaxPayerDetailsNext"
-    Then I wait for "1000" millisecond
-    Then I see text "Organisation Name does not match ABN number." displayed
-    #scenario 3: ABN/ACN combination not verified against ABR (3rd party verification) 
-    Then I enter the details as
-      | Fields                 | Value              |
-      | EmployerName           | DB RESULTS PTY LTD |
-      | BusinessTradingName    | DB RESULTS PTY LTD |
-      | RegistrationAnswer_ABN |        97110187768 |
-      | RegistrationAnswer_ACN |          110187768 |
-    Then I click on "TaxPayerDetailsNext"
-    Then I wait for "1000" millisecond
-    Then I see text "The ABN or ACN you have entered is invalid." displayed
-    #scenario 1: ABN/ACN combination verified against ABR, and the Organisation name entered matches Organisation name returned from ABR (3rd party verificati
-    Then I enter the details as
-      | Fields                 | Value              |
-      | EmployerName           | DB RESULTS PTY LTD |
-      | BusinessTradingName    | DB RESULTS PTY LTD |
-      | RegistrationAnswer_ABN |        97110187767 |
-      | RegistrationAnswer_ACN |          110187767 |
-    Then I click on "TaxPayerDetailsNext"
-    Then I wait for "2000" millisecond
+    #381 Scenario 2: User navigates to the previous section
     Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                 |
-      | item2 | Business Activity Elsewhere in Australia |
-      | item3 | Business Activity Category               |
-      | item4 | Control and Financial Interest           |
-
-    Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob      | dbresults | 12345678901 | 12345678901 |
-
-  @done
-  Scenario Outline: DTSP-310
-    Given I want to login to portal "<PortalName>"
-    And I check I am on "Tax Registration Form" page
-    Then I wait for "2000" millisecond
-    Then I select "Company" from "SelectBusinessTypeCode"
-    Then I select "Miss" from "ContactPerson_Title"
-    Then I select "SMS" from "CommunicationMethodId"
-    #scenario 1: Restricted fields contain incorrect text type (e.g. ABC into 1234 field and vice versa) 
-    Then I enter the details as
-      | Fields                 | Value |
-      | RegistrationAnswer_ABN | TEST  |
-    Then I check "RegistrationAnswer_ABN" is empty
-    #scenario 2: Restricted fields contain correct text type (e.g. ABC into 1234 field) 
-    Then I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 97110187767 |
-    #scenario 5: Mandatory fields not filled in 
-    Then I check "TaxPayerDetailsNext" is readonly
-    #scenario 3, 4: Fields are entered in incorrect format (e.g. no. of digits, email format), Fields are entered in incorrect format (Refer to description for validations and error messages for each field) 
-    Then I enter the details as
-      | Fields                    | Value             |
-      | EmployerName              | DB RESULTS PTY LT |
-      | BusinessTradingName       | DB RESULTS PTY LT |
-      | RegistrationAnswer_ABN    |       97110187767 |
-      | RegistrationAnswer_ACN    |         110187767 |
-      | AddressLine1              | TEST              |
-      | Address_City              | TEST              |
-      | PostCode                  |                33 |
-      | ContactPerson_FirstName   | TEST              |
-      | ContactPerson_LastName    | TEST              |
-      | ContactPerson_PhoneNumber |             33333 |
-      | ContactPerson_Email       | TEST              |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on "TaxPayerDetailsNext"
-    Then I see text "Please enter the correct number of digits for this field." displayed
-    Then I see text "number of digits for this field." displayed
-    Then I see text "Email address is not in the correct format." displayed
-    Then I see text "This is an invalid phone number." displayed
-    Then I enter the details as
-      | Fields                    | Value              |
-      | EmployerName              | DB RESULTS PTY LTD |
-      | BusinessTradingName       | DB RESULTS PTY LTD |
-      | RegistrationAnswer_ABN    |        97110187767 |
-      | RegistrationAnswer_ACN    |          110187767 |
-      | AddressLine1              | TEST               |
-      | Address_City              | TEST               |
-      | PostCode                  |               3333 |
-      | ContactPerson_FirstName   | TEST               |
-      | ContactPerson_LastName    | TEST               |
-      | ContactPerson_PhoneNumber |           33333333 |
-      | ContactPerson_Email       | TEST@TEST          |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    
-    #Scenario 6: Mandatory fields all filled in 
-    Then I click on "TaxPayerDetailsNext"
-    Then I wait for "2000" millisecond
+      | Item  | ItemName                                                                     |
+      | item2 | Business Activity in the ACT                                                 |
+      | item3 | Date Business Commenced Employing in ACT                                     |
+      | item4 | Date Business Became Liable in the ACT (or                                   |
+      | item5 | Number of Employees in your ACT Business                                     |
+      | item6 | Grouping for Payroll Tax Purposes                                            |
+      | item7 | Are you a member of a group?                                                 |
+      | item7 | As an eligible employer, do you wish to apply for annual lodgement approval? |
+      | item7 | Annual Lodgement Request Justification                                       |
+      | item7 | Contact Person for Payroll Tax                                               |
+    Then I click on "PayrollNext"
+    #381 Scenario 3: User navigates to the next section
+    Then I click on button "Refunds_NO"
+    Then I click on button "RefundDetailsNext"
     Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                 |
-      | item2 | Business Activity Elsewhere in Australia |
-      | item3 | Business Activity Category               |
-      | item4 | Control and Financial Interest           |
+      | Item  | ItemName                                                                         |
+      | item2 | Declaration                                                                      |
+      | item3 | Declarer                                                                         |
+      | item5 | I declare that this information is true and correct to the best of my knowledge. |
+    #382 Scenario 1: User does not check Declaration
+    Then I see checkbox "CorrectInfoDeclared" as not selected
+    Then I check "DeclarationNext" is readonly
 
-    Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob      | dbresults | 12345678901 | 12345678901 |
-
-  #@onhold
-  #Scenario Outline: DTSP-354
-  #
   @done
-  Scenario Outline: DTSP-69: As an end user, I want to be able to enter details for my Annual Reconciliation Payroll Tax Return Form, so that my Payroll Tax Return is lodged
+  Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "HomePage" page
     And I click on "Payroll Tax"
     Then I click on "Cancel"
     Then I click on "Payroll Tax"
-    And I check I am on "Payroll Lodgement Form" page
     Then I click on "Answer_TypeAnnual"
-    And I click on "Payroll Tax"
-    #scenario 2: End user cancels with unsaved changes
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
-    And I check I am on "Payroll Lodgement Form" page
-    And I click on "Payroll Tax"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    And I check I am on "Payroll Lodgement Form" page
-    And I check "TaxPayerDetails" is readonly
-    #scenario 3: End user saves and exits
-    And I click on "Payroll Tax"
-    Then I click on "Answer_TypeAnnual"
-    Then I click on "SaveAndExit"
-    And I check I am on "HomePage" page
-    #scenario 1: End user cancels with no unsaved changes
-    And I click on "Payroll Tax"
-    Then I click on "Cancel"
-    And I check I am on "HomePage" page
-    #scenario 4: End user saves
-    And I click on "Payroll Tax"
-    Then I click on "Answer_TypeAnnual"
-    Then I click on "TaxPayerDetailsSave"
-    Then I wait for "1000" millisecond
-    Then I see text "Your changes have been successfully saved" displayed
-    #scenario 5: End user goes to previous page with unsaved changes
-    
-    Then I select "2015" from "YearOfReturn"
-    Then I click on "TaxPayerDetailsNext"
-    Then I click on "ACTWagesPaidBack"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                         |
-      | item2 | Client Reference Number (CRN)    |
-      | item3 | Australian Business Number (ABN) |
-      | item4 | Payroll Tax Group Number         |
-    #scenario 6: End user navigates away from form with no unsaved changes
-    Then I click on "TaxPayerDetailsSave"
-    Then I click on "Settings"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Given I want to login to portal "<PortalName>"
-    #scenario 7: End user navigates away from form with unsaved changes
-    Then I click on "Payroll Tax"
-    Then I select "2014" from "YearOfReturn"
-    Then I click on "Payroll Tax"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
-    And I check I am on "Payroll Lodgement Form" page
-    Then I click on "Payroll Tax"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #scenario 8: As an end user, I want to be able to enter details for my Annual Reconciliation Payroll Tax Return Form, so that my Payroll Tax Return is lodged
-    Then I click on "Payroll Tax"
-    Then I select "2014" from "YearOfReturn"
-    Then I click on "TaxPayerDetailsNext"
-    Then I click on "ACTWagesPaidNext"
-    Then I click on "MonthlyReturnNext"
-    And I wait for "3000" millisecond
-    And I enter the details as
-      | Fields                                        | Value       |
-      | PersonFullName                                | test        |
-      | LegalEntityName                               | Test2       |
-      | wt128_wtContent_wtLodgePayrollAnswer_Employer | test        |
-      | PhoneNumber                                   |  0422184033 |
-      | EmailAddress                                  | abc@abc.com |
-    Then I click on "DeclarationConfirm"
-    Then I click on "ConfirmBack"
-    Then I click on "DeclarationBack"
-    Then I click on "MonthlyReturnNext"
-    Then I click on "DeclarationConfirm"
-    Then I check "Submit" is readonly
+   	Then I click on button "NextSection"
+   	Then I click on button "ACTWagesPaidBackBt2"
+   	Then I check "PayrollAnswer_TypeAnnual" is readonly
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  |
-      | TSS        | UserNameInput | PasswordInput | bob      | dbresults |
+      | PortalName | UserName | Password   |  
+      | TSS        | jscott   | Dbresults1 |
+  #@wip
+  #Scenario Outline: DTSP-9: As an end user I want my portal account locked after a number of unsuccessful login attempts so that unathorised users cannot access my portal account
+    #scenario 1: Same year check
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value     |
+      #| UserNameInput | <UserName>        |
+      #| PasswordInput | ALSOWRONG |
+    #And I hit Enter
+    #And I enter the details as
+      #| Fields        | Value     |
+      #| UserNameInput | <UserName>        |
+      #| PasswordInput | ALSOWRONG |
+    #And I hit Enter
+    #And I enter the details as
+      #| Fields        | Value     |
+      #| UserNameInput | <UserName>        |
+      #| PasswordInput | ALSOWRONG |
+    #And I hit Enter
+    #And I enter the details as
+      #| Fields        | Value     |
+      #| UserNameInput | <UserName>        |
+      #| PasswordInput | ALSOWRONG |
+    #And I hit Enter
+    #And I enter the details as
+    #| Fields        | Value     |
+    #| UserNameInput | <UserName>        |
+    #| PasswordInput | ALSOWRONG |
+    #And I hit Enter
+    #Then I check I am on "Locked Account" page
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value     |
+      #| UserNameInput | bob       |
+      #| PasswordInput | ALSOWRONG |
+    #And I hit Enter
+    #Then I check I am on "Locked Account" page
+    #scenario 1: Scenario 1: Mandatory fields not filled in
+    #Then I check I am on "Locked Account" page
+#
+   # scenario 3:
+    #And I enter the details as
+    #| Fields        | Value     |
+    #| UserNameInput | WRONG     |
+    #| PasswordInput | ALSOWRONG |
+    #And I hit Enter
+    #Then I see text "Invalid Username, Email or Password. Please try again." displayed
+    #And I enter the details as
+    #| Fields        | Value      |
+    #| UserNameInput | <UserName> |
+    #| PasswordInput | <Password> |
+    #And I hit Enter
+    #And I check I am on "HomePage" page
+    #Examples: 
+      #| PortalName | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
+      #| TSS        | UserNameInput | PasswordInput | jscott   | Dbresults1 | 12345678901 | 12345678901 |

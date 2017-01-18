@@ -96,16 +96,37 @@ public class StepImpe {
 	public void i_Check_contains(String arg1, String arg2) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
 		String myxpath = createXpath.xpathMakerById(arg1);
+		Thread.sleep(3000);
 //		System.out.println(myxpath);
 //		String elementToBeSearched = StepImpe.Capture;
 //		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
 //	     DBUtilities t1 = new DBUtilities(driver);
 //	     t1.isTextPresent(elementToBeSearched);
-		WebElement inputBox = driver.findElement(By.xpath(myxpath));
-		String boxContents = inputBox.getAttribute("value");
+		
+		WebElement inputBox = null;
+		inputBox = driver.findElement(By.xpath(myxpath));
+		String boxContents = null;
+		boxContents = inputBox.getAttribute("value");
+		
 		System.out.println("boxContents: " + boxContents);
 		System.out.println("arg2: " + arg2);
-		Assert.assertTrue(boxContents.equals(arg2));
+		
+		try {
+			Assert.assertTrue(boxContents.equals(arg2));
+		}
+		catch (AssertionError e){
+			// for input fields that default to the placeholder value when empty (very specific ones)
+			e.printStackTrace();
+			System.out.println("Attempting to search for placeholder...");
+			boxContents = inputBox.getAttribute("placeholder");
+			System.out.println("boxContents: " + boxContents);
+			System.out.println("arg2: " + arg2);
+			Assert.assertTrue(boxContents.equals(arg2));
+		}
+		boxContents = null;
+		inputBox = null;
+		Thread.sleep(2000);
+
 	}
 	
 	@Then("^I check \"(.*?)\" is empty$")
@@ -118,7 +139,16 @@ public class StepImpe {
 		Assert.assertTrue(boxContents.isEmpty());
 	}
 	
-	
+//	@Then("^I check dropdown \"(.*?)\" is selected as \"(.*?)\"$")
+//	public void i_check_dropdown_is_selected_as(String arg1, String arg2) throws Throwable {
+//		DBUtilities createXpath = new DBUtilities(driver);
+//		String myxpath = createXpath.xpathMakerById(arg1);
+//		WebElement dropdown = driver.findElement(By.xpath(myxpath));
+//		Select mySelect = new Select(dropdown);
+//
+//		String currentValue = mySelect.getFirstSelectedOption().getText();
+//		Assert.assertTrue(currentValue.equals(arg2));
+//	}
 	
 	
 	
@@ -142,7 +172,38 @@ public class StepImpe {
 	}
 	
 
+	@And("^I click on button \"(.*?)\"$")
+	public void i_click_on_button(String arg1) throws Throwable {
+		Thread.sleep(1000);
+		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the calendar popup
+		String myXpath = null;
+		DBUtilities createXpath = new DBUtilities(driver);
+		if (datePattern.matcher(arg1).matches()){
+			myXpath = createXpath.xpathMakerContainsCustomField("dyc-date", arg1);
+			try {
+				driver.findElement(By.xpath(myXpath)).click();
+			}
+			catch (Exception e){
+				for (int i = 0; i < 100; i++){
+					System.out.println("(" + myXpath + ")[" + i + "]");
+					try {
+						driver.findElement(By.xpath("(" + myXpath + ")[" + i + "]")).click();
+						break;
+					}
+					catch (Exception e2){
+						System.out.println();
+					}
+				}
+				
+			}
+		}
+		else {
+			myXpath = createXpath.xpathMakerById(arg1);
+			driver.findElement(By.xpath(myXpath)).click();
+		}
+		Thread.sleep(2500);
 
+	}
 	
 	@And("^I click on \"(.*?)\"$")
 	public void i_click_on(String arg1) throws Throwable {
@@ -157,6 +218,7 @@ public class StepImpe {
 				||arg1.equals("Search")
 				||arg1.equals("Serch")
 				||arg1.equals("Edit")
+				||arg1.equals("NextSection")
 				||arg1.equals("MessageEdit")
 				||arg1.equals("TaxPayerDetailsSave")
 				||arg1.equals("SaveAndExit")
@@ -175,9 +237,14 @@ public class StepImpe {
 				||arg1.equals("PayrollNext")
 				||arg1.equals("RefundDetailsNext")
 				||arg1.equals("ClaimingACTProportion_Yes")
+				||arg1.equals("ClaimingACTProportion_No")
 				||arg1.equals("BackBt")
 				||arg1.equals("Refunds_NO")
 				||arg1.equals("DBResultsSG_Theme_wt6_block_wtActions_wt8")
+				||arg1.equals("LodgePayrollAnswer_EmployerStatus_Independent")
+				||arg1.equals("LodgePayrollAnswer_EmployerStatus_Opt2")
+				||arg1.equals("LodgePayrollAnswer_EmployerStatus_Opt3")
+				||arg1.equals("LodgePayrollAnswer_EmployerStatus_Opt4")
 				||arg1.equals("Answer_TypeAnnual")
 				||arg1.equals("Answer_TypeMonthly")
 				||arg1.equals("YearOfReturn")
@@ -190,14 +257,14 @@ public class StepImpe {
 				||arg1.equals("DeclarationConfirm")
 				||arg1.equals("MonthlyReturnNext")
 				||arg1.equals("ACTWagesPaidNext")
-				||arg1.equals("ACTWagesPaidBack")
+				||arg1.equals("ACTWagesPaidBackBt2")
 				||arg1.equals("ReSendEmailButton")
 				||arg1.equals("PasswordSaveButton")
 				||arg1.equals("ActivityHistoryButton")
 				||arg1.equals("MakeAnotherPaymentButton")
 				||arg1.equals("ConfirmForSubmission")
 				||arg1.equals("EditSettings")
-				||arg1.equals("Submit")
+				||arg1.equals("wtSubmitBT")
 				||arg1.equals("ButtonShowAll")
 				||arg1.equals("AllTransactions")
 				||arg1.equals("Reset")
@@ -240,6 +307,11 @@ public class StepImpe {
 				
 			}
 		}
+//		else if (arg1.equals("Submit")){
+//			DBUtilities createXpath = new DBUtilities(driver);
+//			String myxpath2 = createXpath.xpathMakerByExactId(arg1);
+//			driver.findElement(By.xpath(myxpath2)).click();
+//		}
 		else {
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath = createXpath.xpathMaker(arg1);
@@ -249,6 +321,7 @@ public class StepImpe {
 			driver.findElement(By.xpath(myxpath)).click();
 			
 		}
+		Thread.sleep(2000);
 		
 	}
 
@@ -257,9 +330,10 @@ public class StepImpe {
 		if(arg1.equals("SetGoal")){
 			String myxpath = PageFactory.initElements(driver, GoalsAndTargetsPage.class).xpathMakerById1AndId2(arg1, arg2);
 			driver.findElement(By.xpath(myxpath)).click();
-		}else{
-		PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
-	}
+		}
+		else{
+			PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
+		}
 	}
 	// check for field text and text boxes
 	@And("^I enter the details as$")
@@ -380,6 +454,23 @@ public class StepImpe {
 		  System.out.println(" on correct page " +arg1);
 	}
 	
+	// check that a checkbox is checked
+	@Then("^I see checkbox \"(.*?)\" as selected$")
+	public void i_see_checkbox_as_selected (String arg1) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath = createXpath.xpathMakerById(arg1);
+		System.out.println("Checking if checkbox " +myxpath + " has been selected.");
+		Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isSelected());
+	}
+	
+	@Then("^I see checkbox \"(.*?)\" as not selected$")
+	public void i_see_checkbox_as_not_selected (String arg1) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath = createXpath.xpathMakerById(arg1);
+		System.out.println("Checking if checkbox " +myxpath + " has not been selected.");
+		Assert.assertFalse(driver.findElement(By.xpath(myxpath)).isSelected());
+	}
+	
 	// check the dropdown displays expected
 	@Then("^\"(.*?)\" displays \"(.*?)\" by default$")
 	public void displays_by_default(String arg1, String arg2) throws Throwable {
@@ -388,6 +479,14 @@ public class StepImpe {
 		WebElement dropdownValue = driver.findElement(By.xpath(myXpath));
 		System.out.println(dropdownValue.getText());
 		PageFactory.initElements(driver, AccountFinancialHistorypage.class).isTextPresent(arg2);
+		
+//		DBUtilities createXpath = new DBUtilities(driver);
+//		String myxpath = createXpath.xpathMakerById(arg1);
+//		WebElement dropdown = driver.findElement(By.xpath(myxpath));
+//		Select mySelect = new Select(dropdown);
+//
+//		String currentValue = mySelect.getFirstSelectedOption().getText();
+//		Assert.assertTrue(currentValue.equals(arg2));
 
 	}
 
