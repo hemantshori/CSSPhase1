@@ -1,6 +1,45 @@
-Feature: wip
+#Author: your.email@your.domain.com
+#Keywords Summary :
+#Feature: List of scenarios.
+#Scenario: Business rule through list of steps with arguments.
+#Given: Some precondition step
+#When: Some key actions
+#Then: To observe outcomes or validation
+#And,But: To enumerate more Given,When,Then steps
+#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
+#Examples: Container for s table
+#Background: List of steps run before each of the scenarios
+#""" (Doc Strings)
+#| (Data Tables)
+#@ (Tags/Labels):To group Scenarios 
+#<> (placeholder)
+#""
+## (Comments)
 
-  @review
+#Sample Feature Definition Template
+Feature: Stuff for TSS Phase 3
+  @done
+  Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Payroll Tax"
+    Then I click on "Cancel"
+    Then I click on "Payroll Tax"
+    Then I click on "Answer_TypeAnnual"
+    Then I click on button "NextSection"
+    Then I click on button "ACTWagesPaidBackBt2"
+    Then I check "PayrollAnswer_TypeAnnual" is readonly
+
+    Examples: 
+      | PortalName | UserName | Password   |
+      | TSS        | jscott   | Dbresults1 |
+    
+    
+    @review
   Scenario Outline: DTSP-8
   # REMEMBER TO WAIT FOR FIVE MINUTES BETWEEN EACH RUN OF THIS SCENARIO
     Given I want to login to portal "<PortalName>"
@@ -149,4 +188,3 @@ Feature: wip
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jscott   | Dbresults1 | 12345678901 | 12345678901 |
-  

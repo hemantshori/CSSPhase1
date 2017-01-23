@@ -11,7 +11,7 @@ public class ForgotYourPasswordPage extends DBUtilities {
 
 	public void checkBoxClick(String arg1){
 	 DBUtilities createXpath = new DBUtilities(driver);
-	String myxpath =  createXpath.xpathMakerByType(arg1);
+	 String myxpath =  createXpath.xpathMakerByType(arg1);
      driver.findElement(By.xpath(myxpath)).click();
 	 
 	}
