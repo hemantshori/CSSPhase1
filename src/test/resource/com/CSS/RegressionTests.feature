@@ -323,7 +323,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
-    And I enter the details as new
+    And I enter the details as
       | Fields                  | Value                  |
       | CurrentPasswordInput    | <Current Password>     |
       | NewPasswordInput        | <New Password>         |
@@ -355,7 +355,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item  | Submit         |
        | Item  | Already have an Account? |
       | Item  | Sign In        |
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value                    |
       | InputAccountNumber        | <Invalid Account Number> |
       | InputBillName             | <Name On Bill>           |
@@ -367,7 +367,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
      Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
     And I check I am on "Regist" page
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value            |
       | InputAccountNumber        | <Account Number> |
       | InputBillName             | <Name On Bill>   |
@@ -458,7 +458,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item1 | Description |
     And I check I am on "Activity History" page
     Then I see "Activity History" displayed
-    And I Check "Wrapper" contains "ReceiptNumberId"
+    And I check "Wrapper" contains "ReceiptNumberId"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
@@ -589,7 +589,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: DCSSP-607: As a user I want to view the Terms and Conditions before registering an account so that I know the rules I need to follow when using CSSAs a user I want to enter my user details so that I can complete the registration process
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -607,7 +607,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: DCSSP-414: As a user I want to enter my user details so that I can complete the registration process
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -619,7 +619,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Sign In"
     And I check I am on "Login" page
     And I click on "Create Account"
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -632,7 +632,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Cancel"
     And I check I am on "Login" page
     And I click on "Create Account"
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -649,7 +649,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item  | ItemName   |
       | Item1 | First Name |
       | Item2 | Last Name  |
-    And I enter the details as new
+    And I enter the details as
       | Fields          | Value               |
       | Email           | <Email Address1>    |
       | Username        | <Choose UserName1>  |
@@ -659,7 +659,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I select "<DropDownValue1>" from "<DropDownField>"
     And I click on "Submit"
     Then I see "Email address already exists. Please try again." displayed
-    And I enter the details as new
+    And I enter the details as
       | Fields          | Value               |
       | Email           | <Email Address2>    |
       | NewPassword     | <Choose Password2>  |
@@ -667,7 +667,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I click on "Submit"
     Then I see "Invalid email address. Please try again." displayed
-    And I enter the details as new
+    And I enter the details as
       | Fields          | Value               |
       | Email           | <Email Address3>    |
       | Username        | <Choose UserName3>  |
@@ -675,14 +675,14 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | ConfirmPassword | <Confirm Password3> |
     And I click on "Submit"
     Then I see "Username already exists. Please try again." displayed
-    And I enter the details as new
+    And I enter the details as
       | Fields          | Value               |
       | Username        | <Choose UserName4>  |
       | NewPassword     | <Choose Password4>  |
       | ConfirmPassword | <Confirm Password4> |
     And I click on "Submit"
     Then I see "Invalid password. Please try again." displayed
-    And I enter the details as new
+    And I enter the details as
       | Fields          | Value               |
       | NewPassword     | <Choose Password5>  |
       | ConfirmPassword | <Confirm Password5> |
@@ -856,7 +856,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: DCSSP-520: Already registered or already activated
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -878,7 +878,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: DCSSP-520: Already registered or already activated and user tries again.
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -893,7 +893,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then I click on "wtSubmitButton3"
     And I check I am on "Login" page
     And I click on "Create Account"
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number2> |
       | InputBillName             | <BillName2>       |
@@ -902,7 +902,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     #   Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
-    And I enter the details as new
+    And I enter the details as
       | Fields          | Value               |
       | Email           | <Email Address1>    |
       | Username        | <Choose UserName1>  |
@@ -922,7 +922,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: Continue with 520, Scenario 2: User registers and their account is not activated
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter the details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number> |
       | InputBillName             | <BillName>       |
@@ -1053,7 +1053,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item1 | Description |
     And I check I am on "Activity History" page
     Then I see "Activity History" displayed
-    And I Check "Wrapper" contains "ReceiptNumberId"
+    And I check "Wrapper" contains "ReceiptNumberId"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |

@@ -119,7 +119,7 @@ Feature: Wip in stuff.
     #Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob   | dbresults | 12345678901 | 12345678901 |
+      | Tax_Registration | UserNameInput | PasswordInput | bob   | Dbresults1 | 12345678901 | 12345678901 |
 
   @done
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
@@ -222,7 +222,7 @@ Feature: Wip in stuff.
 
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob      | dbresults | 12345678901 | 12345678901 |
+      | Tax_Registration | UserNameInput | PasswordInput | bob      | Dbresults1 | 12345678901 | 12345678901 |
 
   @done
   Scenario Outline: DTSP-355
@@ -278,7 +278,7 @@ Feature: Wip in stuff.
 
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob      | dbresults | 12345678901 | 12345678901 |
+      | Tax_Registration | UserNameInput | PasswordInput | bob      | Dbresults1 | 12345678901 | 12345678901 |
 
   @done
   Scenario Outline: DTSP-310
@@ -345,7 +345,7 @@ Feature: Wip in stuff.
 
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob      | dbresults | 12345678901 | 12345678901 |
+      | Tax_Registration | UserNameInput | PasswordInput | bob      | Dbresults1 | 12345678901 | 12345678901 |
 
   #@onhold
   #Scenario Outline: DTSP-354
@@ -433,4 +433,4 @@ Feature: Wip in stuff.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password  |
-      | TSS        | UserNameInput | PasswordInput | bob      | dbresults |
+      | TSS        | UserNameInput | PasswordInput | bob      | Dbresults1 |
