@@ -13,18 +13,20 @@ import cucumber.api.junit.Cucumber;
 // ************************************** CSS Portal as on 17/10/2016
 // OCT***********************************
 
-(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSSRegression"},
+(format = { "pretty", "html:target/html/result.html" },  tags = {"@tss_review_done"},
     //*********************for SHAKE	OUT*************************************
 	//	 features = "src/test/resource/com/CSS/SanityTestScript.feature") 
 		
+//****************for wip****************************
+// features = "src/test/resource/com/TSS/wip.feature")
     //****************for Regression****************************
 	 features = "src/test/resource/com/TSS/Regression_TSS.feature")
 
 //****************for TSS Regression****************************
- //  features = "src/test/resource/com/TSS/TANG_TSSPhase1.feature") 
+   //features = "src/test/resource/com/TSS/TANG_TSSPhase2.feature") 
 		
   
 
 public class TSSRunnerTest {
-
+	
 }
