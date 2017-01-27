@@ -1,4 +1,4 @@
-@Regression
+@CSS_Regression
 Feature: To test the functionality of Appication as described in Jira Stories for Iteration 1
 
   @ShakeOut
@@ -45,7 +45,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item  | ItemName      |
       | item2 | Usage History |
     And I click on "<ButtonName2>"
-    Then I see "Residential - Electricity Usage History" displayed
+   # Then I see "Residential - Electricity Usage History" displayed               .......disabled for now
     Then I see "5% discount!" displayed
 
     Examples: 
