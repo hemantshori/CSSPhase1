@@ -290,7 +290,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item11  | Hint          |
       | Item 11 | ******        |
     And I scroll down the page
-        And I click on "Profile"
+    And I click on "Profile"
     And I click on "Contact"
     And I click on "Security"
     And I click on "EditSettings"
