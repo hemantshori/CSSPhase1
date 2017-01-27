@@ -185,3 +185,21 @@ Feature: Stuff for TSS Phase 2
       | PortalName | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | bob      | dbresults | 98765123456 | 12345678902 |
 
+  Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Payroll Tax"
+    Then I click on "Cancel"
+    Then I click on "Payroll Tax"
+    Then I click on "Answer_TypeAnnual"
+    Then I click on button "NextSection"
+    Then I click on button "ACTWagesPaidBackBt2"
+    Then I check "PayrollAnswer_TypeAnnual" is readonly
+
+    Examples: 
+      | PortalName | UserName | Password   |
+      | TSS        | jscott   | Dbresults1 |

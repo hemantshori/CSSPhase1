@@ -1,24 +1,26 @@
 @wip
 Feature: Some feature
 
-  Scenario Outline: Check Usage Menu Item List Test 1, DCSSP-245 Description: User views the menu items Epic: Common Components
+  Scenario Outline: Testing User Roles DCSSP-930 Description: User should be able to access UAP Epic: Portal Admin
     Given I want to login to portal "<PortalName>"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item1 | Logo     |
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I click on "<ButtonName>"
+    Given I want to login to portal "UAP"
     Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName      |
-      | item2 | Usage History |
-    And I click on "<ButtonName2>"
-    And I wait for "3000" millisecond
-    Then I see "Residential - Electricity Usage History" displayed
-              
-    Then I see "5% discount!" displayed
+      | Item  | ItemName              |
+      | item1 | Installation Settings |
+      | item2 | Application Settings  |
+      | item3 | Resource Management   |
+      | item4 | Manage Users          |
+      | item5 | Sign Out              |
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | ServiceName              | ButtonName2   | ButtonName3 |
-      | CSS        | UserNameInput | PasswordInput | Michael  | Dbresults1 | Usage      | Residential: Electricity | Usage History | Contact Us  |
-
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | UAP        | UserNameInput | PasswordInput | Lisa     | Dbresults1 |
+      | UAP        | UserNameInput | PasswordInput | Mary     | Dbresults1 |
