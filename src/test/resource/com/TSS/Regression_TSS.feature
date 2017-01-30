@@ -1,14 +1,10 @@
-@tss_review_done
+ @tss_review_done
 Feature: Some feature
 
-
-   # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
+  # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
   # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
-  
-   
   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
-   
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -25,11 +21,12 @@ Feature: Some feature
     Then I see text "<CRN>" displayed
     Then I see text "<ABN>" displayed
     Then I select "2014" from "YearOfReturn"
+    Then I click on "Independent employer (non-group) lodging for itself"
     Then I click on "TaxPayerDetailsNext"
     And I wait for "2000" millisecond
     Then I click on "ACTWagesPaidNext"
     And I wait for "2000" millisecond
-    Then I click on "MonthlyReturnNext"   
+    Then I click on "MonthlyReturnNext"
     And I wait for "2000" millisecond
     And I enter the details as
       | Fields              | Value       |
@@ -45,10 +42,9 @@ Feature: Some feature
     Then I see text "The period entered has already been lodged. Please select a different period." displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | mbrown   | dbresults | 12121212121 | 21212121212 |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
 
-  @tss_review_done
   Scenario Outline: DTSP-356 Scenario 2, 3 and 4
     #scenario 2: Aus wide wages is not greater than ACT Taxable wages
     #scenario 3: Group ACT wages is not greater than ACT Taxable wages
@@ -66,6 +62,7 @@ Feature: Some feature
     Then I see text "<CRN>" displayed
     Then I see text "<ABN>" displayed
     Then I select "2011" from "YearOfReturn"
+    Then I click on "Designated group employer for a group and lodging for itself"
     Then I click on button "TaxPayerDetailsNext"
     Then I wait for "2000" millisecond
     Then I enter the details as
@@ -90,7 +87,6 @@ Feature: Some feature
     Then I click on "DeclarationConfirm"
     Then I check "Submit" is readonly
     Then I click on "ConfirmForSubmission"
-    
     # don't remove the wt prefix, otherwise there will be a conflict with a 'HiddenSubmitBT'
     Then I click on button "wtSubmitBT"
     And I wait for "2000" millisecond
@@ -99,12 +95,11 @@ Feature: Some feature
     Then I see text "Australia-wide wages must be greater than or equal to Group ACT wages" displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | mbrown   | dbresults | 12121212121 | 21212121212 |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
 
   #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
-  
-    Scenario Outline: DTSP-311: Validation Rules and Errors to be used across Annual Reconciliation Form
+  Scenario Outline: DTSP-311: Validation Rules and Errors to be used across Annual Reconciliation Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -113,27 +108,25 @@ Feature: Some feature
     And I hit Enter
     And I click on "Payroll Tax"
     Then I click on button "GeneralCancelBt"
-    
     Then I click on "Annual Reconciliation"
     Then I click on button "NextSection"
     Then I select "2012" from "YearOfReturn"
+    Then I click on "Designated group employer for a group and lodging for itself"
     Then I click on "TaxPayerDetailsNext"
     Then I wait for "2000" millisecond
-    
     #scenario 1: Restricted fields contain incorrect text type
     Then I enter the details as
       | Fields           | Value |
       | SalariesAndWages | ABC   |
     Then I check "SalariesAndWages" is empty
-    
     #scenario 2:  Restricted fields contain correct text type
     Then I enter the details as
       | Fields                | Value |
       | SalariesAndWages      |   100 |
       | BonusesAndCommissions |   100 |
-      
     #long id is present here to avoid conflict with a button caleld 'ACTWAgesPaidBackBt2', should be fixed soon
-    Then I click on button "wt475_block_wtContent_wtACTWagesPaidBackBt"
+    Then I wait for "1000" millisecond
+    Then I click on button "PaidBackBt"
     Then I click on button "TaxPayerDetailsNext"
     Then I check "SalariesAndWages" contains "$ 100"
     Then I check "BonusesAndCommissions" contains "$ 100"
@@ -141,30 +134,26 @@ Feature: Some feature
     And I wait for "2000" millisecond
     Then I click on button "MonthlyReturnNext"
     And I wait for "2000" millisecond
-    
     #scenario 5: Mandatory fields not filled in
     Then I check "DeclarationConfirm" is readonly
-    
     #scenario 4 (Fields are entered in incorrect format - phone number and/or email field ), then 3 (Fields are entered in correct format)
     And I enter the details as
-      | Fields              | Value       |
-      | PersonFullName      | test        |
-      | LegalEntityName     | Test2       |
-      | EmployerDeclaration | test        |
-      | PhoneNumber         |  042213 |
-      | EmailAddress        | abc |
+      | Fields              | Value  |
+      | PersonFullName      | test   |
+      | LegalEntityName     | Test2  |
+      | EmployerDeclaration | test   |
+      | PhoneNumber         | 042213 |
+      | EmailAddress        | abc    |
     Then I click on "DeclarationConfirm"
     Then I see text "This is an invalid phone number." displayed
-    Then I see text "Email address is not in the correct format." displayed
+    Then I see text "Invalid email address format. Please try again." displayed
     Then I enter the details as
       | Fields       | Value       |
       | PhoneNumber  | 61042218431 |
       | EmailAddress | abc@test    |
-      
     # scenario 6: Mandatory fields all filled in
     Then I click on button "DeclarationConfirm"
     Then I check "Submit" is readonly
-    
     # Scenario 7: Number of days is invalid
     Then I click on "Payroll Tax"
     Then I click on button "NextSection"
@@ -179,33 +168,34 @@ Feature: Some feature
       | DaysPaidGroupAusWide        |   367 |
       | AustralianWide              |   100 |
       | PayrollAnswer_GroupActWages |   100 |
-      Then I wait for "1000" millisecond
+    Then I wait for "1000" millisecond
     Then I click on button "MonthlyReturnNext"
     Then I wait for "2000" millisecond
     Then I see text "Number of days must be equal to or less than 365, or 366 for leap years" displayed
     Then I see text "Some fields are not valid. Please fix them before moving to the next section." displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | mbrown   | dbresults | 98765123456 | 12345678902 |
-      
+      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
+
+  @tss_review_done
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                                  |
-      | item2 | Select Business Type                                      |
-      | item3 | Employer Name                                             |
-      | item4 | Business Trading Name                                     |
-      | item5 | Australian Business Number (ABN)                          |
-      | item6 | Australian Company Name (ACN)                             |
-      | item7 | Business Address                                          |
-      | item7 | Postal Address                                            |
-      | item7 | Address where Business Records are located (Jurisdiction) |
-      | item7 | Contact Person                                            |
-      | item7 | Preferred Communication Method                             |
-      | item7 | Postal Address                                            |
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                                                  |
+      #| item2 | Select Business Type                                      |
+      #| item3 | Employer Name                                             |
+      #| item4 | Business Trading Name                                     |
+      #| item5 | Australian Business Number (ABN)                          |
+      #| item6 | Australian Company Name (ACN)                             |
+      #| item7 | Business Address                                          |
+      #| item7 | Postal Address                                            |
+      #| item7 | Address where Business Records are located (Jurisdiction) |
+      #| item7 | Contact Person                                            |
+      #| item7 | Preferred Communication Method                            |
+      #| item7 | Postal Address                                            |
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Miss" from "ContactPerson_Title"
     Then I select "SMS" from "CommunicationMethodId"
@@ -249,10 +239,14 @@ Feature: Some feature
       | item3 | Control and Financial Interest                   |
       | item4 | (shares, beneficiaries if greater than 20% each) |
     Then I click on "ACTWagesPaidNext"
-    Then I click on "DateBusinessStart"
-    Then I click on "20170102"
-    Then I click on "DateBusinessLiable"
-    Then I click on "20170103"
+   # Then I click on "DateBusinessStart"
+    Then I enter the details as
+      | Fields            | Value      |
+      | DateBusinessStart | 02-01-2017 |
+ #   Then I click on "DateBusinessLiable"
+    Then I enter the details as
+      | Fields             | Value      |
+      | DateBusinessLiable | 03-01-2017 |
     Then I enter the details as
       | Fields               | Value |
       | NumberOfEmployees    |    33 |
@@ -286,10 +280,10 @@ Feature: Some feature
     Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
 
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | dbresults | 12345678901 | 12345678901 |
-      
-       Scenario Outline: DTSP-355
+      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
+
+  Scenario Outline: DTSP-355
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
@@ -340,10 +334,10 @@ Feature: Some feature
       | item4 | Control and Financial Interest           |
 
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | dbresults | 12345678901 | 12345678901 |
-      
-      Scenario Outline: DTSP-310
+      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
+
+  Scenario Outline: DTSP-310
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
@@ -406,6 +400,5 @@ Feature: Some feature
       | item4 | Control and Financial Interest           |
 
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | dbresults | 12345678901 | 12345678901 |
-  
+      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
