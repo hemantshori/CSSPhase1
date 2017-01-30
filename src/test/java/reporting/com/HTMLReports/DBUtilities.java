@@ -309,7 +309,8 @@ public class DBUtilities extends XPathGenerator {
 							  System.out.println(myXpath);
 							  driver.findElement(By.xpath(myXpath)).clear();
 						  }
-					  driver.findElement(By.xpath(myXpath)).click();
+					//  driver.findElement(By.xpath(myXpath)).click();
+						// disabled above as we have already clicked it before
 					 
 					  driver.findElement(By.xpath(myXpath)).sendKeys(data.get(i).get(1));
 						System.out.println("Entering value in table " +myXpath +"as" +name);  

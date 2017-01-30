@@ -32,7 +32,7 @@ Feature: Some feature
       | Fields              | Value       |
       | PersonFullName      | test        |
       | LegalEntityName     | Test2       |
-      | EmployerDeclaration | test        |
+      | EmployerDeclaration | test        | 
       | PhoneNumber         |  0422184033 |
       | EmailAddress        | abc@abc.com |
     Then I click on "DeclarationConfirm"
@@ -178,7 +178,7 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
 
-  @tss_review_done
+
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -255,7 +255,7 @@ Feature: Some feature
       | Fields | Value |
     Then I click on "GroupMember_UNSURE"
     Then I click on "PayrollNext"
-    Then I wait for "2000" millisecond
+    Then I wait for "1000" millisecond
     #scenario 3
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                        |
@@ -273,16 +273,18 @@ Feature: Some feature
       | GroupAusWideTaxableWages |       100 |
     Then I click on "AddTotalWages"
     Then I see text "Remove" displayed
-    Then I click on "RemoveLine"
+    Then I wait for "1000" millisecond
+    #Then I click on "RemoveLine"
+    Then I click on button "RemoveLine"
     Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "Cancel"
     #scenario 5
-    Then I click on "RemoveLine"
+    Then I click on button "RemoveLine"
     Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
 
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
-
+ 
   Scenario Outline: DTSP-355
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -373,7 +375,7 @@ Feature: Some feature
     Then I click on "TaxPayerDetailsNext"
     Then I see text "Please enter the correct number of digits for this field." displayed
     Then I see text "number of digits for this field." displayed
-    Then I see text "Email address is not in the correct format." displayed
+    Then I see text "Invalid email address format. Please try again" displayed
     Then I see text "This is an invalid phone number." displayed
     Then I enter the details as
       | Fields                    | Value              |
