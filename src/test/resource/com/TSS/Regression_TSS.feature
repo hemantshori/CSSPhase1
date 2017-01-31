@@ -14,7 +14,7 @@ Feature: Some feature
     And I hit Enter
     And I check I am on "HomePage" page
     And I click on "Payroll Tax"
-    Then I click on button "GeneralCancelBt"
+    Then I click on button "Discard"
     And I check I am on "Payroll Lodgement Form" page
     Then I click on "Annual Reconciliation"
     Then I click on button "NextSection"
@@ -56,7 +56,7 @@ Feature: Some feature
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Payroll Tax"
-    Then I click on button "GeneralCancelBt"
+  Then I click on button "Discard"
     Then I click on "Annual Reconciliation"
     Then I click on button "NextSection"
     Then I see text "<CRN>" displayed
@@ -107,7 +107,7 @@ Feature: Some feature
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Payroll Tax"
-    Then I click on button "GeneralCancelBt"
+    Then I click on button "Discard"
     Then I click on "Annual Reconciliation"
     Then I click on button "NextSection"
     Then I select "2012" from "YearOfReturn"
