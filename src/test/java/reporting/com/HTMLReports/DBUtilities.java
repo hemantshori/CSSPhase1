@@ -21,6 +21,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import cucumber.api.DataTable;
+import runnerAndSteps.StepImpe;
 
 public class DBUtilities extends XPathGenerator {
 	
@@ -374,6 +375,27 @@ public class DBUtilities extends XPathGenerator {
 			 }
 			 
 		
+			 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 //++++++++++++++++++++++++++++++++++copy and paste page html++++++++++++++++++++++++++++++++++++++++
+			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			 
+			 
+			 public String getPageHTML()
+			 {
+				 String Capture2 = driver.getPageSource();
+			
+			
+					return Capture2;
+
+			 }
+		
+			 public void paste(String arg1)
+			 {
+			  
+
+			 }
+			 
+			 
 			 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			 //++++++++++++++++++++++++++++++++++PopUp handlers++++++++++++++++++++++++++++++++++++++++
 			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

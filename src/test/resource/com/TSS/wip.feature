@@ -2,6 +2,41 @@ Feature: Wip in stuff.
 
   @wip
   Scenario Outline: DTSP-354: As an end user, I want to be able to submit my Payroll Tax Registration form
+    Given I want to login to portal "<PortalName>"
+    And I check I am on "Login" page
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on "checkpaste"
+    And I paste "html"
+    And I capture "AC_num_of_errors"
+
+    Examples: 
+      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
+
+  @wip
+  Scenario Outline: DTSP-354: As an end user, I want to be able to submit my Payroll Tax Registration form
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I check I am on "HomePage" page
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on "checkpaste"
+    And I paste "html"
+    And I capture "AC_num_of_errors"
+
+
+    Examples: 
+      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
+
+  Scenario Outline: DTSP-354: As an end user, I want to be able to submit my Payroll Tax Registration form
     Given I want to login to portal "TSS"
     And I enter the details as
       | Fields        | Value      |
@@ -118,8 +153,8 @@ Feature: Wip in stuff.
     #Then I click on "RemoveLine"
     #Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | bob   | Dbresults1 | 12345678901 | 12345678901 |
+      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | Tax_Registration | UserNameInput | PasswordInput | bob      | Dbresults1 | 12345678901 | 12345678901 |
 
   @done
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
@@ -215,13 +250,12 @@ Feature: Wip in stuff.
     Then I see text "Remove" displayed
     Then I click on "RemoveLine"
     Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "Cancel"
-    
     #scenario 5
     Then I click on "RemoveLine"
     Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
 
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
+      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | bob      | Dbresults1 | 12345678901 | 12345678901 |
 
   @done
@@ -232,8 +266,7 @@ Feature: Wip in stuff.
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Miss" from "ContactPerson_Title"
     Then I select "SMS" from "CommunicationMethodId"
-		#scenario 2: ABN/ACN combination verified against ABR, and the Organisation name entered does not match Organisation name returned from ABR (3rd party verification) 
-    
+    #scenario 2: ABN/ACN combination verified against ABR, and the Organisation name entered does not match Organisation name returned from ABR (3rd party verification)
     Then I enter the details as
       | Fields                    | Value             |
       | EmployerName              | DB RESULTS PTY LT |
@@ -251,7 +284,7 @@ Feature: Wip in stuff.
     Then I click on "TaxPayerDetailsNext"
     Then I wait for "1000" millisecond
     Then I see text "Organisation Name does not match ABN number." displayed
-    #scenario 3: ABN/ACN combination not verified against ABR (3rd party verification) 
+    #scenario 3: ABN/ACN combination not verified against ABR (3rd party verification)
     Then I enter the details as
       | Fields                 | Value              |
       | EmployerName           | DB RESULTS PTY LTD |
@@ -277,7 +310,7 @@ Feature: Wip in stuff.
       | item4 | Control and Financial Interest           |
 
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
+      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | bob      | Dbresults1 | 12345678901 | 12345678901 |
 
   @done
@@ -288,18 +321,18 @@ Feature: Wip in stuff.
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Miss" from "ContactPerson_Title"
     Then I select "SMS" from "CommunicationMethodId"
-    #scenario 1: Restricted fields contain incorrect text type (e.g. ABC into 1234 field and vice versa) 
+    #scenario 1: Restricted fields contain incorrect text type (e.g. ABC into 1234 field and vice versa)
     Then I enter the details as
       | Fields                 | Value |
       | RegistrationAnswer_ABN | TEST  |
     Then I check "RegistrationAnswer_ABN" is empty
-    #scenario 2: Restricted fields contain correct text type (e.g. ABC into 1234 field) 
+    #scenario 2: Restricted fields contain correct text type (e.g. ABC into 1234 field)
     Then I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 97110187767 |
-    #scenario 5: Mandatory fields not filled in 
+    #scenario 5: Mandatory fields not filled in
     Then I check "TaxPayerDetailsNext" is readonly
-    #scenario 3, 4: Fields are entered in incorrect format (e.g. no. of digits, email format), Fields are entered in incorrect format (Refer to description for validations and error messages for each field) 
+    #scenario 3, 4: Fields are entered in incorrect format (e.g. no. of digits, email format), Fields are entered in incorrect format (Refer to description for validations and error messages for each field)
     Then I enter the details as
       | Fields                    | Value             |
       | EmployerName              | DB RESULTS PTY LT |
@@ -333,8 +366,7 @@ Feature: Wip in stuff.
       | ContactPerson_PhoneNumber |           33333333 |
       | ContactPerson_Email       | TEST@TEST          |
     Then I select "Other" from "SelectBusinessTypeCode"
-    
-    #Scenario 6: Mandatory fields all filled in 
+    #Scenario 6: Mandatory fields all filled in
     Then I click on "TaxPayerDetailsNext"
     Then I wait for "2000" millisecond
     Then "<Item>" is displayed as "<ItemName>"
@@ -344,7 +376,7 @@ Feature: Wip in stuff.
       | item4 | Control and Financial Interest           |
 
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password  | CRN         | ABN         |
+      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | bob      | Dbresults1 | 12345678901 | 12345678901 |
 
   #@onhold
@@ -388,7 +420,6 @@ Feature: Wip in stuff.
     Then I wait for "1000" millisecond
     Then I see text "Your changes have been successfully saved" displayed
     #scenario 5: End user goes to previous page with unsaved changes
-    
     Then I select "2015" from "YearOfReturn"
     Then I click on "TaxPayerDetailsNext"
     Then I click on "ACTWagesPaidBack"
@@ -432,5 +463,5 @@ Feature: Wip in stuff.
     Then I check "Submit" is readonly
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  |
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
       | TSS        | UserNameInput | PasswordInput | bob      | Dbresults1 |

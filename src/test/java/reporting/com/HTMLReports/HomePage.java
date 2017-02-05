@@ -33,6 +33,7 @@ public class HomePage extends DBUtilities {
 		}else if(arg1.equals("Tax_Registration_Delete")){driver.get("https://test-ssc.dbresults.com.au/RegistrationCore/DeleteRegistrationData.aspx");
 		}else if(arg1.equals("MessageEdit")){driver.get("https://test-ssc.dbresults.com.au/SS_Admin_Core/FeedbackMsgTexts.aspx");
 		}else if(arg1.equals("PageTexts")){driver.get("https://test-ssc.dbresults.com.au/TSSAdmin/PageTexts.aspx");
+		}else if(arg1.equals("AC CHECKER")){driver.get("http://achecker.ca/checker/index.php");
 		}else if(arg1.equals("UAP")){
 			
 				driver.get("https://test-ssc.dbresults.com.au/utilityadminportal/");

@@ -33,10 +33,11 @@ import reporting.com.HTMLReports.LandingPage;
 import reporting.com.HTMLReports.MakeAPaymentPage;
 
 public class StepImpe {
- //********************************************** following is before and after *****************************************
+  //********************************************** following is before and after *****************************************
 	WebDriver driver;
 	private String bolt;
 	static String Capture;
+
 	
 	@Before()
 	  public void startUp() {
@@ -83,16 +84,38 @@ public class StepImpe {
 		
 
 			
-			DBUtilities createXpath = new DBUtilities(driver);
-			String myxpath = createXpath.xpathMakerById(arg1);
-			System.out.println(myxpath);
-			
-			WebElement xyz = driver.findElement(By.xpath(myxpath));
-			StepImpe.Capture= xyz.getText();
-			System.out.println("object that is captured is " +Capture);
+		
+			if(arg1.equals("html")){
+				StepImpe.Capture = driver.getPageSource();
+				   // System.out.println(Capture);
+			}else{
+				
+				DBUtilities createXpath = new DBUtilities(driver);
+				String myxpath = createXpath.xpathMakerById(arg1);
+				System.out.println(myxpath);
+				
+				WebElement xyz = driver.findElement(By.xpath(myxpath));
+				StepImpe.Capture= xyz.getText();
+				System.out.println("object that is captured is *****************>>>>>>>>>>>>>>>>>>>>>>>> "   +Capture);
+				
+			}
 			return Capture;
   
 	}
+
+	
+	@Given("^I paste \"(.*?)\"$")
+	public void i_paste(String arg1) throws Throwable {
+	      System.out.println(StepImpe.Capture);
+		//String htmlToBePasted = StepImpe.Capture;
+		//System.out.println(htmlToBePasted);
+	      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
+		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
+		
+
+		
+	}
+
 
 	@Then("^I check \"(.*?)\" contains \"(.*?)\"$")
 	public void i_Check_contains(String arg1, String arg2) throws Throwable {
@@ -126,6 +149,24 @@ public class StepImpe {
 		Thread.sleep(2000);
 
 	}
+	
+	
+	
+	//**********************************WHY WE CHANGE THIS to above?????????*************************************************
+//	@Then("^I check \"(.*?)\" contains \"(.*?)\"$")
+//	public void i_Check_contains(String arg1, String arg2) throws Throwable {
+//		DBUtilities createXpath = new DBUtilities(driver);
+//		String myxpath = createXpath.xpathMakerById(arg1);
+//		System.out.println(myxpath);
+//		String elementToBeSearched = StepImpe.Capture;
+//		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
+//	     DBUtilities t1 = new DBUtilities(driver);
+//	     t1.isTextPresent(elementToBeSearched);
+//		
+//		
+//		
+//	}
+
 	
 	@Then("^I check \"(.*?)\" is empty$")
 	public void i_check_is_empty(String arg1) throws Throwable {
@@ -261,6 +302,7 @@ public class StepImpe {
 				||arg1.equals("HintInfoIcon")
 				||arg1.equals("SetGoal")		
 				||arg1.equals("wtSubmitButton3")      // to do ask M lara to change thename ....this is for Reset Password
+				||arg1.equals("checkpaste") 
 				){
 			Thread.sleep(3000);
 			DBUtilities createXpath = new DBUtilities(driver);
@@ -567,6 +609,27 @@ public class StepImpe {
 		PageFactory.initElements(driver, AccountFinancialHistorypage.class).readAndCompareTableRows(arg1, arg2, arg3);
 	 
 	}
+	
+	//******************************CRAP**********************************
+//	@Given("^I copy and paste the html in \"(.*?)\"$")
+//	public void i_copy_and_paste_the_html_in_CIChecker(String arg1) throws Throwable {
+//	 String html = driver.getPageSource();
+//	 HomePage home = PageFactory.initElements(driver, HomePage.class);
+//		home.navigateTo(arg1);
+//		Thread.sleep(1000);
+//		driver.findElement(By.xpath("//*[contains(text(),'Paste HTML Markup')]")).click();
+//		Thread.sleep(1000);
+//		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(html);
+//Thread.sleep(3000);
+//	
+//		
+//	}
+
+
+
+
+	
+
 
 	//**************************************************************************************************************************
 	//**************************************************************************************************************************

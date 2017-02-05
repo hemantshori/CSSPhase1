@@ -1,4 +1,4 @@
- @tss_review_done
+  @tss_review_done
 Feature: Some feature
 
   # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
