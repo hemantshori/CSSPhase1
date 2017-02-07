@@ -5,10 +5,10 @@
 package runnerAndSteps;
 
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
+//import java.awt.Toolkit;
+//import java.awt.datatransfer.Clipboard;
+//import java.awt.datatransfer.DataFlavor;
+//import java.awt.datatransfer.StringSelection;
 import java.sql.DriverManager;
 import java.util.regex.Pattern;
 
@@ -132,15 +132,15 @@ public class StepImpe {
 //		System.out.println();
 		
 		
-		// prepare the clipboard for pasting
-		StringSelection selection = new StringSelection(StepImpe.Capture);
-		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		
-		// get the what was originally in the clipboard so that it can be restored later
-		String oldContent = (String) clipboard.getData(DataFlavor.stringFlavor);
-		
-		// set the clipboard contents as what was captured in the previous step(s)
-		clipboard.setContents(selection, selection);
+//		// prepare the clipboard for pasting
+//		StringSelection selection = new StringSelection(StepImpe.Capture);
+//		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//		
+//		// get the what was originally in the clipboard so that it can be restored later
+//		String oldContent = (String) clipboard.getData(DataFlavor.stringFlavor);
+//		
+//		// set the clipboard contents as what was captured in the previous step(s)
+//		clipboard.setContents(selection, selection);
 		
 		//String htmlToBePasted = StepImpe.Capture;
 		//System.out.println(htmlToBePasted);
@@ -156,10 +156,10 @@ public class StepImpe {
 //		inputField.clear();
 //		inputField.sendKeys(StepImpe.Capture);
 		
-		// revert the clipboard contents to what was there before
-		StringSelection oldSelection = new StringSelection(oldContent);
-		clipboard.setContents(oldSelection, oldSelection);
-		
+//		// revert the clipboard contents to what was there before
+//		StringSelection oldSelection = new StringSelection(oldContent);
+//		clipboard.setContents(oldSelection, oldSelection);
+//		
 	}
 
 
