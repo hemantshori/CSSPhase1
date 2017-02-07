@@ -360,6 +360,13 @@ public class DBUtilities extends XPathGenerator {
 			 }
 			 
 			 
+			 public void tabOut()
+			 {
+				 Actions action = new Actions(driver); 
+				   action.sendKeys(Keys.TAB).perform();
+			 }
+			 
+			 
 			 public void clickOnPopUP(String arg1) throws InterruptedException
 			 {
 				 if(arg1.equals("OK")){

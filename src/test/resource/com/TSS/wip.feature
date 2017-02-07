@@ -1,22 +1,20 @@
 Feature: Wip in stuff.
 
-  @wip
-  Scenario Outline: DTSP-354: As an end user, I want to be able to submit my Payroll Tax Registration form
+@wip
+  Scenario Outline: WCAG Analysis
+  
+  	# LOGIN SCREEN
     Given I want to login to portal "<PortalName>"
     And I check I am on "Login" page
     And I capture "html"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
-    And I click on "checkpaste"
+    And I click on button "checkpaste"
     And I paste "html"
+    And I click on button "validate_paste"
     And I capture "AC_num_of_errors"
-
-    Examples: 
-      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
-
-  @wip
-  Scenario Outline: DTSP-354: As an end user, I want to be able to submit my Payroll Tax Registration form
+    
+    # HOMEPAGE
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -27,14 +25,144 @@ Feature: Wip in stuff.
     And I capture "html"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
-    And I click on "checkpaste"
+    And I click on button "checkpaste"
     And I paste "html"
+    And I click on button "validate_paste"
     And I capture "AC_num_of_errors"
-
-
+    
+    #PAYROLL FORM
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Payroll Tax Lodgement"
+    And I check I am on "Payroll Lodgement Form" page
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    
+		#TAX REGISTRATION FORM
+		 Given I want to login to portal "<PortalName>"
+    Then I click on "Tax Registration"
+    And I check I am on "Tax Registration Form" page
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    
+    # VIEW SETTINGS
+    Given I want to login to portal "AccountManagement"
+    And I check I am on "View Settings" page
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    
+    #EDIT SETTINGS
+    Given I want to login to portal "AccountManagement"
+    Then I click on button "EditBT"
+    And I check I am on "Edit Settings" page
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    
+    # LODGEMENT SUMMARY PAGE
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Payroll Tax Lodgement"
+    And I check I am on "Payroll Lodgement Form" page
+    Then I click on button "Discard"
+    Then I click on "Annual Reconciliation"
+    Then I click on button "NextSection"
+    Then I select "2012" from "YearOfReturn"
+    Then I click on "Independent employer (non-group) lodging for itself"
+    Then I click on button "TaxPayerDetailsNext"
+    Then I enter the details as
+      | Fields           | Value |
+      | SalariesAndWages |   100 |
+    Then I click on button "ACTWagesPaidNext"
+    Then I wait for "3000" millisecond
+    Then I click on button "MonthlyReturnNext"
+    And I wait for "3000" millisecond
+    And I enter the details as
+      | Fields              | Value       |
+      | PersonFullName      | test        |
+      | LegalEntityName     | Test2       |
+      | EmployerDeclaration | test        |
+      | PhoneNumber         |  0422184033 |
+      | EmailAddress        | abc@abc.com |
+    Then I click on button "PersonFullName"
+    Then I click on button "DeclarationConfirm"
+    Then I check "Submit" is readonly
+    Then I click on button "ConfirmForSubmission"
+    # don't remove the wt prefix, otherwise there will be a conflict with a 'HiddenSubmitBT'
+    Then I click on button "wtSubmitBT"
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+		
     Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | AC CHECKER  | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
+
+  #@wip
+  #Scenario Outline: DTSP-354: WCAG Analysis of 
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #And I check I am on "HomePage" page
+    #And I capture "html"
+    #And I want to login to portal "<PortalName2>"
+    #And I click on "Paste HTML Markup"
+    #And I click on button "checkpaste"
+    #And I paste "html"
+    #And I click on button "validate_paste"
+    #And I capture "AC_num_of_errors"
+    #
+  #Examples: 
+      #| PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      #| TSS        | AC CHECKER  | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
+      #
+  #@wip
+  #Scenario Outline: DTSP-354: WCAG Analysis of 
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Payroll Tax Lodgement"
+    #And I check I am on "HomePage" page
+    #And I capture "html"
+    #And I want to login to portal "<PortalName2>"
+    #And I click on "Paste HTML Markup"
+    #And I click on button "checkpaste"
+    #And I paste "html"
+    #And I click on button "validate_paste"
+    #And I capture "AC_num_of_errors"
+    #
+  #Examples: 
+      #| PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      #| TSS        | AC CHECKER  | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
+      #
+
 
   Scenario Outline: DTSP-354: As an end user, I want to be able to submit my Payroll Tax Registration form
     Given I want to login to portal "TSS"

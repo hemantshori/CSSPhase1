@@ -1,9 +1,10 @@
-  @tss_review_done
+@tss_review_done
 Feature: Some feature
 
   # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
   # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
+  
   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
@@ -13,7 +14,7 @@ Feature: Some feature
       | PasswordInput | <Password> |
     And I hit Enter
     And I check I am on "HomePage" page
-    And I click on "Payroll Tax"
+    And I click on "Payroll Tax Lodgement"
     Then I click on button "Discard"
     And I check I am on "Payroll Lodgement Form" page
     Then I click on "Annual Reconciliation"
@@ -32,10 +33,11 @@ Feature: Some feature
       | Fields              | Value       |
       | PersonFullName      | test        |
       | LegalEntityName     | Test2       |
-      | EmployerDeclaration | test        | 
+      | EmployerDeclaration | test        |
       | PhoneNumber         |  0422184033 |
       | EmailAddress        | abc@abc.com |
-    Then I click on "DeclarationConfirm"
+    And I Tab Out
+    Then I click on button "DeclarationConfirm"
     Then I check "SubmitBT" is readonly
     Then I click on "ConfirmForSubmission"
     Then I click on button "wtSubmitBT"
@@ -44,7 +46,7 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
-
+@defect
   Scenario Outline: DTSP-356 Scenario 2, 3 and 4
     #scenario 2: Aus wide wages is not greater than ACT Taxable wages
     #scenario 3: Group ACT wages is not greater than ACT Taxable wages
@@ -55,8 +57,8 @@ Feature: Some feature
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I click on "Payroll Tax"
-  Then I click on button "Discard"
+    And I click on "Payroll Tax Lodgement"
+    Then I click on button "Discard"
     Then I click on "Annual Reconciliation"
     Then I click on button "NextSection"
     Then I see text "<CRN>" displayed
@@ -73,7 +75,7 @@ Feature: Some feature
     Then I wait for "2000" millisecond
     Then I enter the details as
       | Fields                       | Value |
-      | PayrollAnswer_AustralianWide |     1 |
+      | PayrollAnswer_AustralianWide |     100 |
       | PayrollAnswer_GroupActWages  |    98 |
     Then I click on "MonthlyReturnNext"
     And I wait for "2000" millisecond
@@ -84,6 +86,7 @@ Feature: Some feature
       | EmployerDeclaration | test        |
       | PhoneNumber         |  0422184033 |
       | EmailAddress        | abc@abc.com |
+      And I Tab Out
     Then I click on "DeclarationConfirm"
     Then I check "Submit" is readonly
     Then I click on "ConfirmForSubmission"
@@ -99,6 +102,7 @@ Feature: Some feature
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
 
   #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
+  @defect
   Scenario Outline: DTSP-311: Validation Rules and Errors to be used across Annual Reconciliation Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -106,7 +110,7 @@ Feature: Some feature
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I click on "Payroll Tax"
+    And I click on "Payroll Tax Lodgement"
     Then I click on button "Discard"
     Then I click on "Annual Reconciliation"
     Then I click on button "NextSection"
@@ -144,6 +148,7 @@ Feature: Some feature
       | EmployerDeclaration | test   |
       | PhoneNumber         | 042213 |
       | EmailAddress        | abc    |
+       And I Tab Out
     Then I click on "DeclarationConfirm"
     Then I see text "This is an invalid phone number." displayed
     Then I see text "Invalid email address format. Please try again." displayed
@@ -151,11 +156,12 @@ Feature: Some feature
       | Fields       | Value       |
       | PhoneNumber  | 61042218431 |
       | EmailAddress | abc@test    |
+        And I Tab Out
     # scenario 6: Mandatory fields all filled in
     Then I click on button "DeclarationConfirm"
     Then I check "Submit" is readonly
     # Scenario 7: Number of days is invalid
-    Then I click on "Payroll Tax"
+    Then I click on "Payroll Tax Lodgement"
     Then I click on button "NextSection"
     Then I select "2012" from "YearOfReturn"
     Then I click on button "TaxPayerDetailsNext"
@@ -177,25 +183,24 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
-
-
+@defect
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName                                                  |
-      #| item2 | Select Business Type                                      |
-      #| item3 | Employer Name                                             |
-      #| item4 | Business Trading Name                                     |
-      #| item5 | Australian Business Number (ABN)                          |
-      #| item6 | Australian Company Name (ACN)                             |
-      #| item7 | Business Address                                          |
-      #| item7 | Postal Address                                            |
-      #| item7 | Address where Business Records are located (Jurisdiction) |
-      #| item7 | Contact Person                                            |
-      #| item7 | Preferred Communication Method                            |
-      #| item7 | Postal Address                                            |
+    Then "<Item>" is displayed as "<ItemName>"
+    | Item  | ItemName                                                  |
+    | item2 | Select Business Type                                      |
+    | item3 | Employer Name                                             |
+    | item4 | Business Trading Name                                     |
+    | item5 | Australian Business Number (ABN)                          |
+    | item6 | Australian Company Name (ACN)                             |
+    | item7 | Business Address                                          |
+    | item7 | Postal Address                                            |
+    | item7 | Address where Business Records are located (Jurisdiction) |
+    | item7 | Contact Person                                            |
+    | item7 | Preferred Communication Method                            |
+    | item7 | Postal Address                                            |
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Miss" from "ContactPerson_Title"
     Then I select "SMS" from "CommunicationMethodId"
@@ -239,11 +244,11 @@ Feature: Some feature
       | item3 | Control and Financial Interest                   |
       | item4 | (shares, beneficiaries if greater than 20% each) |
     Then I click on "ACTWagesPaidNext"
-   # Then I click on "DateBusinessStart"
+    # Then I click on "DateBusinessStart"
     Then I enter the details as
       | Fields            | Value      |
       | DateBusinessStart | 02-01-2017 |
- #   Then I click on "DateBusinessLiable"
+    #   Then I click on "DateBusinessLiable"
     Then I enter the details as
       | Fields             | Value      |
       | DateBusinessLiable | 03-01-2017 |
@@ -284,7 +289,7 @@ Feature: Some feature
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
- 
+
   Scenario Outline: DTSP-355
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
