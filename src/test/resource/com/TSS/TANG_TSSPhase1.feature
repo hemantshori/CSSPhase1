@@ -42,7 +42,7 @@ Feature: Some feature
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password  |
-      | TSS        | UserNameInput | PasswordInput | bob      | dbresults |
+      | TSS        | UserNameInput | PasswordInput | mbrown      | Dbresults1|
 
   #alt username: hemant.shori
   #alt password: USBcoffee1
