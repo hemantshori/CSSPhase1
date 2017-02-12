@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -14,14 +13,12 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import cucumber.api.DataTable;
-import runnerAndSteps.StepImpe;
 
 public class DBUtilities extends XPathGenerator {
 	
@@ -310,7 +307,7 @@ public class DBUtilities extends XPathGenerator {
 							  System.out.println(myXpath);
 							  driver.findElement(By.xpath(myXpath)).clear();
 						  }
-					//  driver.findElement(By.xpath(myXpath)).click();
+					 // driver.findElement(By.xpath(myXpath)).click();
 						// disabled above as we have already clicked it before
 					 
 					  driver.findElement(By.xpath(myXpath)).sendKeys(data.get(i).get(1));

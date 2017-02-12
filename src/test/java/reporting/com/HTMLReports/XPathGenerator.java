@@ -44,6 +44,16 @@ public class XPathGenerator {
 		            
 		 return xpath;
 	    }
+	 public String xpathMakerByLabelAndId(String buttonName) {
+			String xpath = "//label[contains(@id, '"+buttonName+"')]";
+			System.out.println("xpath ::*** " +xpath);
+			return xpath;
+	 }
+	 public String xpathMakerBySpanAndId(String buttonName) {
+			String xpath = "//span[contains(@id, '"+buttonName+"')]";
+			System.out.println("xpath ::*** " +xpath);
+			return xpath;
+	 } 
 	 public String xpathMakerContainsText(String buttonName)
 	    {
 		String xpath = "//*[contains(text(),'"+buttonName+"')]";
