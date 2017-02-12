@@ -733,7 +733,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+//import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -1047,9 +1047,9 @@ public class StepImpe {
 			String myxpath2 = createXpath.xpathMakerById(arg1);
 			WebElement button = driver.findElement(By.xpath(myxpath2));
 			
-			JavascriptExecutor executor = (JavascriptExecutor)driver;
-			executor.executeScript("arguments[0].scrollIntoView(true);",button);
-			button.click();
+//			JavascriptExecutor executor = (JavascriptExecutor)driver;
+//			executor.executeScript("arguments[0].scrollIntoView(true);",button);
+//			button.click();
 			
 		}
 
@@ -1080,9 +1080,9 @@ public class StepImpe {
 				
 				WebElement button = driver.findElement(By.xpath(myxpath4));
 				
-				JavascriptExecutor executor = (JavascriptExecutor)driver;
-				executor.executeScript("arguments[0].scrollIntoView(true);",button);
-				button.click();
+//				JavascriptExecutor executor = (JavascriptExecutor)driver;
+//				executor.executeScript("arguments[0].scrollIntoView(true);",button);
+//				button.click();
 
 			}
 		}
