@@ -251,6 +251,11 @@
 //		 return PageFactory.initElements(driver, LandingPage.class);
 //	}
 //	
+//// will be used to tab out to activate a button incase the button is not activated.
+//	@Given("^I Tab Out$")
+//	public void i_Tab_Out() throws Throwable {
+//		new DBUtilities(driver).tabOut();
+//	}
 //	
 //	@And("^I click on button \"(.*?)\"$")
 //	public void i_click_on_button(String arg1) throws Throwable {
@@ -733,7 +738,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-//import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -778,10 +783,10 @@ public class StepImpe {
 	}
 		// **************disable to leave browser open***************************************
 
-//	@After()
-//		  public void tearDown() {	
-//		    driver.quit();
-//		   	  }
+	@After()
+		  public void tearDown() {	
+		    driver.quit();
+		   	  }
 	//******************************************************************************   
 	    
    
@@ -803,19 +808,6 @@ public class StepImpe {
 
 	// ********************************************************************************************************************************
 	//**************************************** Capture element from Page************************************************************
-	
-	//disabling following to debug Jenkns
-	
-//	@Given("^I access URL \"(.*?)\"$")
-//	public void i_access_url(String arg1) throws Throwable {
-//		driver.get(arg1);
-//	}
-//	
-//	@Then("^I scroll up$")
-//	public void i_scroll_up() throws Throwable {
-//		JavascriptExecutor jse = (JavascriptExecutor)driver;
-//		jse.executeScript("window.scrollBy(0,5000)", "");
-//	}
 	
 	@Given("^I capture \"(.*?)\"$")
 	public String i_capture(String arg1) throws Throwable {
@@ -865,12 +857,8 @@ public class StepImpe {
 //		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
 //	     DBUtilities t1 = new DBUtilities(driver);
 //	     t1.isTextPresent(elementToBeSearched);
-		
-		WebElement inputBox = null;
-		inputBox = driver.findElement(By.xpath(myxpath));
-		String boxContents = null;
-		boxContents = inputBox.getAttribute("value");
-		
+		WebElement inputBox = driver.findElement(By.xpath(myxpath));
+		String boxContents = inputBox.getAttribute("value");
 		System.out.println("boxContents: " + boxContents);
 		System.out.println("arg2: " + arg2);
 		
@@ -892,6 +880,24 @@ public class StepImpe {
 
 	}
 	
+	
+	
+	//**********************************WHY WE CHANGE THIS to above?????????*************************************************
+//	@Then("^I check \"(.*?)\" contains \"(.*?)\"$")
+//	public void i_Check_contains(String arg1, String arg2) throws Throwable {
+//		DBUtilities createXpath = new DBUtilities(driver);
+//		String myxpath = createXpath.xpathMakerById(arg1);
+//		System.out.println(myxpath);
+//		String elementToBeSearched = StepImpe.Capture;
+//		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
+//	     DBUtilities t1 = new DBUtilities(driver);
+//	     t1.isTextPresent(elementToBeSearched);
+//		
+//		
+//		
+//	}
+
+	
 	@Then("^I check \"(.*?)\" is empty$")
 	public void i_check_is_empty(String arg1) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
@@ -899,16 +905,7 @@ public class StepImpe {
 		WebElement inputBox = driver.findElement(By.xpath(myxpath));
 		Assert.assertTrue(inputBox.isDisplayed());
 		String boxContents = inputBox.getAttribute("value");
-		try {
-			Assert.assertTrue(boxContents.isEmpty());
-		}
-		
-		// for those input fields that lack the 'value' attribute (needs a better way)
-		catch (AssertionError | Exception e){
-			if (boxContents == null){
-				Assert.assertTrue(true);
-			}
-		}
+		Assert.assertTrue(boxContents.isEmpty());
 	}
 	
 	
@@ -934,11 +931,6 @@ public class StepImpe {
 		 return PageFactory.initElements(driver, LandingPage.class);
 	}
 	
-//will be used to tab out to activate a button incase the button is not activated.
-	@Given("^I Tab Out$")
-	public void i_Tab_Out() throws Throwable {
-		new DBUtilities(driver).tabOut();
-	}
 
 	@And("^I click on button \"(.*?)\"$")
 	public void i_click_on_button(String arg1) throws Throwable {
@@ -1047,9 +1039,9 @@ public class StepImpe {
 			String myxpath2 = createXpath.xpathMakerById(arg1);
 			WebElement button = driver.findElement(By.xpath(myxpath2));
 			
-//			JavascriptExecutor executor = (JavascriptExecutor)driver;
-//			executor.executeScript("arguments[0].scrollIntoView(true);",button);
-//			button.click();
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);",button);
+			button.click();
 			
 		}
 
@@ -1080,9 +1072,9 @@ public class StepImpe {
 				
 				WebElement button = driver.findElement(By.xpath(myxpath4));
 				
-//				JavascriptExecutor executor = (JavascriptExecutor)driver;
-//				executor.executeScript("arguments[0].scrollIntoView(true);",button);
-//				button.click();
+				JavascriptExecutor executor = (JavascriptExecutor)driver;
+				executor.executeScript("arguments[0].scrollIntoView(true);",button);
+				button.click();
 
 			}
 		}
@@ -1296,47 +1288,6 @@ public class StepImpe {
 		Assert.assertTrue(result.contains(arg2));
 		
 	}
-	
-//	@Then("^I check \"(.*?)\" has a CSS property \"(.*?)\" with value \"(.*?)\"$")
-//	public void i_check_has_a_css_property_with_value (String arg1, String arg2, String arg3) throws Throwable{
-//		DBUtilities dbutil = new DBUtilities(driver);
-//		String xpath1 = dbutil.xpathMakerById(arg1);
-//		String property = arg2;
-//		String cssVal = arg3;
-//		String currentCssVal = null;
-//		try {
-//			currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
-//			System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-//			Assert.assertTrue(cssVal.equals(currentCssVal));
-//		}
-//		
-//		catch (AssertionError | Exception e){
-//			// try a class
-//			try {
-//				xpath1 = dbutil.xpathMakerByClass(arg1);
-//				currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
-//				System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-//				Assert.assertTrue(cssVal.equals(currentCssVal));
-//			}
-//			catch (AssertionError | Exception ae2){
-//				// specifically for finding CSS values of labels with ::after psuedo selector
-//				try {
-//					xpath1 = dbutil.xpathMakerByLabelAndId(arg1);
-//					WebElement currentElement = driver.findElement(By.xpath(xpath1));
-//					currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
-//					System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-//					Assert.assertTrue(cssVal.equals(currentCssVal));
-//				}
-//				catch (AssertionError | Exception ae3) {
-//					xpath1 = dbutil.xpathMakerBySpanAndId(arg1);
-//					WebElement currentElement = driver.findElement(By.xpath(xpath1));
-//					currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
-//					System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-//					Assert.assertTrue(cssVal.equals(currentCssVal));
-//				}
-//			}
-//		}
-//	}
 	    
 	@Then("^I compare \"(.*?)\" to \"(.*?)\" to check if variation is displayed correctly$")
 	public void i_compare_to_to_check_if_variation_is_displayed_correctly(String arg1, String arg2) throws Throwable {
@@ -1388,6 +1339,27 @@ public class StepImpe {
 		PageFactory.initElements(driver, AccountFinancialHistorypage.class).readAndCompareTableRows(arg1, arg2, arg3);
 	 
 	}
+	
+	//******************************CRAP**********************************
+//	@Given("^I copy and paste the html in \"(.*?)\"$")
+//	public void i_copy_and_paste_the_html_in_CIChecker(String arg1) throws Throwable {
+//	 String html = driver.getPageSource();
+//	 HomePage home = PageFactory.initElements(driver, HomePage.class);
+//		home.navigateTo(arg1);
+//		Thread.sleep(1000);
+//		driver.findElement(By.xpath("//*[contains(text(),'Paste HTML Markup')]")).click();
+//		Thread.sleep(1000);
+//		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(html);
+//Thread.sleep(3000);
+//	
+//		
+//	}
+
+
+
+
+	
+
 
 	//**************************************************************************************************************************
 	//**************************************************************************************************************************
