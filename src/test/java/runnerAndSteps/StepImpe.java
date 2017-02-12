@@ -804,16 +804,18 @@ public class StepImpe {
 	// ********************************************************************************************************************************
 	//**************************************** Capture element from Page************************************************************
 	
-	@Given("^I access URL \"(.*?)\"$")
-	public void i_access_url(String arg1) throws Throwable {
-		driver.get(arg1);
-	}
+	//disabling following to debug Jenkns
 	
-	@Then("^I scroll up$")
-	public void i_scroll_up() throws Throwable {
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,5000)", "");
-	}
+//	@Given("^I access URL \"(.*?)\"$")
+//	public void i_access_url(String arg1) throws Throwable {
+//		driver.get(arg1);
+//	}
+//	
+//	@Then("^I scroll up$")
+//	public void i_scroll_up() throws Throwable {
+//		JavascriptExecutor jse = (JavascriptExecutor)driver;
+//		jse.executeScript("window.scrollBy(0,5000)", "");
+//	}
 	
 	@Given("^I capture \"(.*?)\"$")
 	public String i_capture(String arg1) throws Throwable {
@@ -1295,46 +1297,46 @@ public class StepImpe {
 		
 	}
 	
-	@Then("^I check \"(.*?)\" has a CSS property \"(.*?)\" with value \"(.*?)\"$")
-	public void i_check_has_a_css_property_with_value (String arg1, String arg2, String arg3) throws Throwable{
-		DBUtilities dbutil = new DBUtilities(driver);
-		String xpath1 = dbutil.xpathMakerById(arg1);
-		String property = arg2;
-		String cssVal = arg3;
-		String currentCssVal = null;
-		try {
-			currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
-			System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-			Assert.assertTrue(cssVal.equals(currentCssVal));
-		}
-		
-		catch (AssertionError | Exception e){
-			// try a class
-			try {
-				xpath1 = dbutil.xpathMakerByClass(arg1);
-				currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
-				System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-				Assert.assertTrue(cssVal.equals(currentCssVal));
-			}
-			catch (AssertionError | Exception ae2){
-				// specifically for finding CSS values of labels with ::after psuedo selector
-				try {
-					xpath1 = dbutil.xpathMakerByLabelAndId(arg1);
-					WebElement currentElement = driver.findElement(By.xpath(xpath1));
-					currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
-					System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-					Assert.assertTrue(cssVal.equals(currentCssVal));
-				}
-				catch (AssertionError | Exception ae3) {
-					xpath1 = dbutil.xpathMakerBySpanAndId(arg1);
-					WebElement currentElement = driver.findElement(By.xpath(xpath1));
-					currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
-					System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-					Assert.assertTrue(cssVal.equals(currentCssVal));
-				}
-			}
-		}
-	}
+//	@Then("^I check \"(.*?)\" has a CSS property \"(.*?)\" with value \"(.*?)\"$")
+//	public void i_check_has_a_css_property_with_value (String arg1, String arg2, String arg3) throws Throwable{
+//		DBUtilities dbutil = new DBUtilities(driver);
+//		String xpath1 = dbutil.xpathMakerById(arg1);
+//		String property = arg2;
+//		String cssVal = arg3;
+//		String currentCssVal = null;
+//		try {
+//			currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
+//			System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+//			Assert.assertTrue(cssVal.equals(currentCssVal));
+//		}
+//		
+//		catch (AssertionError | Exception e){
+//			// try a class
+//			try {
+//				xpath1 = dbutil.xpathMakerByClass(arg1);
+//				currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
+//				System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+//				Assert.assertTrue(cssVal.equals(currentCssVal));
+//			}
+//			catch (AssertionError | Exception ae2){
+//				// specifically for finding CSS values of labels with ::after psuedo selector
+//				try {
+//					xpath1 = dbutil.xpathMakerByLabelAndId(arg1);
+//					WebElement currentElement = driver.findElement(By.xpath(xpath1));
+//					currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
+//					System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+//					Assert.assertTrue(cssVal.equals(currentCssVal));
+//				}
+//				catch (AssertionError | Exception ae3) {
+//					xpath1 = dbutil.xpathMakerBySpanAndId(arg1);
+//					WebElement currentElement = driver.findElement(By.xpath(xpath1));
+//					currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
+//					System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+//					Assert.assertTrue(cssVal.equals(currentCssVal));
+//				}
+//			}
+//		}
+//	}
 	    
 	@Then("^I compare \"(.*?)\" to \"(.*?)\" to check if variation is displayed correctly$")
 	public void i_compare_to_to_check_if_variation_is_displayed_correctly(String arg1, String arg2) throws Throwable {
