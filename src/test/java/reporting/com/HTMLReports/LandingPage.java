@@ -41,6 +41,7 @@ public class LandingPage extends DBUtilities {
 					||name.equals("Date")
 					||name.equals("Activity")
 					||name.equals("Description")
+					||name.equals("Counter")
 					||name.equals("Type")
 					||name.equals("SaveAndExit")
 					||name.equals("Next")
@@ -106,6 +107,7 @@ public class LandingPage extends DBUtilities {
 				System.out.println("Element is Absent");
 				}
 		}
+    	
     	  }
       
       public void checkUIElementTEXTIsDisplayed (String arg1) throws InterruptedException

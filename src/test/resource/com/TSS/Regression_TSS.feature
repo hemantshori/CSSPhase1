@@ -46,7 +46,7 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
 
-  @underTest
+ 
   Scenario Outline: DTSP-356 Scenario 2, 3 and 4
     #scenario 2: Aus wide wages is not greater than ACT Taxable wages
     #scenario 3: Group ACT wages is not greater than ACT Taxable wages
@@ -154,7 +154,7 @@ Feature: Some feature
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
 
   #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
-  @defect
+
   Scenario Outline: DTSP-311: Validation Rules and Errors to be used across Annual Reconciliation Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -236,7 +236,7 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
 
-  @defect
+
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -343,6 +343,7 @@ Feature: Some feature
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
 
+ 
   Scenario Outline: DTSP-355
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -396,7 +397,8 @@ Feature: Some feature
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
-
+      
+ 
   Scenario Outline: DTSP-310
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -466,6 +468,7 @@ Feature: Some feature
   ####################################
   ####### Iteration 3 test cases######
   ####################################
+
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -477,9 +480,10 @@ Feature: Some feature
     # Remove the following step with the one above throughout test case when defect on UAP is fixed.
     Given I want to login to portal "<PortalName>"
     # Scenario 1: CPA access the 'Manage Tips' page
+    And I wait for "2000" millisecond
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName             |
-      | item2 | Page                 |
+      #| item2 | Page                 |
       | item3 | Section              |
       | item5 | Tooltips Description |
       | item5 | Identifier           |
@@ -511,24 +515,28 @@ Feature: Some feature
       | item5 | AccountAlreadyRegisteredLine1 |
       | item5 | AccountAlreadyRegisteredLine2 |
       | item5 | AddNewAccountIntro            |
-      | item5 | LockedAccountLine1            |
+    # | item5 | LockedAccountLine1            |.............disabling because taken out...
     #Scenario 4: More than 10 search results
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields      | Value      |
       | SearchInput | PayrollTax |
     Then I click on button "SearchBT"
-    Then I see "Counter" displayed
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item2 | Counter  |
     And I enter the details as
       | Fields      | Value   |
       | SearchInput | Account |
-    Then I see "Counter" displayed
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName |
+      | item2 | Counter  |
 
     Examples: 
       | PortalName   | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS_Tooltips | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
-  @tss_review_done
+  @underTest
   Scenario Outline: DTSP-25: As an organisation I want a user's details verified during registration so that only valid users register with the portal (page 1)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
