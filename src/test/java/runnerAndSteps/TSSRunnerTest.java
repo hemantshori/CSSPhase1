@@ -18,12 +18,12 @@ import cucumber.api.junit.Cucumber;
 	//	 features = "src/test/resource/com/CSS/SanityTestScript.feature") 
 		
 //****************for wip****************************
-// features = "src/test/resource/com/TSS/wip.feature")
+ //features = "src/test/resource/com/TSS/wip.feature")
     //****************for Regression****************************
 	 features = "src/test/resource/com/TSS/Regression_TSS.feature")
 
 //****************for TSS Regression****************************
-  // features = "src/test/resource/com/TSS/TANG_TSSPhase2.feature") 
+   //features = "src/test/resource/com/TSS/TANG_TSSPhase2.feature") 
 
 
 //****************for PRODUCTION Regression****************************

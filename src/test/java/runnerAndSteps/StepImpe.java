@@ -785,7 +785,7 @@ public class StepImpe {
 
 	@After()
 		  public void tearDown() {	
-		    driver.quit();
+		//    driver.quit();
 		   	  }
 	//******************************************************************************   
 	    
@@ -931,7 +931,12 @@ public class StepImpe {
 		 return PageFactory.initElements(driver, LandingPage.class);
 	}
 	
-
+	//will be used to tab out to activate a button incase the button is not activated.
+		@Given("^I Tab Out$")
+		public void i_Tab_Out() throws Throwable {
+			new DBUtilities(driver).tabOut();
+		}
+		
 	@And("^I click on button \"(.*?)\"$")
 	public void i_click_on_button(String arg1) throws Throwable {
 		Thread.sleep(1000);

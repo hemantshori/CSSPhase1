@@ -38,6 +38,10 @@ public class HomePage extends DBUtilities {
 				driver.get("https://test-ssc.dbresults.com.au/TSSAdminPortal");
 			}
 
+			else if(arg1.equals("TSS_Tooltips")){
+				driver.get("https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
+			}
+
 			else if(arg1.equals("Production")){
 				driver.get("https://ssc.dbresults.com.au/TSSPortal/Login.aspx");
 			}

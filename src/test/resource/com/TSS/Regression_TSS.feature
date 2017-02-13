@@ -5,8 +5,7 @@ Feature: Some feature
   # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
   
-  
-  Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
+   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -24,11 +23,11 @@ Feature: Some feature
     Then I see text "<ABN>" displayed
     Then I select "2014" from "YearOfReturn"
     Then I click on "Independent employer (non-group) lodging for itself"
-    Then I click on "TaxPayerDetailsNext"
+    Then I click on button "TaxPayerDetailsNext"
     And I wait for "2000" millisecond
-    Then I click on "ACTWagesPaidNext"
+   Then I click on button "ACTWagesPaidNext"
     And I wait for "2000" millisecond
-    Then I click on "MonthlyReturnNext"
+   Then I click on button "MonthlyReturnNext"
     And I wait for "2000" millisecond
     And I enter the details as
       | Fields              | Value       |
@@ -416,9 +415,10 @@ Feature: Some feature
       ####### Iteration 3 test cases######
       ####################################
       
-       @defect
+       @tss_review_done
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx"
+   
+    Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
@@ -426,7 +426,7 @@ Feature: Some feature
     And I hit Enter
     #  Given I want to login to portal "<PortalName2>"
     # Remove the following step with the one above throughout test case when defect on UAP is fixed.
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx"
+    Given I want to login to portal "<PortalName>"
     # Scenario 1: CPA access the 'Manage Tips' page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName             |
@@ -464,7 +464,7 @@ Feature: Some feature
       | item5 | AddNewAccountIntro            |
       | item5 | LockedAccountLine1            |
     #Scenario 4: More than 10 search results
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx"
+   Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields      | Value      |
       | SearchInput | PayrollTax |
@@ -477,7 +477,7 @@ Feature: Some feature
 
     Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | TSS_Tooltips        | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
       
       
 @tss_review_done

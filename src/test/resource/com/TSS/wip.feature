@@ -1,84 +1,47 @@
 Feature: WIP
 
-  @wip
   
-  Scenario Outline: DTSP-147
+    @tss_review_done
+  Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
+    #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
-    Then I check "UserNameEmailLabel" has a CSS property "content" with value ""*""
-    Then I check "PasswordLabel" has a CSS property "content" with value ""*""
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Given I want to login to portal "AccountManagement"
-    Then I click on button "EditBT"
-    #Scenario 1: User accesses the edit function
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName           |
-      | item2 | Username           |
-      | item3 | First Name         |
-      | item5 | Last Name          |
-      | item5 | Email Address      |
-      | item5 | Phone Number       |
-      | item5 | Choose a Tax Agent |
-      | item5 | Password           |
-      | item5 | New Password       |
-      | item5 | Confirm Password   |
-      | item5 | Hint               |
-    #Scenario 2: User enters incorrect input type into a restricted fields (e.g. entering 123 into an alphabet field)
-    Then I enter the details as
-      | Fields            | Value |
-      | Input_PhoneNumber | TEST  |
-    Then I check "Input_PhoneNumber" is empty
-    #Scenario 3: User has not entered all the mandatory fields
-    Then I check "CancelBT" is readonly
-    #Scenario 4, 6: Scenario 6: Profile settings details does not pass all validations
-    Then I enter the details as
-      | Fields                   | Value                 |
-      | Input_FirstName          | TEST                  |
-      | Input_LastName           | TEST                  |
-      | Input_PhoneNumber        |                 33333 |
-      | Input_Email              | TEST                  |
-      | Input_NewPassword        | adsfasdfaf            |
-      | Input_NewpasswordConfirm | asfsadfsadf           |
-      | Input_Hint               | testsetsetwetstsetset |
-    Then I wait for "1000" millisecond
-    Then I click on button "Input_FirstName"
-    Then I click on button "Submit"
-    #Then I see text "Please enter a valid email address" displayed
-    Then I see text "Email expected!" displayed
-    Then I see text "This is an invalid phone number" displayed
-    Then I see text "New Password is invalid. Please try again." displayed
-    Then I see text "New Password and Confirm Password do not match. Please try again." displayed
-    #Scenario 8: User cancels edit function with unsaved changes
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I check I am on "View Settings" page
-    Given I want to login to portal "AccountManagement"
-    #Then I click on button "Cancel"
-    Then I check I am on "View Settings" page
-    #Scenario 5: Profile settings details pass all validations
-    Then I click on button "EditBT"
-    Then I enter the details as
-      | Fields                   | Value             |
-      | Input_FirstName          | TEST              |
-      | Input_LastName           | TEST              |
-      | Input_PhoneNumber        |          33333333 |
-      | Input_Email              | TEST@TESTTESTTSET |
-      | Input_NewPassword        | Dbresults1        |
-      | Input_NewpasswordConfirm | Dbresults1        |
-      | Input_Hint               | DB RESULTS ONE    |
-    #Scenario 9: User update's Tax Agent Details (Tax Agent registered and activated on the Portal)
-    Then I select "OrganizationWithA_Z TaxAgents (98765432102)" from "ChooseTaxAgent"
-    Then I click on button "Input_FirstName"
-    Then I click on button "Submit"
-    Then I see text "Your changes have been successfully saved." displayed
-    Then I check I am on "View Settings" page
+    And I check I am on "HomePage" page
+    And I click on "Payroll Tax Lodgement"
+    Then I click on button "Discard"
+    And I check I am on "Payroll Lodgement Form" page
+    Then I click on "Annual Reconciliation"
+    Then I click on button "NextSection"
+    Then I see text "<CRN>" displayed
+    Then I see text "<ABN>" displayed
+    Then I select "2014" from "YearOfReturn"
+    Then I click on "Independent employer (non-group) lodging for itself"
+    Then I click on "TaxPayerDetailsNext"
+    And I wait for "2000" millisecond
+    Then I click on "ACTWagesPaidNext"
+    And I wait for "2000" millisecond
+    Then I click on button "MonthlyReturnNext"
+    And I wait for "2000" millisecond
+    And I enter the details as
+      | Fields              | Value       |
+      | PersonFullName      | test        |
+      | LegalEntityName     | Test2       |
+      | EmployerDeclaration | test        |
+      | PhoneNumber         |  0422184033 |
+      | EmailAddress        | abc@abc.com |
+    And I Tab Out
+    Then I click on button "DeclarationConfirm"
+    Then I check "SubmitBT" is readonly
+    Then I click on "ConfirmForSubmission"
+    Then I click on button "wtSubmitBT"
+    Then I see text "The period entered has already been lodged. Please select a different period." displayed
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
   
+ 
