@@ -1,11 +1,10 @@
-
 Feature: Some feature
 
   # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
   # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
-  
-   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
+  @tss_review_done
+  Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -25,9 +24,9 @@ Feature: Some feature
     Then I click on "Independent employer (non-group) lodging for itself"
     Then I click on button "TaxPayerDetailsNext"
     And I wait for "2000" millisecond
-   Then I click on button "ACTWagesPaidNext"
+    Then I click on button "ACTWagesPaidNext"
     And I wait for "2000" millisecond
-   Then I click on button "MonthlyReturnNext"
+    Then I click on button "MonthlyReturnNext"
     And I wait for "2000" millisecond
     And I enter the details as
       | Fields              | Value       |
@@ -46,7 +45,8 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
-@defect
+
+  @underTest
   Scenario Outline: DTSP-356 Scenario 2, 3 and 4
     #scenario 2: Aus wide wages is not greater than ACT Taxable wages
     #scenario 3: Group ACT wages is not greater than ACT Taxable wages
@@ -75,7 +75,7 @@ Feature: Some feature
     Then I wait for "2000" millisecond
     Then I enter the details as
       | Fields                       | Value |
-      | PayrollAnswer_AustralianWide |     100 |
+      | PayrollAnswer_AustralianWide |    97 |
       | PayrollAnswer_GroupActWages  |    98 |
     Then I click on "MonthlyReturnNext"
     And I wait for "2000" millisecond
@@ -86,7 +86,7 @@ Feature: Some feature
       | EmployerDeclaration | test        |
       | PhoneNumber         |  0422184033 |
       | EmailAddress        | abc@abc.com |
-      And I Tab Out
+    And I Tab Out
     Then I click on "DeclarationConfirm"
     Then I check "Submit" is readonly
     Then I click on "ConfirmForSubmission"
@@ -96,6 +96,58 @@ Feature: Some feature
     Then I see text "Aus wide wages must be greater than or equal to ACT Taxable wages" displayed
     Then I see text "Group ACT wages must be greater than or equal to ACT Taxable wages" displayed
     Then I see text "Australia-wide wages must be greater than or equal to Group ACT wages" displayed
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
+
+  Scenario Outline: DTSP-356Part2 Scenario 2, 3 and 4
+    #scenario 2: Aus wide wages is not greater than ACT Taxable wages
+    #scenario 3: Group ACT wages is not greater than ACT Taxable wages
+    #scenario 4: Aus wide wages is not greater than Group ACT wages
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Payroll Tax Lodgement"
+    Then I click on button "Discard"
+    Then I click on "Annual Reconciliation"
+    Then I click on button "NextSection"
+    Then I see text "<CRN>" displayed
+    Then I see text "<ABN>" displayed
+    Then I select "2011" from "YearOfReturn"
+    Then I click on "Designated group employer for a group and lodging for itself"
+    Then I click on button "TaxPayerDetailsNext"
+    Then I wait for "2000" millisecond
+    Then I enter the details as
+      | Fields           | Value |
+      | SalariesAndWages |   100 |
+    Then I click on "ClaimingACTProportion_Yes"
+    Then I click on "ACTWagesPaidNext"
+    Then I wait for "2000" millisecond
+    Then I enter the details as
+      | Fields                       | Value |
+      | PayrollAnswer_AustralianWide |   100 |
+      | PayrollAnswer_GroupActWages  |    98 |
+    Then I click on "MonthlyReturnNext"
+    And I wait for "2000" millisecond
+    And I enter the details as
+      | Fields              | Value       |
+      | PersonFullName      | test        |
+      | LegalEntityName     | Test2       |
+      | EmployerDeclaration | test        |
+      | PhoneNumber         |  0422184033 |
+      | EmailAddress        | abc@abc.com |
+    And I Tab Out
+    Then I click on "DeclarationConfirm"
+    Then I check "Submit" is readonly
+    Then I click on "ConfirmForSubmission"
+    # don't remove the wt prefix, otherwise there will be a conflict with a 'HiddenSubmitBT'
+    Then I click on button "wtSubmitBT"
+    And I wait for "2000" millisecond
+    Then I see text "Group ACT wages must be greater than or equal to ACT Taxable wages" displayed
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
@@ -148,7 +200,7 @@ Feature: Some feature
       | EmployerDeclaration | test   |
       | PhoneNumber         | 042213 |
       | EmailAddress        | abc    |
-       And I Tab Out
+    And I Tab Out
     Then I click on "DeclarationConfirm"
     Then I see text "This is an invalid phone number." displayed
     Then I see text "Invalid email address format. Please try again." displayed
@@ -156,7 +208,7 @@ Feature: Some feature
       | Fields       | Value       |
       | PhoneNumber  | 61042218431 |
       | EmailAddress | abc@test    |
-        And I Tab Out
+    And I Tab Out
     # scenario 6: Mandatory fields all filled in
     Then I click on button "DeclarationConfirm"
     Then I check "Submit" is readonly
@@ -183,24 +235,25 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
-@defect
+
+  @defect
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
     Then "<Item>" is displayed as "<ItemName>"
-    | Item  | ItemName                                                  |
-    | item2 | Select Business Type                                      |
-    | item3 | Employer Name                                             |
-    | item4 | Business Trading Name                                     |
-    | item5 | Australian Business Number (ABN)                          |
-    | item6 | Australian Company Name (ACN)                             |
-    | item7 | Business Address                                          |
-    | item7 | Postal Address                                            |
-    | item7 | Address where Business Records are located (Jurisdiction) |
-    | item7 | Contact Person                                            |
-    | item7 | Preferred Communication Method                            |
-    | item7 | Postal Address                                            |
+      | Item  | ItemName                                                  |
+      | item2 | Select Business Type                                      |
+      | item3 | Employer Name                                             |
+      | item4 | Business Trading Name                                     |
+      | item5 | Australian Business Number (ABN)                          |
+      | item6 | Australian Company Name (ACN)                             |
+      | item7 | Business Address                                          |
+      | item7 | Postal Address                                            |
+      | item7 | Address where Business Records are located (Jurisdiction) |
+      | item7 | Contact Person                                            |
+      | item7 | Preferred Communication Method                            |
+      | item7 | Postal Address                                            |
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Miss" from "ContactPerson_Title"
     Then I select "SMS" from "CommunicationMethodId"
@@ -343,8 +396,7 @@ Feature: Some feature
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
-      
-      
+
   Scenario Outline: DTSP-310
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -410,14 +462,11 @@ Feature: Some feature
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
-      
-      ####################################
-      ####### Iteration 3 test cases######
-      ####################################
-      
-       @tss_review_done
+
+  ####################################
+  ####### Iteration 3 test cases######
+  ####################################
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
-   
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -464,7 +513,7 @@ Feature: Some feature
       | item5 | AddNewAccountIntro            |
       | item5 | LockedAccountLine1            |
     #Scenario 4: More than 10 search results
-   Given I want to login to portal "<PortalName>"
+    Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields      | Value      |
       | SearchInput | PayrollTax |
@@ -476,12 +525,11 @@ Feature: Some feature
     Then I see "Counter" displayed
 
     Examples: 
-      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS_Tooltips        | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
-      
-      
-@tss_review_done
-      Scenario Outline: DTSP-25: As an organisation I want a user's details verified during registration so that only valid users register with the portal (page 1)
+      | PortalName   | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS_Tooltips | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+
+  @tss_review_done
+  Scenario Outline: DTSP-25: As an organisation I want a user's details verified during registration so that only valid users register with the portal (page 1)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
@@ -553,7 +601,7 @@ Feature: Some feature
       | ConfirmPassword        |   123456781 |
       | ConfirmPassword        |   123456781 |
       | PhoneNumber            |    12345671 |
-      | Registration_Hint 		 | 123123			 |
+      | Registration_Hint      |      123123 |
     Then I click on button "Submit"
     Then I see text "Invalid email address format. Please try again." displayed
     Then I see text "Invalid password. Please try again." displayed
@@ -569,11 +617,9 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
-      
-        
-        
-        @defect
-   Scenario Outline: DTSP-145 , As an end user I want to be able to view my user profile settings so that I know if my profile information is up to date
+
+  @defect
+  Scenario Outline: DTSP-145 , As an end user I want to be able to view my user profile settings so that I know if my profile information is up to date
     #Scenario 1: User views their profile settings
     Given I want to login to portal "<PortalName>"
     Then I check "UserNameEmailLabel" has a CSS property "content" with value ""*""
@@ -609,8 +655,8 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
-      
-      Scenario Outline: DTSP-147
+
+  Scenario Outline: DTSP-147
     Given I want to login to portal "<PortalName>"
     Then I check "UserNameEmailLabel" has a CSS property "content" with value ""*""
     Then I check "PasswordLabel" has a CSS property "content" with value ""*""
