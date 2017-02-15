@@ -842,6 +842,17 @@ public class StepImpe {
 		
 	}
 	
+	@Then("^I check \"(.*?)\" is not readonly$")
+	public void i_check_is_not_readonly(String arg1) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myXpath = createXpath.xpathMakerById(arg1);
+		Thread.sleep(1000);
+		WebElement some_element = driver.findElement(By.xpath(myXpath));
+		// some_element.click();
+		Assert.assertTrue(some_element.isEnabled());
+		 }
+	
+	
 	// to check if astrick is present on a mandatory field
 	@Given("^I check \"(.*?)\" is marked as \"(.*?)\"$")
 	public void i_check_is_marked_as(String arg1, String arg2) throws Throwable {
