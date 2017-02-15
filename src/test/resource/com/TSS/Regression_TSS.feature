@@ -5,7 +5,6 @@ Feature: Some feature
   # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
 
-  @tss_review_done
   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
@@ -48,7 +47,6 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
 
- 
   Scenario Outline: DTSP-356 Scenario 2, 3 and 4
     #scenario 2: Aus wide wages is not greater than ACT Taxable wages
     #scenario 3: Group ACT wages is not greater than ACT Taxable wages
@@ -156,7 +154,6 @@ Feature: Some feature
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
 
   #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
-
   Scenario Outline: DTSP-311: Validation Rules and Errors to be used across Annual Reconciliation Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -238,9 +235,8 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
 
-
-  Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
-    Given I want to login to portal "<PortalName>"
+   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
+      Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
     Then "<Item>" is displayed as "<ItemName>"
@@ -249,7 +245,7 @@ Feature: Some feature
       | item3 | Employer Name                                             |
       | item4 | Business Trading Name                                     |
       | item5 | Australian Business Number (ABN)                          |
-      | item6 | Australian Company Name (ACN)                             |
+      | item6 | Australian Company Number (ACN)                           |
       | item7 | Business Address                                          |
       | item7 | Postal Address                                            |
       | item7 | Address where Business Records are located (Jurisdiction) |
@@ -277,7 +273,7 @@ Feature: Some feature
     Then I wait for "2000" millisecond
     Then I click on "ACTWagesPaidNext"
     Then I wait for "2000" millisecond
-    # Scenario 1
+    # Scenario 1...................updated with changes from 506
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                                     |
       | item2 | Date Business Commenced Employing in ACT (or Recommenced)                    |
@@ -288,8 +284,12 @@ Feature: Some feature
       | item7 | Grouping for Payroll Tax Purposes                                            |
       | item7 | Total Taxable Wages for the five previous financial years                    |
       | item7 | As an eligible employer, do you wish to apply for annual lodgement approval? |
-      | item7 | Annual Lodgement Request Justification                                       |
-      | item7 | Contact Person for Payroll Tax                                               |
+      Then I wait for "2000" millisecond
+    And from section "AnnualLodgementApproval" I select radio button option "wtLabel_AnnualLodgementApproval_YES"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                               |
+      | item7 | Annual Lodgement Request Justification |
+      | item7 | Contact Person for Payroll Tax         |
     # Scenario 2
     Then I click on "MonthlyReturnBack"
     Then I wait for "2000" millisecond
@@ -344,8 +344,7 @@ Feature: Some feature
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
-
- 
+  
   Scenario Outline: DTSP-355
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -399,8 +398,7 @@ Feature: Some feature
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
-      
- 
+
   Scenario Outline: DTSP-310
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -470,7 +468,6 @@ Feature: Some feature
   ####################################
   ####### Iteration 3 test cases######
   ####################################
-
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -628,12 +625,11 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
 
-  @defect
   Scenario Outline: DTSP-145 , As an end user I want to be able to view my user profile settings so that I know if my profile information is up to date
     #Scenario 1: User views their profile settings
     Given I want to login to portal "<PortalName>"
-    Then I check "UserNameEmailLabel" has a CSS property "content" with value ""*""
-    Then I check "PasswordLabel" has a CSS property "content" with value ""*""
+    And I check "UserNameEmailLabel" is marked as "Mandatory"
+    Then I check "PasswordLabel" is marked as "Mandatory"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
@@ -668,8 +664,8 @@ Feature: Some feature
 
   Scenario Outline: DTSP-147
     Given I want to login to portal "<PortalName>"
-    Then I check "UserNameEmailLabel" has a CSS property "content" with value ""*""
-    Then I check "PasswordLabel" has a CSS property "content" with value ""*""
+    Then I check "UserNameEmailLabel" is marked as "Mandatory"
+    Then I check "PasswordLabel" is marked as "Mandatory"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
@@ -727,14 +723,14 @@ Feature: Some feature
     #Scenario 5: Profile settings details pass all validations
     Then I click on button "EditBT"
     Then I enter the details as
-      | Fields                   | Value             |
-      | Input_FirstName          | TEST              |
-      | Input_LastName           | TEST              |
-      | Input_PhoneNumber        |          33333333 |
-      | Input_Email              | TEST@TESTTESTTSET |
-      | Input_NewPassword        | Dbresults1        |
-      | Input_NewpasswordConfirm | Dbresults1        |
-      | Input_Hint               | DB RESULTS ONE    |
+      | Fields                   | Value                 |
+      | Input_FirstName          | TEST                  |
+      | Input_LastName           | TEST                  |
+      | Input_PhoneNumber        |              33333333 |
+      | Input_Email              | TEST@TESTTESTTSET.com |
+      | Input_NewPassword        | Dbresults1            |
+      | Input_NewpasswordConfirm | Dbresults1            |
+      | Input_Hint               | DB RESULTS ONE        |
     #Scenario 9: User update's Tax Agent Details (Tax Agent registered and activated on the Portal)
     Then I select "OrganizationWithA_Z TaxAgents (98765432102)" from "ChooseTaxAgent"
     Then I click on button "Input_FirstName"

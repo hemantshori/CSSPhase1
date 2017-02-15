@@ -114,4 +114,18 @@ public class XPathGenerator {
 		 return xpath;
 	 }
 	
+	 
+	 public String combine2Xpaths (String arg1, String arg2)
+	 {
+		 System.out.println(arg1);
+		 System.out.println(arg2);
+		 String truncatedXpath2 = arg2.substring(3);
+		 System.out.println(truncatedXpath2);
+		 
+		return arg1+truncatedXpath2;
+		 
+	 }
+	 
+	 
+	 
 }

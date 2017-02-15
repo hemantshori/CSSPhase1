@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -79,12 +80,16 @@ public class DBUtilities extends XPathGenerator {
 	 		}
 	 
 	 	}
-	 	  // Scroll down the page , NOT READY YET
+	 	  // Scroll down the page
 	 	
 	 	public void scrollDownThePage(String arg1) throws InterruptedException{
-	 	System.out.println(" Scrolling down the  page");
+	 	
+	 		
+	 			JavascriptExecutor jse = (JavascriptExecutor)driver;
+	 			jse.executeScript("window.scrollBy(0,5000)", "");
+	 		}
 	 
-	 	}
+	 	
 	// action performed on element(coming as arg)
 	 	 public void actionPerformedClick (String arg1)
 	 	 {

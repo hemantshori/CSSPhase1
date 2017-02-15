@@ -93,11 +93,7 @@
 //		driver.get(arg1);
 //	}
 //	
-//	@Then("^I scroll up$")
-//	public void i_scroll_up() throws Throwable {
-//		JavascriptExecutor jse = (JavascriptExecutor)driver;
-//		jse.executeScript("window.scrollBy(0,5000)", "");
-//	}
+	
 //	
 //	@Given("^I capture \"(.*?)\"$")
 //	public String i_capture(String arg1) throws Throwable {
@@ -845,6 +841,26 @@ public class StepImpe {
 
 		
 	}
+	
+	// to check if astrick is present on a mandatory field
+	@Given("^I check \"(.*?)\" is marked as \"(.*?)\"$")
+	public void i_check_is_marked_as(String arg1, String arg2) throws Throwable {
+		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
+		WebElement elementName = driver.findElement(By.xpath(myxpath));
+		System.out.println(elementName);
+		String myxpath2 = new DBUtilities(driver).xpathMakerByTextInClass(arg2);
+
+		//following is generating a combined xpath and then looking for element
+		String combineXPaths = new DBUtilities(driver).combine2Xpaths(myxpath, myxpath2);
+		System.out.println(combineXPaths);
+		WebElement elementName2 = driver.findElement(By.xpath(combineXPaths));
+		System.out.println(elementName2);
+		Assert.assertTrue(elementName2.isDisplayed());
+		
+		
+		
+	}
+
 
 
 	@Then("^I check \"(.*?)\" contains \"(.*?)\"$")
@@ -968,6 +984,11 @@ public class StepImpe {
 		}
 		Thread.sleep(2500);
 
+	}
+	
+	@And("^I scroll \"(.*?)\" the page$")
+	public void i_scroll_the_page(String arg1) throws Throwable {
+		new DBUtilities(driver).scrollDownThePage(arg1);
 	}
 	
 	@And("^I click on \"(.*?)\"$")
@@ -1293,6 +1314,24 @@ public class StepImpe {
 		Assert.assertTrue(result.contains(arg2));
 		
 	}
+	
+	// selects radio button for a perticular section and combine xpaths to avoid radio buttons of same name
+	@Then("^from section \"(.*?)\" I select radio button option \"(.*?)\"$")
+	public void from_section_I_select_radio_button_option(String arg1, String arg2) throws Throwable {
+		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
+		//WebElement elementName = driver.findElement(By.xpath(myxpath));
+		//System.out.println(elementName);
+		String myxpath2 = new DBUtilities(driver).xpathMakerById(arg2);
+
+		//following is generating a combined xpath and then looking for element
+		String combineXPaths = new DBUtilities(driver).combine2Xpaths(myxpath, myxpath2);
+		System.out.println(combineXPaths);
+		WebElement elementName2 = driver.findElement(By.xpath(combineXPaths));
+	
+		Assert.assertTrue(elementName2.isDisplayed());
+		elementName2.click();
+	}
+	 
 	    
 	@Then("^I compare \"(.*?)\" to \"(.*?)\" to check if variation is displayed correctly$")
 	public void i_compare_to_to_check_if_variation_is_displayed_correctly(String arg1, String arg2) throws Throwable {
