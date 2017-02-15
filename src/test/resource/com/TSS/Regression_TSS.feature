@@ -4,7 +4,6 @@ Feature: Some feature
   # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
   # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
-
   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
@@ -235,8 +234,8 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
 
-   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
-      Given I want to login to portal "<PortalName>"
+  Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
+    Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
     Then "<Item>" is displayed as "<ItemName>"
@@ -284,7 +283,7 @@ Feature: Some feature
       | item7 | Grouping for Payroll Tax Purposes                                            |
       | item7 | Total Taxable Wages for the five previous financial years                    |
       | item7 | As an eligible employer, do you wish to apply for annual lodgement approval? |
-      Then I wait for "2000" millisecond
+    Then I wait for "2000" millisecond
     And from section "AnnualLodgementApproval" I select radio button option "wtLabel_AnnualLodgementApproval_YES"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                               |
@@ -344,7 +343,7 @@ Feature: Some feature
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
-  
+
   Scenario Outline: DTSP-355
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -742,8 +741,7 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
-      
-        Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
+  Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -761,8 +759,8 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
-      
-      Scenario Outline: DTSP-440 and DTSP-441: As an organisation I want to know the type of user who is registering so that the relevant verification information can be presented.
+
+  Scenario Outline: DTSP-440 and DTSP-441: As an organisation I want to know the type of user who is registering so that the relevant verification information can be presented.
     #ONHOLD until the tax agent registration bug can be fixed
     Given I want to login to portal "<PortalName>"
     Then I click on "Create Account"
@@ -775,8 +773,8 @@ Feature: Some feature
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                               |
       | item2 | Registration ID                        |
-      | item5 | Registered Business Name                 |
-      | item5 | Registered Business Address                       |
+      | item5 | Registered Business Name               |
+      | item5 | Registered Business Address            |
       | item5 | Country                                |
       | item5 | Address Line 1                         |
       | item5 | Address Line 2                         |
@@ -797,14 +795,14 @@ Feature: Some feature
     Then I click on "Create Account"
     Then I click on "Register as a Tax Agent"
     Then I enter the details as
-      | Fields                    | Value            |
-      | InputTaxAgentABN          |      92622632200 |
-      | InputTaxAgentBusinessName | GANG LE TANG     |
-      | BusinessAddress_Address1  | TEST             |
-      | BusinessAddress_Address2  | TEST             |
-      | BusinessAddress_Suburb    | TEST             |
-      | BusinessAddress_Postcode  |             3333 |
-      And I select "Victoria" from "StateIdLabel"
+      | Fields                    | Value        |
+      | InputTaxAgentABN          |  92622632200 |
+      | InputTaxAgentBusinessName | GANG LE TANG |
+      | BusinessAddress_Address1  | TEST         |
+      | BusinessAddress_Address2  | TEST         |
+      | BusinessAddress_Suburb    | TEST         |
+      | BusinessAddress_Postcode  |         3333 |
+    And I select "Victoria" from "StateIdLabel"
     #Then I select "Australia" from "BusinessAddress_CountryId"
     Then I click on button "TermsandConditionsCheckBox2"
     Then I click on button "RegistrationSubmit"
@@ -835,4 +833,59 @@ Feature: Some feature
       | PortalName | UserName | Password   |
       | TSS        | jscott   | Dbresults1 |
 
-      
+  Scenario Outline: DTSP-459
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Create Account"
+    Then I check I am on "Registration" page
+    #Scenario 1: User accesses the 'Registration Verification' page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                               |
+      | item2 | Australian Business Number (ABN)       |
+      | item3 | Client Reference Number (CRN)          |
+      | item5 | By creating an account, I agree to the |
+    #Scenario 7: User clicks on the â€˜Sign Inâ€™ link
+    Then I click on "Sign In"
+    Then I check I am on "Login" page
+    #Scenario 8: User views Terms and Conditions
+    Then I click on "Create Account"
+    Then I click on "Terms & Conditions"
+    Then a new page "http://dbresults.com.au/terms/" is launched
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Create Account"
+    #Scenario 3: User has not entered all the mandatory fields
+    Then I check "RegistrationSubmit" is readonly
+    #Scenario 2: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a Number field)
+    Then I enter the details as
+      | Fields                  | Value |
+      | InputABNNumber_Business | TEST  |
+      | InputCRNNumber_Business | TEST  |
+    Then I check "InputABNNumber_Business" is empty
+    Then I check "InputCRNNumber_Business" is empty
+    #Scenario 4: Registration details do not pass the frontend validation
+    Then I enter the details as
+      | Fields                  | Value |
+      | InputABNNumber_Business |     3 |
+      | InputCRNNumber_Business |     3 |
+    Then I click on button "TermsandConditionsCheckBox"
+    Then I click on button "RegistrationSubmit"
+    Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
+    Then I see text "Invalid CRN. Please try again." displayed
+    #Scenario 6: Registration details failed the verification with stubs
+    Then I enter the details as
+      | Fields                  | Value       |
+      | InputABNNumber_Business | 33333333333 |
+      | InputCRNNumber_Business |      333333 |
+    Then I click on button "RegistrationSubmit"
+    Then I wait for "1000" millisecond
+    Then I see text "Invalid CRN, ABN or ACN. Please try again" displayed
+    #Scenario 5: Registration details verified with stubs
+    Then I enter the details as
+      | Fields                  | Value       |
+      | InputABNNumber_Business | 12345678949 |
+      | InputCRNNumber_Business | 12345678949 |
+    Then I click on button "RegistrationSubmit"
+    Then I check I am on "Complete Registration" page
+
+    Examples: 
+      | PortalName | UserName | Password   |
+      | TSS        | jscott   | Dbresults1 |
