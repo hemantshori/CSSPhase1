@@ -927,8 +927,7 @@ public class StepImpe {
 	
 	@Then("^I check \"(.*?)\" is empty$")
 	public void i_check_is_empty(String arg1) throws Throwable {
-		DBUtilities createXpath = new DBUtilities(driver);
-		String myxpath = createXpath.xpathMakerById(arg1);
+		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
 		WebElement inputBox = driver.findElement(By.xpath(myxpath));
 		Assert.assertTrue(inputBox.isDisplayed());
 		String boxContents = inputBox.getAttribute("value");

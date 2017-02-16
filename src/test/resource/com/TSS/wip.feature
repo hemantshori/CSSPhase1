@@ -1,222 +1,35 @@
 Feature: WIP
 
   @wip
- @done
-  
-
- @done
-  Scenario Outline: DTSP-430:
+ Scenario Outline: DTSP-460: s an organisation I want user inputs to be restricted & validated during Tax Agent's portal registration so that human error can be minimised
     Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    #Given I want to login to portal "StyleGuideConfig"
-    Then "<Item>" is displayed as "<ItemName>"
-      #Scenario 1: User accesses the 'Registration Verification' page
-      | Item  | ItemName            |
-      | item2 | Style Guide Configs |
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
+    Then I click on "Create Account"
+    Then I check I am on "Registration" page
+    Then I see checkbox "RegistrationAsBusiness" as selected
+    Then I see checkbox "RegistrationAsTaxAgent" as not selected
+    Then I click on "Register as a Tax Agent"
+    #Scenario 1: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a number field)
     Then I enter the details as
-      | Fields       | Value   |
-      | PrimaryColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    #for some reason selenium reads CSS colors in the rgba format...
-    Then I check "Header_title" has a CSS property "background-color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
+      | Fields                   | Value |
+      | InputTaxAgentRegId       | TEST  |
+      | InputTaxAgentABN         | TEST  |
+      | BusinessAddress_Postcode | TEST  |
+    Then I check "InputTaxAgentRegId" is empty
+    Then I check "InputTaxAgentABN" is empty
+    Then I check "BusinessAddress_Postcode" is empty
+    #Scenario 2: Tax Agent Registration details do not pass the frontend validation
     Then I enter the details as
-      | Fields         | Value   |
-      | PrimaryColor   | #662D91 |
-      | SecondaryColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I check "wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" has a CSS property "border-bottom-color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields         | Value   |
-      | SecondaryColor | #662D91 |
-      | TertiaryColor  | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "NextSection" has a CSS property "background-color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields        | Value   |
-      | TertiaryColor | #D5D07E |
-      | InactiveColor | #ff00d4 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I click on "NextSection"
-    Then I check "fa fa-fw fa-angle-down" has a CSS property "color" with value "rgba(255, 0, 212, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields        | Value   |
-      | InactiveColor | #9e9e9e |
-      | TextColor     | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "GeneralDiscard" has a CSS property "color" with value "rgba(0, 0, 0, 1)"
-    
-    		Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-    | Fields       | Value    |
-    | TextColor | #010c19	|
-    | ButtonOneActiveColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I hover over "NextSection" and check for CSS property "background-color" with value "rgba(0, 0, 0, 1)"
-    
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-    | Fields       | Value    |
-    | ButtonOneActiveColor | #F7990B	|
-    | ButtonFourIsActiveColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I hover over "GeneralDiscard" and check for CSS property "background-color" with value "rgba(0, 0, 0, 1)"
-    
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields                  | Value   |
-      | ButtonFourIsActiveColor | #dfdfdf |
-      | ButtonFourColor         | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "GeneralDiscard" has a CSS property "background-color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields                | Value   |
-      | ButtonFourColor       | #f1f1f1 |
-      | ButtonFourBorderColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "GeneralDiscard" has a CSS property "border-bottom-color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields                | Value   |
-      | ButtonFourBorderColor | #ccc    |
-      | Footer                | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "Footer" has a CSS property "background-color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields           | Value   |
-      | Footer           | #fff    |
-      | SidebarTextColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "MenuButtonLink" has a CSS property "color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields                 | Value   |
-      | SidebarTextColor       | #fff    |
-      | SidebarBackgroundColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "wtMenu" has a CSS property "background-color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields                 | Value   |
-      | SidebarBackgroundColor | #051629 |
-      | SidebarTextActiveColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "ctl20_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" has a CSS property "color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields        | Value |
-      | ButtonCorners | 4px   |
-      | HeadingSize   | 40px  |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "Title_wtErrorMessageBox2" has a CSS property "font-size" with value "40px"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields          | Value |
-      | HeadingSize     | 22pt  |
-      | SubHeadingsSize | 40px  |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "ReturnTypeHeading" has a CSS property "font-size" with value "40px"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields          | Value   |
-      | SubHeadingsSize | 14pt    |
-      | HeadingsColor   | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "Title_wtErrorMessageBox2" has a CSS property "color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields           | Value   |
-      | HeadingsColor    | #000000 |
-      | SubHeadingsColor | #000000 |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "ReturnTypeHeading" has a CSS property "color" with value "rgba(0, 0, 0, 1)"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields           | Value                                |
-      | SubHeadingsColor | #000000                              |
-      | FontFamily       | 'Comic Sans MS', cursive, sans-serif |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "ReturnTypeHeading" has a CSS property "font-family" with value ""Comic Sans MS", cursive, sans-serif"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields       | Value                              |
-      | FontFamily   | 'Helvetica', 'Arial', 'sans-serif' |
-      | BodyCopySize | 20px                               |
-    Then I click on button "wt45"
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Lodgement"
-    Then I check "ReturnTypeHeading" has a CSS property "font-size" with value "18.6667px"
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx"
-    Then I click on button "StyleGuideConfigTable_ctl03_wt12"
-    Then I enter the details as
-      | Fields       | Value |
-      | BodyCopySize | 10pt  |
-    Then I click on button "wt45"
+      | Fields                    | Value            |
+      | InputTaxAgentABN          |               11 |
+      | InputTaxAgentBusinessName | Automated Tester |
+    Then I click on button "TermsandConditionsCheckBox2"
+    Then I click on button "RegistrationSubmit"
+    Then I wait for "1000" millisecond
+    Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
 
     Examples: 
       | PortalName | UserName | Password   |
       | TSS        | jscott   | Dbresults1 |
+
+  
 
