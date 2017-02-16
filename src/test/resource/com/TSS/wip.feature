@@ -348,7 +348,6 @@ Feature: wip
     #Then I select "AL" from "Address_State"
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on "TaxPayerDetailsNext"
-    Then I check "Label_BusinessActivityCategory" has a CSS property "content" with value ""*""
     Then I wait for "2000" millisecond
     Then I click on "ACTWagesPaidNext"
     Then I wait for "2000" millisecond
@@ -396,7 +395,6 @@ Feature: wip
     #Then I select "AL" from "Address_State"
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on "TaxPayerDetailsNext"
-    Then I check "Label_BusinessActivityCategory" has a CSS property "content" with value ""*""
     Then I wait for "2000" millisecond
     Then I click on "ACTWagesPaidNext"
     Then I wait for "2000" millisecond
@@ -499,13 +497,13 @@ Feature: wip
   @onhold
   Scenario Outline: DTSP-305: As a Customer Portal Administrator (CPA), I want to be able to edit the taxpayer tips displayed on specific forms so that I can help the end user better understand the form fields
     # ONHOLD until Hemant can give me advice about the firefinder not detecting xpaths in the popups
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx"
+    Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx"
+    Then I click on "Settings"
     #Scenario 1: CPA accesses the 'Edit Tool Tip' pop up window
     Then I click on button "EditTooltip"
     Then I wait for "1000" millisecond
@@ -550,13 +548,13 @@ Feature: wip
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
-  @done
+  @wip
   Scenario Outline: DTSP-463: Display all the mandatory fields with an Asterisk (*)
     #On hold until a clear standard for the mandatory field asterisks can be made
     #PART 1: Login Screen
     Given I want to login to portal "<PortalName>"
-    Then I check "UserNameEmailLabel" has a CSS property "content" with value ""*""
-    Then I check "PasswordLabel" has a CSS property "content" with value ""*""
+    Then I check "UserNameEmailLabel" is marked as "Mandatory"
+    Then I check "PasswordLabel" is marked as "Mandatory"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
@@ -570,16 +568,16 @@ Feature: wip
     Then I click on button "NextSection"
     Then I select "2014" from "YearOfReturn"
     Then I select "January" from "MonthOfReturn"
-    Then I check "YearOfReturnLabel" has a CSS property "content" with value ""*""
-    Then I check "MonthOfReturnLabel" has a CSS property "content" with value ""*""
-    Then I check "CurrentEmployerStatusLabel" has a CSS property "content" with value ""*""
+    Then I check "YearOfReturnLabel" is marked as "Mandatory"
+    Then I check "MonthOfReturnLabel" is marked as "Mandatory"
+    Then I check "CurrentEmployerStatusLabel" is marked as "Mandatory"
     Then I click on "Designated group employer for a group and lodging for itself"
     Then I click on button "TaxPayerDetailsNext"
-    Then I check "ClaimingACTProportion_Label" has a CSS property "content" with value ""*""
+    Then I check "ClaimingACTProportion_Label" is marked as "Mandatory"
     Then I click on button "ClaimingACTProportion_Yes"
     Then I click on button "ACTWagesPaidNext"
-    Then I check "AusWideWages" has a CSS property "content" with value ""*""
-    Then I check "GroupActWages" has a CSS property "content" with value ""*""
+    Then I check "AusWideWages" is marked as "Mandatory"
+    Then I check "GroupActWages" is marked as "Mandatory"
     Then I enter the details as
       | Fields                       | Value |
       | PayrollAnswer_AustralianWide |     1 |
@@ -587,11 +585,11 @@ Feature: wip
 		Then I click on button "MonthlyReturnBack"
 		Then I click on button "ACTWagesPaidNext"
     Then I click on button "MonthlyReturnNext"
-    Then I check "PersonFullNameLabel" has a CSS property "content" with value ""*""
-    Then I check "LegalEntityNameLabel" has a CSS property "content" with value ""*""
-    Then I check "EmployerDeclarationLabel" has a CSS property "content" with value ""*""
-    Then I check "PhoneNumberLabel" has a CSS property "content" with value ""*""
-    Then I check "EmailAddressLabel" has a CSS property "content" with value ""*""
+    Then I check "PersonFullNameLabel" is marked as "Mandatory"
+    Then I check "LegalEntityNameLabel" is marked as "Mandatory"
+    Then I check "EmployerDeclarationLabel" is marked as "Mandatory"
+    Then I check "PhoneNumberLabel" is marked as "Mandatory"
+    Then I check "EmailAddressLabel" is marked as "Mandatory"
     And I enter the details as
       | Fields              | Value       |
       | PersonFullName      | test        |
@@ -607,24 +605,24 @@ Feature: wip
     Given I want to login to portal "<PortalName>"
     Then I click on "Create Account"
     Then I click on button "TermsandConditionsCheckBox2"
-    Then I check "InputAccountNumberLabel" has a CSS property "content" with value ""*""
-    #Then I check "SelectBusinessType" has a CSS property "content" with value ""*""
+    Then I check "InputAccountNumberLabel" is marked as "Mandatory"
+    #Then I check "SelectBusinessType" is marked as "Mandatory"
     Then I click on button "RegistrationAsTaxAgent"
-    Then I check "InputTaxAgentABNLabel" has a CSS property "content" with value ""*""
-    Then I check "InputTaxAgentBusinessNameLabel" has a CSS property "content" with value ""*""
+    Then I check "InputTaxAgentABNLabel" is marked as "Mandatory"
+    Then I check "InputTaxAgentBusinessNameLabel" is marked as "Mandatory"
     Then I click on button "RegistrationAsBusiness"
     Then I enter the details as
       | Fields                  | Value       |
       | InputABNNumber_Business | 12345678949 |
       | InputCRNNumber_Business | 12345678949 |
     Then I click on button "RegistrationSubmit"
-    Then I check "Registration_FirstNameLabel" has a CSS property "content" with value ""*""
-    Then I check "Registration_LastNameLabel" has a CSS property "content" with value ""*""
-    Then I check "Registration_EmailLabel" has a CSS property "content" with value ""*""
-    Then I check "Registration_UsernameLabel" has a CSS property "content" with value ""*""
-    Then I check "Registration_NewPasswordLabel" has a CSS property "content" with value ""*""
-    Then I check "Registration_ConfirmPasswordLabel" has a CSS property "content" with value ""*""
-    Then I check "Registration_HintLabel" has a CSS property "content" with value ""*""
+    Then I check "Registration_FirstNameLabel" is marked as "Mandatory"
+    Then I check "Registration_LastNameLabel" is marked as "Mandatory"
+    Then I check "Registration_EmailLabel" is marked as "Mandatory"
+    Then I check "Registration_UsernameLabel" is marked as "Mandatory"
+    Then I check "Registration_NewPasswordLabel" is marked as "Mandatory"
+    Then I check "Registration_ConfirmPasswordLabel" is marked as "Mandatory"
+    Then I check "Registration_HintLabel" is marked as "Mandatory"
     #PART 4: Tax Registration Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -634,24 +632,24 @@ Feature: wip
     And I hit Enter
     Then I click on "Payroll Tax Registration"
     Then I wait for "2000" millisecond
-    Then I check "SelectBusinessType" has a CSS property "content" with value ""*""
-    Then I check "EmployerName" has a CSS property "content" with value ""*""
-    Then I check "BusinessTradingName" has a CSS property "content" with value ""*""
-    Then I check "Label_AustralianBusinessNumber_ABN" has a CSS property "content" with value ""*""
-    Then I check "Label_BusinessAdress_Country" has a CSS property "content" with value ""*""
-    Then I check "Label_BusinessAddress_AddressLine1" has a CSS property "content" with value ""*""
-    Then I check "Label_BusinessAdress_Suburb" has a CSS property "content" with value ""*""
-    Then I check "Label_BusinessAdress_Territory" has a CSS property "content" with value ""*""
-    Then I check "Label_BusinessAdress_Postcode" has a CSS property "content" with value ""*""
-   #Then I check "Text_PostalAddress" has a CSS property "content" with value ""*""
-    #Then I check "Text_AddresswhereBusinessRecordsarelocated_Jurisdi" has a CSS property "content" with value ""*""
-    Then I check "Label_ContactPerson_Title" has a CSS property "content" with value ""*""
-    Then I check "ContactPerson_FirstName" has a CSS property "content" with value ""*""
-    Then I check "ContactPerson_LastName" has a CSS property "content" with value ""*""
-    Then I check "Label_ContactPerson_ContactPhoneNumber" has a CSS property "content" with value ""*""
-    Then I check "Label_ContactPerson_EmailAddress" has a CSS property "content" with value ""*""
-    Then I check "Label_PreferedCommunicationMethod" has a CSS property "content" with value ""*""
-    #Then I check "Label_PostalAddress" has a CSS property "content" with value ""*""
+    Then I check "SelectBusinessType" is marked as "Mandatory"
+    Then I check "EmployerName" is marked as "Mandatory"
+    Then I check "BusinessTradingName" is marked as "Mandatory"
+    Then I check "Label_AustralianBusinessNumber_ABN" is marked as "Mandatory"
+    Then I check "Label_BusinessAdress_Country" is marked as "Mandatory"
+    Then I check "Label_BusinessAddress_AddressLine1" is marked as "Mandatory"
+    Then I check "Label_BusinessAdress_Suburb" is marked as "Mandatory"
+    Then I check "Label_BusinessAdress_Territory" is marked as "Mandatory"
+    Then I check "Label_BusinessAdress_Postcode" is marked as "Mandatory"
+   #Then I check "Text_PostalAddress" is marked as "Mandatory"
+    #Then I check "Text_AddresswhereBusinessRecordsarelocated_Jurisdi" is marked as "Mandatory"
+    Then I check "Label_ContactPerson_Title" is marked as "Mandatory"
+    Then I check "ContactPerson_FirstName" is marked as "Mandatory"
+    Then I check "ContactPerson_LastName" is marked as "Mandatory"
+    Then I check "Label_ContactPerson_ContactPhoneNumber" is marked as "Mandatory"
+    Then I check "Label_ContactPerson_EmailAddress" is marked as "Mandatory"
+    Then I check "Label_PreferedCommunicationMethod" is marked as "Mandatory"
+    #Then I check "Label_PostalAddress" is marked as "Mandatory"
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Miss" from "ContactPerson_Title"
     Then I select "SMS" from "CommunicationMethodId"
@@ -671,17 +669,17 @@ Feature: wip
     #Then I select "AL" from "Address_State"
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on "TaxPayerDetailsNext"
-    Then I check "Label_BusinessActivityCategory" has a CSS property "content" with value ""*""
+    Then I check "Label_BusinessActivityCategory" is marked as "Mandatory"
     Then I wait for "2000" millisecond
     Then I click on "ACTWagesPaidNext"
     Then I wait for "2000" millisecond
-    Then I check "Label_DateBusinessCommencedEmployinginACT" has a CSS property "content" with value ""*""
-    Then I check "Label_DateBusinessBecameLiableintheACT" has a CSS property "content" with value ""*""
-    Then I check "Label_NumberofEmployeesinyourACTBusiness" has a CSS property "content" with value ""*""
+    Then I check "Label_DateBusinessCommencedEmployinginACT" is marked as "Mandatory"
+    Then I check "Label_DateBusinessBecameLiableintheACT" is marked as "Mandatory"
+    Then I check "Label_NumberofEmployeesinyourACTBusiness" is marked as "Mandatory"
     #Then I see text "Are you a member of a group?*" displayed
-    Then I check "Label_Asaneligibleemployer_doyouwishtoapplyforannu" has a CSS property "content" with value ""*""
-    Then I check "Label_AnnualLodgementRequestJustification" has a CSS property "content" with value ""*""
-    #Then I check "Text_ContactPersonforPayrollTax" has a CSS property "content" with value ""*""
+    Then I check "Label_Asaneligibleemployer_doyouwishtoapplyforannu" is marked as "Mandatory"
+    Then I check "Label_AnnualLodgementRequestJustification" is marked as "Mandatory"
+    #Then I check "Text_ContactPersonforPayrollTax" is marked as "Mandatory"
     Then I click on "DateBusinessStart"
     Then I click on "20170206"
     Then I click on "DateBusinessLiable"
@@ -699,9 +697,9 @@ Feature: wip
       | item2 | Set Up Bank Account for Refunds |
       | item3 | BSB                             |
       | item4 | Bank Account Number             |
-    Then I check "Label_BSB" has a CSS property "content" with value ""*""
-    Then I check "Label_BankAccountNumber" has a CSS property "content" with value ""*""
-    Then I check "Label_BankAccountName" has a CSS property "content" with value ""*""
+    Then I check "Label_BSB" is marked as "Mandatory"
+    Then I check "Label_BankAccountNumber" is marked as "Mandatory"
+    Then I check "Label_BankAccountName" is marked as "Mandatory"
     Then I click on button "Refunds_NO"
     Then I click on button "RefundDetailsNext"
     Then "<Item>" is displayed as "<ItemName>"
@@ -709,11 +707,11 @@ Feature: wip
       | item2 | Declaration                                                                      |
       | item3 | Declarer                                                                         |
       | item5 | I declare that this information is true and correct to the best of my knowledge. |
-    Then I check "Label_Declarer" has a CSS property "content" with value ""*""
-    Then I check "Label_Organisation" has a CSS property "content" with value ""*""
-    Then I check "Label_Employer" has a CSS property "content" with value ""*""
-    Then I check "Label_ContactPhone" has a CSS property "content" with value ""*""
-    Then I check "Label_EmailAdress" has a CSS property "content" with value ""*""
+    Then I check "Label_Declarer" is marked as "Mandatory"
+    Then I check "Label_Organisation" is marked as "Mandatory"
+    Then I check "Label_Employer" is marked as "Mandatory"
+    Then I check "Label_ContactPhone" is marked as "Mandatory"
+    Then I check "Label_EmailAdress" is marked as "Mandatory"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
@@ -750,7 +748,7 @@ Feature: wip
     Then I click on button "MonthlyReturnBack"
     Then I click on button "ACTWagesPaidBack"
     Then I click on button "TaxPayerDetailsBT"
-    Then I scroll up
+    #Then I scroll up
     Then I wait for "2000" millisecond
     Then I click on button "SaveAndExitBt"
     Then I check I am on "HomePage" page

@@ -1,12 +1,14 @@
 Feature: Some feature
 
-  @tss
+@defect
   Scenario Outline: DTSP-54 : As a DB Portal Administrator I want to search for a message so that I can quickly access the message I want to view
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
+    And I hit Enter
+    Given I want to login to portal "<PortalName2>"
     And I hit Enter
     Given I want to login to portal "MessageEdit"
     Then I see text "Feedback Message Text" displayed
@@ -41,8 +43,8 @@ Feature: Some feature
       | item6 | InvalidABN           |
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  |
-      | TSS        | UserNameInput | PasswordInput | bob      | dbresults |
+      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   |
+      | TSS        | TSSUAP      | UserNameInput | PasswordInput | mbrown   | Dbresults1 |
 
   #alt username: hemant.shori
   #alt password: USBcoffee1

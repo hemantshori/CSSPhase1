@@ -1,4 +1,4 @@
-@Regression
+@CSS_Regression
 Feature: To test the functionality of Appication as described in Jira Stories for Iteration 1
 
   @ShakeOut
@@ -7,7 +7,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -35,7 +35,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   @ShakeOut
   Scenario Outline: Check Usage Menu Item List Test 1, DCSSP-245 Description: User views the menu items Epic: Common Components
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -45,7 +45,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item  | ItemName      |
       | item2 | Usage History |
     And I click on "<ButtonName2>"
-    Then I see "Residential - Electricity Usage History" displayed
+   # Then I see "Residential - Electricity Usage History" displayed               .......disabled for now
     Then I see "5% discount!" displayed
 
     Examples: 
@@ -55,7 +55,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   @ShakeOut
   Scenario Outline: Check User Menu Item List Test 1, DCSSP-745 Description: check for feature under development
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -80,7 +80,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: Test20, Test21, Test22, Test23, Test24, Test26, Check Billing history page elements.
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -105,7 +105,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: Test 25, User views the Billing History page
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -136,7 +136,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -152,7 +152,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: Covers tests around billing history check, Scenario 189
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -179,7 +179,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: Covers tests around Usage history check, Scenario 189
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -208,14 +208,14 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   #########################################################################
   Scenario Outline: DCSSP-450,DCSSP-451,DCSSP-457, PAYMENTS, To make payment from RHS "PAY" button.
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "<ButtonName>"
     And I check I am on "MakePayment" page
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value           |
       | PaymentAmount | <PaymentAmount> |
       | NameOnCard    | <Name on Card>  |
@@ -241,14 +241,14 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   #    | CSS        | UserNameInput | PasswordInput | mary     | Dbresults11 | Pay        | 689608083     | 5.00          | Mary Test    | 4007000000027 | 11           | 20          | 112           | Thank you, your payment has been received. |
   Scenario Outline: DCSSP-422, 423, SUCCESSFUL PAYMENTS, To make payment from RHS "PAY" button.
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "<ButtonName>"
     And I check I am on "MakePayment" page
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value           |
       | PaymentAmount | <PaymentAmount> |
       | NameOnCard    | <Name on Card>  |
@@ -268,7 +268,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   #########################################################################
   Scenario Outline: DCSSP-162, DCSSP-236 edit settings......................Ellen Please verify these
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -287,16 +287,18 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item9   | Language      |
       | Item10  | Contact       |
       | Item11  | Security      |
-      | Item11  | Security      |
       | Item11  | Hint          |
       | Item 11 | ******        |
+    And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | Item2 | Submit   |
       | Item3 | Cancel   |
-    And I enter then details as
+    And I enter the details as
       | Fields | Value   |
       | Email  | <email> |
     And I click on "Submit"
@@ -308,16 +310,19 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: DCSSP-433, DCSSP-550 (reset password is manual), DCSSP-162 Edit Settings>> reset pwd
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
     And I check I am on "Setting" page
+    And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
-    And I enter then details as new
+    And I enter the details as
       | Fields                  | Value                  |
       | CurrentPasswordInput    | <Current Password>     |
       | NewPasswordInput        | <New Password>         |
@@ -349,7 +354,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item  | Submit         |
        | Item  | Already have an Account? |
       | Item  | Sign In        |
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value                    |
       | InputAccountNumber        | <Invalid Account Number> |
       | InputBillName             | <Name On Bill>           |
@@ -361,7 +366,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
      Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
     And I check I am on "Regist" page
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value            |
       | InputAccountNumber        | <Account Number> |
       | InputBillName             | <Name On Bill>   |
@@ -370,7 +375,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "checkbox" checkbox
     And I click on "Submit"
     And I check I am on "Registration" page
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value      |
       | NewPassword | <Password> |
     Then "<Item>" is displayed as "<ItemName>"
@@ -388,7 +393,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   ########################## TO DO ADD PAYMENT VERIFICATIONS#####################################################
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451: Scenario 1, Scenario 2 Test 1, To make payment from LHS
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -397,7 +402,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Make a Payment"
     And I check I am on "MakePayment" page
     And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value           |
       | PaymentAmount | <PaymentAmount> |
       | NameOnCard    | <Name on Card>  |
@@ -423,7 +428,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   #############################################################ALL IS WELLLLLLLLLLLLLLLL#####################################################
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -431,16 +436,8 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Payments"
     And I click on "Make a Payment"
     And I check I am on "MakePayment" page
-    And "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName            |
-      | Item1 | Total Due           |
-      | Item2 | Payment Amount      |
-      | Item3 | Name on Card        |
-      | Item4 | Card Number         |
-      | Item5 | Expiry Date (mm/yy) |
-      | Item6 | Security Code       |
     And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value           |
       | PaymentAmount | <PaymentAmount> |
       | NameOnCard    | <Name on Card>  |
@@ -451,28 +448,26 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     And I check I am on "PaymentConfirm" page
     Then I see "Thank you, your payment has been received." displayed
-    And "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName        |
-      | Item1 | Receipt Sent To |
+    And I capture "ReceiptNumberId"
     And I click on "ActivityHistoryButton"
-    And I check I am on "Activity History" page
-    Then I see "Activity History" displayed
     And "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName    |
       | Item1 | Date        |
       | Item1 | Activity    |
       | Item1 | Description |
+    And I check I am on "Activity History" page
+    Then I see "Activity History" displayed
+    And I check "Wrapper" contains "ReceiptNumberId"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
-      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          2.20 | Mary Test    | 4007000000027 |           11 |          20 |           112 |
-
+      | CSS        | UserNameInput | PasswordInput | mary     | Dbresults1 | Pay        | Account 1071805034 |          0.11 | Mary Test    | 4007000000027 |           11 |          20 |           112 |  
   ######################################################################
   ############################    LHS successful payment  back to make another payment    ############################
   ######################################################################
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451: Scenario 1, Scenario 2 Test 1, To make payment from LHS
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -489,7 +484,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item5 | Expiry Date (mm/yy) |
       | Item6 | Security Code       |
     And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value           |
       | PaymentAmount | <PaymentAmount> |
       | NameOnCard    | <Name on Card>  |
@@ -523,25 +518,25 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   #############################################################################################################################################################################################
   Scenario Outline: DCSSP-493: Invalid Login using email (scenario 3); DCSSP-551: Password Hint during login; DCSSP-28: Account locked after no of unsuccessful login attempts
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value               |
       | UserNameInput | <UserName or Email> |
       | PasswordInput | <Invalid Password1> |
     And I hit Enter
     Then I see "<message1>" displayed
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value               |
       | UserNameInput | <UserName or Email> |
       | PasswordInput | <Invalid Password2> |
     And I hit Enter
     Then I see "<message1>" displayed
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value               |
       | UserNameInput | <UserName or Email> |
       | PasswordInput | <Invalid Password3> |
     And I hit Enter
     Then I see "<message2>" displayed
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value               |
       | UserNameInput | <UserName or Email> |
       | PasswordInput | <Invalid Password4> |
@@ -556,27 +551,30 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: DCSSP-493 :As a user I want to login to the CSS using my email address so that I can access my information
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
-    And I enter then details as
+    And I enter the details as
       | Fields | Value   |
       | Email  | <email> |
     And I click on "Submit"
     And I click on "Sign Out"
     And I check I am on "Login" page
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <email>    |
       | PasswordInput | <Password> |
     And I hit Enter
     And I check I am on "Dashboard" page
     And I click on "Sign Out"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value         |
       | UserNameInput | <wrong email> |
       | PasswordInput | <Password>    |
@@ -590,7 +588,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: DCSSP-607: As a user I want to view the Terms and Conditions before registering an account so that I know the rules I need to follow when using CSSAs a user I want to enter my user details so that I can complete the registration process
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -608,7 +606,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: DCSSP-414: As a user I want to enter my user details so that I can complete the registration process
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -620,7 +618,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Sign In"
     And I check I am on "Login" page
     And I click on "Create Account"
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -633,7 +631,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Cancel"
     And I check I am on "Login" page
     And I click on "Create Account"
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -650,7 +648,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item  | ItemName   |
       | Item1 | First Name |
       | Item2 | Last Name  |
-    And I enter then details as new
+    And I enter the details as
       | Fields          | Value               |
       | Email           | <Email Address1>    |
       | Username        | <Choose UserName1>  |
@@ -660,7 +658,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I select "<DropDownValue1>" from "<DropDownField>"
     And I click on "Submit"
     Then I see "Email address already exists. Please try again." displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields          | Value               |
       | Email           | <Email Address2>    |
       | NewPassword     | <Choose Password2>  |
@@ -668,7 +666,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hit Enter
     And I click on "Submit"
     Then I see "Invalid email address. Please try again." displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields          | Value               |
       | Email           | <Email Address3>    |
       | Username        | <Choose UserName3>  |
@@ -676,14 +674,14 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | ConfirmPassword | <Confirm Password3> |
     And I click on "Submit"
     Then I see "Username already exists. Please try again." displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields          | Value               |
       | Username        | <Choose UserName4>  |
       | NewPassword     | <Choose Password4>  |
       | ConfirmPassword | <Confirm Password4> |
     And I click on "Submit"
     Then I see "Invalid password. Please try again." displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields          | Value               |
       | NewPassword     | <Choose Password5>  |
       | ConfirmPassword | <Confirm Password5> |
@@ -700,7 +698,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
    Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS; DCSSP-459: scenario 1, 2, 3
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -718,7 +716,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item6 | Security Code       |
     And I click on "Cancel"
     And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value           |
       | PaymentAmount | <PaymentAmount> |
       | NameOnCard    | <Name on Card>  |
@@ -746,7 +744,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451: Scenario 1, Scenario 2 Test 1, To make payment from LHS; DCSSP-459: scenario 4
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -765,7 +763,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
     And I click on "Cancel"
     And I check I am on "MakePayment" page
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value           |
       | PaymentAmount | <PaymentAmount> |
       | NameOnCard    | <Name on Card>  |
@@ -788,7 +786,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: DCSSP-489 As a user I want my name displayed in the portal so that I know I'm currently logged in
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -803,19 +801,22 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: DCSSP-449: all (Edit phone and mailing address); DCSSP-553: covers update of info (excludes ccb check)
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
     And I check I am on "Setting" page
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName   |
       | Item2 | First Name |
       | Item3 | Last Name  |
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value               |
       | MobilePhone | <Mobile Number1>    |
       | HomePhone   | <HomePhone Number1> |
@@ -823,19 +824,19 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I hover on "hint" to verify "(999) 999-9999" is displayed
     And I click on "Submit"
     Then I see "Mobile format invalid. Expected format: (999) 999-9999" displayed
-    And I enter then details as
+    And I enter the details as
       | Fields      | Value               |
       | MobilePhone | <Mobile Number2>    |
       | HomePhone   | <HomePhone Number2> |
     And I click on "Submit"
     Then I see "Home Phone format invalid. Expected format: (999) 999-9999" displayed
-    And I enter then details as
+    And I enter the details as
       | Fields    | Value               |
       | HomePhone | <HomePhone Number1> |
       | WorkPhone | <WorkPhone Number2> |
     And I click on "Submit"
     Then I see "Work Phone format invalid. Expected format: (999) 999-9999" displayed
-    And I enter then details as
+    And I enter the details as
       | Fields           | Value               |
       | Email            | <Email>             |
       | WorkPhone        | <WorkPhone Number1> |
@@ -854,7 +855,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: DCSSP-520: Already registered or already activated
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -876,7 +877,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: DCSSP-520: Already registered or already activated and user tries again.
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number1> |
       | InputBillName             | <BillName1>       |
@@ -891,7 +892,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then I click on "wtSubmitButton3"
     And I check I am on "Login" page
     And I click on "Create Account"
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number2> |
       | InputBillName             | <BillName2>       |
@@ -900,7 +901,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     #   Then I see "Please wait while we retrieve your account..." displayed
     And I check I am on "Registration" page
-    And I enter then details as new
+    And I enter the details as
       | Fields          | Value               |
       | Email           | <Email Address1>    |
       | Username        | <Choose UserName1>  |
@@ -920,7 +921,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
   Scenario Outline: Continue with 520, Scenario 2: User registers and their account is not activated
     Given I want to login to portal "<PortalName>"
     And I click on "Create Account"
-    And I enter then details as new
+    And I enter the details as
       | Fields                    | Value             |
       | InputAccountNumber        | <Account Number> |
       | InputBillName             | <BillName>       |
@@ -936,27 +937,30 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       
   Scenario Outline: DCSSP-493 :As a user I want to login to the CSS using my email address so that I can access my information. This will keep runing the validations till CAPTCHA
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
-    And I enter then details as
+    And I enter the details as
       | Fields | Value   |
       | Email  | <email> |
     And I click on "Submit"
     And I click on "Sign Out"
     And I check I am on "Login" page
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <email>    |
       | PasswordInput | <Password> |
     And I hit Enter
     And I check I am on "Dashboard" page
     And I click on "Sign Out"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value         |
       | UserNameInput | <wrong email> |
       | PasswordInput | <Password>    |
@@ -964,7 +968,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then I see "<Message>" displayed
     Given I want to login to portal "<PortalName2>"
     And I click on "Forgot Password?"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value   |
       | UserNameInput | <email> |
     And I hit Enter
@@ -976,16 +980,19 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: DCSSP-758: This is for defect 758, email address should not be duplicated with edit settings option. This should not accept the duplicate email address.
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I check I am on "Dashboard" page
     And I click on "Settings"
+    And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
-    And I enter then details as
+    And I enter the details as
       | Fields | Value   |
       | Email  | <email> |
     And I hit Enter
@@ -997,7 +1004,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: DCSSP-758: This is for defect 758, email address should not be duplicated with edit settings option. This should not accept the duplicate email address.
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1016,7 +1023,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
 
   Scenario Outline: DCSSP-450; DCSSP-457; DCSSP-451; DCSSP-492: Scenario 1, Scenario 2 Test 1, To make payment from LHS. + DCSSP-743-- Check payment made on activity history page.
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1025,7 +1032,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Make a Payment"
     And I check I am on "MakePayment" page
     And I hover on "InfoTooltip OSInline" to verify "3 digit number on the back of your card or 4 digit number on your American Express" is displayed
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value           |
       | PaymentAmount | <PaymentAmount> |
       | NameOnCard    | <Name on Card>  |
@@ -1036,7 +1043,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     And I click on "Submit"
     And I check I am on "PaymentConfirm" page
     Then I see "Thank you, your payment has been received." displayed
-    And I capture "wt49_block_wtColumn2"
+    And I capture "ReceiptNumberId"
     And I click on "ActivityHistoryButton"
     And "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName    |
@@ -1045,7 +1052,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
       | Item1 | Description |
     And I check I am on "Activity History" page
     Then I see "Activity History" displayed
-    And I Check "Wrapper" contains "wt49_block_wtColumn2"
+    And I check "Wrapper" contains "ReceiptNumberId"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ButtonName | AccountNumber      | PaymentAmount | Name on Card | Card Number   | Expiry Month | Expiry Year | Security Code |
@@ -1056,7 +1063,7 @@ Feature: To test the functionality of Appication as described in Jira Stories fo
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1078,7 +1085,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
       | Item1 | Sign In          |
       | Item1 | Forgot Password? |
       | Item1 | Create Account   |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1125,7 +1132,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
       | Item6 | Light dimmers save you money and can extend the life of incandescent lamps.                                             |
     And I click on "Sign Out"
     And I check I am on "Login" page
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1147,7 +1154,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     Then I see "15% Eco Goal" displayed
     And I click on "Sign Out"
     And I check I am on "Login" page
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1177,16 +1184,19 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
     And I check I am on "Settings" page
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
-    And I enter then details as
+    And I enter the details as
       | Fields                 | Value            |
       | CurrentPasswordInput   | <Password>       |
       | NewPasswordInput       | <NewPassword>    |
@@ -1209,7 +1219,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
 
   Scenario Outline: DCSSP-644: Open PDF bill and verify
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1224,7 +1234,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
 
   Scenario Outline: DCSSP-67 : As a user I want to view my account’s financial history so that I can review the account's transactions over a period of time
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1252,7 +1262,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
 
   Scenario Outline: DCSSP-67 : As a user I want to view my account’s financial history is empty Scenario 3
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1275,7 +1285,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
 
   Scenario Outline: DCSSP-730: update Profile Address Scenario 1
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1297,13 +1307,16 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
       | Item11  | Security      |
       | Item11  | Hint          |
       | Item 11 | ******        |
+        And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
     And I click on "EditSettings"
     And I check I am on "EditSettings" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | Item2 | Submit   |
       | Item3 | Cancel   |
-    And I enter then details as
+    And I enter the details as
       | Fields           | Value      |
       | Email            | <email>    |
       | MailingAddressL2 | <MAddress> |
@@ -1318,20 +1331,23 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
 
   Scenario Outline: DCSSP-730: update Profile Address Scenario 2
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
     And I check I am on "Setting" page
-    And I click on "EditSettings"
+       And I click on "Profile"
+    And I click on "Contact"
+    And I click on "Security"
+    And I click on "EditSettings" 
     And I check I am on "EditSettings" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | Item2 | Submit   |
       | Item3 | Cancel   |
-    And I enter then details as
+    And I enter the details as
       | Fields           | Value      |
       | Email            | <email>    |
       | MailingAddressL2 | <MAddress> |
@@ -1354,7 +1370,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1382,7 +1398,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1399,7 +1415,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -1423,7 +1439,7 @@ Scenario Outline: DCSSP-117,167,754 : Goals and Targets setting,verification and
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |

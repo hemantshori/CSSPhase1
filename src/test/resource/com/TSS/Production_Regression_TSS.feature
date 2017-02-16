@@ -1,9 +1,9 @@
-@TSSRegression
 Feature: Some feature
 
   # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
-  # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
+  # Find nation's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
+  @defect
   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
@@ -22,11 +22,11 @@ Feature: Some feature
     Then I see text "<ABN>" displayed
     Then I select "2014" from "YearOfReturn"
     Then I click on "Independent employer (non-group) lodging for itself"
-    Then I click on button "TaxPayerDetailsNext"
+    Then I click on "TaxPayerDetailsNext"
     And I wait for "2000" millisecond
-    Then I click on button "ACTWagesPaidNext"
+    Then I click on "ACTWagesPaidNext"
     And I wait for "2000" millisecond
-    Then I click on button "MonthlyReturnNext"
+    Then I click on "MonthlyReturnNext"
     And I wait for "2000" millisecond
     And I enter the details as
       | Fields              | Value       |
@@ -44,8 +44,9 @@ Feature: Some feature
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
+      | Production | UserNameInput | PasswordInput | nation   | Dbresults1 | 12345678949 | 12345678949 |
 
+  @tss_review_done
   Scenario Outline: DTSP-356 Scenario 2, 3 and 4
     #scenario 2: Aus wide wages is not greater than ACT Taxable wages
     #scenario 3: Group ACT wages is not greater than ACT Taxable wages
@@ -68,14 +69,15 @@ Feature: Some feature
     Then I wait for "2000" millisecond
     Then I enter the details as
       | Fields           | Value |
-      | SalariesAndWages |   100 |
+      | SalariesAndWages |   100000 |
     Then I click on "ClaimingACTProportion_Yes"
     Then I click on "ACTWagesPaidNext"
     Then I wait for "2000" millisecond
     Then I enter the details as
       | Fields                       | Value |
-      | PayrollAnswer_AustralianWide |    97 |
-      | PayrollAnswer_GroupActWages  |    98 |
+      | PayrollAnswer_AustralianWide |   100000 |
+      | PayrollAnswer_GroupActWages  |    98000 |
+ 
     Then I click on "MonthlyReturnNext"
     And I wait for "2000" millisecond
     And I enter the details as
@@ -98,61 +100,10 @@ Feature: Some feature
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
+      | Production | UserNameInput | PasswordInput | nation   | Dbresults1 | 12345678949 | 12345678949 |
 
-  Scenario Outline: DTSP-356Part2 Scenario 2, 3 and 4
-    #scenario 2: Aus wide wages is not greater than ACT Taxable wages
-    #scenario 3: Group ACT wages is not greater than ACT Taxable wages
-    #scenario 4: Aus wide wages is not greater than Group ACT wages
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    And I click on "Payroll Tax Lodgement"
-    Then I click on button "Discard"
-    Then I click on "Annual Reconciliation"
-    Then I click on button "NextSection"
-    Then I see text "<CRN>" displayed
-    Then I see text "<ABN>" displayed
-    Then I select "2011" from "YearOfReturn"
-    Then I click on "Designated group employer for a group and lodging for itself"
-    Then I click on button "TaxPayerDetailsNext"
-    Then I wait for "2000" millisecond
-    Then I enter the details as
-      | Fields           | Value |
-      | SalariesAndWages |   100 |
-    Then I click on "ClaimingACTProportion_Yes"
-    Then I click on "ACTWagesPaidNext"
-    Then I wait for "2000" millisecond
-    Then I enter the details as
-      | Fields                       | Value |
-      | PayrollAnswer_AustralianWide |   100 |
-      | PayrollAnswer_GroupActWages  |    98 |
-    Then I click on "MonthlyReturnNext"
-    And I wait for "2000" millisecond
-    And I enter the details as
-      | Fields              | Value       |
-      | PersonFullName      | test        |
-      | LegalEntityName     | Test2       |
-      | EmployerDeclaration | test        |
-      | PhoneNumber         |  0422184033 |
-      | EmailAddress        | abc@abc.com |
-    And I Tab Out
-    Then I click on "DeclarationConfirm"
-    Then I check "Submit" is readonly
-    Then I click on "ConfirmForSubmission"
-    # don't remove the wt prefix, otherwise there will be a conflict with a 'HiddenSubmitBT'
-    Then I click on button "wtSubmitBT"
-    And I wait for "2000" millisecond
-    Then I see text "Group ACT wages must be greater than or equal to ACT Taxable wages" displayed
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12121212121 | 21212121212 |
-
-  #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
+  #NOTE: Ensure that nation has a current employee type selected in the data extensions page
+  @tss_review_done
   Scenario Outline: DTSP-311: Validation Rules and Errors to be used across Annual Reconciliation Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -232,8 +183,9 @@ Feature: Some feature
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
+      | Production | UserNameInput | PasswordInput | nation   | Dbresults1 | 98765123456 | 12345678902 |
 
+  @defect
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
@@ -244,7 +196,7 @@ Feature: Some feature
       | item3 | Employer Name                                             |
       | item4 | Business Trading Name                                     |
       | item5 | Australian Business Number (ABN)                          |
-      | item6 | Australian Company Number (ACN)                           |
+      | item6 | Australian Company Name (ACN)                             |
       | item7 | Business Address                                          |
       | item7 | Postal Address                                            |
       | item7 | Address where Business Records are located (Jurisdiction) |
@@ -272,7 +224,7 @@ Feature: Some feature
     Then I wait for "2000" millisecond
     Then I click on "ACTWagesPaidNext"
     Then I wait for "2000" millisecond
-    # Scenario 1...................updated with changes from 506
+    # Scenario 1
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                                     |
       | item2 | Date Business Commenced Employing in ACT (or Recommenced)                    |
@@ -283,12 +235,8 @@ Feature: Some feature
       | item7 | Grouping for Payroll Tax Purposes                                            |
       | item7 | Total Taxable Wages for the five previous financial years                    |
       | item7 | As an eligible employer, do you wish to apply for annual lodgement approval? |
-    Then I wait for "2000" millisecond
-    And from section "AnnualLodgementApproval" I select radio button option "wtLabel_AnnualLodgementApproval_YES"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                               |
-      | item7 | Annual Lodgement Request Justification |
-      | item7 | Contact Person for Payroll Tax         |
+      | item7 | Annual Lodgement Request Justification                                       |
+      | item7 | Contact Person for Payroll Tax                                               |
     # Scenario 2
     Then I click on "MonthlyReturnBack"
     Then I wait for "2000" millisecond
@@ -298,11 +246,11 @@ Feature: Some feature
       | item3 | Control and Financial Interest                   |
       | item4 | (shares, beneficiaries if greater than 20% each) |
     Then I click on "ACTWagesPaidNext"
-    # Then I click on "DateBusinessStart"
+    #Then I click on "DateBusinessStart"
     Then I enter the details as
       | Fields            | Value      |
       | DateBusinessStart | 02-01-2017 |
-    #   Then I click on "DateBusinessLiable"
+    # Then I click on "DateBusinessLiable"
     Then I enter the details as
       | Fields             | Value      |
       | DateBusinessLiable | 03-01-2017 |
@@ -341,8 +289,8 @@ Feature: Some feature
     Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
 
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
+      | PortalName                  | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | Production_Tax_Registration | UserNameInput | PasswordInput | nation   | Dbresults1 | 12345678901 | 12345678901 |
 
   Scenario Outline: DTSP-355
     Given I want to login to portal "<PortalName>"
@@ -395,8 +343,8 @@ Feature: Some feature
       | item4 | Control and Financial Interest           |
 
     Examples: 
-      | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
+      | PortalName                  | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | Production_Tax_Registration | UserNameInput | PasswordInput | nation   | Dbresults1 | 12345678901 | 12345678901 |
 
   Scenario Outline: DTSP-310
     Given I want to login to portal "<PortalName>"
@@ -462,13 +410,14 @@ Feature: Some feature
 
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
+      | Tax_Registration | UserNameInput | PasswordInput | nation   | Dbresults1 | 12345678901 | 12345678901 |
 
   ####################################
   ####### Iteration 3 test cases######
   ####################################
+  @defect
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
-    Given I want to login to portal "<PortalName>"
+    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
@@ -476,12 +425,11 @@ Feature: Some feature
     And I hit Enter
     #  Given I want to login to portal "<PortalName2>"
     # Remove the following step with the one above throughout test case when defect on UAP is fixed.
-    Given I want to login to portal "<PortalName>"
+    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx"
     # Scenario 1: CPA access the 'Manage Tips' page
-    And I wait for "2000" millisecond
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName             |
-      #| item2 | Page                 |
+      | item2 | Page                 |
       | item3 | Section              |
       | item5 | Tooltips Description |
       | item5 | Identifier           |
@@ -513,28 +461,23 @@ Feature: Some feature
       | item5 | AccountAlreadyRegisteredLine1 |
       | item5 | AccountAlreadyRegisteredLine2 |
       | item5 | AddNewAccountIntro            |
-    # | item5 | LockedAccountLine1            |.............disabling because taken out...
+      | item5 | LockedAccountLine1            |
     #Scenario 4: More than 10 search results
-    Given I want to login to portal "<PortalName>"
+    Given I access URL "https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx"
     And I enter the details as
       | Fields      | Value      |
       | SearchInput | PayrollTax |
     Then I click on button "SearchBT"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName |
-      | item2 | Counter  |
+    Then I see "Counter" displayed
     And I enter the details as
       | Fields      | Value   |
       | SearchInput | Account |
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName |
-      | item2 | Counter  |
+    Then I see "Counter" displayed
 
     Examples: 
-      | PortalName   | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS_Tooltips | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | Production | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
-  @underTest
   Scenario Outline: DTSP-25: As an organisation I want a user's details verified during registration so that only valid users register with the portal (page 1)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
@@ -622,13 +565,13 @@ Feature: Some feature
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
+      | Production | UserNameInput | PasswordInput | nation   | Dbresults1 | 12345678901 | 12345678901 |
 
   Scenario Outline: DTSP-145 , As an end user I want to be able to view my user profile settings so that I know if my profile information is up to date
     #Scenario 1: User views their profile settings
     Given I want to login to portal "<PortalName>"
-    And I check "UserNameEmailLabel" is marked as "Mandatory"
-    Then I check "PasswordLabel" is marked as "Mandatory"
+    Then I check "UserNameEmailLabel" has a CSS property "content" with value ""*""
+    Then I check "PasswordLabel" has a CSS property "content" with value ""*""
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
@@ -659,265 +602,4 @@ Feature: Some feature
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
-
-  Scenario Outline: DTSP-147
-    Given I want to login to portal "<PortalName>"
-    Then I check "UserNameEmailLabel" is marked as "Mandatory"
-    Then I check "PasswordLabel" is marked as "Mandatory"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Given I want to login to portal "AccountManagement"
-    Then I click on button "EditBT"
-    #Scenario 1: User accesses the edit function
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName           |
-      | item2 | Username           |
-      | item3 | First Name         |
-      | item5 | Last Name          |
-      | item5 | Email Address      |
-      | item5 | Phone Number       |
-      | item5 | Choose a Tax Agent |
-      | item5 | Password           |
-      | item5 | New Password       |
-      | item5 | Confirm Password   |
-      | item5 | Hint               |
-    #Scenario 2: User enters incorrect input type into a restricted fields (e.g. entering 123 into an alphabet field)
-    Then I enter the details as
-      | Fields            | Value |
-      | Input_PhoneNumber | TEST  |
-    Then I check "Input_PhoneNumber" is empty
-    #Scenario 3: User has not entered all the mandatory fields
-    Then I check "CancelBT" is readonly
-    #Scenario 4, 6: Scenario 6: Profile settings details does not pass all validations
-    Then I enter the details as
-      | Fields                   | Value                 |
-      | Input_FirstName          | TEST                  |
-      | Input_LastName           | TEST                  |
-      | Input_PhoneNumber        |                 33333 |
-      | Input_Email              | TEST                  |
-      | Input_NewPassword        | adsfasdfaf            |
-      | Input_NewpasswordConfirm | asfsadfsadf           |
-      | Input_Hint               | testsetsetwetstsetset |
-    Then I wait for "1000" millisecond
-    Then I click on button "Input_FirstName"
-    Then I click on button "Submit"
-    #Then I see text "Please enter a valid email address" displayed
-    Then I see text "Email expected!" displayed
-    Then I see text "This is an invalid phone number" displayed
-    Then I see text "New Password is invalid. Please try again." displayed
-    Then I see text "New Password and Confirm Password do not match. Please try again." displayed
-    #Scenario 8: User cancels edit function with unsaved changes
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I check I am on "View Settings" page
-    Given I want to login to portal "AccountManagement"
-    #Then I click on button "Cancel"
-    Then I check I am on "View Settings" page
-    #Scenario 5: Profile settings details pass all validations
-    Then I click on button "EditBT"
-    Then I enter the details as
-      | Fields                   | Value                 |
-      | Input_FirstName          | TEST                  |
-      | Input_LastName           | TEST                  |
-      | Input_PhoneNumber        |              33333333 |
-      | Input_Email              | TEST@TESTTESTTSET.com |
-      | Input_NewPassword        | Dbresults1            |
-      | Input_NewpasswordConfirm | Dbresults1            |
-      | Input_Hint               | DB RESULTS ONE        |
-    #Scenario 9: User update's Tax Agent Details (Tax Agent registered and activated on the Portal)
-    Then I select "OrganizationWithA_Z TaxAgents (98765432102)" from "ChooseTaxAgent"
-    Then I click on button "Input_FirstName"
-    Then I click on button "Submit"
-    Then I see text "Your changes have been successfully saved." displayed
-    Then I check I am on "View Settings" page
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
-
-  Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    And I click on "Payroll Tax Lodgement"
-    Then I click on button "Discard"
-    Then I click on "Annual Reconciliation"
-    Then I click on button "NextSection"
-    Then I click on button "TaxPayerDetailsBT"
-    Then I check "PayrollAnswer_TypeMonthly" is readonly
-    Then I check "PayrollAnswer_TypeAnnual" is readonly
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
-
-  Scenario Outline: DTSP-440 and DTSP-441: As an organisation I want to know the type of user who is registering so that the relevant verification information can be presented.
-    #ONHOLD until the tax agent registration bug can be fixed
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    #DTSP-440: Scenario 1 and 2
-    Then I see checkbox "RegistrationAsBusiness" as selected
-    Then I see checkbox "RegistrationAsTaxAgent" as not selected
-    #DTSP-441, Scenario 1:
-    Then I click on "Register as a Tax Agent"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                               |
-      | item2 | Registration ID                        |
-      | item5 | Registered Business Name               |
-      | item5 | Registered Business Address            |
-      | item5 | Country                                |
-      | item5 | Address Line 1                         |
-      | item5 | Address Line 2                         |
-      | item5 | Suburb / City                          |
-      | item5 | Territory / State                      |
-      | item5 | Postcode                               |
-      | item5 | By creating an account, I agree to the |
-    #DTSP-441, Scenario 3:
-    Then I check "RegistrationSubmit" is readonly
-    #DTSP-441, Scenario 4: User clicks on the â€˜Sign Inâ€™ link
-    Then I click on "Sign In"
-    Then I check I am on "Login" page
-    #DTSP-441, Scenario 5: User views Terms and Conditions
-    Then I click on "Create Account"
-    Then I click on "Terms & Conditions"
-    Then a new page "http://dbresults.com.au/terms/" is launched
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I click on "Register as a Tax Agent"
-    Then I enter the details as
-      | Fields                    | Value        |
-      | InputTaxAgentABN          |  92622632200 |
-      | InputTaxAgentBusinessName | GANG LE TANG |
-      | BusinessAddress_Address1  | TEST         |
-      | BusinessAddress_Address2  | TEST         |
-      | BusinessAddress_Suburb    | TEST         |
-      | BusinessAddress_Postcode  |         3333 |
-    And I select "Victoria" from "StateIdLabel"
-    #Then I select "Australia" from "BusinessAddress_CountryId"
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName         |
-      | item2 | First Name       |
-      | item3 | Last Name        |
-      | item5 | Phone Number     |
-      | item5 | Email Address    |
-      | item5 | Choose Username  |
-      | item5 | Choose Password  |
-      | item5 | Confirm Password |
-      | item5 | Hint             |
-    Then I enter the details as
-      | Fields                       | Value             |
-      | Registration_FirstName       | TEST              |
-      | Registration_LastName        | TEST              |
-      | Registration_PhoneNumber     |          33333333 |
-      | Registration_Email           | TEST@asdfasdfafsd |
-      | Registration_Username        | TeSTMANMAN        |
-      | Registration_NewPassword     | Dbresults1        |
-      | Registration_ConfirmPassword | Dbresults1        |
-      | Registration_Hint            |              3333 |
-    Then I check "Submit" is not readonly
-
-    Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jscott   | Dbresults1 |
-
-  Scenario Outline: DTSP-459
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    #Scenario 1: User accesses the 'Registration Verification' page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                               |
-      | item2 | Australian Business Number (ABN)       |
-      | item3 | Client Reference Number (CRN)          |
-      | item5 | By creating an account, I agree to the |
-    #Scenario 7: User clicks on the â€˜Sign Inâ€™ link
-    Then I click on "Sign In"
-    Then I check I am on "Login" page
-    #Scenario 8: User views Terms and Conditions
-    Then I click on "Create Account"
-    Then I click on "Terms & Conditions"
-    Then a new page "http://dbresults.com.au/terms/" is launched
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    #Scenario 3: User has not entered all the mandatory fields
-    Then I check "RegistrationSubmit" is readonly
-    #Scenario 2: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a Number field)
-    Then I enter the details as
-      | Fields                  | Value |
-      | InputABNNumber_Business | TEST  |
-      | InputCRNNumber_Business | TEST  |
-    Then I check "InputABNNumber_Business" is empty
-    Then I check "InputCRNNumber_Business" is empty
-    #Scenario 4: Registration details do not pass the frontend validation
-    Then I enter the details as
-      | Fields                  | Value |
-      | InputABNNumber_Business |     3 |
-      | InputCRNNumber_Business |     3 |
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I click on button "RegistrationSubmit"
-    Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
-    Then I see text "Invalid CRN. Please try again." displayed
-    #Scenario 6: Registration details failed the verification with stubs
-    Then I enter the details as
-      | Fields                  | Value       |
-      | InputABNNumber_Business | 33333333333 |
-      | InputCRNNumber_Business |      333333 |
-    Then I click on button "RegistrationSubmit"
-    Then I wait for "1000" millisecond
-    Then I see text "Invalid CRN, ABN or ACN. Please try again" displayed
-    #Scenario 5: Registration details verified with stubs
-    Then I enter the details as
-      | Fields                  | Value       |
-      | InputABNNumber_Business | 12345678949 |
-      | InputCRNNumber_Business | 12345678949 |
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
-
-    Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jscott   | Dbresults1 |
-      
-      # following test is failing but Jonathan fixed the label names and should work in next release.
-      Scenario Outline: DTSP-460: s an organisation I want user inputs to be restricted & validated during Tax Agent's portal registration so that human error can be minimised
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    Then I see checkbox "RegistrationAsBusiness" as selected
-    Then I see checkbox "RegistrationAsTaxAgent" as not selected
-    Then I click on "Register as a Tax Agent"
-    #Scenario 1: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a number field)
-    Then I enter the details as
-      | Fields                   | Value |
-      | InputTaxAgentRegId       | TEST  |
-      | InputTaxAgentABN         | TEST  |
-      | BusinessAddress_Postcode | TEST  |
-    Then I check "InputTaxAgentRegId" is empty
-    Then I check "InputTaxAgentABN" is empty
-    Then I check "BusinessAddress_Postcode" is empty
-    #Scenario 2: Tax Agent Registration details do not pass the frontend validation
-    Then I enter the details as
-      | Fields                    | Value            |
-      | InputTaxAgentABN          |               11 |
-      | InputTaxAgentBusinessName | Automated Tester |
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I wait for "1000" millisecond
-    Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
-
-    Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jscott   | Dbresults1 |
-      
+      | Production | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |

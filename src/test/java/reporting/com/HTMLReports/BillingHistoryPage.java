@@ -26,31 +26,27 @@ public class BillingHistoryPage extends DBUtilities {
 	{
 		List<List<String>> data = table.raw();
 		System.out.println(" value is ++" +data);
-		DBUtilities createXpath = new DBUtilities(driver);
 		for (int i = 1; i <data.size(); i++){
 			Thread.sleep(1000);
 			String name = data.get(i).get(1);
 			System.out.println(" and the name is+++++" +name);
 			if(name.equals("CurrBill")||name.equals("Pay")){
-				
 				Thread.sleep(3000);
-				
+				DBUtilities createXpath = new DBUtilities(driver);
 				String myxpath = createXpath.xpathMakerById(name);
-				System.out.println("The XPath name is" +myxpath);
+				System.out.println(" and the name is++++++++++++++++" +myxpath);
 				Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
 			
-			}
-			else {
-				
-				String myxpath = createXpath.xpathMaker(name);
-				System.out.println("The XPath is" +myxpath);
-				Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
+			}else {
+			DBUtilities createXpath = new DBUtilities(driver);
+			String myxpath = createXpath.xpathMaker(name);
+			System.out.println("**" +myxpath);
+			Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
 		
-				if(driver.findElements(By.xpath(myxpath)).size() != 0){
-					System.out.println("Element is Present");
-				}
-				else {
-					System.out.println("Element is Absent");
+			if(driver.findElements(By.xpath(myxpath)).size() != 0){
+				System.out.println("Element is Present");
+				}else{
+				System.out.println("Element is Absent");
 				}
 			}
 		}
