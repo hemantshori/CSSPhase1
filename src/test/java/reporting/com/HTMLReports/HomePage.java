@@ -75,7 +75,19 @@ public class HomePage extends DBUtilities {
 	    else if (arg1.equals("Change Password Page")){
 	    	driver.get("https://dbresults-tst.outsystemsenterprise.com/AccountMgmt/ResetPassword.aspx?Token=bf138cb5-7b10-43ac-9610-5775e29e5fe1");
 	    }
-	    else {
+	    else if (arg1.equals("StyleGuideConfig")){
+	    	driver.get("https://test-ssc.dbresults.com.au/SS_Admin_Core/StyleGuideConfigs.aspx");
+	    }
+	    else if (arg1.equals("AccountManagement")){
+			driver.get("https://test-ssc.dbresults.com.au/TSSAccountMgmt/Settings.aspx");
+	    }
+		else if(arg1.equals("AC CHECKER")){
+			driver.get("http://achecker.ca/checker/index.php");
+		}
+		else if (arg1.equals("AdminPortal")){
+			driver.get("https://test-ssc.dbresults.com.au/TSSAdminPortal/Homepage.aspx");
+		}
+		else {
 	    	driver.get("https://google.com");
 	    }
 
