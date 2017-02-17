@@ -200,12 +200,12 @@ Feature: Some feature
       | EmailAddress        | abc    |
     And I Tab Out
     Then I click on "DeclarationConfirm"
-    Then I see text "This is an invalid phone number." displayed
-    Then I see text "Invalid email address format. Please try again." displayed
+    Then I see text "Invalid Phone Number. Phone Number should be 8 digits. Please try again." displayed
+    Then I see text "Incorrect Email Format." displayed
     Then I enter the details as
       | Fields       | Value       |
       | PhoneNumber  | 61042218431 |
-      | EmailAddress | abc@test    |
+      | EmailAddress | abc@test.com    |
     And I Tab Out
     # scenario 6: Mandatory fields all filled in
     Then I click on button "DeclarationConfirm"
@@ -233,6 +233,7 @@ Feature: Some feature
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
+
 
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
@@ -433,9 +434,9 @@ Feature: Some feature
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on "TaxPayerDetailsNext"
     Then I see text "Please enter the correct number of digits for this field." displayed
-    Then I see text "number of digits for this field." displayed
-    Then I see text "Invalid email address format. Please try again" displayed
-    Then I see text "This is an invalid phone number." displayed
+    #Then I see text "number of digits for this field." displayed
+    Then I see text "Incorrect Email Format." displayed
+    Then I see text "Invalid Phone Number. Phone Number should be 8 digits. Please try again." displayed
     Then I enter the details as
       | Fields                    | Value              |
       | EmployerName              | DB RESULTS PTY LTD |
@@ -463,6 +464,7 @@ Feature: Some feature
     Examples: 
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
+	
 
   ####################################
   ####### Iteration 3 test cases######
@@ -534,7 +536,8 @@ Feature: Some feature
       | PortalName   | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS_Tooltips | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
-  @underTest
+  @defect 
+ 
   Scenario Outline: DTSP-25: As an organisation I want a user's details verified during registration so that only valid users register with the portal (page 1)
     #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
@@ -549,6 +552,8 @@ Feature: Some feature
     Then I check I am on "Login" page
     #Scenario 5
     Then I click on "Create Account"
+    
+    # DEFECT HERE: LINK CAN'T BE CLICKED ON
     Then I click on "Terms & Conditions"
     Then a new page "http://dbresults.com.au/terms/" is launched
     Then I check I am on "Terms of Use | DB Results - Digital Business specialists" page
@@ -869,7 +874,7 @@ Feature: Some feature
     Then I click on button "TermsandConditionsCheckBox"
     Then I click on button "RegistrationSubmit"
     Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
-    Then I see text "Invalid CRN. Please try again." displayed
+    Then I see text "Invalid CRN. CRN Should be 6 digits. Please try again." displayed
     #Scenario 6: Registration details failed the verification with stubs
     Then I enter the details as
       | Fields                  | Value       |
@@ -891,7 +896,7 @@ Feature: Some feature
       | TSS        | jscott   | Dbresults1 |
       
       # following test is failing but Jonathan fixed the label names and should work in next release.
-      Scenario Outline: DTSP-460: s an organisation I want user inputs to be restricted & validated during Tax Agent's portal registration so that human error can be minimised
+     Scenario Outline: DTSP-460: s an organisation I want user inputs to be restricted & validated during Tax Agent's portal registration so that human error can be minimised
     Given I want to login to portal "<PortalName>"
     Then I click on "Create Account"
     Then I check I am on "Registration" page
@@ -912,6 +917,11 @@ Feature: Some feature
       | Fields                    | Value            |
       | InputTaxAgentABN          |               11 |
       | InputTaxAgentBusinessName | Automated Tester |
+      | BusinessAddress_Address1  | TEST         |
+      | BusinessAddress_Address2  | TEST         |
+      | BusinessAddress_Suburb    | TEST         |
+      | BusinessAddress_Postcode  |         3333 |
+    And I select "Victoria" from "BusinessAddress_StateId"
     Then I click on button "TermsandConditionsCheckBox2"
     Then I click on button "RegistrationSubmit"
     Then I wait for "1000" millisecond

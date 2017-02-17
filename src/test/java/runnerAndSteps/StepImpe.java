@@ -781,7 +781,7 @@ public class StepImpe {
 
 	@After()
 		  public void tearDown() {	
-		    driver.quit();
+		    //driver.quit();
 		   	  }
 	//******************************************************************************   
 	    
@@ -931,7 +931,13 @@ public class StepImpe {
 		WebElement inputBox = driver.findElement(By.xpath(myxpath));
 		Assert.assertTrue(inputBox.isDisplayed());
 		String boxContents = inputBox.getAttribute("value");
-		Assert.assertTrue(boxContents.isEmpty());
+		try {
+			Assert.assertTrue(boxContents.isEmpty());
+		}
+		// in the
+		catch (Exception e){
+			Assert.assertTrue(boxContents == null);
+		}
 	}
 	
 	
@@ -1106,11 +1112,11 @@ public class StepImpe {
 					}
 				}
 				
-				WebElement button = driver.findElement(By.xpath(myxpath4));
-				
-				JavascriptExecutor executor = (JavascriptExecutor)driver;
-				executor.executeScript("arguments[0].scrollIntoView(true);",button);
-				button.click();
+//				WebElement button = driver.findElement(By.xpath(myxpath4));
+//				
+//				JavascriptExecutor executor = (JavascriptExecutor)driver;
+//				executor.executeScript("arguments[0].scrollIntoView(true);",button);
+//				button.click();
 
 			}
 		}

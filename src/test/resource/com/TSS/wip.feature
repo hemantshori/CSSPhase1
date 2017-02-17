@@ -1,54 +1,341 @@
 Feature: wip
 	
-	@bugtest
-	Scenario Outline: DTSP-540 Bug Test
+#	@fixed
+#	Scenario Outline: DTSP-310
+    #Given I want to login to portal "<PortalName>"
+    #And I check I am on "Tax Registration Form" page
+    #Then I wait for "2000" millisecond
+    #Then I select "Company" from "SelectBusinessTypeCode"
+    #Then I select "Miss" from "ContactPerson_Title"
+    #Then I select "SMS" from "CommunicationMethodId"
+    #scenario 1: Restricted fields contain incorrect text type (e.g. ABC into 1234 field and vice versa)
+    #Then I enter the details as
+      #| Fields                 | Value |
+      #| RegistrationAnswer_ABN | TEST  |
+    #Then I check "RegistrationAnswer_ABN" is empty
+    #scenario 2: Restricted fields contain correct text type (e.g. ABC into 1234 field)
+    #Then I enter the details as
+      #| Fields                 | Value       |
+      #| RegistrationAnswer_ABN | 97110187767 |
+    #scenario 5: Mandatory fields not filled in
+    #Then I check "TaxPayerDetailsNext" is readonly
+    #scenario 3, 4: Fields are entered in incorrect format (e.g. no. of digits, email format), Fields are entered in incorrect format (Refer to description for validations and error messages for each field)
+    #Then I enter the details as
+      #| Fields                    | Value             |
+      #| EmployerName              | DB RESULTS PTY LT |
+      #| BusinessTradingName       | DB RESULTS PTY LT |
+      #| RegistrationAnswer_ABN    |       97110187767 |
+      #| RegistrationAnswer_ACN    |         110187767 |
+      #| AddressLine1              | TEST              |
+      #| Address_City              | TEST              |
+      #| PostCode                  |                33 |
+      #| ContactPerson_FirstName   | TEST              |
+      #| ContactPerson_LastName    | TEST              |
+      #| ContactPerson_PhoneNumber |             33333 |
+      #| ContactPerson_Email       | TEST              |
+    #Then I select "Other" from "SelectBusinessTypeCode"
+    #Then I click on "TaxPayerDetailsNext"
+    #Then I see text "Please enter the correct number of digits for this field." displayed
+    #Then I see text "number of digits for this field." displayed
+    #Then I see text "Incorrect Email Format." displayed
+    #Then I see text "Invalid Phone Number. Phone Number should be 8 digits. Please try again." displayed
+    #Then I enter the details as
+      #| Fields                    | Value              |
+      #| EmployerName              | DB RESULTS PTY LTD |
+      #| BusinessTradingName       | DB RESULTS PTY LTD |
+      #| RegistrationAnswer_ABN    |        97110187767 |
+      #| RegistrationAnswer_ACN    |          110187767 |
+      #| AddressLine1              | TEST               |
+      #| Address_City              | TEST               |
+      #| PostCode                  |               3333 |
+      #| ContactPerson_FirstName   | TEST               |
+      #| ContactPerson_LastName    | TEST               |
+      #| ContactPerson_PhoneNumber |           33333333 |
+      #| ContactPerson_Email       | TEST@TEST          |
+    #Then I select "Other" from "SelectBusinessTypeCode"
+    #Scenario 6: Mandatory fields all filled in
+    #Then I select "Miss" from "ContactPerson_Title"
+    #Then I click on "TaxPayerDetailsNext"
+    #Then I wait for "2000" millisecond
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                                 |
+      #| item2 | Business Activity Elsewhere in Australia |
+      #| item3 | Business Activity Category               |
+      #| item4 | Control and Financial Interest           |
+#
+    #Examples: 
+      #| PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      #| Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
+#	
+#	@fixed
+#	Scenario Outline: DTSP-459
+    #Given I want to login to portal "<PortalName>"
+    #Then I click on "Create Account"
+    #Then I check I am on "Registration" page
+    #Scenario 1: User accesses the 'Registration Verification' page
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                               |
+      #| item2 | Australian Business Number (ABN)       |
+      #| item3 | Client Reference Number (CRN)          |
+      #| item5 | By creating an account, I agree to the |
+    #Scenario 7: User clicks on the â€˜Sign Inâ€™ link
+    #Then I click on "Sign In"
+    #Then I check I am on "Login" page
+    #Scenario 8: User views Terms and Conditions
+    #Then I click on "Create Account"
+    #Then I click on "Terms & Conditions"
+    #Then a new page "http://dbresults.com.au/terms/" is launched
+    #Given I want to login to portal "<PortalName>"
+    #Then I click on "Create Account"
+    #Scenario 3: User has not entered all the mandatory fields
+    #Then I check "RegistrationSubmit" is readonly
+    #Scenario 2: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a Number field)
+    #Then I enter the details as
+      #| Fields                  | Value |
+      #| InputABNNumber_Business | TEST  |
+      #| InputCRNNumber_Business | TEST  |
+    #Then I check "InputABNNumber_Business" is empty
+    #Then I check "InputCRNNumber_Business" is empty
+    #Scenario 4: Registration details do not pass the frontend validation
+    #Then I enter the details as
+      #| Fields                  | Value |
+      #| InputABNNumber_Business |     3 |
+      #| InputCRNNumber_Business |     3 |
+    #Then I click on button "TermsandConditionsCheckBox"
+    #Then I click on button "RegistrationSubmit"
+    #Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
+    #Then I see text "Invalid CRN. CRN Should be 6 digits. Please try again." displayed
+    #Scenario 6: Registration details failed the verification with stubs
+    #Then I enter the details as
+      #| Fields                  | Value       |
+      #| InputABNNumber_Business | 33333333333 |
+      #| InputCRNNumber_Business |      333333 |
+    #Then I click on button "RegistrationSubmit"
+    #Then I wait for "1000" millisecond
+    #Then I see text "Invalid CRN, ABN or ACN. Please try again" displayed
+    #Scenario 5: Registration details verified with stubs
+    #Then I enter the details as
+      #| Fields                  | Value       |
+      #| InputABNNumber_Business | 12345678949 |
+      #| InputCRNNumber_Business | 12345678949 |
+    #Then I click on button "RegistrationSubmit"
+    #Then I check I am on "Complete Registration" page
+#
+    #Examples: 
+      #| PortalName | UserName | Password   |
+      #| TSS        | jscott   | Dbresults1 |
+#	
+#	@fixed
+#	  Scenario Outline: DTSP-460: s an organisation I want user inputs to be restricted & validated during Tax Agent's portal registration so that human error can be minimised
+    #Given I want to login to portal "<PortalName>"
+    #Then I click on "Create Account"
+    #Then I check I am on "Registration" page
+    #Then I see checkbox "RegistrationAsBusiness" as selected
+    #Then I see checkbox "RegistrationAsTaxAgent" as not selected
+    #Then I click on "Register as a Tax Agent"
+    #Scenario 1: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a number field)
+    #Then I enter the details as
+      #| Fields                   | Value |
+      #| InputTaxAgentRegId       | TEST  |
+      #| InputTaxAgentABN         | TEST  |
+      #| BusinessAddress_Postcode | TEST  |
+    #Then I check "InputTaxAgentRegId" is empty
+    #Then I check "InputTaxAgentABN" is empty
+    #Then I check "BusinessAddress_Postcode" is empty
+    #Scenario 2: Tax Agent Registration details do not pass the frontend validation
+    #Then I enter the details as
+      #| Fields                    | Value            |
+      #| InputTaxAgentABN          |               11 |
+      #| InputTaxAgentBusinessName | Automated Tester |
+      #| BusinessAddress_Address1  | TEST         |
+      #| BusinessAddress_Address2  | TEST         |
+      #| BusinessAddress_Suburb    | TEST         |
+      #| BusinessAddress_Postcode  |         3333 |
+    #And I select "Victoria" from "BusinessAddress_StateId"
+    #Then I click on button "TermsandConditionsCheckBox2"
+    #Then I click on button "RegistrationSubmit"
+    #Then I wait for "1000" millisecond
+    #Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
+#
+    #Examples: 
+      #| PortalName | UserName | Password   |
+      #| TSS        | jscott   | Dbresults1 |
+#
+  #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
+  #@fixed
+  #Scenario Outline: DTSP-311: Validation Rules and Errors to be used across Annual Reconciliation Form
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #And I click on "Payroll Tax Lodgement"
+    #Then I click on button "Discard"
+    #Then I click on "Annual Reconciliation"
+    #Then I click on button "NextSection"
+    #Then I select "2012" from "YearOfReturn"
+    #Then I click on "Designated group employer for a group and lodging for itself"
+    #Then I click on "TaxPayerDetailsNext"
+    #Then I wait for "2000" millisecond
+    #scenario 1: Restricted fields contain incorrect text type
+    #Then I enter the details as
+      #| Fields           | Value |
+      #| SalariesAndWages | ABC   |
+    #Then I check "SalariesAndWages" is empty
+    #scenario 2:  Restricted fields contain correct text type
+    #Then I enter the details as
+      #| Fields                | Value |
+      #| SalariesAndWages      |   100 |
+      #| BonusesAndCommissions |   100 |
+    #long id is present here to avoid conflict with a button caleld 'ACTWAgesPaidBackBt2', should be fixed soon
+    #Then I wait for "1000" millisecond
+    #Then I click on button "PaidBackBt"
+    #Then I click on button "TaxPayerDetailsNext"
+    #Then I check "SalariesAndWages" contains "$ 100"
+    #Then I check "BonusesAndCommissions" contains "$ 100"
+    #Then I click on button "ACTWagesPaidNext"
+    #And I wait for "2000" millisecond
+    #Then I click on button "MonthlyReturnNext"
+    #And I wait for "2000" millisecond
+    #scenario 5: Mandatory fields not filled in
+    #Then I check "DeclarationConfirm" is readonly
+    #scenario 4 (Fields are entered in incorrect format - phone number and/or email field ), then 3 (Fields are entered in correct format)
+    #And I enter the details as
+      #| Fields              | Value  |
+      #| PersonFullName      | test   |
+      #| LegalEntityName     | Test2  |
+      #| EmployerDeclaration | test   |
+      #| PhoneNumber         | 042213 |
+      #| EmailAddress        | abc    |
+    #And I Tab Out
+    #Then I click on "DeclarationConfirm"
+    #Then I see text "Invalid Phone Number. Phone Number should be 8 digits. Please try again." displayed
+    #Then I see text "Incorrect Email Format." displayed
+    #Then I enter the details as
+      #| Fields       | Value       |
+      #| PhoneNumber  | 61042218431 |
+      #| EmailAddress | abc@test.com    |
+    #And I Tab Out
+    # scenario 6: Mandatory fields all filled in
+    #Then I click on button "DeclarationConfirm"
+    #Then I check "Submit" is readonly
+    # Scenario 7: Number of days is invalid
+    #Then I click on "Payroll Tax Lodgement"
+    #Then I click on button "NextSection"
+    #Then I select "2012" from "YearOfReturn"
+    #Then I click on button "TaxPayerDetailsNext"
+    #Then I click on button "ClaimingACTProportion_Yes"
+    #Then I click on button "ACTWagesPaidNext"
+    #Then I wait for "2000" millisecond
+    #Then I enter the details as
+      #| Fields                      | Value |
+      #| Answer_DaysPaidTaxable      |   367 |
+      #| DaysPaidGroupAusWide        |   367 |
+      #| AustralianWide              |   100 |
+      #| PayrollAnswer_GroupActWages |   100 |
+    #Then I wait for "1000" millisecond
+    #Then I click on button "MonthlyReturnNext"
+    #Then I wait for "2000" millisecond
+    #Then I see text "Number of days must be equal to or less than 365, or 366 for leap years" displayed
+    #Then I see text "Some fields are not valid. Please fix them before moving to the next section." displayed
+#
+    #Examples: 
+      #| PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      #| TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 98765123456 | 12345678902 |
 	
-	Given I want to login to portal "<PortalName>"
-  And I enter the details as
+	@onhold
+  Scenario Outline: DTSP-147
+    Given I want to login to portal "<PortalName>"
+    Then I check "UserNameEmailLabel" is marked as "Mandatory"
+    Then I check "PasswordLabel" is marked as "Mandatory"
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
-  And I hit Enter
-  Then I click on "Payroll Tax Registration" 
-  Then I select "Company" from "SelectBusinessTypeCode"
-  Then I select "Miss" from "ContactPerson_Title"
-  Then I select "SMS" from "CommunicationMethodId"
-  Then I enter the details as
-      | Fields                    | Value              |
-      | EmployerName              | DB RESULTS PTY LTD |
-      | BusinessTradingName       | DB RESULTS PTY LTD |
-      | RegistrationAnswer_ABN    |        97110187767 |
-      | RegistrationAnswer_ACN    |          110187767 |
-      | AddressLine1              | TEST               |
-      | Address_City              | TEST               |
-      | PostCode                  |               3333 |
-      | ContactPerson_FirstName   | TEST               |
-      | ContactPerson_LastName    | TEST               |
-      | ContactPerson_PhoneNumber |           33333333 |
-      | ContactPerson_Email       | TEST@TEST          |
-    #Then I select "AL" from "Address_State"
-  Then I select "Other" from "SelectBusinessTypeCode"
-  Then I click on "TaxPayerDetailsNext"
-  Then I click on "ACTWagesPaidNext"
-  Then I wait for "2000" millisecond
-  Then I click on "DateBusinessStart"
-  Then I click on "20170206"
-  Then I click on "DateBusinessLiable"
-  Then I click on "20170207"
-  Then I click on "GroupMember_UNSURE"
-  Then I click on button "AnnualLodgementApproval_YES"
-  Then I enter the details as
-      | Fields               | Value |
-      | RequestJustification | TEST  |
-      | NumberOfEmployees    |    33 |
-  
-  Then I click on "PayrollNext"
-  Examples: 
+    And I hit Enter
+    Given I want to login to portal "AccountManagement"
+    Then I click on button "EditBT"
+    #Scenario 1: User accesses the edit function
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName           |
+      | item2 | Username           |
+      | item3 | First Name         |
+      | item5 | Last Name          |
+      | item5 | Email Address      |
+      | item5 | Phone Number       |
+      | item5 | Choose a Tax Agent |
+      | item5 | Password           |
+      | item5 | New Password       |
+      | item5 | Confirm Password   |
+      | item5 | Hint               |
+    #Scenario 2: User enters incorrect input type into a restricted fields (e.g. entering 123 into an alphabet field)
+    Then I enter the details as
+      | Fields            | Value |
+      | Input_PhoneNumber | TEST  |
+    Then I check "Input_PhoneNumber" is empty
+    #Scenario 3: User has not entered all the mandatory fields
+    Then I check "CancelBT" is readonly
+    #Scenario 4, 6: Scenario 6: Profile settings details does not pass all validations
+    Then I enter the details as
+      | Fields                   | Value                 |
+      | Input_FirstName          | TEST                  |
+      | Input_LastName           | TEST                  |
+      | Input_PhoneNumber        |                 33333 |
+      | Input_Email              | TEST                  |
+      | Input_NewPassword        | adsfasdfaf            |
+      | Input_NewpasswordConfirm | asfsadfsadf           |
+      | Input_Hint               | testsetsetwetstsetset |
+    Then I wait for "1000" millisecond
+    Then I click on button "Input_FirstName"
+    Then I click on button "Submit"
+    #Then I see text "Please enter a valid email address" displayed
+    Then I see text "Email expected!" displayed
+    Then I see text "Invalid Phone Number. Phone Number should be 8 digits. Please try again." displayed
+    Then I see text "New Password is invalid. Please try again." displayed
+    Then I see text "New Password and Confirm Password do not match. Please try again." displayed
+    #Scenario 8: User cancels edit function with unsaved changes
+    Then I click on button "Cancel"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
+    Then I click on button "Cancel"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    Then I check I am on "View Settings" page
+    Given I want to login to portal "AccountManagement"
+    #Then I click on button "Cancel"
+    Then I check I am on "View Settings" page
+    #Scenario 5: Profile settings details pass all validations
+    Then I click on button "EditBT"
+    Then I enter the details as
+      | Fields                   | Value                 |
+      | Input_FirstName          | TEST                  |
+      | Input_LastName           | TEST                  |
+      | Input_PhoneNumber        |              33333333 |
+      | Input_Email              | TEST@TESTTESTTSET.com |
+      | Input_NewPassword        | Dbresults1            |
+      | Input_NewpasswordConfirm | Dbresults1            |
+      | Input_Hint               | DB RESULTS ONE        |
+    #Scenario 9: User update's Tax Agent Details (Tax Agent registered and activated on the Portal)
+    #Then I select "TOYOTA SUPER PTY LTD (21006819692)" from "ChooseTaxAgent"
+    Then I click on button "ChooseTaxAgent"
+    Then I click on button "select2-results-1"
+    #Then I click on ""
+    #Then I enter the details as
+      #| Fields               | Value                  |
+      #| s2id_autogen1_search | TOYOTA SUPER PTY LTD (21006819692) |
+ #		Then I click on button "select2-results-1"
+     #Then I enter the details as
+      #| Fields                   | Value                 |
+      #| Input_FirstName          | TEST2                  |
+      #| Input_LastName           | TEST2                  |
+    Then I click on button "Submit"
+    Then I see text "Your changes have been successfully saved." displayed
+    Then I check I am on "View Settings" page
+
+    Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
-  
 	
-	@review
+	@onhold
 	Scenario Outline: DTSP-526: Update the ABN LookUp Rules for Payroll Tax Registration Form
 	Given I want to login to portal "<PortalName>"
   And I enter the details as
@@ -214,7 +501,7 @@ Feature: wip
       | PortalName | UserName | Password   |
       | TSS        | jbradley | Dbresults1 |
   
-  @wip
+  @review
   Scenario Outline: DTSP-527: Update the relationship between Business Taxpayer, Tax Agent Organisation and Users	
   Given I want to login to portal "<PortalName>"
   And I enter the details as
@@ -264,8 +551,12 @@ Feature: wip
     | BusinessAddress_Address2  | TEST             |
     | BusinessAddress_Suburb    | TEST             |
     | BusinessAddress_Postcode  |             3333 |
-  Then I select "Australia" from "BusinessAddress_CountryId"
-  Then I select "Victoria" from "BusinessAddress_StateId"
+  Then I click on button "BusinessAddress_CountryId"
+  Then I click on "Australia"
+  Then I click on button "BusinessAddress_StateId"
+  Then I click on "Victoria"
+  #Then I select "Australia" from "BusinessAddress_CountryId"
+  #Then I select "Victoria" from "BusinessAddress_StateId"
   Then I click on button "TermsandConditionsCheckBox2"
   Then I click on button "RegistrationSubmit"
   Then I check I am on "Complete Registration" page	
@@ -548,7 +839,7 @@ Feature: wip
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
-  @wip
+  @review
   Scenario Outline: DTSP-463: Display all the mandatory fields with an Asterisk (*)
     #On hold until a clear standard for the mandatory field asterisks can be made
     #PART 1: Login Screen
@@ -678,6 +969,7 @@ Feature: wip
     Then I check "Label_NumberofEmployeesinyourACTBusiness" is marked as "Mandatory"
     #Then I see text "Are you a member of a group?*" displayed
     Then I check "Label_Asaneligibleemployer_doyouwishtoapplyforannu" is marked as "Mandatory"
+    Then I click on button "AnnualLodgementApproval_YES"
     Then I check "Label_AnnualLodgementRequestJustification" is marked as "Mandatory"
     #Then I check "Text_ContactPersonforPayrollTax" is marked as "Mandatory"
     Then I click on "DateBusinessStart"
@@ -701,17 +993,19 @@ Feature: wip
     Then I check "Label_BankAccountNumber" is marked as "Mandatory"
     Then I check "Label_BankAccountName" is marked as "Mandatory"
     Then I click on button "Refunds_NO"
-    Then I click on button "RefundDetailsNext"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                                                         |
-      | item2 | Declaration                                                                      |
-      | item3 | Declarer                                                                         |
-      | item5 | I declare that this information is true and correct to the best of my knowledge. |
-    Then I check "Label_Declarer" is marked as "Mandatory"
-    Then I check "Label_Organisation" is marked as "Mandatory"
-    Then I check "Label_Employer" is marked as "Mandatory"
-    Then I check "Label_ContactPhone" is marked as "Mandatory"
-    Then I check "Label_EmailAdress" is marked as "Mandatory"
+    
+    #CAPTCHA IS HERE, CANNOT PROCEED ANY FURTHER
+    #Then I click on button "RefundDetailsNext"
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                                                                         |
+      #| item2 | Declaration                                                                      |
+      #| item3 | Declarer                                                                         |
+      #| item5 | I declare that this information is true and correct to the best of my knowledge. |
+    #Then I check "Label_Declarer" is marked as "Mandatory"
+    #Then I check "Label_Organisation" is marked as "Mandatory"
+    #Then I check "Label_Employer" is marked as "Mandatory"
+    #Then I check "Label_ContactPhone" is marked as "Mandatory"
+    #Then I check "Label_EmailAdress" is marked as "Mandatory"
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
@@ -840,3 +1134,52 @@ Feature: wip
 	 Examples: 
       | PortalName | UserName | Password   |
       | TSS        | taxagent1   | Dbresults1 |
+      
+  
+	@bugtest
+	Scenario Outline: DTSP-540 Bug Test
+	
+	Given I want to login to portal "<PortalName>"
+  And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+  And I hit Enter
+  Then I click on "Payroll Tax Registration" 
+  Then I select "Company" from "SelectBusinessTypeCode"
+  Then I select "Miss" from "ContactPerson_Title"
+  Then I select "SMS" from "CommunicationMethodId"
+  Then I enter the details as
+      | Fields                    | Value              |
+      | EmployerName              | DB RESULTS PTY LTD |
+      | BusinessTradingName       | DB RESULTS PTY LTD |
+      | RegistrationAnswer_ABN    |        97110187767 |
+      | RegistrationAnswer_ACN    |          110187767 |
+      | AddressLine1              | TEST               |
+      | Address_City              | TEST               |
+      | PostCode                  |               3333 |
+      | ContactPerson_FirstName   | TEST               |
+      | ContactPerson_LastName    | TEST               |
+      | ContactPerson_PhoneNumber |           33333333 |
+      | ContactPerson_Email       | TEST@TEST          |
+    #Then I select "AL" from "Address_State"
+  Then I select "Other" from "SelectBusinessTypeCode"
+  Then I click on "TaxPayerDetailsNext"
+  Then I click on "ACTWagesPaidNext"
+  Then I wait for "2000" millisecond
+  Then I click on "DateBusinessStart"
+  Then I click on "20170206"
+  Then I click on "DateBusinessLiable"
+  Then I click on "20170207"
+  Then I click on "GroupMember_UNSURE"
+  Then I click on button "AnnualLodgementApproval_YES"
+  Then I enter the details as
+      | Fields               | Value |
+      | RequestJustification | TEST  |
+      | NumberOfEmployees    |    33 |
+  
+  Then I click on "PayrollNext"
+  Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+  

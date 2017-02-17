@@ -132,11 +132,25 @@ public class LandingPage extends DBUtilities {
       
       public void selectDropdownValue(String arg1, String arg2) throws InterruptedException
       {
-    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
-    	  driver.findElement(By.xpath(myxpath)).click();
-    	  
-    	  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
-    	  driver.findElement(By.xpath(myxpath2)).click();
+    	  try {
+	    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
+	    	  driver.findElement(By.xpath(myxpath)).click();
+	    	  
+	    	  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
+	    	  myxpath2 = myxpath2.replace("*", "select");
+	    	  System.out.println(myxpath2);
+	    	  driver.findElement(By.xpath(myxpath2)).click();
+    	  }
+    	  catch (Exception e){
+    		  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
+	    	  myxpath2 = myxpath2.replace("*", "select");
+	    	  System.out.println(myxpath2);
+	    	  driver.findElement(By.xpath(myxpath2)).click();
+	    	  
+	    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
+	    	  driver.findElement(By.xpath(myxpath)).click();
+	    	  
+    	  }
     	  
     	  
 //    	  DBUtilities createXpath = new DBUtilities(driver);
