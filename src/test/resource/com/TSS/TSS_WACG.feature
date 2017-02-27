@@ -44,7 +44,7 @@ Feature: Wip in stuff.
     
 		#TAX REGISTRATION FORM
 		 Given I want to login to portal "<PortalName>"
-    Then I click on "Tax Registration"
+    Then I click on "Payroll Tax Registration"
     And I check I am on "Tax Registration Form" page
     And I capture "html"
     And I want to login to portal "<PortalName2>"
@@ -82,29 +82,41 @@ Feature: Wip in stuff.
     Then I click on "Payroll Tax Lodgement"
     And I check I am on "Payroll Lodgement Form" page
     Then I click on button "Discard"
-    Then I click on "Annual Reconciliation"
+    Then I click on "Monthly Return"
+    Then I select "Jul 2016" from "combo1"
     Then I click on button "NextSection"
-    Then I select "2012" from "YearOfReturn"
-    Then I click on "Independent employer (non-group) lodging for itself"
+  
     Then I click on button "TaxPayerDetailsNext"
     Then I enter the details as
       | Fields           | Value |
-      | SalariesAndWages |   100 |
-    Then I click on button "ACTWagesPaidNext"
-    Then I wait for "3000" millisecond
-    Then I click on button "MonthlyReturnNext"
-    And I wait for "3000" millisecond
-    And I enter the details as
-      | Fields              | Value       |
-      | PersonFullName      | test        |
-      | LegalEntityName     | Test2       |
-      | EmployerDeclaration | test        |
-      | PhoneNumber         |  0422184033 |
-      | EmailAddress        | abc@abc.com |
-    Then I click on button "PersonFullName"
-    Then I click on button "DeclarationConfirm"
-    Then I check "Submit" is readonly
-    Then I click on button "ConfirmForSubmission"
+      | SalariesAndWages |   	 0 |
+      | BonusesAndCommissions| 0 |
+      | LodgePayrollAnswer_Commissions | 0 |
+      | LodgePayrollAnswer_Allowances | 0 |
+      | LodgePayrollAnswer_DirectorsFees | 0 |
+      | LodgePayrollAnswer_EligibleTerminationPayments | 0 |
+      | LodgePayrollAnswer_ValueOfBenefits | 0 |
+      | LodgePayrollAnswer_ShareValue | 0 |
+      | LodgePayrollAnswer_ServiceContracts | 0 |
+      | LodgePayrollAnswer_Superannuation | 0 |
+      | LodgePayrollAnswer_OtherTaxablePayment | 0 |
+      | LodgePayrollAnswer_ExemptWages | 0 |
+#=
+    #Then I click on button "ACTWagesPaidNext"
+    #Then I wait for "3000" millisecond
+    #Then I click on button "MonthlyReturnNext"
+    #And I wait for "3000" millisecond
+    #And I enter the details as
+      #| Fields              | Value       |
+      #| PersonFullName      | test        |
+      #| LegalEntityName     | Test2       |
+      #| EmployerDeclaration | test        |
+      #| PhoneNumber         |  0422184033 |
+      #| EmailAddress        | abc@abc.com |
+    #Then I click on button "PersonFullName"
+    #Then I click on button "DeclarationConfirm"
+    #Then I check "Submit" is readonly
+    #Then I click on button "ConfirmForSubmission"
     # don't remove the wt prefix, otherwise there will be a conflict with a 'HiddenSubmitBT'
     Then I click on button "wtSubmitBT"
     And I capture "html"

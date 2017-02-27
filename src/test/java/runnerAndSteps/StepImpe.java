@@ -727,6 +727,10 @@
 package runnerAndSteps;
 
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.sql.DriverManager;
 import java.util.regex.Pattern;
 
@@ -735,10 +739,12 @@ import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -832,13 +838,38 @@ public class StepImpe {
 	
 	@Given("^I paste \"(.*?)\"$")
 	public void i_paste(String arg1) throws Throwable {
-	      System.out.println(StepImpe.Capture);
+	      //System.out.println(StepImpe.Capture);
 		//String htmlToBePasted = StepImpe.Capture;
 		//System.out.println(htmlToBePasted);
-	      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
-		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
-		
-
+//	      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
+//		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
+//		
+	      StringSelection selection = new StringSelection(StepImpe.Capture);
+			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			
+			// get the what was originally in the clipboard so that it can be restored later
+			String oldContent = (String) clipboard.getData(DataFlavor.stringFlavor);
+			
+			// set the clipboard contents as what was captured in the previous step(s)
+			clipboard.setContents(selection, selection);
+			
+			//String htmlToBePasted = StepImpe.Capture;
+			//System.out.println(htmlToBePasted);
+			
+			// find the element
+			WebElement inputField =  driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]"));
+			inputField.click();
+			
+			//paste the captured stuff
+			Actions actions = new Actions(driver);
+			actions.sendKeys(Keys.chord(Keys.LEFT_CONTROL, "v")).build().perform();
+			
+//			inputField.clear();
+//			inputField.sendKeys(StepImpe.Capture);
+			
+			// revert the clipboard contents to what was there before
+			StringSelection oldSelection = new StringSelection(oldContent);
+			clipboard.setContents(oldSelection, oldSelection);
 		
 	}
 	
@@ -1254,6 +1285,26 @@ public class StepImpe {
       Thread.sleep(1000);
       AU.checkUIElementTEXTIsDisplayed(arg1);
 	}
+	@Then("^I see text \"(.*?)\" not displayed$")
+	public void i_see_text_not_displayed(String arg1) throws Throwable {
+		DBUtilities checkElementDisplayed = new DBUtilities(driver);
+		Thread.sleep(1000);
+		//String myxpath=checkElementDisplayed.xpathMaker(arg1);
+		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
+		System.out.println("checking for text " +myxpath);
+	
+	    driver.getPageSource().contains(arg1);
+	    Assert.assertFalse(driver.getPageSource().contains(arg1));
+		//Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
+	
+		if(driver.findElements(By.xpath(myxpath)).size() != 0){
+			System.out.println("Element is Present");
+		}
+		else {
+			System.out.println("Element is Absent");
+		}
+	}
+	
 	//check i am on right page
 	@Given("^I check I am on \"(.*?)\" page$")
 	public void i_check_I_am_on_page(String arg1) throws Throwable {

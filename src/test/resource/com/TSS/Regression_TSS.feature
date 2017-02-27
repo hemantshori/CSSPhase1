@@ -253,8 +253,8 @@ Feature: Some feature
       | item7 | Preferred Communication Method                            |
       | item7 | Postal Address                                            |
     Then I select "Company" from "SelectBusinessTypeCode"
-    Then I select "Miss" from "ContactPerson_Title"
-    Then I select "SMS" from "CommunicationMethodId"
+    Then I select "Mr" from "ContactPerson_Title"
+    Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value              |
       | EmployerName              | DB RESULTS PTY LTD |
@@ -267,7 +267,7 @@ Feature: Some feature
       | ContactPerson_FirstName   | TEST               |
       | ContactPerson_LastName    | TEST               |
       | ContactPerson_PhoneNumber |           33333333 |
-      | ContactPerson_Email       | TEST@TEST          |
+      | ContactPerson_Email       | TEST@TEST.com          |
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on "TaxPayerDetailsNext"
     Then I wait for "2000" millisecond
@@ -350,8 +350,8 @@ Feature: Some feature
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
     Then I select "Company" from "SelectBusinessTypeCode"
-    Then I select "Miss" from "ContactPerson_Title"
-    Then I select "SMS" from "CommunicationMethodId"
+    Then I select "Mr" from "ContactPerson_Title"
+    Then I select "Direct Post" from "CommunicationMethodId"
     #scenario 2: ABN/ACN combination verified against ABR, and the Organisation name entered does not match Organisation name returned from ABR (3rd party verification)
     Then I enter the details as
       | Fields                    | Value             |
@@ -365,7 +365,7 @@ Feature: Some feature
       | ContactPerson_FirstName   | TEST              |
       | ContactPerson_LastName    | TEST              |
       | ContactPerson_PhoneNumber |          33333333 |
-      | ContactPerson_Email       | TEST@TEST         |
+      | ContactPerson_Email       | TEST@TEST.com         |
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on "TaxPayerDetailsNext"
     Then I wait for "1000" millisecond
@@ -400,12 +400,13 @@ Feature: Some feature
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
 
   Scenario Outline: DTSP-310
+    Scenario Outline: DTSP-310
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
     Then I select "Company" from "SelectBusinessTypeCode"
-    Then I select "Miss" from "ContactPerson_Title"
-    Then I select "SMS" from "CommunicationMethodId"
+    Then I select "Mr" from "ContactPerson_Title"
+    Then I select "Direct Post" from "CommunicationMethodId"
     #scenario 1: Restricted fields contain incorrect text type (e.g. ABC into 1234 field and vice versa)
     Then I enter the details as
       | Fields                 | Value |
@@ -430,7 +431,7 @@ Feature: Some feature
       | ContactPerson_FirstName   | TEST              |
       | ContactPerson_LastName    | TEST              |
       | ContactPerson_PhoneNumber |             33333 |
-      | ContactPerson_Email       | TEST              |
+      | ContactPerson_Email       | TEST@TE              |
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on "TaxPayerDetailsNext"
     Then I see text "Please enter the correct number of digits for this field." displayed
@@ -449,10 +450,10 @@ Feature: Some feature
       | ContactPerson_FirstName   | TEST               |
       | ContactPerson_LastName    | TEST               |
       | ContactPerson_PhoneNumber |           33333333 |
-      | ContactPerson_Email       | TEST@TEST          |
+      | ContactPerson_Email       |  TEST@TEST.COM         |
     #Then I select "Other" from "SelectBusinessTypeCode"
     #Scenario 6: Mandatory fields all filled in
-    Then I select "Miss" from "ContactPerson_Title"
+    Then I select "Mr" from "ContactPerson_Title"
     Then I click on "TaxPayerDetailsNext"
     Then I wait for "2000" millisecond
     Then "<Item>" is displayed as "<ItemName>"
@@ -465,11 +466,13 @@ Feature: Some feature
       | PortalName       | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
 	
+	
 
   ####################################
   ####### Iteration 3 test cases######
   ####################################
-  Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
+ @fixed
+		Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -535,7 +538,7 @@ Feature: Some feature
     Examples: 
       | PortalName   | PortalName2 | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS_Tooltips | TSSUAP      | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
-
+	
   @defect 
  
   Scenario Outline: DTSP-25: As an organisation I want a user's details verified during registration so that only valid users register with the portal (page 1)
@@ -712,7 +715,7 @@ Feature: Some feature
     Then I click on button "Submit"
     #Then I see text "Please enter a valid email address" displayed
     Then I see text "Email expected!" displayed
-    Then I see text "This is an invalid phone number" displayed
+    Then I see text "Invalid Phone Number. Phone Number should be 8 digits. Please try again." displayed
     Then I see text "New Password is invalid. Please try again." displayed
     Then I see text "New Password and Confirm Password do not match. Please try again." displayed
     #Scenario 8: User cancels edit function with unsaved changes
@@ -722,22 +725,23 @@ Feature: Some feature
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
     Then I check I am on "View Settings" page
     Given I want to login to portal "AccountManagement"
-    #Then I click on button "Cancel"
-    Then I check I am on "View Settings" page
+	    Then I check I am on "View Settings" page
+	   
     #Scenario 5: Profile settings details pass all validations
     Then I click on button "EditBT"
+    Then I click on button "ChooseTaxAgent"
+    Then I see text "TOYOTA SUPER PTY LTD (21006819692)" displayed
+    Then I see text "Tax Agent Test 1" displayed
+    Then I click on button "Input_FirstName"
+    #Scenario 9: User update's Tax Agent Details (Tax Agent registered and activated on the Portal)
+    
     Then I enter the details as
       | Fields                   | Value                 |
       | Input_FirstName          | TEST                  |
       | Input_LastName           | TEST                  |
       | Input_PhoneNumber        |              33333333 |
       | Input_Email              | TEST@TESTTESTTSET.com |
-      | Input_NewPassword        | Dbresults1            |
-      | Input_NewpasswordConfirm | Dbresults1            |
-      | Input_Hint               | DB RESULTS ONE        |
-    #Scenario 9: User update's Tax Agent Details (Tax Agent registered and activated on the Portal)
-    Then I select "OrganizationWithA_Z TaxAgents (98765432102)" from "ChooseTaxAgent"
-    Then I click on button "Input_FirstName"
+    Then I click on button "ProfileFormSection_block_wtTitle"
     Then I click on button "Submit"
     Then I see text "Your changes have been successfully saved." displayed
     Then I check I am on "View Settings" page
@@ -874,7 +878,7 @@ Feature: Some feature
     Then I click on button "TermsandConditionsCheckBox"
     Then I click on button "RegistrationSubmit"
     Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
-    Then I see text "Invalid CRN. CRN Should be 6 digits. Please try again." displayed
+    #Then I see text "Invalid CRN. CRN Should be 6 digits. Please try again." displayed
     #Scenario 6: Registration details failed the verification with stubs
     Then I enter the details as
       | Fields                  | Value       |
@@ -931,3 +935,15 @@ Feature: Some feature
       | PortalName | UserName | Password   |
       | TSS        | jscott   | Dbresults1 |
       
+	Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
+  Given I want to login to portal "<PortalName>"
+  And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+  And I hit Enter
+  Then I click on "Payroll Tax Registration"
+  Then I see text "Because you are not logged in, you cannot save an incomplete form for later. Please complete your form and submit it before closing your session" displayed
+  Examples:
+      | PortalName | UserName | Password   |
+      | TSS        | jbradley | Dbresults1 |

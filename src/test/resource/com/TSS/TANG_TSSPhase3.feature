@@ -15,7 +15,7 @@ Feature: Stuff for TSS Phase 3
     #Scenario 4
     Then I click on "Sign In"
     Then I check I am on "Login" page
-    #Scenario 5
+    #Scenario p
     Then I click on "Create Account"
     Then I click on "Terms & Conditions"
     Then a new page "http://dbresults.com.au/terms/" is launched
@@ -976,6 +976,20 @@ Feature: Stuff for TSS Phase 3
     Examples: 
       | PortalName | UserName  | Password   |
       | TSS        | taxagent1 | Dbresults1 |
+      
+  @done
+   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
+  Given I want to login to portal "<PortalName>"
+  And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+  And I hit Enter
+  Then I click on "Payroll Tax Registration"
+  Then I see text "Because you are not logged in, you cannot save an incomplete form for later. Please complete your form and submit it before closing your session" displayed
+  Examples:
+      | PortalName | UserName | Password   |
+      | TSS        | jbradley | Dbresults1 |
   #@review
   #Scenario Outline: DTSP-8
     # REMEMBER TO WAIT FOR FIVE MINUTES BETWEEN EACH RUN OF THIS SCENARIO

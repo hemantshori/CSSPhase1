@@ -110,22 +110,22 @@ public class LandingPage extends DBUtilities {
     	
     	  }
       
-      public void checkUIElementTEXTIsDisplayed (String arg1) throws InterruptedException
-	  {
-	  DBUtilities checkElementDisplayed = new DBUtilities(driver);
-	 // String myxpath=checkElementDisplayed.xpathMaker(arg1);
-	  String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
-	  System.out.println("checking for text " +myxpath);
-
-      driver.getPageSource().contains(arg1);
-  Assert.assertTrue(" Varification failed as " +arg1 +"NOT FOUND",driver.getPageSource().contains(arg1));
-	//  Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
-
-	  if(driver.findElements(By.xpath(myxpath)).size() != 0){
+      public void checkUIElementTEXTIsDisplayed (String arg1) throws InterruptedException {
+		  DBUtilities checkElementDisplayed = new DBUtilities(driver);
+		 //String myxpath=checkElementDisplayed.xpathMaker(arg1);
+		  String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
+		  System.out.println("checking for text " +myxpath);
+	
+	      driver.getPageSource().contains(arg1);
+	      Assert.assertTrue(" Varification failed as " +arg1 +"NOT FOUND",driver.getPageSource().contains(arg1));
+		//Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
+	
+		if(driver.findElements(By.xpath(myxpath)).size() != 0){
 			System.out.println("Element is Present");
-			}else{
+		}
+		else {
 			System.out.println("Element is Absent");
-			}
+		}
 	}
       
       // following are for RHS colouns......
