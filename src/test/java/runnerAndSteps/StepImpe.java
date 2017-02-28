@@ -838,6 +838,7 @@ public class StepImpe {
 	
 	@Given("^I paste \"(.*?)\"$")
 	public void i_paste(String arg1) throws Throwable {
+
 	      //System.out.println(StepImpe.Capture);
 		//String htmlToBePasted = StepImpe.Capture;
 		//System.out.println(htmlToBePasted);
@@ -870,6 +871,13 @@ public class StepImpe {
 			// revert the clipboard contents to what was there before
 			StringSelection oldSelection = new StringSelection(oldContent);
 			clipboard.setContents(oldSelection, oldSelection);
+	      System.out.println(StepImpe.Capture);
+		//String htmlToBePasted = StepImpe.Capture;
+		//System.out.println(htmlToBePasted);
+	      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
+		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
+		
+
 		
 	}
 	
@@ -885,6 +893,7 @@ public class StepImpe {
 	
 	
 	// to check if asterisk is present on a mandatory field
+
 	@Given("^I check \"(.*?)\" is marked as \"(.*?)\"$")
 	public void i_check_is_marked_as(String arg1, String arg2) throws Throwable {
 		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
@@ -1143,6 +1152,13 @@ public class StepImpe {
 					}
 				}
 				
+
+//				WebElement button = driver.findElement(By.xpath(myxpath4));
+//				
+//				JavascriptExecutor executor = (JavascriptExecutor)driver;
+//				executor.executeScript("arguments[0].scrollIntoView(true);",button);
+//				button.click();
+
 //				WebElement button = driver.findElement(By.xpath(myxpath4));
 //				
 //				JavascriptExecutor executor = (JavascriptExecutor)driver;

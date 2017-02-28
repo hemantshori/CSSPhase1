@@ -1,3 +1,4 @@
+
 Feature: wip
 	
 	@wip
@@ -68,7 +69,7 @@ Feature: wip
       | ContactPerson_Email       | TEST@TEST.com     |
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on "TaxPayerDetailsNext"
-    hen "<Item>" is displayed as "<ItemName>"
+    Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                  |
       | item2 | Declaration                                      |
       | item3 | Declarer                                            |
@@ -1168,3 +1169,4 @@ Feature: wip
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
   
+

@@ -157,7 +157,7 @@ Feature: Phase 1 Iteration 4 TSS Stuff
       | PortalName | UserNameField | PasswordField | Password   |
       | TSS        | UserNameInput | PasswordInput | Dbresults1 |
 
-  @review
+  @wip
   Scenario Outline: DTSP-537
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -220,15 +220,31 @@ Feature: Phase 1 Iteration 4 TSS Stuff
     Then I click on "Payroll Tax Lodgement"
     Then I click on button "Discard"
     Then I click on "Annual Reconciliation"
-    Then I select "2012" from "AnnualObligationSelect"
+    Then I select "2013" from "AnnualObligationSelect"
     Then I click on button "NextSection"
     Then I click on button "TaxPayerDetailsNext"
+     Then I enter the details as
+      | Fields                                         | Value |
+      | SalariesAndWages                               |   100 |
+      | BonusesAndCommissions                          |   100 |
+      | LodgePayrollAnswer_Commissions                 |   100 |
+      | LodgePayrollAnswer_Allowances                  |   100 |
+      | LodgePayrollAnswer_DirectorsFees               |   100 |
+      | LodgePayrollAnswer_EligibleTerminationPayments |   100 |
+      | LodgePayrollAnswer_ValueOfBenefits             |   100 |
+      | LodgePayrollAnswer_ShareValue                  |   100 |
+      | LodgePayrollAnswer_ServiceContracts            |   100 |
+      | LodgePayrollAnswer_Superannuation              |   100 |
+      | LodgePayrollAnswer_OtherTaxablePayment         |   100 |
+      | LodgePayrollAnswer_ExemptWages                 |   100 |
+    Then I click on button "wtSubmitBTAjaxRfrsh"
+    
     Then I click on button "ClaimingACTProportion_Yes" 
     Then I see text "Days where 1 group member paid or was liable to pay taxable or interstate wages" displayed
     
     #Scenario 7:  (Designated group employer and lodging a joint return for itself and other ACT group members) Rename the field ‘Days where you paid or were liable to pay taxable or interstate wages’ to ‘Days where 1 group member paid or was liable to pay taxable or interstate wages’
     Then I click on "Sign Out"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -708,7 +724,7 @@ Feature: Phase 1 Iteration 4 TSS Stuff
       | PortalName | UserName | Password   |
       | TSS        | jbradley | Dbresults1 |
 
-  @review
+  @done
   Scenario Outline: DTSP-506: Update default answer to a question on the Payroll Tax Registration form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
