@@ -137,9 +137,9 @@ Feature: Phase 1 Iteration 4 TSS Stuff
       | Fields                   | Value |
       | NumberOfEmployees          |    33 |
     Then I click on "DateBusinessStart"
-    Then I click on "20170206"
+    Then I click on "20170228"
     Then I click on "DateBusinessLiable"
-    Then I click on "20170207"
+    Then I click on "20170228"
     Then I click on "PayrollNext"
     Then I enter the details as
       | Fields                   | Value |

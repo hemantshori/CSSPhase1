@@ -14,7 +14,7 @@ import cucumber.api.junit.Cucumber;
 // OCT***********************************
 
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@wip"},
-(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSSRegression"},
+(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSS_Regression"},
     //*********************for SHAKE	OUT*************************************
 	//	 features = "src/test/resource/com/CSS/SanityTestScript.feature") 
 
