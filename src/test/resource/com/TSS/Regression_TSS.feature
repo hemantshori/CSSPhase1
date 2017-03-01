@@ -15,19 +15,19 @@ Feature: Some feature
     Given I want to login to portal "<PortalName>"
     And I check I am on "Tax Registration Form" page
     Then I wait for "2000" millisecond
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName                                                  |
-      #| item2 | Select Business Type                                      |
-      #| item3 | Employer Name                                             |
-      #| item4 | Business Trading Name                                     |
-      #| item5 | Australian Business Number (ABN)                          |
-      #| item6 | Australian Company Number (ACN)                           |
-      #| item7 | Business Address                                          |
-      #| item7 | Postal Address                                            |
-      #| item7 | Address where Business Records are located (Jurisdiction) |
-      #| item7 | Contact Person                                            |
-      #| item7 | Preferred Communication Method                            |
-      #| item7 | Postal Address                                            |
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                                  |
+      | item2 | Select Business Type                                      |
+      | item3 | Employer Name                                             |
+      | item4 | Business Trading Name                                     |
+      | item5 | Australian Business Number (ABN)                          |
+      | item6 | Australian Company Number (ACN)                           |
+      | item7 | Business Address                                          |
+      | item7 | Postal Address                                            |
+      | item7 | Address where Business Records are located (Jurisdiction) |
+      | item7 | Contact Person                                            |
+      | item7 | Preferred Communication Method                            |
+      | item7 | Postal Address                                            |
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I select "Mr" from "ContactPerson_Title"
     Then I select "Direct Post" from "CommunicationMethodId"
@@ -56,16 +56,16 @@ Feature: Some feature
     Then I click on button "ACTWagesPaidNextBt"
     Then I wait for "2000" millisecond
     # Scenario 1...................updated with changes from 506
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName                                                                     |
-      #| item2 | Date Business Commenced Employing in ACT (or Recommenced)                    |
-      #| item3 | Date Business Became Liable in the ACT (or Reactivated its Liability)        |
-      #| item4 | Number of Employees in your ACT Business                                     |
-      #| item5 | Business Activity in the ACT                                                 |
-      #| item6 | Are you a member of a group?                                                 |
-      #| item7 | Grouping for Payroll Tax Purposes                                            |
-      #| item7 | Total Taxable Wages for the five previous financial years                    |
-      #| item7 | As an eligible employer, do you wish to apply for annual lodgement approval? |
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                                                     |
+      | item2 | Date Business Commenced Employing in ACT (or Recommenced)                    |
+      | item3 | Date Business Became Liable in the ACT (or Reactivated its Liability)        |
+      | item4 | Number of Employees in your ACT Business                                     |
+      | item5 | Business Activity in the ACT                                                 |
+      | item6 | Are you a member of a group?                                                 |
+      | item7 | Grouping for Payroll Tax Purposes                                            |
+      | item7 | Total Taxable Wages for the five previous financial years                    |
+      | item7 | As an eligible employer, do you wish to apply for annual lodgement approval? |
     Then I wait for "2000" millisecond
     And from section "AnnualLodgementApproval" I select radio button option "wtLabel_AnnualLodgementApproval_YES"
     Then "<Item>" is displayed as "<ItemName>"
@@ -75,11 +75,11 @@ Feature: Some feature
     # Scenario 2
     Then I click on "MonthlyReturnBack"
     Then I wait for "2000" millisecond
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName                                         |
-      #| item2 | Business Activity Elsewhere in Australia         |
-      #| item3 | Control and Financial Interest                   |
-      #| item4 | (shares, beneficiaries if greater than 20% each) |
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                                         |
+      | item2 | Business Activity Elsewhere in Australia         |
+      | item3 | Control and Financial Interest                   |
+      | item4 | (shares, beneficiaries if greater than 20% each) |
     Then I click on "ACTWagesPaidNext"
     # Then I click on "DateBusinessStart"
     Then I click on "DateBusinessStart"
@@ -96,11 +96,11 @@ Feature: Some feature
     Then I click on "PayrollNext"
     Then I wait for "1000" millisecond
     #scenario 3
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName                        |
-      #| item2 | Set Up Bank Account for Refunds |
-      #| item3 | BSB                             |
-      #| item4 | Bank Account Number             |
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                        |
+      | item2 | Set Up Bank Account for Refunds |
+      | item3 | BSB                             |
+      | item4 | Bank Account Number             |
     Then I click on "ConfirmBack"
     Then I wait for "2000" millisecond
     #scenario 4
