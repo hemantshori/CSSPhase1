@@ -34,17 +34,20 @@ public class HomePage extends DBUtilities {
 			driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Home.aspx");
 		}
 		 
-			else if(arg1.equals("TSSUAP")){
-				driver.get("https://test-ssc.dbresults.com.au/TSSAdminPortal");
-			}
+		else if(arg1.equals("TSSUAP")){
+			driver.get("https://test-ssc.dbresults.com.au/TSSAdminPortal");
+		}
 
-			else if(arg1.equals("TSS_Tooltips")){
-				driver.get("https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
-			}
+		else if(arg1.equals("TSS_Tooltips")){
+			driver.get("https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
+		}
 
-			else if(arg1.equals("Production")){
-				driver.get("https://ssc.dbresults.com.au/TSSPortal/Login.aspx");
-			}
+		else if(arg1.equals("Production")){
+			driver.get("https://ssc.dbresults.com.au/TSSPortal/");
+		}
+		else if (arg1.equals("Production_Tooltips")){
+			driver.get("https://ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
+		}
 		else if(arg1.equals("TSSDev")){
 			driver.get("https://dev-ssc.dbresults.com.au/TSSPortal/Home.aspx");
 		}
@@ -52,9 +55,9 @@ public class HomePage extends DBUtilities {
 			driver.get("https://test-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
 		}
 		
-			else if(arg1.equals("Production_Tax_Registration")){
-				driver.get("https://ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
-			}
+		else if(arg1.equals("Production_Tax_Registration")){
+			driver.get("https://ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
+		}
 		else if(arg1.equals("Tax_Registration_Delete")){
 			driver.get("https://test-ssc.dbresults.com.au/RegistrationCore/DeleteRegistrationData.aspx");
 		}
@@ -79,10 +82,6 @@ public class HomePage extends DBUtilities {
 		}
 		else if(arg1.equals("UAP")){
 			driver.get("https://test-ssc.dbresults.com.au/utilityadminportal/");
-				//following is for SIT
-		      //  driver.get("https://dbresults-tst.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
-				// for dev
-				//driver.get("https://dbresults-dev.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
 		}
 	    else if(arg1.equals("copyFromMail")){           // this is for semi-automated tests as the link will be coming from the received mail
         //following is for SIT

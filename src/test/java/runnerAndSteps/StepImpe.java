@@ -786,9 +786,9 @@ public class StepImpe {
 		// **************disable to leave browser open***************************************
 
 	@After()
-		  public void tearDown() {	
-		    driver.quit();
-		   	  }
+	public void tearDown() {	
+		driver.quit();
+	}
 	//******************************************************************************   
 	    
    
@@ -813,26 +813,20 @@ public class StepImpe {
 	
 	@Given("^I capture \"(.*?)\"$")
 	public String i_capture(String arg1) throws Throwable {
-		
-
+		if(arg1.equals("html")){
+			StepImpe.Capture = driver.getPageSource();
+			   // System.out.println(Capture);
+		}
+		else{
+			DBUtilities createXpath = new DBUtilities(driver);
+			String myxpath = createXpath.xpathMakerById(arg1);
+			System.out.println(myxpath);
 			
-		
-			if(arg1.equals("html")){
-				StepImpe.Capture = driver.getPageSource();
-				   // System.out.println(Capture);
-			}else{
-				
-				DBUtilities createXpath = new DBUtilities(driver);
-				String myxpath = createXpath.xpathMakerById(arg1);
-				System.out.println(myxpath);
-				
-				WebElement xyz = driver.findElement(By.xpath(myxpath));
-				StepImpe.Capture= xyz.getText();
-				System.out.println("object that is captured is *****************>>>>>>>>>>>>>>>>>>>>>>>> "   +Capture);
-				
-			}
-			return Capture;
-  
+			WebElement xyz = driver.findElement(By.xpath(myxpath));
+			StepImpe.Capture= xyz.getText();
+			System.out.println("object that is captured is *****************>>>>>>>>>>>>>>>>>>>>>>>> "   +Capture);
+		}
+		return Capture;
 	}
 
 	
@@ -845,40 +839,37 @@ public class StepImpe {
 //	      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
 //		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
 //		
-	      StringSelection selection = new StringSelection(StepImpe.Capture);
-			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-			
-			// get the what was originally in the clipboard so that it can be restored later
-			String oldContent = (String) clipboard.getData(DataFlavor.stringFlavor);
-			
-			// set the clipboard contents as what was captured in the previous step(s)
-			clipboard.setContents(selection, selection);
-			
-			//String htmlToBePasted = StepImpe.Capture;
-			//System.out.println(htmlToBePasted);
-			
-			// find the element
-			WebElement inputField =  driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]"));
-			inputField.click();
-			
-			//paste the captured stuff
-			Actions actions = new Actions(driver);
-			actions.sendKeys(Keys.chord(Keys.LEFT_CONTROL, "v")).build().perform();
-			
-//			inputField.clear();
-//			inputField.sendKeys(StepImpe.Capture);
-			
-			// revert the clipboard contents to what was there before
-			StringSelection oldSelection = new StringSelection(oldContent);
-			clipboard.setContents(oldSelection, oldSelection);
-	      System.out.println(StepImpe.Capture);
+      StringSelection selection = new StringSelection(StepImpe.Capture);
+      Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		
+		// get the what was originally in the clipboard so that it can be restored later
+      String oldContent = (String) clipboard.getData(DataFlavor.stringFlavor);
+		
+		// set the clipboard contents as what was captured in the previous step(s)
+      clipboard.setContents(selection, selection);
+		
 		//String htmlToBePasted = StepImpe.Capture;
 		//System.out.println(htmlToBePasted);
-	      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
-		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
 		
-
+		// find the element
+      WebElement inputField =  driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]"));
+      inputField.click();
 		
+		//paste the captured stuff
+      Actions actions = new Actions(driver);
+      actions.sendKeys(Keys.chord(Keys.LEFT_CONTROL, "v")).build().perform();
+		
+//			inputField.clear();
+//			inputField.sendKeys(StepImpe.Capture);
+		
+		// revert the clipboard contents to what was there before
+      StringSelection oldSelection = new StringSelection(oldContent);
+      clipboard.setContents(oldSelection, oldSelection);
+      System.out.println(StepImpe.Capture);
+	//String htmlToBePasted = StepImpe.Capture;
+	//System.out.println(htmlToBePasted);
+      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
+      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
 	}
 	
 	@Then("^I check \"(.*?)\" is not readonly$")
@@ -889,7 +880,7 @@ public class StepImpe {
 		WebElement some_element = driver.findElement(By.xpath(myXpath));
 		// some_element.click();
 		Assert.assertTrue(some_element.isEnabled());
-		 }
+	}
 	
 	
 	// to check if asterisk is present on a mandatory field
@@ -907,9 +898,7 @@ public class StepImpe {
 		WebElement elementName2 = driver.findElement(By.xpath(combineXPaths));
 		System.out.println(elementName2);
 		Assert.assertTrue(elementName2.isDisplayed());
-		
-		
-		
+
 	}
 
 
@@ -995,19 +984,18 @@ public class StepImpe {
 
 
 	@And("^I hit Enter$")
-     public LandingPage I_hit_Enter() throws InterruptedException
-	{
-   PageFactory.initElements(driver, LandingPage.class).hitEnter();
+    public LandingPage I_hit_Enter() throws InterruptedException {
+		PageFactory.initElements(driver, LandingPage.class).hitEnter();
 		Thread.sleep(1000);
 		
-		 return PageFactory.initElements(driver, LandingPage.class);
+		return PageFactory.initElements(driver, LandingPage.class);
 	}
 	
 	//will be used to tab out to activate a button incase the button is not activated.
-		@Given("^I Tab Out$")
-		public void i_Tab_Out() throws Throwable {
-			new DBUtilities(driver).tabOut();
-		}
+	@Given("^I Tab Out$")
+	public void i_Tab_Out() throws Throwable {
+		new DBUtilities(driver).tabOut();
+	}
 		
 	@And("^I click on button \"(.*?)\"$")
 	public void i_click_on_button(String arg1) throws Throwable {
@@ -1128,11 +1116,9 @@ public class StepImpe {
 		}
 
 		else if (arg1.equals("Welcome")){
-				DBUtilities createXpath2 = new DBUtilities(driver);
-				String myxpath3 = createXpath2.xpathMakerContainsText(arg1);
-
-				
-			}
+			DBUtilities createXpath2 = new DBUtilities(driver);
+			String myxpath3 = createXpath2.xpathMakerContainsText(arg1);	
+		}
 		// for calendar stuff found in the PAYROLL TAX INFORMATION part of the tax registration page
 		else if (datePattern.matcher(arg1).matches()){
 			DBUtilities createXpath = new DBUtilities(driver);
@@ -1151,20 +1137,6 @@ public class StepImpe {
 						System.out.println();
 					}
 				}
-				
-
-//				WebElement button = driver.findElement(By.xpath(myxpath4));
-//				
-//				JavascriptExecutor executor = (JavascriptExecutor)driver;
-//				executor.executeScript("arguments[0].scrollIntoView(true);",button);
-//				button.click();
-
-//				WebElement button = driver.findElement(By.xpath(myxpath4));
-//				
-//				JavascriptExecutor executor = (JavascriptExecutor)driver;
-//				executor.executeScript("arguments[0].scrollIntoView(true);",button);
-//				button.click();
-
 			}
 		}
 		else {
@@ -1186,19 +1158,18 @@ public class StepImpe {
 		if(arg1.equals("SetGoal")){
 			String myxpath = PageFactory.initElements(driver, GoalsAndTargetsPage.class).xpathMakerById1AndId2(arg1, arg2);
 			driver.findElement(By.xpath(myxpath)).click();
-		}else{
-		PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
-	}
+		}
+		else {
+			PageFactory.initElements(driver, LandingPage.class).selectDropdownValue(arg1, arg2);
+		}
 	}
 	// check for field text and text boxes
 	@And("^I enter the details as$")
 	public void I_enter_then_details_as(DataTable table) throws Throwable {
 
-     PageFactory.initElements(driver, DBUtilities.class).enterCucumbertableValuesInUI(table);
-	//In test	
-     //Thread.sleep(2000);
-		
-		}
+		PageFactory.initElements(driver, DBUtilities.class).enterCucumbertableValuesInUI(table);
+
+	}
 	
 	// simple wait
 	@Then("^I wait for \"(.*?)\" millisecond$")
@@ -1207,16 +1178,11 @@ public class StepImpe {
 	}
 
 
-//	@And("^I enter then details as new$")
-//	public void enterCucumberTableValuesInUI(DataTable table) throws InterruptedException{
-//		PageFactory.initElements(driver, DBUtilities.class).enterCucumbertableValuesInUI(table);
-//		
-//	}
+
 	
 	@Then("^I hover on \"(.*?)\" to verify \"(.*?)\" is displayed$")
 	public void i_hover_on_to_verify_is_displayed(String arg1, String arg2) throws Throwable {
-    PageFactory.initElements(driver, MakeAPaymentPage.class).hoverOverElement(arg1, arg2);
- 
+		PageFactory.initElements(driver, MakeAPaymentPage.class).hoverOverElement(arg1, arg2);
 	}
 
 	// CHECK ELEMENT IS READ ONLY
@@ -1228,7 +1194,7 @@ public class StepImpe {
 	// this is for checking checkbox
 	@Given("^I click on \"(.*?)\" checkbox$")
 	public void i_click_on_checkbox(String arg1) throws Throwable {
-     PageFactory.initElements(driver, ForgotYourPasswordPage.class).checkBoxClick(arg1);
+		PageFactory.initElements(driver, ForgotYourPasswordPage.class).checkBoxClick(arg1);
 	}
 
 	//*********************************************** read popup message********************************************
@@ -1245,14 +1211,9 @@ public class StepImpe {
 	//***************************************************Landing Page********************************************************
 	@Then("^\"(.*?)\" is displayed as \"(.*?)\"$")
 	public void is_displayed_as(String arg1, String arg2, DataTable table) throws Throwable {
-//		if(arg2.equals("Checkbox")
-//				||arg2.equals("I'm not a robot")
-//				||arg2.equals("recaptcha-anchor")){
-//			PageFactory.initElements(driver, LandingPage.class).checkElementPresentOnScreen(table);
-//		}else{
+
 		PageFactory.initElements(driver, LandingPage.class).checkElementPresentOnScreen(table);
-		}
-//	}
+	}
 
 	
 	// Read All SAs
@@ -1265,12 +1226,10 @@ public class StepImpe {
 	// ******************************************************* new page is launched*********************************************
 	@Then("^a new page \"(.*?)\" is launched$")                 
 	public void a_new_page_is_launched(String arg1) throws Throwable {
-    String URL = driver.getCurrentUrl();
-     System.out.println(URL);
-     new DBUtilities(driver).passControlToNewWindow(arg1);
-    
-  
-		}
+		String URL = driver.getCurrentUrl();
+		System.out.println(URL);
+		new DBUtilities(driver).passControlToNewWindow(arg1);
+	}
 
 	
 	
@@ -1285,13 +1244,13 @@ public class StepImpe {
 	
 	@When("^I view the left hand panel of screen$")
 	public void i_view_the_left_hand_panel_of_screen() throws Throwable {
-	System.out.println("Checking UI Elements on LHS of screen");
-	Thread.sleep(10000);
+		System.out.println("Checking UI Elements on LHS of screen");
+		Thread.sleep(10000);
 	}
 
 	@Then("^I see \"(.*?)\" displayed$")
 	public void i_see_and_displayed(String arg1) throws Throwable {
-    PageFactory.initElements(driver, LandingPage.class).checkUIElementIsDisplayed(arg1);
+		PageFactory.initElements(driver, LandingPage.class).checkUIElementIsDisplayed(arg1);
 
 	}
 	
@@ -1301,6 +1260,7 @@ public class StepImpe {
       Thread.sleep(1000);
       AU.checkUIElementTEXTIsDisplayed(arg1);
 	}
+	
 	@Then("^I see text \"(.*?)\" not displayed$")
 	public void i_see_text_not_displayed(String arg1) throws Throwable {
 		DBUtilities checkElementDisplayed = new DBUtilities(driver);
@@ -1324,7 +1284,7 @@ public class StepImpe {
 	//check i am on right page
 	@Given("^I check I am on \"(.*?)\" page$")
 	public void i_check_I_am_on_page(String arg1) throws Throwable {
-	PageFactory.initElements(driver, BillingHistoryPage.class).checkIfOnRightPage(arg1); 
+		PageFactory.initElements(driver, BillingHistoryPage.class).checkIfOnRightPage(arg1); 
 		  
 		  System.out.println(" on correct page " +arg1);
 	}
@@ -1355,14 +1315,6 @@ public class StepImpe {
 		System.out.println(dropdownValue.getText());
 		PageFactory.initElements(driver, AccountFinancialHistorypage.class).isTextPresent(arg2);
 		
-//		DBUtilities createXpath = new DBUtilities(driver);
-//		String myxpath = createXpath.xpathMakerById(arg1);
-//		WebElement dropdown = driver.findElement(By.xpath(myxpath));
-//		Select mySelect = new Select(dropdown);
-//
-//		String currentValue = mySelect.getFirstSelectedOption().getText();
-//		Assert.assertTrue(currentValue.equals(arg2));
-
 	}
 
 
@@ -1383,13 +1335,13 @@ public class StepImpe {
 	// compare 2 values
 	@Then("^I verify \"(.*?)\" is \"(.*?)\" then \"(.*?)\"$")
 	public void i_verify_is_then(String arg1, String arg2, String arg3) throws Throwable {
-	   DBUtilities val1 = new DBUtilities(driver);
-	  String a = val1.xpathMakerById(arg1);
-	  String currentValue1 = driver.findElement(By.xpath(a)).getText();
-	  System.out.println(currentValue1);
-	  String b = val1.xpathMakerById(arg3);
-	  String currentValue2 = driver.findElement(By.xpath(b)).getText();
-	  System.out.println(currentValue2);
+		DBUtilities val1 = new DBUtilities(driver);
+		String a = val1.xpathMakerById(arg1);
+		String currentValue1 = driver.findElement(By.xpath(a)).getText();
+		System.out.println(currentValue1);
+		String b = val1.xpathMakerById(arg3);
+		String currentValue2 = driver.findElement(By.xpath(b)).getText();
+		System.out.println(currentValue2);
 
 		DBUtilities compareAccountTotalToServiceTotal = new DBUtilities(driver);
 		String result = compareAccountTotalToServiceTotal.compare2DollarValues(currentValue1, currentValue2);
