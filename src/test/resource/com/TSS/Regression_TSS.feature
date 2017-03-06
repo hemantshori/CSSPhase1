@@ -1,4 +1,4 @@
-@TSS_Regression
+#@TSS_Regression
 Feature: Some feature
 
   # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
@@ -9,7 +9,197 @@ Feature: Some feature
 
   #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
   
-
+  @done
+  Scenario Outline: DTSP-463: Check for Mandatory
+    #On hold until a clear standard for the Mandatory field asterisks can be made
+    #PART 1: Login Screen
+    Given I want to login to portal "<PortalName>"
+    #Then I check "UserNameEmailLabel" is marked as "Mandatory"
+    #Then I check "PasswordLabel" is marked as "Mandatory"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    And I click on "Payroll Tax Lodgement"
+    Then I click on button "Discard"
+    #Part 2: Payroll Tax (Annual)
+    Then I click on "Payroll Tax Lodgement"
+    Then I click on "Monthly Return"
+    Then I select "Jan 2017" from "MonthlyObligationSelect"
+    Then I click on button "NextSection"
+    #Then I check "YearOfReturnLabel" is marked as "Mandatory"
+    #Then I check "MonthOfReturnLabel" is marked as "Mandatory"
+    #Then I check "CurrentEmployerStatusLabel" is marked as "Mandatory"
+    #Then I click on "Designated group employer for a group and lodging for itself"
+    Then I click on button "TaxPayerDetailsNext"
+    Then I click on button "ClaimingACTProportion_Yes"
+    Then I check "LodgePayrollAnswer_ClaimingACTProportion_Label" is marked as "Mandatory"
+    #Then I click on button "ACTWagesPaidNext"
+    Then I check "SalariesAndWages" is marked as "Mandatory"
+		Then I check "BonusesAndCommissions" is marked as "Mandatory"
+		Then I check "LodgePayrollAnswer_Commissions" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_Allowances" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_DirectorsFees" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_EligibleTerminationPayments" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_ValueOfBenefits" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_ShareValue" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_ServiceContracts" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_Superannuation" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_OtherTaxablePayment" is marked as "Mandatory"    
+		Then I check "LodgePayrollAnswer_ExemptWages" is marked as "Mandatory"    
+		Then I check "PayrollAnswer_AustralianWide" is marked as "Mandatory"    
+		Then I check "GroupActWages" is marked as "Mandatory"    
+    #Then I enter the details as
+      #| Fields                       | Value |
+      #| PayrollAnswer_AustralianWide |     1 |
+      #| PayrollAnswer_GroupActWages  |    98 |
+    #Then I click on button "MonthlyReturnBack"
+    #Then I click on button "ACTWagesPaidNext"
+    #Then I click on button "MonthlyReturnNext"
+    #Then I check "PersonFullNameLabel" is marked as "Mandatory"
+    #Then I check "LegalEntityNameLabel" is marked as "Mandatory"
+    #Then I check "EmployerDeclarationLabel" is marked as "Mandatory"
+    #Then I check "PhoneNumberLabel" is marked as "Mandatory"
+    #Then I check "EmailAddressLabel" is marked as "Mandatory"
+    #And I enter the details as
+      #| Fields              | Value       |
+      #| PersonFullName      | test        |
+      #| LegalEntityName     | Test2       |
+      #| EmployerDeclaration | test        |
+      #| PhoneNumber         |  0422184033 |
+      #| EmailAddress        | abc@abc.com |
+    #Then I click on button "DeclarationBack"
+    #Then I click on button "MonthlyReturnNext"
+    #Then I click on button "DeclarationConfirm"
+    Then I click on "Sign Out"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    
+    #PART 3: Create Account (TODO Once labels have IDs)
+    #Given I want to login to portal "<PortalName>"
+    Then I click on "Create Account"
+    Then I click on button "TermsandConditionsCheckBox2"
+    Then I click on button "RegistrationAsTaxAgent"
+		Then I check "BusinessAddress_Address1Label" is marked as "Mandatory"
+		Then I check "CountryIdLabel" is marked as "Mandatory"
+		Then I check "SuburbLabel" is marked as "Mandatory"
+		Then I check "StateIdLabel" is marked as "Mandatory"
+		Then I check "PostcodeLabel" is marked as "Mandatory"
+    #Then I check "SelectBusinessType" is marked as "Mandatory"
+    Then I click on button "RegistrationAsBusiness"
+    Then I check "InputABNNumber_Business" is marked as "Mandatory"
+    Then I check "InputCRNNumber_Business" is marked as "Mandatory"
+    
+    Then I enter the details as
+      | Fields                  | Value       |
+      | InputABNNumber_Business | 91167969593 |
+      | InputCRNNumber_Business | 400016 |
+    Then I click on button "RegistrationSubmit"
+    Then I check "Registration_FirstNameLabel" is marked as "Mandatory"
+    Then I check "Registration_LastNameLabel" is marked as "Mandatory"
+    Then I check "Registration_EmailLabel" is marked as "Mandatory"
+    Then I check "Registration_UsernameLabel" is marked as "Mandatory"
+    Then I check "Registration_NewPasswordLabel" is marked as "Mandatory"
+    Then I check "Registration_ConfirmPasswordLabel" is marked as "Mandatory"
+    Then I check "Registration_HintLabel" is marked as "Mandatory"
+    #PART 4: Tax Registration Form
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Payroll Tax Registration"
+    Then I wait for "2000" millisecond
+    Then I check "SelectBusinessType" is marked as "Mandatory"
+    Then I check "EmployerName" is marked as "Mandatory"
+    Then I check "BusinessTradingName" is marked as "Mandatory"
+    Then I check "Label_AustralianBusinessNumber_ABN" is marked as "Mandatory"
+    Then I check "Label_BusinessAdress_Country" is marked as "Mandatory"
+    Then I check "Label_BusinessAddress_AddressLine1" is marked as "Mandatory"
+    Then I check "Label_BusinessAdress_Suburb" is marked as "Mandatory"
+    Then I check "Label_BusinessAdress_Territory" is marked as "Mandatory"
+    Then I check "Label_BusinessAdress_Postcode" is marked as "Mandatory"
+    #Then I check "Text_PostalAddress" is marked as "Mandatory"
+    #Then I check "Text_AddresswhereBusinessRecordsarelocated_Jurisdi" is marked as "Mandatory"
+    Then I check "Label_ContactPerson_Title" is marked as "Mandatory"
+    Then I check "ContactPerson_FirstName" is marked as "Mandatory"
+    Then I check "ContactPerson_LastName" is marked as "Mandatory"
+    Then I check "Label_ContactPerson_ContactPhoneNumber" is marked as "Mandatory"
+    Then I check "Label_ContactPerson_EmailAddress" is marked as "Mandatory"
+    Then I check "Label_PreferedCommunicationMethod" is marked as "Mandatory"
+    #Then I check "Label_PostalAddress" is marked as "Mandatory"
+    Then I select "Company" from "SelectBusinessTypeCode"
+    Then I select "Mr" from "ContactPerson_Title"
+    Then I select "Direct Post" from "CommunicationMethodId"
+    Then I enter the details as
+      | Fields                    | Value              |
+      | EmployerName              | DB RESULTS PTY LTD |
+      | BusinessTradingName       | DB RESULTS PTY LTD |
+      | RegistrationAnswer_ABN    |        97110187767 |
+      | RegistrationAnswer_ACN    |          110187767 |
+      | AddressLine1              | TEST               |
+      | Address_City              | TEST               |
+      | PostCode                  |               3333 |
+      | ContactPerson_FirstName   | TEST               |
+      | ContactPerson_LastName    | TEST               |
+      | ContactPerson_PhoneNumber |           33333333 |
+      | ContactPerson_Email       | TEST@TEST.com          |
+    #Then I select "AL" from "Address_State"
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on "TaxPayerDetailsNext"
+    Then I check "Label_BusinessActivityCategory" is marked as "Mandatory"
+     Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value        |
+      | s2id_autogen1_search | Turf Growing |
+    Then I click on button "select2-results-1"
+    Then I click on "ACTWagesPaidNext"
+    Then I wait for "2000" millisecond
+    Then I check "Label_DateBusinessCommencedEmployinginACT" is marked as "Mandatory"
+    Then I check "Label_DateBusinessBecameLiableintheACT" is marked as "Mandatory"
+    Then I check "Label_NumberofEmployeesinyourACTBusiness" is marked as "Mandatory"
+    #Then I see text "Are you a member of a group?*" displayed
+    Then I check "Label_Asaneligibleemployer_doyouwishtoapplyforannu" is marked as "Mandatory"
+    Then I click on button "AnnualLodgementApproval_YES"
+    Then I check "Label_AnnualLodgementRequestJustification" is marked as "Mandatory"
+    #Then I check "Text_ContactPersonforPayrollTax" is marked as "Mandatory"
+    Then I click on "DateBusinessStart"
+    Then I click on "20170304"
+    Then I click on "DateBusinessLiable"
+    Then I click on "20170304"
+    Then I enter the details as
+      | Fields               | Value |
+      | NumberOfEmployees    |    33 |
+      | RequestJustification | TEST  |
+    Then I click on "GroupMember_UNSURE"
+    Then I click on button "AnnualLodgementApproval_NO"
+    Then I click on "PayrollNext"
+    Then I wait for "2000" millisecond
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                        |
+      | item2 | Set Up Bank Account for Refunds |
+      | item3 | BSB                             |
+      | item4 | Bank Account Number             |
+    Then I check "Label_BSB" is marked as "Mandatory"
+    Then I check "Label_BankAccountNumber" is marked as "Mandatory"
+    Then I check "Label_BankAccountName" is marked as "Mandatory"
+    #Then I click on button "Refunds_NO"
+    #Then I click on button "RefundDetailsNext"
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                                                                         |
+      #| item2 | Declaration                                                                      |
+      #| item3 | Declarer                                                                         |
+      #| item5 | I declare that this information is true and correct to the best of my knowledge. |
+    #Then I check "Label_Declarer" is marked as "Mandatory"
+    #Then I check "Label_Organisation" is marked as "Mandatory"
+    #Then I check "Label_Employer" is marked as "Mandatory"
+    #Then I check "Label_ContactPhone" is marked as "Mandatory"
+    #Then I check "Label_EmailAdress" is marked as "Mandatory"
+	    Examples: 
+      | PortalName       | UserNameField | PasswordField | UserName | Password   | 
+      | TSS | UserNameInput | PasswordInput | jbradley   | Dbresults1 |
+      
 	@review
   Scenario Outline: DTSP-380 -> As a user I want the ability to enter my Payroll Tax Information on the Tax Registration form so that I can register for Payroll Tax
     Given I want to login to portal "<PortalName>"
@@ -360,7 +550,7 @@ Feature: Some feature
       | Fields            | Value |
       | Input_PhoneNumber | TEST  |
     Then I check "Input_PhoneNumber" is empty
-    #Scenario 3: User has not entered all the mandatory fields
+    #Scenario 3: User has not entered all the Mandatory fields
     Then I check "CancelBT" is readonly
     #Scenario 4, 6: Scenario 6: Profile settings details does not pass all validations
     Then I enter the details as
@@ -502,7 +692,7 @@ Feature: Some feature
     Then a new page "http://dbresults.com.au/terms/" is launched
     Given I want to login to portal "<PortalName>"
     Then I click on "Create Account"
-    #Scenario 3: User has not entered all the mandatory fields
+    #Scenario 3: User has not entered all the Mandatory fields
     Then I check "RegistrationSubmit" is readonly
     #Scenario 2: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a Number field)
     Then I enter the details as
@@ -593,7 +783,7 @@ Feature: Some feature
 
    
 	  @done
-  Scenario Outline: DTSP-523
+   Scenario Outline: DTSP-523
     # Part of this story is automatically tested by others...
   
     Given I want to login to portal "<PortalName>"
@@ -749,7 +939,7 @@ Feature: Some feature
       | PortalName | UserNameField | PasswordField | Password   |
       | TSS        | UserNameInput | PasswordInput | Dbresults1 |
 
-  @review
+  @done
   Scenario Outline: DTSP-537
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -857,7 +1047,7 @@ Feature: Some feature
       | TSS        | UserNameInput | PasswordInput | Dbresults1 |
 
   @done
-  Scenario Outline: DTSP-444: As an end user, I want to know my Payroll Tax Obligations (including Month and Year) which have not been lodged so I can lodge my monthly payroll tax accordingly
+  Scenario Outline: DTSP-444: As an end user, I want to know my Payroll Tax Obligations including Month and Year which have not been lodged so I can lodge my monthly payroll tax accordingly
     #Scenario 5: Gather Obligation List [Monthly and Annual] [Exception Path]
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -1032,7 +1222,7 @@ Feature: Some feature
       | PortalName | UserName | Password   |
       | TSS        | jbradley | Dbresults1 |
 
-  @review
+  @done
   Scenario Outline: DTSP-553: As a user, I want to see a "Total Amounts" section on my Annual Payroll Tax return form so I can enter my "Less Total Tax Paid" amount
     Given I want to login to portal "<PortalName>"
     And I enter the details as
