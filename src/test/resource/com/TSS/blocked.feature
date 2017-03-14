@@ -4,6 +4,8 @@
 #Sample Feature Definition Template
 
 Feature: Blocked tests
+	#CURRENTLY BLOCKED: 356
+
  @wip
   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known (error field mapping)
     #BLOCKER: DTSP-612: Submitting Lodgement Forms With the Same Periods

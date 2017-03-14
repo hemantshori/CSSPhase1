@@ -787,7 +787,7 @@ public class StepImpe {
 
 	@After()
 	public void tearDown() {	
-		//driver.quit();
+		driver.quit();
 	}
 	//******************************************************************************   
 	    
@@ -1435,7 +1435,46 @@ public class StepImpe {
 //	}
 
 
-
+@Then("^I check \"(.*?)\" has a CSS property \"(.*?)\" with value \"(.*?)\"$")
+public void i_check_has_a_css_property_with_value (String arg1, String arg2, String arg3) throws Throwable{
+	DBUtilities dbutil = new DBUtilities(driver);
+	String xpath1 = dbutil.xpathMakerById(arg1);
+	String property = arg2;
+	String cssVal = arg3;
+	String currentCssVal = null;
+	try {
+		currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
+		System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+		Assert.assertTrue(cssVal.equals(currentCssVal));
+	}
+	// specifically for finding CSS values of labels with ::after psuedo selector
+	catch (AssertionError | Exception e){
+		try {
+			xpath1 = dbutil.xpathMakerByLabelAndId(arg1);
+			WebElement currentElement = driver.findElement(By.xpath(xpath1));
+			currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
+			System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+			Assert.assertTrue(cssVal.equals(currentCssVal));
+		}
+		catch (AssertionError | Exception ae2) {
+			try {
+				xpath1 = dbutil.xpathMakerBySpanAndId(arg1);
+				WebElement currentElement = driver.findElement(By.xpath(xpath1));
+				currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
+				System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+				Assert.assertTrue(cssVal.equals(currentCssVal));
+			}
+			catch (AssertionError | Exception ae3){
+				xpath1 = dbutil.xpathMakerBySpanAndClass(arg1);
+				WebElement currentElement = driver.findElement(By.xpath(xpath1));
+				currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
+				System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+				Assert.assertTrue(cssVal.equals(currentCssVal));
+			}
+		}
+		
+	}
+}
 
 	
 

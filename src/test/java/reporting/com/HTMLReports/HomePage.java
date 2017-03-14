@@ -41,6 +41,7 @@ public class HomePage extends DBUtilities {
 		else if(arg1.equals("TSS_Tooltips")){
 			driver.get("https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
 		}
+		
 
 		else if(arg1.equals("Production")){
 			driver.get("https://ssc.dbresults.com.au/TSSPortal/");
@@ -62,10 +63,16 @@ public class HomePage extends DBUtilities {
 			driver.get("https://test-ssc.dbresults.com.au/RegistrationCore/DeleteRegistrationData.aspx");
 		}
 		else if(arg1.equals("MessageEdit")){
-			driver.get("https://test-ssc.dbresults.com.au/SS_Admin_Core/FeedbackMsgTexts.aspx");
+			driver.get("https://test-ssc.dbresults.com.au/SS_Admin/FeedbackMsgTexts.aspx");
+		}
+		else if(arg1.equals("Production_MessageEdit")){
+			driver.get("https://ssc.dbresults.com.au/SS_Admin/FeedbackMsgTexts.aspx");
 		}
 		else if(arg1.equals("PageTexts")){
-			driver.get("https://test-ssc.dbresults.com.au/TSSAdmin/PageTexts.aspx");
+			driver.get("https://test-ssc.dbresults.com.au/SS_Admin/PageTexts.aspx");
+		}
+		else if(arg1.equals("Production_PageTexts")){
+			driver.get("https://ssc.dbresults.com.au/SS_Admin/PageTexts.aspx");
 		}
 		else if(arg1.equals("ExpiredPassword")){
 			driver.get("http://test-ssc.dbresults.com.au/AccountMgmt/ChangePassword.aspx?Token=e69de158-9abf-4e5d-aba7-6841237bd58c");
@@ -91,7 +98,10 @@ public class HomePage extends DBUtilities {
 	    	driver.get("https://dbresults-tst.outsystemsenterprise.com/AccountMgmt/ResetPassword.aspx?Token=bf138cb5-7b10-43ac-9610-5775e29e5fe1");
 	    }
 	    else if (arg1.equals("StyleGuideConfig")){
-	    	driver.get("https://test-ssc.dbresults.com.au/SS_Admin_Core/StyleGuideConfigs.aspx");
+	    	driver.get("https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx");
+	    }
+	    else if (arg1.equals("Production_StyleGuideConfig")){
+	    	driver.get("https://ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx");
 	    }
 	    else if (arg1.equals("AccountManagement")){
 			driver.get("https://test-ssc.dbresults.com.au/TSSAccountMgmt/Settings.aspx");

@@ -15,7 +15,8 @@ import cucumber.api.junit.Cucumber;
 
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@wip"},
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSS_Regression_Prod"},
-(format = { "pretty", "html:target/html/result.html" },  tags = {"@current"},
+(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSS_Regression"},
+//(format = { "pretty", "html:target/html/result.html" },  tags = {"@current"},
     //*********************for SHAKE	OUT*************************************
 	//	 features = "src/test/resource/com/CSS/SanityTestScript.feature") 
 

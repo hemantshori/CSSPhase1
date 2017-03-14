@@ -54,6 +54,8 @@ public class XPathGenerator {
 			System.out.println("xpath ::*** " +xpath);
 			return xpath;
 	 } 
+	 
+	 
 	 public String xpathMakerContainsText(String buttonName)
 	    {
 		//String xpath = "//*[contains(text(),"\"+buttonName+"")]";
@@ -61,6 +63,12 @@ public class XPathGenerator {
 		 return xpath;
 	    }
 	//span[@class='nav-selection']
+	 public String xpathMakerBySpanAndClass(String buttonName) {
+			String xpath = "//span[contains(@class, '"+buttonName+"')]";
+			System.out.println("xpath ::*** " +xpath);
+			return xpath;
+	 } 
+	 
 	 public String xpathMakerSpanClass(String buttonName)
 	    {
 		String xpath = "//span[@class='"+buttonName+"']";

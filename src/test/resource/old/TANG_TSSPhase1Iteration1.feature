@@ -316,5 +316,5 @@ Feature: Some feature
       | item9 | wtMainContent 					|
       
        Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  |
+      | PortalName | UserNameField | PasswordField | UserName | Password  | 
       | TSS        | UserNameInput | PasswordInput | bob      | dbresults |
