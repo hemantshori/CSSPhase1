@@ -14,6 +14,7 @@ import cucumber.api.junit.Cucumber;
 // OCT***********************************
 
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@wip"},
+//(format = { "pretty", "html:target/html/result.html" },  tags = {"@runthrough"},
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSS_Regression_Prod"},
 (format = { "pretty", "html:target/html/result.html" },  tags = {"@TSS_Regression"},
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@current"},
@@ -33,7 +34,7 @@ import cucumber.api.junit.Cucumber;
     //****************for Regression****************************
 //	 features = "src/test/resource/com/TSS/wip.feature")
 
- //features = "src/test/resource/com/TSS/TANG_TSSPhase1Iteration4.feature")
+ //features = "src/test/resource/com/TSS/TSSIteration1-1.feature")
 	
 
 

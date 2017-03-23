@@ -1,16 +1,9 @@
+@runthrough
+Feature: Automation for stories done in Iteration 1.1
 
-@TSS_Regression
-Feature: Regression for TSS.
-
-	#STORIES DONE:  78, 136, 141, 176, 185, 522, 578, 583, 584, 592, 608, 617, 622
-	#CURRENT ITERATION: 1.1
-  # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
-  # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
-  # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
+  #Stories done: 78, 136, 141, 176, 185, 522, 578, 583, 584, 592, 608, 617, 622
   
 
-  #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
-  
   @review
   Scenario Outline: DTSP-78: As an end user, I want to be able to select an ABN and view next payment information and lodge from the Right Navigation Panel on my Basic Dashboard
     #Business Taxpayer with many: jbradley
@@ -342,9 +335,7 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | UserName | Password   |
       | TSS        | jbradley | Dbresults1 |
-  
-  
- 
+
   @review
   Scenario Outline: DTSP-522: As a end user I want the settings page updated so I can understand what the settings page is used for
     Given I want to login to portal "<PortalName>"
@@ -862,11 +853,3 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | UserName | Password   | SearchString |
       | TSS        | jbradley | Dbresults1 | FISH AND CO  |
-
-  
-
-  
-  
-
- 
-	

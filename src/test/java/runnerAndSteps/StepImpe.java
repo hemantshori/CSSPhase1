@@ -772,7 +772,7 @@ public class StepImpe {
 
 	
 	@Before()
-	  public void startUp() {
+	public void startUp() {
 //	    driver = new FirefoxDriver();
 //	    driver.manage().window().maximize();
 
@@ -842,16 +842,16 @@ public class StepImpe {
       StringSelection selection = new StringSelection(StepImpe.Capture);
       Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		
-		// get the what was originally in the clipboard so that it can be restored later
+      // get the what was originally in the clipboard so that it can be restored later
       String oldContent = (String) clipboard.getData(DataFlavor.stringFlavor);
 		
-		// set the clipboard contents as what was captured in the previous step(s)
+      // set the clipboard contents as what was captured in the previous step(s)
       clipboard.setContents(selection, selection);
 		
-		//String htmlToBePasted = StepImpe.Capture;
-		//System.out.println(htmlToBePasted);
+      //String htmlToBePasted = StepImpe.Capture;
+      //System.out.println(htmlToBePasted);
 		
-		// find the element
+      // find the element
       WebElement inputField =  driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]"));
       inputField.click();
 		
@@ -859,15 +859,12 @@ public class StepImpe {
       Actions actions = new Actions(driver);
       actions.sendKeys(Keys.chord(Keys.LEFT_CONTROL, "v")).build().perform();
 		
-//			inputField.clear();
-//			inputField.sendKeys(StepImpe.Capture);
 		
 		// revert the clipboard contents to what was there before
       StringSelection oldSelection = new StringSelection(oldContent);
       clipboard.setContents(oldSelection, oldSelection);
       System.out.println(StepImpe.Capture);
-	//String htmlToBePasted = StepImpe.Capture;
-	//System.out.println(htmlToBePasted);
+	
       driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
       driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
 	}
@@ -878,7 +875,6 @@ public class StepImpe {
 		String myXpath = createXpath.xpathMakerById(arg1);
 		Thread.sleep(1000);
 		WebElement some_element = driver.findElement(By.xpath(myXpath));
-		// some_element.click();
 		Assert.assertTrue(some_element.isEnabled());
 	}
 	
@@ -908,11 +904,6 @@ public class StepImpe {
 		DBUtilities createXpath = new DBUtilities(driver);
 		String myxpath = createXpath.xpathMakerById(arg1);
 		Thread.sleep(3000);
-//		System.out.println(myxpath);
-//		String elementToBeSearched = StepImpe.Capture;
-//		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +elementToBeSearched);
-//	     DBUtilities t1 = new DBUtilities(driver);
-//	     t1.isTextPresent(elementToBeSearched);
 		WebElement inputBox = driver.findElement(By.xpath(myxpath));
 		String boxContents = inputBox.getAttribute("value");
 		System.out.println("boxContents: " + boxContents);
@@ -969,6 +960,21 @@ public class StepImpe {
 		}
 	}
 	
+	@Then("^I check \"(.*?)\" is not empty$")
+	public void i_check_is_not_empty(String arg1) throws Throwable {
+		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
+		WebElement inputBox = driver.findElement(By.xpath(myxpath));
+		Assert.assertTrue(inputBox.isDisplayed());
+		String boxContents = inputBox.getAttribute("value");
+		try {
+			Assert.assertTrue(!boxContents.isEmpty());
+		}
+		// in the
+		catch (Exception e){
+			Assert.assertTrue(boxContents != null);
+		}
+	}
+	
 	
 	
 	
@@ -996,6 +1002,8 @@ public class StepImpe {
 	public void i_Tab_Out() throws Throwable {
 		new DBUtilities(driver).tabOut();
 	}
+	
+	
 		
 	@And("^I click on button \"(.*?)\"$")
 	public void i_click_on_button(String arg1) throws Throwable {
@@ -1023,9 +1031,35 @@ public class StepImpe {
 			}
 		}
 		else {
-			myXpath = createXpath.xpathMakerById(arg1);
-			driver.findElement(By.xpath(myXpath)).click();
+			try {
+				myXpath = createXpath.xpathMakerById(arg1);
+				driver.findElement(By.xpath(myXpath)).click();
+			}
+			catch (Exception e){
+				myXpath = createXpath.xpathMakerByClass(arg1);
+				driver.findElement(By.xpath(myXpath)).click();
+			}
 		}
+		Thread.sleep(2500);
+
+	}
+	
+	@And("^I click on button with value \"(.*?)\"$")
+	public void i_click_on_button_with_value(String arg1) throws Throwable {
+		Thread.sleep(1000);
+		String myXpath = null;
+		DBUtilities createXpath = new DBUtilities(driver);
+		myXpath = createXpath.xpathMakerByValue(arg1);
+		driver.findElement(By.xpath(myXpath)).click();
+//		try {
+//			myXpath = createXpath.xpathMakerById(arg1);
+//		
+//		}
+//		catch (Exception e){
+//			myXpath = createXpath.xpathMakerByClass(arg1);
+//			driver.findElement(By.xpath(myXpath)).click();
+//		}
+	
 		Thread.sleep(2500);
 
 	}
@@ -1435,46 +1469,46 @@ public class StepImpe {
 //	}
 
 
-@Then("^I check \"(.*?)\" has a CSS property \"(.*?)\" with value \"(.*?)\"$")
-public void i_check_has_a_css_property_with_value (String arg1, String arg2, String arg3) throws Throwable{
-	DBUtilities dbutil = new DBUtilities(driver);
-	String xpath1 = dbutil.xpathMakerById(arg1);
-	String property = arg2;
-	String cssVal = arg3;
-	String currentCssVal = null;
-	try {
-		currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
-		System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-		Assert.assertTrue(cssVal.equals(currentCssVal));
-	}
-	// specifically for finding CSS values of labels with ::after psuedo selector
-	catch (AssertionError | Exception e){
+	@Then("^I check \"(.*?)\" has a CSS property \"(.*?)\" with value \"(.*?)\"$")
+	public void i_check_has_a_css_property_with_value (String arg1, String arg2, String arg3) throws Throwable{
+		DBUtilities dbutil = new DBUtilities(driver);
+		String xpath1 = dbutil.xpathMakerById(arg1);
+		String property = arg2;
+		String cssVal = arg3;
+		String currentCssVal = null;
 		try {
-			xpath1 = dbutil.xpathMakerByLabelAndId(arg1);
-			WebElement currentElement = driver.findElement(By.xpath(xpath1));
-			currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
+			currentCssVal = driver.findElement(By.xpath(xpath1)).getCssValue(arg2);
 			System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
 			Assert.assertTrue(cssVal.equals(currentCssVal));
 		}
-		catch (AssertionError | Exception ae2) {
+		// specifically for finding CSS values of labels with ::after psuedo selector
+		catch (AssertionError | Exception e){
 			try {
-				xpath1 = dbutil.xpathMakerBySpanAndId(arg1);
+				xpath1 = dbutil.xpathMakerByLabelAndId(arg1);
 				WebElement currentElement = driver.findElement(By.xpath(xpath1));
 				currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
 				System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
 				Assert.assertTrue(cssVal.equals(currentCssVal));
 			}
-			catch (AssertionError | Exception ae3){
-				xpath1 = dbutil.xpathMakerBySpanAndClass(arg1);
-				WebElement currentElement = driver.findElement(By.xpath(xpath1));
-				currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
-				System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
-				Assert.assertTrue(cssVal.equals(currentCssVal));
+			catch (AssertionError | Exception ae2) {
+				try {
+					xpath1 = dbutil.xpathMakerBySpanAndId(arg1);
+					WebElement currentElement = driver.findElement(By.xpath(xpath1));
+					currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
+					System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+					Assert.assertTrue(cssVal.equals(currentCssVal));
+				}
+				catch (AssertionError | Exception ae3){
+					xpath1 = dbutil.xpathMakerBySpanAndClass(arg1);
+					WebElement currentElement = driver.findElement(By.xpath(xpath1));
+					currentCssVal = ((JavascriptExecutor) driver).executeScript("return window.getComputedStyle(arguments[0], '::after').getPropertyValue('" + property + "');",currentElement).toString();
+					System.out.println("Comparing '" + cssVal + "' against the property value found: '" + currentCssVal + "'.");
+					Assert.assertTrue(cssVal.equals(currentCssVal));
+				}
 			}
+			
 		}
-		
 	}
-}
 
 	
 
@@ -1492,5 +1526,13 @@ public void i_check_has_a_css_property_with_value (String arg1, String arg2, Str
 	@Given("^I read the table on \"(.*?)\" page$")
 	public void i_read_the_table_on_page(String arg1) throws Throwable {
 		 new DBUtilities(driver).readTableAndCaptureInString(arg1);
+	}
+	
+	
+	// for those Outsystems popups, set argument as 0 if there is only one frame present
+	@Then("^I switch to frame \"(.*?)\"$")
+	public void i_switch_to_frame(String arg1) throws Throwable {
+		int frameNum = Integer.parseInt(arg1);
+		driver.switchTo().frame(frameNum);
 	}
 }

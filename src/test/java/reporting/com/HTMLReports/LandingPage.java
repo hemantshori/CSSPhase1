@@ -30,7 +30,7 @@ public class LandingPage extends DBUtilities {
 		
 		List<List<String>> data = table.raw();
 		System.out.println(" value is ++" +data);
-		for (int i = 1; i <data.size(); i++){
+		for (int i = 1; i <data.size(); i++) {
 			Thread.sleep(3000);
 			String name = data.get(i).get(1);
 			System.out.println(" and the name is+++++" +name);
@@ -56,59 +56,79 @@ public class LandingPage extends DBUtilities {
 				System.out.println(" and element............" +myxpath + "is displayed successfully");
 				Assert.assertTrue(" Varification failede as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
 				
-			}else if(name.equals("Logo")||name.equals("Logo on main page")){
+			} 
+			else if(name.equals("Logo")||name.equals("Logo on main page")){
 				// verify image on home screen
 				Assert.assertTrue(driver.findElement(By.xpath("//img[contains(@src, 'png')]")).isDisplayed());
 				//Assert.assertTrue(driver.findElement(By.xpath("//img[contains(@src, 'Logo_Large.png')]")).isDisplayed());
-			}else if(name.equals("Due Date")||name.equals("Account Total")){
-					// verify xpath with span id is displayed on screen
-//				DBUtilities createXpath = new DBUtilities(driver);
-//				String myxpath = createXpath.xpathMakerBySpanID(name);
+			} 
+			else if(name.equals("Due Date")||name.equals("Account Total")){
 				String myxpath = new DBUtilities(driver).xpathMakerBySpanID(name);
 				System.out.println(" and the name is++++++++++++++++" +myxpath);
 				Assert.assertTrue(" Varification failede as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
 				
-			}else{	
+			}
+			else {	
 //			DBUtilities createXpath = new DBUtilities(driver);
 //			String myxpath = createXpath.xpathMaker(name);
 				String myxpath = new DBUtilities(driver).xpathMakerContainsText(name);
-			System.out.println("*checking for*  " +myxpath); if(driver.findElements(By.xpath(myxpath)).size() != 0){
-				System.out.println("Element is Present");
-				}else{
-				System.out.println("Element is Absent");
-				}
-			Thread.sleep(2000);
-			Assert.assertTrue(" Varification failede as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
-
+				System.out.println("*checking for*  " +myxpath); 
+//				if(driver.findElements(By.xpath(myxpath)).size() != 0){
+//					System.out.println("Element is Present");
+//				}	
+//				else {
+//					System.out.println("Element is Absent");
+//				}
+				Thread.sleep(2000);
+				Assert.assertTrue(" Varification failede as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
+				
 			}
 		}
 	
 	}
 
-      public void checkUIElementIsDisplayed (String arg1) throws InterruptedException
-    	  {
+   public void checkUIElementIsDisplayed (String arg1) throws InterruptedException {
     	//  if (arg1.equals("Please wait while we retrieve your account...")|| arg1.equals("Please contact Simply Energy on 13 88 08 to set up your Direct Debit")){
-    		  if (arg1.equals("highcharts-tracker")){
-    		  DBUtilities checkElementDisplayed = new DBUtilities(driver);
-        	  String myxpath=checkElementDisplayed.xpathMakerByClass(arg1);
-        	  Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());    
-        	  System.out.println("Element " +arg1 +" is displayed as expected");
-        	  
-    	  }else{
-    	  DBUtilities checkElementDisplayed = new DBUtilities(driver);
-    	  String myxpath=checkElementDisplayed.xpathMakerBySpanID(arg1);
-    	  System.out.println("**" +myxpath);
-    	 Thread.sleep(2000);
-		  Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
-		  
-    	  if(driver.findElements(By.xpath(myxpath)).size() != 0){
-				System.out.println("Element is Present"); 
-				}else{
-				System.out.println("Element is Absent");
-				}
-		}
-    	
+	   String myxpath = "";
+	   if (arg1.equals("highcharts-tracker")){
+		   DBUtilities checkElementDisplayed = new DBUtilities(driver);
+		   myxpath=checkElementDisplayed.xpathMakerByClass(arg1);
+		   Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());    
+		   System.out.println("Element " +arg1 +" is displayed as expected");
     	  }
+	   else{
+		   DBUtilities checkElementDisplayed = new DBUtilities(driver);
+		   myxpath=checkElementDisplayed.xpathMakerBySpanID(arg1);
+		   System.out.println("**" +myxpath);
+		   Thread.sleep(2000);
+		   try {
+			   Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
+		   }
+		   catch (AssertionError | Exception e){
+			    myxpath=checkElementDisplayed.xpathMakerById(arg1);
+				for (int i = 0; i < 10; i++){
+					System.out.println("(" + myxpath + ")[" + i + "]");
+					try {
+						 Assert.assertTrue(" Varification failed as " +"(" + myxpath + ")[" + i + "]" +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
+						break;
+					}
+					catch (Exception e2){
+						System.out.println();
+					}
+				}
+				
+			}
+	   }
+	   
+	   if(driver.findElements(By.xpath(myxpath)).size() != 0){
+			System.out.println("Element is Present"); 
+	   }
+	   else {
+			System.out.println("Element is Absent");
+	   }
+}
+    	
+   	
       
       public void checkUIElementTEXTIsDisplayed (String arg1) throws InterruptedException {
 		  DBUtilities checkElementDisplayed = new DBUtilities(driver);

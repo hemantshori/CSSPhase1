@@ -122,6 +122,12 @@ public class XPathGenerator {
 		 System.out.println(" its " +xpath);
 		 return xpath;
 	 }
+	 
+	 public String xpathMakerByValue(String arg1){
+		 String xpath = "//*[@value ='"+arg1+"']";
+		 System.out.println(" xpath " +xpath);
+		 return xpath;
+	 }
 	
 	 
 	 public String combine2Xpaths (String arg1, String arg2)

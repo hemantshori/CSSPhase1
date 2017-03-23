@@ -31,7 +31,7 @@ public class HomePage extends DBUtilities {
 			driver.get("https://test-ssc.dbresults.com.au/CSSPortal/Login.aspx");
 		}
 		else if(arg1.equals("TSS")){
-			driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Home.aspx");
+			driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
 		}
 		 
 		else if(arg1.equals("TSSUAP")){
@@ -50,7 +50,7 @@ public class HomePage extends DBUtilities {
 			driver.get("https://ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
 		}
 		else if(arg1.equals("TSSDev")){
-			driver.get("https://dev-ssc.dbresults.com.au/TSSPortal/Home.aspx");
+			driver.get("https://dev-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
 		}
 		else if(arg1.equals("Tax_Registration")){
 			driver.get("https://test-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
