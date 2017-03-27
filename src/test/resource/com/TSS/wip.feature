@@ -1,6 +1,8 @@
-
+@runthrough
 Feature: wip
 	
+	
+	#TODO:  430, 444, 459, 463, 523, 524, 527, 536, 537, 553, 566
  @review
   Scenario Outline: DTSP-25: As an organisation I want a users details verified during registration so that only valid users register with the portal page 1
     #scenario 1: Same year check
@@ -93,7 +95,7 @@ Feature: wip
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
 	
-	 @review
+	 @todo
   Scenario Outline: DTSP-54 : As a DB Portal Administrator I want to search for a message so that I can quickly access the message I want to view
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -233,11 +235,12 @@ Feature: wip
       | PasswordInput | <Password> |
     And I hit Enter
     Given I want to login to portal "AccountManagement"
-    Then I check I am on "View Settings" page
+    Then I check I am on "View User Profile" page
     # Scenario 2: User access edit profile settings function
+    Then I see text "Profile" displayed
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName      |
-      | item2 | Profile       |
+      #| item2 | Profile       |
       | item2 | Username      |
       | item3 | First Name    |
       | item5 | Last Name     |
@@ -247,7 +250,7 @@ Feature: wip
       | item5 | Password      |
       | item5 | Hint          |
     And I click on "Edit"
-    And I check I am on "Edit Settings" page
+    And I check I am on "Edit User Profile" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | Item2 | Submit   |
@@ -312,9 +315,9 @@ Feature: wip
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
     Then I click on button "Cancel"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I check I am on "View Settings" page
+    Then I check I am on "View User Profile" page
     Given I want to login to portal "AccountManagement"
-	    Then I check I am on "View Settings" page
+	    Then I check I am on "View User Profile" page
 	   
 	   
 	  # Tax Agent stuff removed due to a lack of need for it.
@@ -328,7 +331,7 @@ Feature: wip
     #Then I click on button "Input_FirstName"
     #Then I click on button "Submit"
     #Then I see text "Your changes have been successfully saved." displayed
-    #Then I check I am on "View Settings" page
+    #Then I check I am on "View User Profile" page
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
@@ -604,7 +607,7 @@ Feature: wip
     Then I wait for "1000" millisecond
     #Then I click on "RemoveLine"
     Then I click on button "RemoveLine"
-    Then I see "Are you sure you want to remove this year's taxable wages" displayed on  and I click "Cancel"
+    Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "Cancel"
     #scenario 5
     Then I click on button "RemoveLine"
     Then I see "Are you sure you want to remove this year's taxable wages" displayed on popup and I click "OK"
@@ -614,7 +617,7 @@ Feature: wip
       | Tax_Registration | UserNameInput | PasswordInput | mbrown   | Dbresults1 | 12345678901 | 12345678901 |
 
 	@review
-  Scenario Outline: DTSP-392:
+  Scenario Outline: DTSP-392: As an end user, I want the Declaration section to be pre-populated on the Summary page so that I don't need to enter my details again
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -626,11 +629,12 @@ Feature: wip
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value        |
-      | s2id_autogen1_search | (1) |
+      | s2id_autogen1_search | Active Bottle |
     Then I click on button "select2-results-1"
-    Then I click on "Annual Reconciliation"
-    Then I select "2015" from "AnnualObligationSelect"
+    Then I click on "Monthly Return"
+    Then I select "Sep 2016" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
+    Then I wait for "1000" millisecond
     #Then I click on button "TaxPayerDetailsNext"
     Then I enter the details as
       | Fields                                         | Value |
@@ -647,16 +651,16 @@ Feature: wip
       | LodgePayrollAnswer_OtherTaxablePayment         |     0 |
       | LodgePayrollAnswer_ExemptWages                 |     0 |
     Then I click on button "Submit"
-    Then I enter the details as
-      | Fields                 | Value |
-      | AnnualLessTotalTaxPaid |     0 |
-    Then I click on button "TotalAmountsNextBt"
+    #Then I enter the details as
+      #| Fields                 | Value |
+      #| AnnualLessTotalTaxPaid |     0 |
+    #Then I click on button "TotalAmountsNextBt"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName      |
       | item2 | Declaration   |
       | item3 | Declarer      |
       | item4 | Organisation  |
-      | item5 | Phone Number  |
+      | item5 | Contact Phone  |
       | item6 | Email Address |
 
     Examples: 
@@ -965,7 +969,7 @@ Feature: wip
       | PasswordInput | <Password> |
     And I hit Enter
     Then I click on "Payroll Tax Lodgement"
-    Then I click on button "Discard"
+    Then I click on button with value "Cancel"
     Then I check "LodgePayrollAnswer_TypeMonthly" is readonly
     Then I see text "No Monthly Lodgements Available" displayed
     Then I check "LodgePayrollAnswer_TypeAnnual" is readonly
@@ -1028,11 +1032,7 @@ Feature: wip
       | PortalName | UserNameField | PasswordField | Password   |
       | TSS        | UserNameInput | PasswordInput | Dbresults1 |
 
-  
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 |
-	
+ 
 	@review
   Scenario Outline: DTSP-459
     Given I want to login to portal "<PortalName>"
@@ -1233,7 +1233,7 @@ Feature: wip
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Payroll Tax Lodgement"
-    Then I click on button "Discard"
+    Then I click on button with value "Discard"
     #Part 2: Payroll Tax (Annual)
     Then I click on "Payroll Tax Lodgement"
     Then I click on "Monthly Return"

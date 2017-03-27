@@ -1,5 +1,5 @@
 
-@TSS_Regression
+@TSSRegression
 Feature: Regression for TSS.
 
 	#STORIES DONE:  78, 136, 141, 176, 185, 522, 578, 583, 584, 592, 608, 617, 622
