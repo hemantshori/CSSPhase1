@@ -1,19 +1,13 @@
+#Sample Feature Definition Template
+#DONE:
+#MANUAL: 580, 601, 607, 648, 651,
+@all
+Feature: Regression temp
 
-@TSSRegression
-Feature: Regression for TSS.
-
-	#STORIES DONE:  78, 136, 141, 176, 185, 522, 578, 583, 584, 592, 608, 617, 622
-	#CURRENT ITERATION: 1.1
-  # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
-  # Find mbrown's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
-  # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
-  
-
-  #NOTE: Ensure that mbrown has a current employee type selected in the data extensions page
-  
-  @review
+  #Stories done: 78, 136, 141, 176, 185, 522, 578, 583, 584, 592, 608, 617, 622
+  @onhold
   Scenario Outline: DTSP-78: As an end user, I want to be able to select an ABN and view next payment information and lodge from the Right Navigation Panel on my Basic Dashboard
-    #Business Taxpayer with many: jbradley
+    #Business Taxpayer with many: jbradley2
     #Business Taxpayer with only one: camido
     #Business Taxpayer with none: ccover
     #Tax Agent with many: test_taxagent1
@@ -33,8 +27,8 @@ Feature: Regression for TSS.
     Then I click on button "select2-results-1"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
-      | Fields               | Value    |
-      | s2id_autogen1_search | NAVY PTY |
+      | Fields               | Value |
+      | s2id_autogen1_search | Build |
     Then I click on button "select2-results-1"
     Then I click on "Sign Out"
     #Scenario 2: Business Taxpayer associated with only 1 ABN
@@ -85,12 +79,12 @@ Feature: Regression for TSS.
     Then I see text "Next Lodgement" displayed
     #Scenario 7: User clicks on “View History” button
     # Then I click on "View History"
-    Then I click on button with value "View History"
-    Then I check I am on "Transaction History" page
+    Then I click on button "BillComparation_wt61"
+    Then I check I am on "Return History" page
     Then I click on "Dashboard"
     #Scenario 8: User clicks on “Lodge Return” button
     #Then I click on "Lodge Return"
-    Then I click on button with value "Lodge Return"
+    Then I click on button "BillComparation_wt88"
     Then I check I am on "Payroll Lodgement Form" page
     Then I click on "Dashboard"
     Then I click on "Sign Out"
@@ -103,7 +97,7 @@ Feature: Regression for TSS.
     And I hit Enter
     Then I see text "You do not have any outstanding payments" displayed
     #Scenario 11: User has no transaction history
-    Then I check "BillComparation" is readonly
+    Then I check "BillComparation_wt61" is readonly
     Then I click on "Sign Out"
     #Scenario 9: User has no outstanding lodgement
     Given I want to login to portal "<PortalName>"
@@ -121,8 +115,8 @@ Feature: Regression for TSS.
 
     #Scenario 11: TODO when 'View History' and 'Lodge Return' buttons have actual ids.
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-136: As an end user, I want to be able to view the left navigation panel so that I can quickly access the functions that I need
@@ -132,37 +126,36 @@ Feature: Regression for TSS.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                         |
-      | text1 | Dashboard                        |
-      | text1 | Transaction History              |
-      | text2 | Payroll Tax Lodgement            |
-      | text2 | Payroll Tax Registration         |
-      | text2 | Payroll Tax Registration Updates |
-      | text2 | Manage Tax Details               |
-      | text2 | User Profile                     |
-      | text2 | Sign Out                         |
+    Then I wait for "1000" millisecond
+    Then I see text "Home" displayed
+    Then I see text "Payroll Tax Lodgement" displayed
+    Then I see text "Payroll Tax Registration" displayed
+    Then I see text "Tax Registration Update" displayed
+    Then I see text "Manage Account Details" displayed
+    Then I see text "User Profile" displayed
+    Then I see text "Sign Out" displayed
+
     Then I click on "Payroll Tax Lodgement"
     Then I check I am on "Payroll Lodgement Form" page
-    Then I click on "Manage Tax Details"
-    Then I check I am on "Manage Tax Details" page
+    Then I click on "Manage Account Details"
+    Then I check I am on "Manage Account Details" page
     #This part is bugged for the moment
-    #Then I click on "Transaction History"
-    #Then I check I am on "Transaction History" page
+    #Then I click on "Return History"
+    #Then I check I am on "Return History" page
     Then I click on "Payroll Tax Registration"
     Then I check I am on "Payroll Tax Registration" page
     Then I click on "User Profile"
     Then I check I am on "View User Profile" page
-    Then I click on "Dashboard"
-    Then I check I am on "HomePage" page
+    Then I click on "Home"
+    Then I check I am on "Home" page
     Then I click on "Sign Out"
     Then I check I am on "Login" page
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
 
-  @review
+  @onhold
   Scenario Outline: DTSP-141: As an end user, I want to be able to view my Recent Transactions on my Basic Dashboard, so that it shows me a quick summary of my recent/closed Lodgements and Payments.
     #Scenarios 1 and 2 are better off manually.
     Given I want to login to portal "<PortalName>"
@@ -172,21 +165,21 @@ Feature: Regression for TSS.
       | PasswordInput | <Password> |
     And I hit Enter
     #Scenario 3
-    Then I click on button "BillComparation"
-    Then I check I am on "Transaction History" page
-    Then I click on "Dashboard"
+    Then I click on button with value "View History"
+    Then I check I am on "Return History" page
+    Then I click on "Home"
     Then I click on "Sign Out"
     #Scenario 4
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
-      | UserNameInput | mbisping   |
+      | UserNameInput | jbradley   |
       | PasswordInput | <Password> |
     And I hit Enter
-    #Then I click on "Transaction History"
+    #Then I click on "Return History"
     Then I see text "You do not have any monthly transaction history available" displayed
     Then I see text "You do not have any annual transaction history available" displayed
-    Then I check "BillComparation" is readonly
+    Then I check "BillComparation_wt61" is readonly
     Then I click on "Sign Out"
     #Scenario 7
     Given I want to login to portal "<PortalName>"
@@ -197,7 +190,7 @@ Feature: Regression for TSS.
     And I hit Enter
     Then I see text "Please note, as there are no ABN's associated to your account, we are unable to display any information." displayed
     Then I click on "Add an ABN to my Account"
-    Then I check I am on "Manage Tax Details" page
+    Then I check I am on "Manage Account Details" page
     Then I click on "Sign Out"
     #Scenario 8
     Given I want to login to portal "<PortalName>"
@@ -210,10 +203,10 @@ Feature: Regression for TSS.
     Then I click on "Sign Out"
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
 
-  @review
+  @onhold
   Scenario Outline: DTSP-176: As an end user, I want to be able to view my Transaction History for Payroll Tax
     #Scenarios 1-4 are already tested in DTSP-78.
     #Scenarios 13-14 are already tested in DTSP-141
@@ -231,7 +224,7 @@ Feature: Regression for TSS.
     Then I click on button "select2-results-1"
     #Then I click on button "select2-chosen-1"
     Then I click on "Payroll Tax Registration"
-    Then I click on "Transaction History"
+    Then I click on "Return History"
     #Scenario 7: “Next” button
     Then I click on button "ListNavigation_Next"
     #Scenario 8: "Previous" button
@@ -248,20 +241,18 @@ Feature: Regression for TSS.
       | PasswordInput | <Password> |
     And I hit Enter
     #Scenario 9 and 11
-    Then I click on "Transaction History"
+    Then I click on "Return History"
     Then I see text "You do not have any monthly transaction history available" displayed
     Then I see text "You do not have any annual transaction history available" displayed
     Then I click on "Sign Out"
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-185: As an end user, I want to be able to edit my Business Address details on my Tax Registration form
     #Scenario 10 should be tested manually as it regards an email
-    #ONHOLD DUE TO DTSP-713
-    
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -270,15 +261,15 @@ Feature: Regression for TSS.
     And I hit Enter
     #	Scenario 1: User views update left hand Navigation menu items
     # Scenario 2: User views "Tax Registration Updates" sub menu items
-    Then I click on "Payroll Tax Registration Updates"
+    Then I click on "Tax Registration Update"
     Then I see text "Update Business Address" displayed
-    Then I see text "Update Contact Details" displayed
-    Then I see text "Update Refund Details" displayed
+    Then I see text "Update Payroll Contact Details" displayed
+    Then I see text "Update Payroll Refund Details" displayed
     # Scenario 3: User elects to view "Update Business Address" details form
     Then I click on "Update Business Address"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                                                  |
-      | item2 | Tax Payer Details                                         |
+      | item2 | Taxpayer Details                                         |
       #| item3 | Update Business Address                                   |
       #| item5 | Business Address                                          |
       | item5 | Postal Address                                            |
@@ -289,8 +280,7 @@ Feature: Regression for TSS.
       | Fields               | Value         |
       | s2id_autogen1_search | Active Bottle |
     Then I click on button "select2-results-1"
-    #Then I check "Address_CountryId" is not readonly
-    Then I check "Address_AddressLine1" is not readonly
+    Then I check "Address_AddressLine" is not readonly
     Then I check "Address_City" is not readonly
     Then I check "Address_State" is not readonly
     Then I check "Address_PostCode" is not readonly
@@ -298,7 +288,6 @@ Feature: Regression for TSS.
     #		Scenario 5: User views 'Tax Registration Update ' Summary page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName      |
-      | item2 | Declarer      |
       | item3 | Declaration   |
       | item5 | Organisation  |
       | item5 | Contact Phone |
@@ -306,11 +295,12 @@ Feature: Regression for TSS.
     #		Scenario 6: Submit 'Tax Registration Update ' data to PSRM without errors
     Then I click on button "CorrectInfoDeclared"
     Then I click on button "SubmitBT"
-    Then I see text "Your Tax Registration updates for Payroll Tax has been successful. An email has been sent to you for your records." displayed
-    Then I see text "To download the details you submitted, please click the button below. Transaction Reference Number:" displayed
+    Then I see text "Your Update Business Address Request has been successfully submitted. An email has been sent to you for your reference." displayed
+    Then I see text "To download the details you have submitted, please click the button below." displayed
+    Then I see text "Transaction Reference Number:" displayed
     #		Scenario 7: Submit 'Tax Registration Updates 'data to PSRM with errors
     Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Registration Updates"
+    Then I click on "Tax Registration Update"
     Then I click on "Update Business Address"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -321,8 +311,6 @@ Feature: Regression for TSS.
       | Fields           | Value |
       | Address_PostCode |    33 |
     Then I click on button "NextBT"
-    Then I wait for "5000" millisecond
-    #Then I see text "Invalid Post Code, should have length 4 and should contain only digits." displayed
     Then I see text "Please enter the correct number of digits for this field." displayed
     #		Scenario 8: User clicks 'Back' on the 'Tax Registration Updates' Summary page
     Then I enter the details as
@@ -343,11 +331,9 @@ Feature: Regression for TSS.
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
-  
-  
- 
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
+
   @review
   Scenario Outline: DTSP-522: As a end user I want the settings page updated so I can understand what the settings page is used for
     Given I want to login to portal "<PortalName>"
@@ -363,7 +349,7 @@ Feature: Regression for TSS.
     Then I check I am on "View User Profile" page
     Then I see text "Contact Details" displayed
     Then I see text "Edit User Profile" displayed
-    Then I see text "Business Tax Payer" not displayed
+    Then I see text "Business Taxpayer" not displayed
     Then I see text "Choose a Tax Agent" not displayed
     #Scenario 3: User selects 'Edit User Profile' on the 'View User Profile' page
     Then I click on button "EditBT"
@@ -371,10 +357,10 @@ Feature: Regression for TSS.
     Then I see text "Contact Details" displayed
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
 
-  @wip
+  @onhold
   Scenario Outline: DTSP-567: As an end user, I don't want to see any tax calculations while I am filling out the Payroll Tax Lodgement Form until they are retrieved from PSRM and populated on the Lodgement Summary page
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -388,10 +374,10 @@ Feature: Regression for TSS.
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value         |
-      | s2id_autogen1_search | ACTIVE BOTTLE |
+      | s2id_autogen1_search | ABCAD |
     Then I click on button "select2-results-1"
     Then I click on "Annual Reconciliation"
-    Then I select "2016" from "AnnualObligationSelect"
+    Then I select "2015" from "AnnualObligationSelect"
     Then I click on button "NextSection"
     #Then I click on button "TaxPayerDetailsNext"
     Then I enter the details as
@@ -409,7 +395,7 @@ Feature: Regression for TSS.
       | LodgePayrollAnswer_OtherTaxablePayment         |     1 |
       | LodgePayrollAnswer_ExemptWages                 |     1 |
     #Scenario 1: Remove calculated fields in the "Wages / Reconciliation" section
-   # Then I see text "ACT Taxable Wages" not displayed
+    Then I see text "ACT Taxable Wages" not displayed
     Then I see text "Tax-Free Threshold" not displayed
     Then I see text "Taxable wages" not displayed
     Then I see text "Tax Payable" not displayed
@@ -424,21 +410,22 @@ Feature: Regression for TSS.
 
     #Scenario 3 is currently blocked by bug DTSP-684
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
 
-  @review
+  @redo
   Scenario Outline: DTSP-578: Update Portal Registration Form to re-enable front end validation on CRN
     Given I want to login to portal "<PortalName>"
     Then I click on "Create Account"
-    #Scenario 3: Business Tax Payer fails to enter a CRN
+    #Scenario 3: Business Taxpayer fails to enter a CRN
     Then I check "RegistrationSubmit" is readonly
     #Scenario 4: CRN field only accepts numeric input
+    Then I click on button "RegistrationAsBusiness"
     Then I enter the details as
       | Fields         | Value |
       | InputCRNNumber | TEST  |
     Then I check "InputCRNNumber" is empty
-    #Scenario 2: Business Tax Payer enters a CRN of less then 6 digits during portal registration
+    #Scenario 2: Business Taxpayer enters a CRN of less then 6 digits during portal registration
     Then I enter the details as
       | Fields         | Value |
       | InputABNNumber | <ABN> |
@@ -446,7 +433,7 @@ Feature: Regression for TSS.
     Then I click on button "TermsandConditionsCheckBox"
     Then I click on button "RegistrationSubmit"
     Then I see text "CRN Should be 6 digits." displayed
-    #Scenario 1: Business Tax Payer enters a valid 6 digits CRN during portal registration
+    #Scenario 1: Business Taxpayer enters a valid 6 digits CRN during portal registration
     Then I enter the details as
       | Fields         | Value |
       | InputABNNumber | <ABN> |
@@ -455,8 +442,8 @@ Feature: Regression for TSS.
     Then I check I am on "Complete Registration" page
 
     Examples: 
-      | PortalName | UserName | Password   | ABN         | CRN    |
-      | TSS        | jbradley | Dbresults1 | 13058370433 | 400014 |
+      | PortalName | UserName  | Password   | ABN         | CRN    |
+      | Production | jbradley2 | Dbresults1 | 48613935005 | 400003 |
 
   @review
   Scenario Outline: DTSP-583: As an end user, I want to be able to edit my Contact Person details on my Tax Registration form
@@ -468,16 +455,16 @@ Feature: Regression for TSS.
     And I hit Enter
     #	Scenario 1: User views update left hand Navigation menu items
     # Scenario 2: User views "Tax Registration Updates" sub menu items
-    Then I click on "Payroll Tax Registration Updates"
+    Then I click on "Tax Registration Update"
     Then I see text "Update Business Address" displayed
-    Then I see text "Update Contact Details" displayed
-    Then I see text "Update Refund Details" displayed
+    Then I see text "Update Payroll Contact Details" displayed
+    Then I see text "Update Payroll Refund Details" displayed
     # Scenario 3: User elects to view "Update Business Address" details form
-    Then I click on "Update Contact Details"
+    Then I click on "Update Payroll Contact Details"
     Then I check I am on "Update Contact Details" page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName          |
-      | item2 | Tax Payer Details |
+      | item2 | Taxpayer Details |
     #| item3 | Update Business Address                                   |
     #| item5 | Business Address                                          |
     #| item5 | Update Contact Details                                           |
@@ -491,15 +478,15 @@ Feature: Regression for TSS.
     Then I check "ContactPerson_LastName" is not readonly
     Then I check "ContactPerson_PhoneNumber" is not readonly
     Then I check "ContactPerson_Email" is not readonly
-    Then I check "Address_AddressLine7" is not readonly
-    Then I check "Address_City4" is not readonly
-    Then I check "Address_PostCode4" is not readonly
+    Then I check "Address_AddressLine" is not readonly
+    Then I check "Address_City" is not readonly
+    Then I check "Address_PostCode" is not readonly
     #Then I check "Address_AddressLine7" is not readonly
-    Then I click on button "NextBT"
+    Then I click on button with value "Next"
+    Then I click on button with value "Next"
     #		Scenario 5: User views 'Tax Registration Update ' Summary page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName      |
-      | item2 | Declarer      |
       | item3 | Declaration   |
       | item5 | Organisation  |
       | item5 | Contact Phone |
@@ -507,12 +494,13 @@ Feature: Regression for TSS.
     #		Scenario 6: Submit 'Tax Registration Update ' data to PSRM without errors
     Then I click on button "CorrectInfoDeclared"
     Then I click on button "SubmitBT"
-    Then I see text "Your Tax Registration updates for Payroll Tax has been successful. An email has been sent to you for your records." displayed
-    Then I see text "To download the details you submitted, please click the button below. Transaction Reference Number:" displayed
+    Then I see text "Your Update Contact Details Request has been successfully submitted. An email has been sent to you for your reference." displayed
+    Then I see text "To download the details you have submitted, please click the button below." displayed
+    Then I see text "Transaction Reference Number:" displayed
     #		Scenario 7: Submit 'Tax Registration Updates 'data to PSRM with errors
     Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Registration Updates"
-    Then I click on "Update Contact Details"
+    Then I click on "Tax Registration Update"
+    Then I click on "Update Payroll Contact Details"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value         |
@@ -543,8 +531,8 @@ Feature: Regression for TSS.
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-592: As an end user, I want to be able to edit my Refund details on my Tax Registration form
@@ -557,12 +545,12 @@ Feature: Regression for TSS.
     And I hit Enter
     #	Scenario 1: User views update left hand Navigation menu items
     # Scenario 2: User views "Tax Registration Updates" sub menu items
-    Then I click on "Payroll Tax Registration Updates"
+    Then I click on "Tax Registration Update"
     Then I see text "Update Business Address" displayed
-    Then I see text "Update Contact Details" displayed
-    Then I see text "Update Refund Details" displayed
+    Then I see text "Update Payroll Contact Details" displayed
+    Then I see text "Update Payroll Refund Details" displayed
     # Scenario 3: User elects to view "Update Business Address" details form
-    Then I click on "Update Refund Details"
+    Then I click on "Update Payroll Refund Details"
     Then I check I am on "Update Refund Details" page
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -572,8 +560,8 @@ Feature: Regression for TSS.
     #Then I click on button "Refunds_YES"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                        |
-      | item2 | Tax Payer Details               |
-      | item3 | Set Up Bank Account for Refunds |
+      | item2 | Taxpayer Details               |
+      | item3 | Set up bank account for refunds |
     #| item5 | BSB                                          |
     #| item5 | Bank Account Number                                            |
     #| item5 | Bank Account Name |
@@ -583,12 +571,11 @@ Feature: Regression for TSS.
     Then I check "Answer_CRN" is not empty
     #Then I check "Address_State" is not readonly
     #Then I check "Address_PostCode" is not readonly
-    Then I click on button "NextBT"
+    Then I click on button with value "Next"
     Then I wait for "1000" millisecond
     #		Scenario 5: User views 'Tax Registration Update ' Summary page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName      |
-      | item2 | Declarer      |
       | item3 | Declaration   |
       | item5 | Organisation  |
       | item5 | Contact Phone |
@@ -596,12 +583,13 @@ Feature: Regression for TSS.
     #		Scenario 6: Submit 'Tax Registration Update ' data to PSRM without errors
     Then I click on button "CorrectInfoDeclared"
     Then I click on button with value "Submit"
-    Then I see text "Your Tax Registration updates for Payroll Tax has been successful. An email has been sent to you for your records." displayed
-    Then I see text "To download the details you submitted, please click the button below. Transaction Reference Number:" displayed
+    Then I see text "Your Update Refund Details Request has been successfully submitted. An email has been sent to you for your reference." displayed
+    Then I see text "To download the details you have submitted, please click the button below." displayed
+    Then I see text "Transaction Reference Number:" displayed
     #		Scenario 7: Submit 'Tax Registration Updates 'data to PSRM with errors
     Given I want to login to portal "<PortalName>"
-    Then I click on "Payroll Tax Registration Updates"
-    Then I click on "Update Refund Details"
+    Then I click on "Tax Registration Update"
+    Then I click on "Update Payroll Refund Details"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value         |
@@ -613,10 +601,8 @@ Feature: Regression for TSS.
       | Answer_BSB               |         33 |
       | Answer_BankAccountNumber | 2342354234 |
       | Answer_BankAccountName   | TEST       |
-    Then I click on button "NextBT"
-    Then I wait for "4000" millisecond
+    Then I click on button with value "Next"
     #Then I see text "Invalid BSB. BSB Should be 6 digits. Please try again." displayed
-    Then I see text "BSB Should be 6 digits." displayed
     #		Scenario 8: User clicks 'Back' on the 'Tax Registration Updates' Summary page
     Then I enter the details as
       | Fields     | Value  |
@@ -636,11 +622,11 @@ Feature: Regression for TSS.
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
-	
-	@review
-  Scenario Outline: DTSP-608: As a user I want to choose a Tax Payer's ABN so that those details are populated on forms
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
+
+  @onhold
+  Scenario Outline: DTSP-608: As a user I want to choose a Taxpayer's ABN so that those details are populated on forms
     #Scenario 2: Business Taxpayer associated with multiple ABNs
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -652,9 +638,9 @@ Feature: Regression for TSS.
     Then I click on button with value "Discard"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                         |
-      | text1 | Tax Payer Details                |
-      | text1 | Choose a Tax Payer ABN           |
-      | text2 | Organisational Name              |
+      | text1 | Taxpayer Details                |
+      | text1 | Choose a Taxpayer           |
+      | text2 | Organisation Name              |
       | text2 | Australian Business Number (ABN) |
       | text2 | Client Reference Number (CRN)    |
       | text2 | Return Type                      |
@@ -746,7 +732,7 @@ Feature: Regression for TSS.
     Then I check "Answer_ABN" is readonly
     Then I check "Answer_CRN" is readonly
     Then I click on "Sign Out"
-    #Scenario 7: Business Tax Payer views Payroll Tax Lodgement with no associated ABN's
+    #Scenario 7: Business Taxpayer views Payroll Tax Lodgement with no associated ABN's
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -770,10 +756,10 @@ Feature: Regression for TSS.
     Then I click on "Sign Out"
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
-	
-  @done
+      | PortalName | UserName  | Password   |
+      | Production | jbradley2 | Dbresults1 |
+
+  @review
   Scenario Outline: DTSP-617: Annual Payroll Tax Lodgements (Check for outstanding monthly obligations in PSRM)
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -788,35 +774,29 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <SearchString> |
     Then I click on button "select2-results-1"
-    Then I click on "Annual Reconciliation"
-    Then I click on button "AnnualObligationSelect"
+    Then I click on button "PayrollAnswer_TypeAnnual"
     #Then I see text "2012" displayed
-    #Then I see text "2013" displayed
+    Then I see text "2013" displayed
     Then I see text "2014" displayed
     Then I see text "2015" displayed
     Then I see text "2016" displayed
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <SearchString2> |
-    Then I click on button "select2-results-1"
     Then I click on "Monthly Return"
-    Then I click on button "MonthlyObligationSelect"
-    
-    #Then I see text "Aug 2016" displayed
+    Then I click on button "PayrollAnswer_TypeMonthly"
+    Then I see text "Jul 2016" displayed
+    Then I see text "Aug 2016" displayed
     Then I see text "Sep 2016" displayed
     Then I see text "Oct 2016" displayed
     Then I see text "Nov 2016" displayed
     Then I see text "Dec 2016" displayed
     Then I see text "Jan 2017" displayed
-    #Then I see text "Feb 2017" displayed
+    Then I see text "Feb 2017" displayed
 
     Examples: 
-      | PortalName | UserName | Password   | SearchString  | SearchString2 |
-      | TSS        | jbradley | Dbresults1 | ACTIVE BOTTLE | CO CONSULTANTS |
+      | PortalName | UserName  | Password   | SearchString  |
+      | Production | jbradley2 | Dbresults1 | ABL |
 
-  @done
-  Scenario Outline: DTSP-622: As an end user (Business Tax Payer), I want to be able to manage tax details
+  @review
+  Scenario Outline: DTSP-622: As an end user (Business Taxpayer), I want to be able to manage tax details
     #NOTE: DO SCENARIOs 6 and 8 manually
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -824,9 +804,9 @@ Feature: Regression for TSS.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Then I click on "Manage Tax Details"
-    #Scenario 1: Display Manage Tax Details page (Business Tax Payer associated to One ABN)
-    #Scenario 2: Display Manage Tax Details page (Business Tax Payer associated to Multiple ABNs)
+    Then I click on "Manage Account Details"
+    #Scenario 1: Display Manage Tax Details page (Business Taxpayer associated to One ABN)
+    #Scenario 2: Display Manage Tax Details page (Business Taxpayer associated to Multiple ABNs)
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName          |
       | item2 | ABN               |
@@ -853,7 +833,7 @@ Feature: Regression for TSS.
       | s2id_autogen1_search | <SearchString> |
     Then I click on button "select2-results-1"
     Then I click on button "SaveBtn"
-    Then I check I am on "Manage Tax Details" page
+    Then I check I am on "Manage Account Details" page
     #Scenario 7: Display the Add Additional ABN page
     Then I click on button "AddABN"
     Then I switch to frame "0"
@@ -861,7 +841,6 @@ Feature: Regression for TSS.
     Then I see text "CRN" displayed
     #Scenario 10: Mandatory Information on the “Add Additional ABN” page
     Then I check "SaveBtn" is readonly
-    #Scenario 9: Add an additional ABN to the Business Tax Payer account [unhappy path]
     And I enter the details as
       | Fields             | Value         |
       | BusinessEntity_ABN | 1111111111111 |
@@ -870,13 +849,5 @@ Feature: Regression for TSS.
     Then I see text "Invalid ABN or CRN" displayed
 
     Examples: 
-      | PortalName | UserName | Password   | SearchString |
-      | TSS        | jbradley | Dbresults1 | FISH AND CO  |
-
-  
-
-  
-  
-
- 
-	
+      | PortalName | UserName  | Password   | SearchString |
+      | Production | jbradley2 | Dbresults1 | FISH AND CO  |

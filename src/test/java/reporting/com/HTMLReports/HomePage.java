@@ -13,25 +13,26 @@ public class HomePage extends DBUtilities {
 	}
 
 	public void navigateTo(String arg1)  {
-		if(arg1.equals("CSS")){
+		if(arg1.equals("USS")){
 			
 			//************************************** SET  TEST Environment ***********************************************
 			//for production
-		//driver.get("https://ssc.dbresults.com.au/CSSPortal");
+		//driver.get("https://ssc.dbresults.com.au/USSPortal");
 		//following is for SIT
-			driver.get("https://test-ssc.dbresults.com.au/CSSPortal/");
+			driver.get("https://test-ssc.dbresults.com.au/USSPortal/");
 		// for dev
-		//driver.get("https://dev-ssc.dbresults.com.au/CSSPortal/");
+		//driver.get("https://dev-ssc.dbresults.com.au/USSPortal/");
 			// for p10
-		//driver.get("https://dbresults-p10-dev.outsystemscloud.com/CSSPortal");
+		//driver.get("https://dbresults-p10-dev.outsystemscloud.com/USSPortal");
         
         //****************************************************************************************************************
 		}
-		else if(arg1.equals("CSS2")){
-			driver.get("https://test-ssc.dbresults.com.au/CSSPortal/Login.aspx");
+		else if(arg1.equals("USS2")){
+			driver.get("https://test-ssc.dbresults.com.au/USSPortal/Login.aspx");
 		}
 		else if(arg1.equals("TSS")){
-			driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
+			//driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
+			driver.get("http://dev2-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
 		}
 		 
 		else if(arg1.equals("TSSUAP")){
@@ -88,7 +89,7 @@ public class HomePage extends DBUtilities {
 
 		}
 		else if(arg1.equals("UAP")){
-			driver.get("https://test-ssc.dbresults.com.au/utilityadminportal/");
+			driver.get("https://test-ssc.dbresults.com.au/USSAdminPortal/");
 		}
 	    else if(arg1.equals("copyFromMail")){           // this is for semi-automated tests as the link will be coming from the received mail
         //following is for SIT
@@ -178,20 +179,20 @@ public class HomePage extends DBUtilities {
 //	}
 //
 //	public void navigateTo(String arg1)  {
-//		if(arg1.equals("CSS")){
+//		if(arg1.equals("USS")){
 //			
 //			//************************************** SET  TEST Environment ***********************************************
 //			//for production
-//		//driver.get("https://ssc.dbresults.com.au/CSSPortal");
+//		//driver.get("https://ssc.dbresults.com.au/USSPortal");
 //		//following is for SIT
-//			driver.get("https://test-ssc.dbresults.com.au/CSSPortal/");
+//			driver.get("https://test-ssc.dbresults.com.au/USSPortal/");
 //		// for dev
-//		//driver.get("https://dev-ssc.dbresults.com.au/CSSPortal/");
+//		//driver.get("https://dev-ssc.dbresults.com.au/USSPortal/");
 //			// for p10
-//		//driver.get("https://dbresults-p10-dev.outsystemscloud.com/CSSPortal");
+//		//driver.get("https://dbresults-p10-dev.outsystemscloud.com/USSPortal");
 //        
 //        //****************************************************************************************************************
-//		}else if(arg1.equals("CSS2")){driver.get("https://test-ssc.dbresults.com.au/CSSPortal/Login.aspx");
+//		}else if(arg1.equals("USS2")){driver.get("https://test-ssc.dbresults.com.au/USSPortal/Login.aspx");
 //		}else if(arg1.equals("TSS")){driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Home.aspx");
 //		}else if(arg1.equals("TSSDev")){driver.get("https://dev-ssc.dbresults.com.au/TSSPortal/Home.aspx");
 //		}else if(arg1.equals("Tax_Registration")){driver.get("https://test-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");

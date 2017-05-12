@@ -2,7 +2,7 @@ Feature: Some feature
 
   Scenario Outline: DCSSP-730: update Profile Address Scenario 1
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -30,7 +30,7 @@ Feature: Some feature
       | Item  | ItemName |
       | Item2 | Submit   |
       | Item3 | Cancel   |
-    And I enter then details as
+    And I enter the details as
       | Fields           | Value      |
       | Email            | <email>    |
       | MailingAddressL2 | <MAddress> |
@@ -45,7 +45,7 @@ Feature: Some feature
 
   Scenario Outline: DCSSP-730: update Profile Address Scenario 2
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -58,7 +58,7 @@ Feature: Some feature
       | Item  | ItemName |
       | Item2 | Submit   |
       | Item3 | Cancel   |
-    And I enter then details as
+    And I enter the details as
       | Fields           | Value      |
       | Email            | <email>    |
       | MailingAddressL2 | <MAddress> |

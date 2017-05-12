@@ -6,7 +6,7 @@ Feature: To test the basic functionality of Appication ....to be used for shakeo
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -36,7 +36,7 @@ Feature: To test the basic functionality of Appication ....to be used for shakeo
 
   Scenario Outline: Check Usage Menu Item List Test 1, DCSSP-245 Description: User views the menu items Epic: Common Components
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -66,7 +66,7 @@ Feature: To test the basic functionality of Appication ....to be used for shakeo
 
   Scenario Outline: Check User Menu Item List Test 1, DCSSP-245 Description: check for feature under development
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -91,7 +91,7 @@ Feature: To test the basic functionality of Appication ....to be used for shakeo
 
   Scenario Outline: Test20, Test21, Test22, Test23, Test24, Test26, Check Billing history page elements.
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |

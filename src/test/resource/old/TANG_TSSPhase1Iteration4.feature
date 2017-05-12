@@ -512,7 +512,7 @@ Feature: Phase 1 Iteration 4 TSS Stuff
       | PortalName | UserNameField | PasswordField | UserName | Password   |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 |
 
-  @done
+  @redo
   Scenario Outline: DTSP-526, 531: Update the ABN LookUp Rules for Payroll Tax Registration Form / Update the first page of the Portal Registration process
     Given I want to login to portal "<PortalName>"
     #This user has the ABN 12345678933, but since it's a tax agent user it isn't shown in the lodgement form

@@ -9,18 +9,18 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions
 
-// ************************************** CSS Portal as on 17/10/2016
+// ************************************** USS Portal as on 17/10/2016
 // OCT***********************************
 
-(format = { "pretty", "html:target/html/result.html" },  tags = {"@CSS_Regression"},
+(format = { "pretty", "html:target/html/result.html" },  tags = {"@redo"},
     //*********************for SHAKEOUT*************************************
-	//	 features = "src/test/resource/com/CSS/SanityTestScript.feature") 
+	//	 features = "src/test/resource/com/USS/SanityTestScript.feature") 
 		
     //****************for Regression****************************
-	 features = "src/test/resource/com/CSS/RegressionTests.feature") 
+	 features = "src/test/resource/com/USS/RegressionTests.feature") 
 		
     //********************for wip********************************
-	//	features = "src/test/resource/com/CSS/wip.feature") /// wip
+	//	features = "src/test/resource/com/USS/wip.feature") /// wip
 
 
 //  *********************Testing TANG 
@@ -29,7 +29,7 @@ import cucumber.api.junit.Cucumber;
 
      //**** p10 ************************************
  
-   //    features = "src/test/resource/com/CSS/p10.feature") 
+   //    features = "src/test/resource/com/USS/p10.feature") 
 
 // ************************************** Admin
 // Portal***********************************

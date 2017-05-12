@@ -1,10 +1,10 @@
-@runthrough
+@all
 Feature: Automation for stories done in Iteration 1.1
 
   #Stories done: 78, 136, 141, 176, 185, 522, 578, 583, 584, 592, 608, 617, 622
   
 
-  @review
+  @onhold
   Scenario Outline: DTSP-78: As an end user, I want to be able to select an ABN and view next payment information and lodge from the Right Navigation Panel on my Basic Dashboard
     #Business Taxpayer with many: jbradley
     #Business Taxpayer with only one: camido
@@ -27,7 +27,7 @@ Feature: Automation for stories done in Iteration 1.1
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value    |
-      | s2id_autogen1_search | NAVY PTY |
+      | s2id_autogen1_search | Build |
     Then I click on button "select2-results-1"
     Then I click on "Sign Out"
     #Scenario 2: Business Taxpayer associated with only 1 ABN
@@ -117,7 +117,7 @@ Feature: Automation for stories done in Iteration 1.1
       | PortalName | UserName | Password   |
       | TSS        | jbradley | Dbresults1 |
 
-  @review
+  @done
   Scenario Outline: DTSP-136: As an end user, I want to be able to view the left navigation panel so that I can quickly access the functions that I need
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -128,10 +128,10 @@ Feature: Automation for stories done in Iteration 1.1
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                         |
       | text1 | Dashboard                        |
-      | text1 | Transaction History              |
+      | text1 | Return History             |
       | text2 | Payroll Tax Lodgement            |
       | text2 | Payroll Tax Registration         |
-      | text2 | Payroll Tax Registration Updates |
+      | text2 | Tax Registration Update |
       | text2 | Manage Tax Details               |
       | text2 | User Profile                     |
       | text2 | Sign Out                         |
@@ -155,7 +155,7 @@ Feature: Automation for stories done in Iteration 1.1
       | PortalName | UserName | Password   |
       | TSS        | jbradley | Dbresults1 |
 
-  @review
+  @onhold
   Scenario Outline: DTSP-141: As an end user, I want to be able to view my Recent Transactions on my Basic Dashboard, so that it shows me a quick summary of my recent/closed Lodgements and Payments.
     #Scenarios 1 and 2 are better off manually.
     Given I want to login to portal "<PortalName>"
@@ -165,7 +165,7 @@ Feature: Automation for stories done in Iteration 1.1
       | PasswordInput | <Password> |
     And I hit Enter
     #Scenario 3
-    Then I click on button "BillComparation_wt61"
+    Then I click on button with value "View History"
     Then I check I am on "Transaction History" page
     Then I click on "Dashboard"
     Then I click on "Sign Out"
@@ -206,7 +206,7 @@ Feature: Automation for stories done in Iteration 1.1
       | PortalName | UserName | Password   |
       | TSS        | jbradley | Dbresults1 |
 
-  @review
+  @redo
   Scenario Outline: DTSP-176: As an end user, I want to be able to view my Transaction History for Payroll Tax
     #Scenarios 1-4 are already tested in DTSP-78.
     #Scenarios 13-14 are already tested in DTSP-141
@@ -224,7 +224,7 @@ Feature: Automation for stories done in Iteration 1.1
     Then I click on button "select2-results-1"
     #Then I click on button "select2-chosen-1"
     Then I click on "Payroll Tax Registration"
-    Then I click on "Transaction History"
+    Then I click on "Return History"
     #Scenario 7: “Next” button
     Then I click on button "ListNavigation_Next"
     #Scenario 8: "Previous" button

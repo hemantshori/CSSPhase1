@@ -88,6 +88,8 @@ public class DBUtilities extends XPathGenerator {
 	 			JavascriptExecutor jse = (JavascriptExecutor)driver;
 	 			jse.executeScript("window.scrollBy(0,5000)", "");
 	 		}
+	 	
+	 	
 	 
 	 	
 	// action performed on element(coming as arg)
@@ -357,7 +359,7 @@ public class DBUtilities extends XPathGenerator {
 			 public void checkPopUpMessage(String arg1)
 			 {
 				 String popUpMessage = driver.switchTo().alert().getText();
-				 System.out.println("the pop up message text is " +popUpMessage);
+				 System.out.println("the pop up message text is '" + popUpMessage + "'");
 				 Assert.assertTrue(arg1, popUpMessage.equals(arg1));
 			 }
 			 

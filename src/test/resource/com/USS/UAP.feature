@@ -5,7 +5,7 @@ Feature: Test Scenarios around UAP
 
   Scenario Outline: Read the UAP
   Given I want to login to portal "CSS"
-     And I enter then details as
+     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
@@ -23,11 +23,10 @@ Given I want to login to portal "UAP"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName |
       | item1 | Logo     |
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
-    And I hit Enter
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName                          |
       | item1 | File Upload                       |
@@ -52,7 +51,7 @@ Given I want to login to portal "UAP"
    And I hit Enter
     And I check I am on "Locked Account" page
     And I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value               |
       | UserNameInput | <UserName or Email> |
       | PasswordInput | <Invalid Password3> |

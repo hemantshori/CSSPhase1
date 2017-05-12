@@ -3,27 +3,27 @@
  Feature: This is a semiautomated test, in between scrript 1 and 2, CAPTCHA needs to be resolved and the link from mail has to be copied before 2nd script is executed.
   Scenario Outline: DCSSP-493 :As a user I want to login to the CSS using my email address so that I can access my information
     Given I want to login to portal "<PortalName>"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
     And I click on "Settings"
     And I click on "EditSettings"
-    And I enter then details as
+    And I enter the details as
       | Fields | Value   |
       | Email  | <email> |
     And I click on "Submit"
     And I click on "Sign Out"
     And I check I am on "Login" page
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <email>    |
       | PasswordInput | <Password> |
     And I hit Enter
     And I check I am on "Dashboard" page
     And I click on "Sign Out"
-    And I enter then details as
+    And I enter the details as
       | Fields        | Value         |
       | UserNameInput | <wrong email> |
       | PasswordInput | <Password>    |
@@ -31,7 +31,7 @@
     Then I see "<Message>" displayed
     Given I want to login to portal "<PortalName2>"
     And I click on "Forgot Password?"
-     And I enter then details as
+     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <email> |
       And I hit Enter
@@ -66,7 +66,7 @@
     And I click on "Cancel"
     And I check I am on "Login" page
     And I want to login to portal "<PortalName>"
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password1>     |
       | ConfirmPasswordInput | <Confirm Password1> |
@@ -76,25 +76,25 @@
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
     And I check I am on "Login" page
     And I want to login to portal "<PortalName>"
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password2>     |
       | ConfirmPasswordInput | <Confirm Password2> |
     And I click on "PasswordSaveButton"
     Then I see "Mandatory field!" displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password3>     |
       | ConfirmPasswordInput | <Confirm Password3> |
     And I click on "PasswordSaveButton"
     Then I see "New Password is invalid. Please try again." displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password4>     |
       | ConfirmPasswordInput | <Confirm Password4> |
     And I click on "PasswordSaveButton"
     Then I see "New Password and Confirm Password do not match. Please try again." displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password5>     |
       | ConfirmPasswordInput | <Confirm Password5> |
@@ -119,7 +119,7 @@
     And I click on "Cancel"
     And I check I am on "Login" page
     And I want to login to portal "<PortalName>"
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password1>     |
       | ConfirmPasswordInput | <Confirm Password1> |
@@ -129,25 +129,25 @@
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
     And I check I am on "Login" page
     And I want to login to portal "<PortalName>"
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password2>     |
       | ConfirmPasswordInput | <Confirm Password2> |
     And I click on "PasswordSaveButton"
     Then I see "Mandatory field!" displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password3>     |
       | ConfirmPasswordInput | <Confirm Password3> |
     And I click on "PasswordSaveButton"
     Then I see "New Password is invalid. Please try again." displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password4>     |
       | ConfirmPasswordInput | <Confirm Password4> |
     And I click on "PasswordSaveButton"
     Then I see "New Password and Confirm Password do not match. Please try again." displayed
-    And I enter then details as new
+    And I enter the details as
       | Fields               | Value               |
       | NewPasswordInput     | <New Password5>     |
       | ConfirmPasswordInput | <Confirm Password5> |
