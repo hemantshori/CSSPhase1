@@ -19,7 +19,7 @@ public class HomePage extends DBUtilities {
 			//for production
 		//driver.get("https://ssc.dbresults.com.au/USSPortal");
 		//following is for SIT
-			driver.get("https://test-ssc.dbresults.com.au/USSPortal/");
+			driver.get("https://dev2-ssc.dbresults.com.au/USSPortal/");
 		// for dev
 		//driver.get("https://dev-ssc.dbresults.com.au/USSPortal/");
 			// for p10
@@ -28,19 +28,19 @@ public class HomePage extends DBUtilities {
         //****************************************************************************************************************
 		}
 		else if(arg1.equals("USS2")){
-			driver.get("https://test-ssc.dbresults.com.au/USSPortal/Login.aspx");
+			driver.get("https://dev2-ssc.dbresults.com.au/USSPortal/Login.aspx");
 		}
 		else if(arg1.equals("TSS")){
-			//driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
+			//driver.get("https://dev2-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
 			driver.get("http://dev2-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
 		}
 		 
 		else if(arg1.equals("TSSUAP")){
-			driver.get("https://test-ssc.dbresults.com.au/TSSAdminPortal");
+			driver.get("https://dev2-ssc.dbresults.com.au/TSSAdminPortal");
 		}
 
 		else if(arg1.equals("TSS_Tooltips")){
-			driver.get("https://test-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
+			driver.get("https://dev2-ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
 		}
 		
 
@@ -54,42 +54,42 @@ public class HomePage extends DBUtilities {
 			driver.get("https://dev-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
 		}
 		else if(arg1.equals("Tax_Registration")){
-			driver.get("https://test-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
+			driver.get("https://dev2-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
 		}
 		
 		else if(arg1.equals("Production_Tax_Registration")){
 			driver.get("https://ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
 		}
 		else if(arg1.equals("Tax_Registration_Delete")){
-			driver.get("https://test-ssc.dbresults.com.au/RegistrationCore/DeleteRegistrationData.aspx");
+			driver.get("https://dev2-ssc.dbresults.com.au/RegistrationCore/DeleteRegistrationData.aspx");
 		}
 		else if(arg1.equals("MessageEdit")){
-			driver.get("https://test-ssc.dbresults.com.au/SS_Admin/FeedbackMsgTexts.aspx");
+			driver.get("https://dev2-ssc.dbresults.com.au/SS_Admin/FeedbackMsgTexts.aspx");
 		}
 		else if(arg1.equals("Production_MessageEdit")){
 			driver.get("https://ssc.dbresults.com.au/SS_Admin/FeedbackMsgTexts.aspx");
 		}
 		else if(arg1.equals("PageTexts")){
-			driver.get("https://test-ssc.dbresults.com.au/SS_Admin/PageTexts.aspx");
+			driver.get("https://dev2-ssc.dbresults.com.au/SS_Admin/PageTexts.aspx");
 		}
 		else if(arg1.equals("Production_PageTexts")){
 			driver.get("https://ssc.dbresults.com.au/SS_Admin/PageTexts.aspx");
 		}
 		else if(arg1.equals("ExpiredPassword")){
-			driver.get("http://test-ssc.dbresults.com.au/AccountMgmt/ChangePassword.aspx?Token=e69de158-9abf-4e5d-aba7-6841237bd58c");
+			driver.get("http://dev2-ssc.dbresults.com.au/AccountMgmt/ChangePassword.aspx?Token=e69de158-9abf-4e5d-aba7-6841237bd58c");
 		}
 		else if(arg1.equals("InvalidPasswordLink")){
-			driver.get("https://test-ssc.dbresults.com.au/TSSAdmin/PageTextasdfafdss.aspx");
+			driver.get("https://dev2-ssc.dbresults.com.au/TSSAdmin/PageTextasdfafdss.aspx");
 		}
 		else if(arg1.equals("ExpiredActivation")){
-			driver.get("https://test-ssc.dbresults.com.au/SS_AccountMgmtCommon/ActivateAccount.aspx?Token=aff21ece-9f23-43c9-818f-7964436791ef");
+			driver.get("https://dev2-ssc.dbresults.com.au/SS_AccountMgmtCommon/ActivateAccount.aspx?Token=aff21ece-9f23-43c9-818f-7964436791ef");
 		}
 		else if(arg1.equals("InvalidActivation")){
-			driver.get("https://test-ssc.dbresults.com.au/SS_AccountMgmtCommon/ActivateAccountasdfasdf.aspx?Token=aff21ece-9f23-43c9-818f-7964436791ef");
+			driver.get("https://dev2-ssc.dbresults.com.au/SS_AccountMgmtCommon/ActivateAccountasdfasdf.aspx?Token=aff21ece-9f23-43c9-818f-7964436791ef");
 
 		}
 		else if(arg1.equals("UAP")){
-			driver.get("https://test-ssc.dbresults.com.au/USSAdminPortal/");
+			driver.get("https://dev2-ssc.dbresults.com.au/USSAdminPortal/");
 		}
 	    else if(arg1.equals("copyFromMail")){           // this is for semi-automated tests as the link will be coming from the received mail
         //following is for SIT
@@ -99,20 +99,24 @@ public class HomePage extends DBUtilities {
 	    	driver.get("https://dbresults-tst.outsystemsenterprise.com/AccountMgmt/ResetPassword.aspx?Token=bf138cb5-7b10-43ac-9610-5775e29e5fe1");
 	    }
 	    else if (arg1.equals("StyleGuideConfig")){
-	    	driver.get("https://test-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx");
+	    	driver.get("https://dev2-ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx");
 	    }
 	    else if (arg1.equals("Production_StyleGuideConfig")){
 	    	driver.get("https://ssc.dbresults.com.au/SS_Admin/StyleGuideConfigs.aspx");
 	    }
 	    else if (arg1.equals("AccountManagement")){
-			driver.get("https://test-ssc.dbresults.com.au/TSSAccountMgmt/Settings.aspx");
+			driver.get("https://dev2-ssc.dbresults.com.au/TSSAccountMgmt/Settings.aspx");
 	    }
 		else if(arg1.equals("AC CHECKER")){
 			driver.get("http://achecker.ca/checker/index.php");
 		}
+		else if (arg1.equals("RegistrationLinkTable")){
+			driver.get("https://dev2-ssc.dbresults.com.au/TSSAccountMgmtCore/ActivationLinks.aspx");
+		}
 		else {
-	    	driver.get("https://google.com");
+	    	driver.get("http://stackoverflow.com/questions/3422262/take-a-screenshot-with-selenium-webdriver");
 	    }
+		
 
 		System.out.println("********************************************************************"
 		+ "************************TESTING "+arg1+"*****************************************************");
@@ -185,24 +189,24 @@ public class HomePage extends DBUtilities {
 //			//for production
 //		//driver.get("https://ssc.dbresults.com.au/USSPortal");
 //		//following is for SIT
-//			driver.get("https://test-ssc.dbresults.com.au/USSPortal/");
+//			driver.get("https://dev2-ssc.dbresults.com.au/USSPortal/");
 //		// for dev
 //		//driver.get("https://dev-ssc.dbresults.com.au/USSPortal/");
 //			// for p10
 //		//driver.get("https://dbresults-p10-dev.outsystemscloud.com/USSPortal");
 //        
 //        //****************************************************************************************************************
-//		}else if(arg1.equals("USS2")){driver.get("https://test-ssc.dbresults.com.au/USSPortal/Login.aspx");
-//		}else if(arg1.equals("TSS")){driver.get("https://test-ssc.dbresults.com.au/TSSPortal/Home.aspx");
+//		}else if(arg1.equals("USS2")){driver.get("https://dev2-ssc.dbresults.com.au/USSPortal/Login.aspx");
+//		}else if(arg1.equals("TSS")){driver.get("https://dev2-ssc.dbresults.com.au/TSSPortal/Home.aspx");
 //		}else if(arg1.equals("TSSDev")){driver.get("https://dev-ssc.dbresults.com.au/TSSPortal/Home.aspx");
-//		}else if(arg1.equals("Tax_Registration")){driver.get("https://test-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
-//		}else if(arg1.equals("Tax_Registration_Delete")){driver.get("https://test-ssc.dbresults.com.au/RegistrationCore/DeleteRegistrationData.aspx");
-//		}else if(arg1.equals("MessageEdit")){driver.get("https://test-ssc.dbresults.com.au/SS_Admin_Core/FeedbackMsgTexts.aspx");
-//		}else if(arg1.equals("PageTexts")){driver.get("https://test-ssc.dbresults.com.au/TSSAdmin/PageTexts.aspx");
+//		}else if(arg1.equals("Tax_Registration")){driver.get("https://dev2-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
+//		}else if(arg1.equals("Tax_Registration_Delete")){driver.get("https://dev2-ssc.dbresults.com.au/RegistrationCore/DeleteRegistrationData.aspx");
+//		}else if(arg1.equals("MessageEdit")){driver.get("https://dev2-ssc.dbresults.com.au/SS_Admin_Core/FeedbackMsgTexts.aspx");
+//		}else if(arg1.equals("PageTexts")){driver.get("https://dev2-ssc.dbresults.com.au/TSSAdmin/PageTexts.aspx");
 //		}else if(arg1.equals("AC CHECKER")){driver.get("http://achecker.ca/checker/index.php");
 //		}else if(arg1.equals("UAP")){
 //			
-//				driver.get("https://test-ssc.dbresults.com.au/utilityadminportal/");
+//				driver.get("https://dev2-ssc.dbresults.com.au/utilityadminportal/");
 //				//following is for SIT
 //		      //  driver.get("https://dbresults-tst.outsystemsenterprise.com/UtilityAdminPortal/Home.aspx");
 //				// for dev

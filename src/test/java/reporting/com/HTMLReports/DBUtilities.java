@@ -163,7 +163,7 @@ public class DBUtilities extends XPathGenerator {
 		 public void checkIfOnRightPage(String arg1) throws InterruptedException
 			{
 				System.out.println("****************Page Name*************************" +arg1);
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				String title = driver.getTitle();
 				System.out.println("The page title is " +title);
 				Assert.assertTrue(driver.getTitle().contains(arg1));

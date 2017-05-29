@@ -6,9 +6,23 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.DriverManager;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
@@ -16,11 +30,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -45,6 +64,11 @@ public class StepImpe {
 	WebDriver driver;
 	private String bolt;
 	static String Capture;
+	static String sourceCode;
+	static String URLCaptured;
+	final String wcag_subdirectory = "wcagoutput";
+	final String screenshot_subdirectory = "screenshots";
+	Hashtable<String, Integer> summary = new Hashtable<String, Integer>();
 
 	
 	@Before()
@@ -55,7 +79,18 @@ public class StepImpe {
 	    // the location of the driver is been changed to match with remote server setting.....  HS
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
 		
+//		String downloadFilepath = "/pdfs";
+//		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+//		chromePrefs.put("profile.default_content_settings.popups", 0);
+//		chromePrefs.put("download.default_directory", downloadFilepath);
+//		ChromeOptions options = new ChromeOptions();
+//		options.setExperimentalOption("prefs", chromePrefs);
+//		DesiredCapabilities cap = DesiredCapabilities.chrome();
+//		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+//		cap.setCapability(ChromeOptions.CAPABILITY, options);
 		driver = new ChromeDriver();
+		
+
 	    driver.manage().window().maximize();
 	    
 	}
@@ -87,64 +122,174 @@ public class StepImpe {
 	// ********************************************************************************************************************************
 	//**************************************** Capture element from Page************************************************************
 	
+	@Given("^I erase previous data$") 
+	public void i_erase_previous_data() throws Throwable {
+	    // destroy the files in the folder before running
+	    File outputDirectory = new File (wcag_subdirectory);
+	    System.out.println(outputDirectory.getAbsolutePath());
+	    FileUtils.cleanDirectory(outputDirectory); 
+	    PrintWriter pw = new PrintWriter("summary.txt");
+	    pw.close();
+	    
+	}
+	
+	
 	@Given("^I capture \"(.*?)\"$")
 	public String i_capture(String arg1) throws Throwable {
-		if(arg1.equals("html")){
-			StepImpe.Capture = driver.getPageSource();
-			   // System.out.println(Capture);
-		}
-		else{
-			DBUtilities createXpath = new DBUtilities(driver);
-			String myxpath = createXpath.xpathMakerById(arg1);
-			System.out.println(myxpath);
-			
-			WebElement xyz = driver.findElement(By.xpath(myxpath));
-			StepImpe.Capture= xyz.getText();
-			System.out.println("object that is captured is *****************>>>>>>>>>>>>>>>>>>>>>>>> "   +Capture);
-		}
-		return Capture;
-	}
+		
 
+			
+		
+			if(arg1.equals("html")){
+				StepImpe.sourceCode = driver.getPageSource();
+				StepImpe.URLCaptured = driver.getCurrentUrl();
+
+			}else{
+				DBUtilities createXpath = new DBUtilities(driver);
+				String myxpath = createXpath.xpathMakerById(arg1);
+				System.out.println(myxpath);
+				
+				WebElement xyz = driver.findElement(By.xpath(myxpath));
+				StepImpe.Capture= xyz.getText();
+				System.out.println("*****************************FINAL RESULTS*****************************\n");
+				System.out.println(StepImpe.URLCaptured + " HAS " + Capture + " WCAG ERRORS\n");
+				System.out.println("***********************************************************************");
+			}
+			//StepImpe.URLCaptured = "";
+			return Capture;
+  
+	}
+	
+	@Given("^I write \"(.*?)\" information to file")
+	public void i_write_information_to_file(String arg1) throws Throwable {
+		
+		// date format for timestamp in the filenames
+		//DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH\ua789mm\ua789ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		String currentDate = dateFormat.format(cal.getTime());
+		String outputText =  driver.findElement(By.xpath("//*[contains(@id, 'output_div')]")).getText();
+		String lineSeparate = "-------------------------------------------------------------------------------------------";
+		try {
+			//write information to both files
+			if (Integer.parseInt(Capture) > 0){ 
+				PrintWriter pwsource = new PrintWriter(wcag_subdirectory + "/" + arg1 + " SOURCE CODE.html", "UTF-16");
+				pwsource.write(sourceCode);
+				pwsource.close();
+			}
+			PrintWriter pwinfo = new PrintWriter(wcag_subdirectory + "/" + arg1 + " WCAG EVALUATION.txt", "UTF-16");
+			pwinfo.write("URL: " + URLCaptured);
+			pwinfo.write("\n" + lineSeparate + "\n NUMBER OF ERRORS \n" + lineSeparate + "\n");
+			pwinfo.write(Capture);
+			pwinfo.write("\n" + lineSeparate + "\n OUTPUT TEXT \n" + lineSeparate + "\n");
+			pwinfo.write(outputText);
+			pwinfo.write("\n\n\n(NUMBER OF 'COLUMN's in the OUTPUT TEXT should equal the NUMBER OF ERRORS. If not, contact Chris Tang for assistance and bugfixing.)");
+			
+			pwinfo.close();
+
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+		
+		summary.put(arg1, Integer.parseInt(Capture));
+
+	}
+	
+	@Then("^I write to the summary file")
+	public void i_write_to_the_summary_file() throws Throwable {
+		String summaryFilePath = "summary.txt";
+		
+		File summaryFile = new File("summary.txt");
+		if (!summaryFile.exists()){
+			summaryFile.createNewFile();
+		}
+		FileWriter fw = new FileWriter(summaryFile, true);
+		
+		
+		
+		ArrayList<String> keys = Collections.list(summary.keys());
+		Collections.sort(keys);
+		for (String key: keys){
+			fw.write(key + ": " + summary.get(key) + " Errors.\n");
+		}
+		
+		fw.close();
+	}
+	
+	@Then("^I sort the summary file")
+	public void i_sort_the_summary_file() throws Throwable {
+		String summaryFilePath = "summary.txt";
+		BufferedReader br = null;
+		
+		File summaryFile = new File("summary.txt");
+		if (!summaryFile.exists()){
+			summaryFile.createNewFile();
+		}
+		
+		ArrayList<String> lines = new ArrayList<String>();
+		FileWriter fw = new FileWriter(summaryFile, true);
+		try {
+			br = new BufferedReader(new FileReader(summaryFile));
+			String line;
+			while ((line = br.readLine()) != null){
+				lines.add(line);
+			}
+			Collections.sort(lines);
+			for (String content: lines){
+				fw.write(content + "\n");
+			}
+			
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			if (br != null){
+				br.close();
+			}
+			
+			fw.close();
+		}
+		
+		
+//		ArrayList<String> keys = Collections.list(summary.keys());
+//		Collections.sort(keys);
+//		for (String key: keys){
+//			fw.write(key + ": " + summary.get(key) + " Errors.\n");
+//		}
+//		
+//		fw.close();
+	}
+	
 	
 	@Given("^I paste \"(.*?)\"$")
 	public void i_paste(String arg1) throws Throwable {
 
-	      //System.out.println(StepImpe.Capture);
-		//String htmlToBePasted = StepImpe.Capture;
-		//System.out.println(htmlToBePasted);
-//	      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
-//		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
-//		
-      StringSelection selection = new StringSelection(StepImpe.Capture);
-      Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	      StringSelection selection = new StringSelection(StepImpe.sourceCode);
+	      Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			
+			// get the what was originally in the clipboard so that it can be restored later
+			String oldContent = (String) clipboard.getData(DataFlavor.stringFlavor);
+			
+			// set the clipboard contents as what was captured in the previous step(s)
+			clipboard.setContents(selection, selection);
+			
+
+			
+			// find the element
+			WebElement inputField =  driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]"));
+			inputField.click();
+			
+			//paste the captured stuff
+			Actions actions = new Actions(driver);
+			actions.sendKeys(Keys.chord(Keys.LEFT_CONTROL, "v")).build().perform();
+			
+			// revert the clipboard contents to what was there before
+			StringSelection oldSelection = new StringSelection(oldContent);
+			clipboard.setContents(oldSelection, oldSelection);
 		
-      // get the what was originally in the clipboard so that it can be restored later
-      String oldContent = (String) clipboard.getData(DataFlavor.stringFlavor);
-		
-      // set the clipboard contents as what was captured in the previous step(s)
-      clipboard.setContents(selection, selection);
-		
-      //String htmlToBePasted = StepImpe.Capture;
-      //System.out.println(htmlToBePasted);
-		
-      // find the element
-      WebElement inputField =  driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]"));
-      inputField.click();
-		
-		//paste the captured stuff
-      Actions actions = new Actions(driver);
-      actions.sendKeys(Keys.chord(Keys.LEFT_CONTROL, "v")).build().perform();
-		
-		
-		// revert the clipboard contents to what was there before
-      StringSelection oldSelection = new StringSelection(oldContent);
-      clipboard.setContents(oldSelection, oldSelection);
-      System.out.println(StepImpe.Capture);
-	
-      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).click();
-      driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(StepImpe.Capture);
 	}
-	
 	@Then("^I check \"(.*?)\" is not readonly$")
 	public void i_check_is_not_readonly(String arg1) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
@@ -188,29 +333,55 @@ public class StepImpe {
 		try {
 			Assert.assertTrue(boxContents.equals(arg2));
 		}
-		catch (AssertionError e){
-			try{
-				System.out.println("Attempting to search for origvalue...");
-				boxContents = inputBox.getAttribute("origvalue");
+		catch (AssertionError | Exception e){
+			try {
+				myxpath = myxpath.replace("*", "input");
+				inputBox = driver.findElement(By.xpath(myxpath));
+				boxContents = inputBox.getAttribute("value");
 				System.out.println("boxContents: " + boxContents);
 				System.out.println("arg2: " + arg2);
-				Assert.assertTrue(boxContents.equals(arg2));
 			}
-			catch (AssertionError e2) {
-				// for input fields that default to the placeholder value when empty (very specific ones)
-				e2.printStackTrace();
-				System.out.println("Attempting to search for placeholder...");
-				boxContents = inputBox.getAttribute("placeholder");
-				System.out.println("boxContents: " + boxContents);
-				System.out.println("arg2: " + arg2);
-				Assert.assertTrue(boxContents.equals(arg2));
+			catch (AssertionError | Exception ae){
+				try{
+					System.out.println("Attempting to search for origvalue...");
+					boxContents = inputBox.getAttribute("origvalue");
+					System.out.println("boxContents: " + boxContents);
+					System.out.println("arg2: " + arg2);
+					Assert.assertTrue(boxContents.equals(arg2));
+				}
+				catch (AssertionError | Exception ae2) {
+					// for input fields that default to the placeholder value when empty (very specific ones)
+					ae2.printStackTrace();
+					System.out.println("Attempting to search for placeholder...");
+					boxContents = inputBox.getAttribute("placeholder");
+					System.out.println("boxContents: " + boxContents);
+					System.out.println("arg2: " + arg2);
+					Assert.assertTrue(boxContents.equals(arg2));
+				}
 			}
 		}
+		
 		boxContents = null;
 		inputBox = null;
 		Thread.sleep(2000);
 
 	}
+	
+	@Then("^I check label \"(.*?)\" contains \"(.*?)\"$")
+	public void i_Check_label_contains(String arg1, String arg2) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath = createXpath.xpathMakerById(arg1);
+		Thread.sleep(3000);
+		WebElement contents = driver.findElement(By.xpath(myxpath));
+		String labelContents = contents.getText();
+		System.out.println("labelContents: " + labelContents);
+		System.out.println("arg2: " + arg2);
+		
+		Assert.assertTrue(labelContents.equals(arg2));
+
+	}
+	
+	
 	
 	
 	
@@ -251,6 +422,7 @@ public class StepImpe {
 		WebElement inputBox = driver.findElement(By.xpath(myxpath));
 		Assert.assertTrue(inputBox.isDisplayed());
 		String boxContents = inputBox.getAttribute("value");
+		System.out.println("Box Contents: " + boxContents);
 		try {
 			Assert.assertTrue(!boxContents.isEmpty());
 		}
@@ -277,12 +449,22 @@ public class StepImpe {
 			Assert.assertTrue(regex.matcher(value).matches());
 		}
 		catch (Exception | AssertionError e){
-			myxpath = new DBUtilities(driver).xpathMakerByClass(arg1);
-			WebElement inputBox2 = driver.findElement(By.xpath(myxpath));
-			String value = inputBox2.getAttribute("value");
-			System.out.println("value: " + value);
-			System.out.println("arg2: " + arg2);
-			Assert.assertTrue(regex.matcher(value).matches());
+			try {
+				myxpath = new DBUtilities(driver).xpathMakerByClass(arg1);
+				WebElement inputBox2 = driver.findElement(By.xpath(myxpath));
+				String value = inputBox2.getAttribute("value");
+				System.out.println("value: " + value);
+				System.out.println("arg2: " + arg2);
+				Assert.assertTrue(regex.matcher(value).matches());
+			}
+			catch (Exception | AssertionError e2){
+				myxpath = new DBUtilities(driver).xpathMakerById(arg1);
+				WebElement inputBox3 = driver.findElement(By.xpath(myxpath));
+				String value = inputBox3.getText();
+				System.out.println("value: " + value);
+				System.out.println("arg2: " + arg2);
+				Assert.assertTrue(regex.matcher(value).matches());
+			}
 		}
 	}
 	
@@ -316,7 +498,7 @@ public class StepImpe {
 		
 	@And("^I click on button \"(.*?)\"$")
 	public void i_click_on_button(String arg1) throws Throwable {
-		Thread.sleep(2500);
+		Thread.sleep(3000);
 		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the calendar popup
 		String myXpath = null;
 		DBUtilities createXpath = new DBUtilities(driver);
@@ -350,7 +532,7 @@ public class StepImpe {
 				driver.findElement(By.xpath(myXpath)).click();
 			}
 		}
-		Thread.sleep(2500);
+		Thread.sleep(4000);
 
 	}
 	
@@ -560,6 +742,9 @@ public class StepImpe {
 		
 	}
 	
+
+	
+	
 	@Then("^I check \"(.*?)\" does not exist$")
 	public void i_check_does_not_exist(String arg1) throws Throwable {
 		DBUtilities checkElementDisplayed = new DBUtilities(driver);
@@ -638,7 +823,46 @@ public class StepImpe {
 	public void i_see_text_displayed(String arg1) throws Throwable {
       LandingPage AU = PageFactory.initElements(driver, LandingPage.class);
       Thread.sleep(1000);
-      AU.checkUIElementTEXTIsDisplayed(arg1);
+      DBUtilities checkElementDisplayed = new DBUtilities(driver);
+		Thread.sleep(1000);
+		//String myxpath=checkElementDisplayed.xpathMaker(arg1);
+		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
+		System.out.println("checking for text " +myxpath);
+	
+	    //driver.getPageSource().contains(arg1);
+		Assert.assertTrue(driver.getPageSource().contains(arg1));
+//		for (int i = 0; i < 10; i++){
+//			System.out.println("(" + myxpath + ")[" + i + "]");
+//			try {
+//				Assert.assertTrue(driver.findElement(By.xpath("(" + myxpath + ")[" + i + "]")).isDisplayed());
+//				return;
+//			}
+//			catch (AssertionError | Exception e){
+//				System.out.println();
+//			}
+//		}
+		
+		//Assert.assertTrue(false);
+		
+//      AU.checkUIElementTEXTIsDisplayed(arg1);
+	}
+	
+	@Then("^I see text \"(.*?)\" shown$")
+	public void i_see_text_shown(String arg1) throws Throwable {
+      LandingPage AU = PageFactory.initElements(driver, LandingPage.class);
+      Thread.sleep(1000);
+      DBUtilities checkElementDisplayed = new DBUtilities(driver);
+		Thread.sleep(1000);
+		//String myxpath=checkElementDisplayed.xpathMaker(arg1);
+		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
+		System.out.println("checking for text " +myxpath);
+	
+	    //driver.getPageSource().contains(arg1);
+		Assert.assertTrue(driver.getPageSource().contains(arg1));
+
+		//Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
+		
+//      AU.checkUIElementTEXTIsDisplayed(arg1);
 	}
 	
 	@Then("^I see text \"(.*?)\" not displayed$")
@@ -885,5 +1109,86 @@ public class StepImpe {
 	public void i_switch_to_frame(String arg1) throws Throwable {
 		int frameNum = Integer.parseInt(arg1);
 		driver.switchTo().frame(frameNum);
+	}
+	
+	
+	@Then("^I take a screenshot with name \"(.*?)\"$")
+	public void i_take_a_screenshot(String arg1) throws Throwable {
+
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		// Now you can do whatever you need to do with it, for example copy somewhere
+		FileUtils.copyFile(scrFile, new File(screenshot_subdirectory + "/" + arg1 +"_screenshot.png"));
+	}
+	
+	@Then("^I change download destinations$")
+	public void i_change_download_destinations() throws Throwable{
+		String downloadFilepath = "/pdfs";
+		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+		chromePrefs.put("profile.default_content_settings.popups", 0);
+		chromePrefs.put("download.default_directory", downloadFilepath);
+		ChromeOptions options = new ChromeOptions();
+		options.setExperimentalOption("prefs", chromePrefs);
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		cap.setCapability(ChromeOptions.CAPABILITY, options);
+		WebDriver new_driver = new ChromeDriver(cap);
+		driver = new_driver;
+	}
+	
+	
+	//**************************************************************************************************************************
+		//**************************************************************************************************************************
+		//**************************************************************************************************************************
+		//**************************************************************************************************************************
+		//****************************************************GENERIC XPATH FUNCTIONS*************************************************************
+		//**************************************************************************************************************************
+		//**************************************************************************************************************************
+		//**************************************************************************************************************************
+		//**************************************************************************************************************************
+	
+	//use these if there is nothing else that can be done
+	
+	@Then("^I check object with xpath \"(.*?)\" exists$")
+	public void i_check_object_with_xpath_exists(String arg1) throws Throwable {
+		Thread.sleep(3000);
+		DBUtilities checkElementDisplayed = new DBUtilities(driver);
+	
+		WebElement object = driver.findElement(By.xpath(arg1));
+		Assert.assertTrue(object.isDisplayed());
+
+	}
+	
+	
+	
+	@Then("^I check object with xpath \"(.*?)\" contains \"(.*?)\"$")
+	public void i_check_object_with_xpath_contains(String arg1, String arg2) throws Throwable {
+		DBUtilities createXpath = new DBUtilities(driver);
+		String myxpath = arg1;
+		Thread.sleep(3000);
+		WebElement inputBox = driver.findElement(By.xpath(myxpath));
+		String contents = inputBox.getText();
+		System.out.println("boxContents: " + contents);
+		System.out.println("arg2: " + arg2);
+		
+		
+		Assert.assertTrue(contents.equals(arg2));
+	}
+	
+	@Then("^I check object with xpath \"(.*?)\" contents match regex \"(.*?)\"$")
+	public void i_check_object_with_xpath_contents_are_of_pattern(String arg1, String arg2) throws Throwable{
+		Pattern regex = Pattern.compile(arg2);
+		WebElement inputBox = driver.findElement(By.xpath(arg1));
+		String value = inputBox.getText();
+		System.out.println("value: " + value);
+		System.out.println("arg2: " + arg2);
+		
+		Assert.assertTrue(regex.matcher(value).matches());
+		
+	}
+	
+	@Then("^I click on object with xpath \"(.*?)\"$")
+	public void i_click_on_object_with_xpath(String arg1) throws Throwable{
+		WebElement object = driver.findElement(By.xpath(arg1));
+		object.click();
 	}
 }

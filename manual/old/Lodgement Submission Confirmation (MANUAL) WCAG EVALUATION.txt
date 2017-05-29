@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+  <head><script type="text/javascript" charset="UTF-8">
+(function (global) {
+    global.outsystems = global.outsystems || {};
+    global.outsystems.internal = global.outsystems.internal || {};
+})(this);
+outsystems.internal.timerspolyfillResponseStart = new Date().getTime();
+outsystems.internal.startInstant = new Date();
+outsystems.internal.requestEventName = 'WebScreenClientExecuted';
+outsystems.internal.beaconRESTURL = '/PerformanceProbe/rest/BeaconInternal/WebScreenClientExecutedEvent';
+</script><title>
+	Submission Confirmation
+</title><meta name="msapplication-tap-highlight" content="no" scheme=""/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" scheme=""/><meta name="apple-mobile-web-app-capable" content="yes" scheme=""/><meta name="mobile-web-app-capable" content="yes" scheme=""/><meta name="format-detection" content="telephone=no" scheme=""/><link type="text/css" rel="stylesheet" href="/SS_Admin_Core/GetCSS.aspx" charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" />
+<style>
+.OSFillParent { 
+ display: block;
+ width: 100%;
+}
+table.OSFillParent {
+ display: table;
+}
+input.OSFillParent,
+button.OSFillParent,
+select.OSFillParent,
+textarea.OSFillParent {
+ display: inline-block;
+ box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+}
+.OSInline {
+ display: inline-block;
+ *zoom: 1;
+ *display: inline;
+ vertical-align: top;
+}
+table.OSInline {
+ display: inline-table;
+}
+.OSAutoMarginTop {
+ margin-top: 10px;
+}
+table[class*="ThemeGrid_Width"] {
+ display: inline-table;
+ vertical-align: top;
+}
+div[class*="ThemeGrid_Width"] {
+ vertical-align: top;
+}
+th[class*="ThemeGrid_Width"],
+td[class*="ThemeGrid_Width"] {
+ display: table-cell;
+}
+[class*="ThemeGrid_Width"] {
+ display: inline-block;
+ box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ *zoom: 1;
+ *display: inline;
+}
+.ThemeGrid_Container {
+ box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+}
+
+</style>
+<link href="/RichWidgets/Blocks/RichWidgets/RichWidgets/Icon.css?817" type="text/css" rel="stylesheet" />
+<link href="/SilkUIFramework/Blocks/SilkUIFramework/Private/Tooltipster_3_0_6.css?989" type="text/css" rel="stylesheet" />
+<link href="/SilkUIFramework/Blocks/SilkUIFramework/Javascript/SilkUI.css?989" type="text/css" rel="stylesheet" />
+<link href="/RichWidgets/Blocks/RichWidgets/jQueryUI/jQueryUIInternal.css?817" type="text/css" rel="stylesheet" />
+<link href="/RichWidgets/Blocks/RichWidgets/RichWidgets/Feedback_Message.css?817" type="text/css" rel="stylesheet" />
+<link href="/DBResultsSG_Theme/Blocks/DBResultsSG_Theme/DBResultsBase/Layout_DBResults.css?1001" type="text/css" rel="stylesheet" />
+<link href="/RichWidgets/Blocks/RichWidgets/RichWidgets/DropDownMenu.css?817" type="text/css" rel="stylesheet" />
+    <link href="/TSSCommon/Theme.TSSTheme.css?1472" type="text/css" rel="stylesheet" />
+    <link href="/DBResultsSG_Theme/Theme.DBResultsSG_Theme.extra.css?1001" type="text/css" rel="stylesheet" />
+    <script id="_OSrequestInfoScript" type="text/javascript">(function(global) { global.outsystems = global.outsystems || {};global.outsystems.internal = global.outsystems.internal || {};global.outsystems.internal.requestInfo = {visitorKey:'f31f03c9-2c39-4900-a651-f775ceb05280',visitKey:'1b7fc438-1aa8-4af3-904b-6fa97f7051cf',sessionKey:'8f04fe7a-93b6-4002-d263-f5a4f8f6e79a',userKey:'880fc586-6227-bd0f-4759-1701901edad5',requestKey:'dcbc9d3e-8499-4c3d-8572-fa335b93eb4d',webScreenKey:'e4cdbdd0-c272-4c9e-b2ac-a6bc11c9c38d',webScreenName:'LodgePayroll_Step3_SubmissionDone',espaceKey:'564cea04-783c-4ccb-a182-5affa829313a',espaceName:'TSSLodgement',applicationKey:'223483f2-a483-4dab-aba5-e279d3882685',applicationName:'TaxPortal',tenantKey:'4e2b2e2f-e178-5a45-1f5e-310891360efa',tenantName:'Users',environmentKey:'a1061ea8-e9c7-443c-b6ee-cae67431e48b',environmentName:'Testing',frontendKey:'$1$qhPyQjvS3mDwAO6mxvM7wQ==SSA419mOKTJj8PH+GPNgCA=='}})(this);</script>
+    <script src="_osjs.js?10_0_200_0" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/SilkUIFramework/Javascript/SilkUICommon.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/SilkUIFramework/Private/ToggleScript.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/SilkUIFramework/Private/Tooltipster_3_0_6.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/SilkUIFramework/Javascript/SilkUI.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/SilkUIFramework/Utilities/Feedback_AjaxWait.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/RichWidgets/jQueryUI/jQueryUIInternal.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/RichWidgets/jQueryUI/jQueryComponents.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/RichWidgets/RichWidgets/Feedback_Message.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/DBResultsSG_Theme/DBResultsBase/Layout_DBResults.js?1001" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSLodgement/Blocks/RichWidgets/RichWidgets/DropDownMenu.en.js?817" type="text/javascript" charset="UTF-8"></script>
+
+</head>
+  <body>
+    <form method="post" action="LodgePayroll_Step3_SubmissionDone.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="WebForm1" name="WebForm1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__OSVSTATE" id="__OSVSTATE" value="lhPKtwQYwmqrqwlb0xLK6lepPdmh0GU6QMPWc2Y0VSF/wPhl55C7vGupq6TPcy9dWdqLKiKJC/s0fyLkNbyJnWAlIrcqtV9AEHbhWGgCIcs25CSnvGo7Zd8hCX9MaJxBS4jXjDId8Ur/f0pdiZngtyfWGdTam82dJ3lIO17iUrTsQ8EANIX/qH+9qRnfNWDTVASai0il/3elc5ppSgT0+ITP+K59JTAIPfLQxOXM7tCJ1hcBbGOcjrYRGbEPhQyTv+gjYvhzWb5BtL7NwlpxKtk1aj6h7qcFgGpPexIzAYKj2RTw37sg84rvTxjbTJyrRVE9cEfFxb51NMNRZAVHqZHDPPB7kIva61FJO2L1HXqu6R9oWsnf6J7tSe6csB+z2ypRUbQSVHLpS1THIO57wS/f8VM2mvWBtBxAOIaxcKFqERZogJKG4+kz7uoQwQrnB0AfkArrPonN+O91PMQnqu8STHOeEewDF1tShP+82LYsup0w1GNw8eOk8+UujqcLAwPNDV7b0WIJM/ajslFJl8MDalqleqXTt36Jh9NV97Zriqy6bSCuSXTuNpGK6jnPN0Rt3v2eWKvP5W7L0amKiva0eKlVPFX155JXu+j8dLxq4jzFkJcpwBrq7Q0EOv3DDhonyUjwYcX1cD/qRou/olc4JHjQ/zfzcE/EugN21ovAdSNqy56FCTz8lVf/yT8cz+0BkJHzIYLshy0qB5YU+WzaD+cjo/bu/a6XGSjk0ig9qgk/VCxbIMzHygS5OAQDbczEnzxgxTYhF5zWPW1CqGD+LHETY683hN/rL7gp0jhy9CATIBVly1PADsdD/tlh" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['WebForm1'];
+if (!theForm) {
+    theForm = document.WebForm1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+OsPrepareCheckboxesForSubmit();
+OsFixUploadBeforeSubmit();
+if (!OsValidatorOnSubmit()) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="DCFF7F00" />
+</div>
+<div  class="Page startHidden windows chrome en DBResultsSG_Theme"><div  id="DBResultsSG_Theme_wt19_block_wtHeader" class="Header" role="navigation"><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_title" class="Header_title"><div  class="Application_Title" style="margin-top: 0px"><a id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_title_wt3" tabindex="1" href="#!"><img alt="DB Results" src="/TSSCommon/img/logo_greyscale.png?1472" /></a></div ></div ><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_content_wrap" class="Header_content_wrap"><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader__MenuLink" class="Header__MenuLink PH"><a id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader__MenuLink_wt9" tabindex="2" class="Button Icon Header_buttonMenu" title="Menu" href="#!"><span class="fa fa-fw fa-bars"></span></a></div ><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader__HomeLink" class="Header__HomeLink" ishomepage="False"><a id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader__HomeLink_wtHomeLink" tabindex="3" class="Button Icon Header_button" taget="_self" title="Back to Home" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt19$block$wtHeader$TSSCommon_wt4$block$SS_Common_wt20$block$wtHeader__HomeLink$wtHomeLink&#39;,&#39;&#39;)"><span class="fa fa-fw fa-home"></span></a></div ><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_loginInfo" class="Header__loginInfo"><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_loginInfo_wtLoginInfo"></div ></div ></div ><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_content_wrap__mobile" class="Header_content_wrap__mobile"><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_search" class="Header_search PH"><a id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_search_wt5" tabindex="4" class="Button Icon Header_buttonMenu" title="Menu" href="#!"><span class="fa fa-fw fa-bars"></span></a></div ><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader__activity" class="Header__activity" ishomepage="False"><a id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader__activity_wtHomeLinkMobile" tabindex="5" class="Button Icon Header_buttonMiddle" target="_self" title="Back to Home" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt19$block$wtHeader$TSSCommon_wt4$block$SS_Common_wt20$block$wtHeader__activity$wtHomeLinkMobile&#39;,&#39;&#39;)"><span class="fa fa-fw fa-home"></span></a></div ><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_loginInfoMobile" class="Header__loginInfo" issettingspage="False"><div  id="DBResultsSG_Theme_wt19_block_wtHeader_TSSCommon_wt4_block_SS_Common_wt20_block_wtHeader_loginInfoMobile_wtLoginInfoMobile"></div ></div ></div ><div  class="OSAutoMarginTop"></div ></div ><div  id="DBResultsSG_Theme_wt19_block_wtMenu" class="Menu OSInline" role="navigation"><div  class="Menu_TopMenus"><span id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1"><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu Menu_TopMenuActive"><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="6" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt19$block$wtMenu$SS_Menu_Core_wt26$block$wtListRecords1$ctl00$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">TSS Portal</a></div ></div ><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"><span id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1"><a id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl00_wtSubMenuLink" tabindex="8" class="Menu_SubMenuItem Menu_SubMenuItem Menu_SubMenuItemActive" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt19$block$wtMenu$SS_Menu_Core_wt26$block$wtListRecords1$ctl00$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl00$wtSubMenuLink&#39;,&#39;&#39;)">Payroll Tax Lodgement</a><a id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl02_wtSubMenuLink" tabindex="10" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt19$block$wtMenu$SS_Menu_Core_wt26$block$wtListRecords1$ctl00$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl02$wtSubMenuLink&#39;,&#39;&#39;)">Payroll Tax Registration</a><a id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl04_wtSubMenuLink" tabindex="12" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt19$block$wtMenu$SS_Menu_Core_wt26$block$wtListRecords1$ctl00$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl04$wtSubMenuLink&#39;,&#39;&#39;)">Settings</a></span></div ></div ></div ><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="14" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt19$block$wtMenu$SS_Menu_Core_wt26$block$wtListRecords1$ctl02$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Sign Out</a></div ></div ><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt19_block_wtMenu_SS_Menu_Core_wt26_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ></span></div ></div ><div  id="DBResultsSG_Theme_wt19_block_wtContent_Top" class="Content_Top PH"></div ><div  class="Content ThemeGrid_Wrapper"><div  class="ThemeGrid_Container" style="margin-top: 0px"><div  class="HeaderPage ThemeGrid_Width12"><div  id="DBResultsSG_Theme_wt19_block_wtBreadcrumbs" class="BreadcrumbsContainer PH" role="navigation"></div ><div  class="TitleActions"><div  id="DBResultsSG_Theme_wt19_block_wtTitle" class="Heading1 Title PH OSInline" role="banner">Submission Confirmation</div ><div  id="DBResultsSG_Theme_wt19_block_wtActions" class="Actions Title_Links PH" style="margin-top: 0px"> </div ></div ></div ><div  class="OSAutoMarginTop"><div  id="DBResultsSG_Theme_wt19_block_wtMainContent" class="MainContent" role="main">Your Annual Payroll Tax Reconciliation Lodgement has been successfully submitted. An email has been sent to you for your records. <br/>Transaction reference number:  <span class="Bold">0</span><div  class="OSAutoMarginTop"><input type="submit" name="DBResultsSG_Theme_wt19$block$wtMainContent$wtDownloadBt" value="Download PDF" id="DBResultsSG_Theme_wt19_block_wtMainContent_wtDownloadBt" tabindex="16" class="Button Is_Default" style="margin-left: 0px" /></div ></div ><div  class="Sidebar PH"><div  id="DBResultsSG_Theme_wt19_block_wtSidebar" class="Sidebar_Content PH"></div ></div ></div ><div  class="Footer" style="margin-top: 0px"><div  id="DBResultsSG_Theme_wt19_block_wtFooter" role="contentinfo"></div ></div ></div ><script>SilkDeviceDetect.init('desktop', false, false, 'chrome', true, false)</script><div  class="ResponsiveOverlay"><div  class="ResponsiveOverlay_Top"><div  class="OSInline" style="width: 30px"><span id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_RichWidgets_wttt_trigger_block"><span class="fa fa-fw fa-question-circle fa-lg"></span></span></div ><div  class="ResponsiveOverlay_Device OSInline" style="width: 170px"></div ><div  class="OpenClose OSInline" style="width: 20px; margin-left: 10px"><span class="fa fa-fw fa-cog fa-lg"></span></div ></div ><div  id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wtOverlay_Bottom" class="ResponsiveOverlay_Bottom" style="display:none"><div  class="OSInline" style="width: 150px">Device Emulation</div ><div  class="OSInline" align="right" style="width: 70px; margin-left: 10px"><div  class="ToggleButton OSInline"><label  id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wt43_wtCheckbox" class="PH ToggleButton_label"><input type="checkbox" name="DBResultsSG_Theme_wt19$block$SilkUIFramework_wt12$block$wt5$wt43$wtCheckbox$wt36" id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wt43_wtCheckbox_wt36" tabindex="27" class="BtnRespOverlay" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wt43_wtCheckbox_wt36"></span></label ></div ></div ><div  class="ResponsiveOverlay_Preview"><div  class="OSInline" style="width: 50%">Preview</div ><div  class="OSInline" align="right" style="width: 50%"><a id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wt11" tabindex="28" href="/PreviewInDevices/Preview.aspx?URL=/TSSLodgement/LodgePayroll_Step2_Confirm.aspx"><span class="fa fa-fw fa-mobile"></span><span class="fa fa-fw fa-tablet"></span><span class="fa fa-fw fa-desktop"></span></a></div ></div ><div  style="margin-top: 5px"><a id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wt34" tabindex="29" target="_blank" href="http://labs.outsystems.net/SilkUI/"><span class="Text_Note">labs.outsystems.net/silkui</span></a></div ></div ></div ><div  id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wt38_wtTooltipContent" class="tooltip-content">Silk UI Framework Simulation Device<br/>Resize the window to preview the page in target devices.<br/>Open the settings to change the simulation device options.</div ><script>$('#DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_RichWidgets_wttt_trigger_block').tooltipster({
+    content: $( '<span>' + $('#DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wt38_wtTooltipContent').html() + '</span>' ),
+    trigger: 'hover',
+    position: 'top',
+    maxWidth: '400',
+    theme: 'tooltip_style'
+});
+$('#DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt5_wt38_wtTooltipContent').remove();</script><div  id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt17_wtdivWait" class="Feedback_AjaxWait" align="center" style="display:none"><div  id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt17_wtloader" class="Loader"></div >Loading</div ><script>RichWidgets_Feedback_AjaxWait_init('DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt17_wtdivWait');</script><span id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block"><script type='text/javascript'>
+OsRegisterExceptionHandler(RichWidgets_Feedback_Message_ErrorHandler)
+</script><div  id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtFeedback_Wrapper" class="Feedback_Message_Wrapper"><span id="DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtnotify"><span class="NotifyWidget"></span><SCRIPT type="text/javascript">
+//<![CDATA[
+RichWidgets_Feedback_Message_notifyWidget ='DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtnotify';
+//]]>
+</SCRIPT></span></div ></span></div ></div >
+    
+<script type="text/javascript">
+//<![CDATA[
+var OsPage_ValidatorsOrder =  new Array("DBResultsSG_Theme_wt19_block_SilkUIFramework_wt12_block_wt8_wtCommandLine");
+var OsPage_Validators =  new Array({});
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var OsPage_ValidationActive = false;
+OsValidatorOnLoad();
+
+function OsValidatorOnSubmit() {
+  if (OsPage_ValidationActive) { return OsValidatorCommonOnSubmit(); }
+  return true;
+}
+// ]]>
+</script>
+</form><script type="text/javascript">outsystems.internal.$._waitForViewstate = true;outsystems.internal.$(document).ready(function() {outsystems.internal.$('input[name=__OSVSTATE]').val('lhPKtwQYwmqrqwlb0xLK6lepPdmh0GU6QMPWc2Y0VSF/wPhl55C7vGupq6TPcy9dWdqLKiKJC/s0fyLkNbyJnWAlIrcqtV9AEHbhWGgCIcs25CSnvGo7Zd8hCX9MaJxBS4jXjDId8Ur/f0pdiZngtyfWGdTam82dJ3lIO17iUrTsQ8EANIX/qH+9qRnfNWDTVASai0il/3elc5ppSgT0+ITP+K59JTAIPfLQxOXM7tCJ1hcBbGOcjrYRGbEPhQyTv+gjYvhzWb5BtL7NwlpxKtk1aj6h7qcFgGpPexIzAYKj2RTw37sg84rvTxjbTJyrRVE9cEfFxb51NMNRZAVHqZHDPPB7kIva61FJO2L1HXqu6R9oWsnf6J7tSe6csB+z2ypRUbQSVHLpS1THIO57wS/f8VM2mvWBtBxAOIaxcKFqERZogJKG4+kz7uoQwQrnB0AfkArrPonN+O91PMQnqu8STHOeEewDF1tShP+82LYsup0w1GNw8eOk8+UujqcLAwPNDV7b0WIJM/ajslFJl8MDalqleqXTt36Jh9NV97Zriqy6bSCuSXTuNpGK6jnPN0Rt3v2eWKvP5W7L0amKiva0eKlVPFX155JXu+j8dLxq4jzFkJcpwBrq7Q0EOv3DDhonyUjwYcX1cD/qRou/olc4JHjQ/zfzcE/EugN21ovAdSNqy56FCTz8lVf/yT8cz+0BkJHzIYLshy0qB5YU+WzaD+cjo/bu/a6XGSjk0ig9qgk/VCxbIMzHygS5OAQDbczEnzxgxTYhF5zWPW1CqGD+LHETY683hN/rL7gp0jhy9CATIBVly1PADsdD/tlh');outsystems.internal.$._waitForViewstate = false;});</script>
+<!-- Begin Inbox Block --><link href="/EPA_Taskbox/Blocks/EPA_Taskbox/Inbox_Flow/Inbox.css?812" type="text/css" rel="stylesheet" /><script src="/EPA_Taskbox/Blocks/EPA_Taskbox/Inbox_Flow/Inbox.js?812" type="text/javascript" charset="UTF-8"></script><div><span id="epa_wtEPATaskbox_ViewOptions_JS"><script language="javascript">var EPATaskbox_ViewOptions = { allowGlow : false, pollInterval : 20, maxPollInterval : 1800, cookieTimeout : 2, applicationServer : ".Net", developmentMode : true};</script></span><!--[if gte IE 5.5]><![if lt IE 7]><style type="text/css">div#epa_wtEPATaskbox_ExtraStylesContainer {  _right: auto; _bottom: auto; _left: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetWidth + ( document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth ) + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' ); _top: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetHeight + ( document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight ) + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );}</style><![endif]><![if gte IE 7]><script>if(document.compatMode == 'BackCompat') { window.attachEvent('onload', function() { var div = document.createElement('div'); div.style.display = 'none'; div.innerHTML = "style<style type=\"text/css\">"+ " div#epa_wtEPATaskbox_ExtraStylesContainer { "+ "  "+ " _right: auto; _bottom: auto; "+ " _left: expression( ( -51 - epa_wtEPATaskbox_ExtraStylesContainer.offsetWidth + ( document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth ) + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' ); "+ " _top: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetHeight + ( document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight ) + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); "+ " } "+ " </style>"; document.body.appendChild(div);});};</script><![endif]><![endif]--><div id="epa_wtEPATaskbox_Container" class="EPATaskbox_Container"><div id="epa_wtEPATaskbox_ExtraStylesContainer" class="EPATaskbox_ExtraStylesContainer"><div class="EPATaskbox_IconifiedContainer"><div class="EPATaskbox_Icon_EPATaskbox_NotGlowing"></div><div class="EPATaskbox_Icon_EPATaskbox_Glowing"></div><div class="EPATaskbox_ActivityCount"></div></div><div class="EPATaskbox_ExpandedContainer"><div class="EPATaskbox_ExpandedIcon_EPATaskbox_NotGlowing"></div><div class="EPATaskbox_ExpandedIcon_EPATaskbox_Glowing"></div><div class="EPATaskbox_ExpandedText">Click here to see your activities</div></div><div class="EPATaskbox_OpenedContainer"><div class="EPATaskbox_FrameContainer"></div></div></div></div></div><!-- End Inbox Block --><script type='text/javascript'> EPATaskbox.instance = new EPATaskbox(outsystems.internal.$('.EPATaskbox_Container'), 157, 0, false, null); </script><script src="/PerformanceProbe/performanceprobe.js?10_0_200_0" type="text/javascript" charset="UTF-8"></script>
+  </body>
+</html>
