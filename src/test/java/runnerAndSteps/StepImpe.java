@@ -36,7 +36,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -73,8 +75,16 @@ public class StepImpe {
 	
 	@Before()
 	public void startUp() {
-//	    driver = new FirefoxDriver();
-//	    driver.manage().window().maximize();
+//		File pathToBinary = new File("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
+//		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+//		FirefoxProfile firefoxProfile = new FirefoxProfile();      
+//		File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+//		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+//		FirefoxProfile firefoxProfile = new FirefoxProfile();
+//		driver = new FirefoxDriver(ffBinary,firefoxProfile);
+		//driver = new FirefoxDriver();
+		
+	   // driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
@@ -98,7 +108,7 @@ public class StepImpe {
 
 	@After()
 	public void tearDown() {	
-		driver.quit();
+		//driver.quit();
 	}
 	//******************************************************************************   
 	    

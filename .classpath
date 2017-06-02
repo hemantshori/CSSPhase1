@@ -25,7 +25,7 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="C:/Users/CTang/git/SSCP/cucumber-jvm-deps-1.0.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/CTang/git/SSCP/selenium-java-2.40.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/CTang/git/SSCP/client-combined-3.0.1-nodeps.jar"/>
 	<classpathentry kind="lib" path="C:/Users/CTang/git/SSCP/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/CTang/git/SSCP/selenium-java-3.4.0/client-combined-3.4.0-nodeps.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

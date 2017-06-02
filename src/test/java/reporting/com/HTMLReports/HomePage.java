@@ -76,7 +76,7 @@ public class HomePage extends DBUtilities {
 			driver.get("https://ssc.dbresults.com.au/SS_Admin/PageTexts.aspx");
 		}
 		else if(arg1.equals("ExpiredPassword")){
-			driver.get("http://dev2-ssc.dbresults.com.au/AccountMgmt/ChangePassword.aspx?Token=e69de158-9abf-4e5d-aba7-6841237bd58c");
+			driver.get("https://dev2-ssc.dbresults.com.au/SSAccountMgmt/ChangePassword.aspx?Token=3b787893-fc4e-43e7-a2d3-deba8fd3fe00");
 		}
 		else if(arg1.equals("InvalidPasswordLink")){
 			driver.get("https://dev2-ssc.dbresults.com.au/TSSAdmin/PageTextasdfafdss.aspx");

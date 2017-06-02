@@ -255,7 +255,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | PortalName | UserNameField | PasswordField | UserName | Password  | ButtonName1 | DropDownValue1 | DropDownField | DropDownValue2 | DropDownField2 | Message                                    |
       | TSS        | UserNameInput | PasswordInput | jbradley      | Dbresults1| TypeMonthly |           2012 | YearOfReturn  | September      | MonthOfReturn  | Your changes have been successfully saved. |			
 
-@tss
+  @tss
   Scenario Outline: DTSP-358: As an end user, I want to be able to submit my Annual Payroll Tax Return Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -282,7 +282,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
-    Then I select "May 2017" from "MonthlyObligationSelect"
+    Then I select "2017" from "MonthlyObligationSelect"
     Then I click on "NextSection"
     Then I wait for "2000" millisecond
     Then I enter the details as
@@ -327,6 +327,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
 
         Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation         | ContactPhone | EmailAddress         |
+      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | COFFEE CORP PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | GOOD FOR SOMETHING PROPRIETARY LIMITED | 04 5678 9767 | jbradley@hotmail.com |
   
     
