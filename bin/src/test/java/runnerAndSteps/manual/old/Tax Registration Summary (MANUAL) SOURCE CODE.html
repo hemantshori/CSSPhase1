@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
+  <head><title>
+	Tax Registration Summary
+</title><meta name="msapplication-tap-highlight" content="no" scheme=""/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" scheme=""/><meta name="apple-mobile-web-app-capable" content="yes" scheme=""/><meta name="mobile-web-app-capable" content="yes" scheme=""/><meta name="format-detection" content="telephone=no" scheme=""/><link type="text/css" rel="stylesheet" href="/SS_Admin_Core/GetCSS.aspx" charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" />
+<style>
+.OSFillParent { 
+ display: block;
+ width: 100%;
+}
+table.OSFillParent {
+ display: table;
+}
+input.OSFillParent,
+button.OSFillParent,
+select.OSFillParent,
+textarea.OSFillParent {
+ display: inline-block;
+ box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+}
+.OSInline {
+ display: inline-block;
+ *zoom: 1;
+ *display: inline;
+ vertical-align: top;
+}
+table.OSInline {
+ display: inline-table;
+}
+.OSAutoMarginTop {
+ margin-top: 10px;
+}
+table[class*="ThemeGrid_Width"] {
+ display: inline-table;
+ vertical-align: top;
+}
+div[class*="ThemeGrid_Width"] {
+ vertical-align: top;
+}
+th[class*="ThemeGrid_Width"],
+td[class*="ThemeGrid_Width"] {
+ display: table-cell;
+}
+[class*="ThemeGrid_Width"] {
+ display: inline-block;
+ box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ *zoom: 1;
+ *display: inline;
+}
+.ThemeGrid_Container {
+ box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+}
+
+</style>
+<link href="/RichWidgets/Blocks/RichWidgets/RichWidgets/Icon.css?817" type="text/css" rel="stylesheet" />
+<link href="/SilkUIFramework/Blocks/SilkUIFramework/Private/Tooltipster_3_0_6.css?989" type="text/css" rel="stylesheet" />
+<link href="/SilkUIFramework/Blocks/SilkUIFramework/Javascript/SilkUI.css?989" type="text/css" rel="stylesheet" />
+<link href="/RichWidgets/Blocks/RichWidgets/jQueryUI/jQueryUIInternal.css?817" type="text/css" rel="stylesheet" />
+<link href="/RichWidgets/Blocks/RichWidgets/RichWidgets/Feedback_Message.css?817" type="text/css" rel="stylesheet" />
+<link href="/DBResultsSG_Theme/Blocks/DBResultsSG_Theme/DBResultsBase/Layout_DBResults.css?2070" type="text/css" rel="stylesheet" />
+    <link href="/TSSCommon/Theme.TSSTheme.css?2054" type="text/css" rel="stylesheet" />
+    <link href="TaxRegistrationSummary.css?2080" type="text/css" rel="stylesheet" />
+    <link href="/DBResultsSG_Theme/Theme.DBResultsSG_Theme.extra.css?2070" type="text/css" rel="stylesheet" />
+    <script id="_OSrequestInfoScript" type="text/javascript">(function(global) { global.outsystems = global.outsystems || {};global.outsystems.internal = global.outsystems.internal || {};global.outsystems.internal.requestInfo = {visitorKey:'c035789c-c752-4ac6-ade0-d22ea0943da5',visitKey:'1ed1ff8e-213e-42bc-952d-8937ddf42b49',sessionKey:'5a158aea-8da1-e8ed-6593-5a9ae088ba17',userKey:'880fc586-6227-bd0f-4759-1701901edad5',requestKey:'d700d244-6fc0-46b4-8468-e7e991350a32',webScreenKey:'d6d00a02-23ec-456a-a1ce-635d51440306',webScreenName:'TaxRegistrationSummary',espaceKey:'29d288e2-8229-4870-af2a-9842e31bbe1c',espaceName:'Registration',applicationKey:'223483f2-a483-4dab-aba5-e279d3882685',applicationName:'TaxPortal',tenantKey:'4e2b2e2f-e178-5a45-1f5e-310891360efa',tenantName:'Users',environmentKey:'a1061ea8-e9c7-443c-b6ee-cae67431e48b',environmentName:'Testing',frontendKey:'$1$60fSoZzP0moi/Fiyb08+6Q==OnRNUPFb0V0FLKEazO8Miw=='}})(this);</script>
+    <script src="_osjs.js?10_0_200_0" type="text/javascript" charset="UTF-8"></script>
+    <script src="/Registration/Blocks/SilkUIFramework/Javascript/SilkUICommon.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/Registration/Blocks/SilkUIFramework/Javascript/SilkUI.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/Registration/Blocks/SilkUIFramework/Utilities/Feedback_AjaxWait.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/Registration/Blocks/RichWidgets/jQueryUI/jQueryUIInternal.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/Registration/Blocks/RichWidgets/jQueryUI/jQueryComponents.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/Registration/Blocks/RichWidgets/RichWidgets/Feedback_Message.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/Registration/Blocks/DBResultsSG_Theme/DBResultsBase/Layout_DBResults.js?2070" type="text/javascript" charset="UTF-8"></script>
+
+</head>
+  <body>
+    <form method="post" action="TaxRegistrationSummary.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="WebForm1" name="WebForm1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__OSVSTATE" id="__OSVSTATE" value="vQzSbVcYQiR0+buubuNMThkR6CM3hUZv6k77x57S6p+0P5dxSRubdSsV0li0MlGgnAVEE16uBKRVi3I09H/REO0PzcV4Oy0Met9U781oTfI2fSZIVLfL/WQr/mpq+9CUlpRh1AmVZn4gK3m4y372AdWfvG0eP75UYnsUT+JMmXZxZ/KpndE5y5amE0IhBWHDl+FrrIiFMUVAoh33hoP+99dqw2hQsWsdLrb9KMSwPCm+WtYymN0m4xaO2sjR7Y9EuGCxjFNw9ZO/m/NER05vOSvsyoyYGE0P3N0VCHhyHiCKtbuJOQ2nFO0bvOS1b7vqWRdHjkcoTK5c7dRGJKrDrzWjrc+qd40MyZqKtXnwVPMa/mLBfz3BITtq0eXdoJH/HjGMBGG5QfTy+m3qdqPthUJgg2CDm0UOy3KVjrF8H50j7rbbMcKDsqgJ4WyBDQRUXAdAiMwUAd2mWqSbbtvH7dtIXoad+npN3mxbs370g8ACzOS/2LgGin7uK75C9LMzhXQjt5QxOEVaJLc1yLqunhulkeGPfSNCozOfzhtIm5TEl5Xw1SRcJ2PvmwUEuHau/qOLTGXPzrzF0h7Nf/AJMJLV9Be5Oi42wWQq81gdPYILHwD95FrCASJOSzcoRz2qJg28hXRmAvWKNioFnJbTqQDgQ1rYh/nM6UC7lpbpWeEa0lSm2Trvu8B4qHR/jzKxhsV9MwLZizHR0FtG/jANHCKF2OffDOGVs25dM2TWXCPNbsQwy9vs+7NZhM1o9KjMbPEXJNJpEikNyjStrqi0/6pup7O/gplCC+pA3lGHVVtEymTJuyrn3jtUaUxc7wGFFAdRivFV/B0/AooTXKrso/ai2y2tlvSGQ0ZpKu+10Ur3i12gaYWncBqkz8r0wR+k" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['WebForm1'];
+if (!theForm) {
+    theForm = document.WebForm1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+OsPrepareCheckboxesForSubmit();
+OsFixUploadBeforeSubmit();
+if (!OsValidatorOnSubmit()) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="27F188FC" />
+</div>
+<div  class="Page startHidden windows chrome en DBResultsSG_Theme"><div  id="DBResultsSG_Theme_wt295_block_wtHeader" class="Header" role="navigation"><div  id="DBResultsSG_Theme_wt295_block_wtHeader_TSSCommon_wt363_block_wtHeader_content_wrap" class="Header_content_wrap"><div  id="DBResultsSG_Theme_wt295_block_wtHeader_TSSCommon_wt363_block_wtHeader__MenuLink" class="Header__MenuLink PH"></div ><div  id="DBResultsSG_Theme_wt295_block_wtHeader_TSSCommon_wt363_block_wtHeader__HomeLink" class="Header__HomeLink" ishomepage="False"></div ></div ><div  id="DBResultsSG_Theme_wt295_block_wtHeader_TSSCommon_wt363_block_wtHeader_content_wrap__mobile" class="Header_content_wrap__mobile"><div  id="DBResultsSG_Theme_wt295_block_wtHeader_TSSCommon_wt363_block_wtHeader_search" class="Header_search PH"></div ><div  id="DBResultsSG_Theme_wt295_block_wtHeader_TSSCommon_wt363_block_wtHeader__activity" class="Header__activity"></div ><div  id="DBResultsSG_Theme_wt295_block_wtHeader_TSSCommon_wt363_block_wtHeader_loginInfo" class="Header__loginInfo"></div ></div ></div ><div  id="DBResultsSG_Theme_wt295_block_wtMenu" class="Menu OSInline" role="navigation"></div ><div  id="DBResultsSG_Theme_wt295_block_wtContent_Top" class="Content_Top PH"></div ><div  class="Content ThemeGrid_Wrapper"><div  class="ThemeGrid_Container" style="margin-top: 0px"><div  class="HeaderPage ThemeGrid_Width12"><div  id="DBResultsSG_Theme_wt295_block_wtBreadcrumbs" class="BreadcrumbsContainer PH" role="navigation"></div ><div  class="TitleActions"><div  id="DBResultsSG_Theme_wt295_block_wtTitle" class="Heading1 Title PH OSInline" role="banner">Tax Registration Summary</div ><div  id="DBResultsSG_Theme_wt295_block_wtActions" class="Actions Title_Links PH" style="margin-top: 0px"></div ></div ></div ><div  class="OSAutoMarginTop"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent" class="MainContent" role="main"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtBusinessDetails" class="FormSection"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtHeader_BusinessDetails" class="SettingsHeadings">Business Details</div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtBusinessData" class="TableWrapper OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_SelectBusinessType' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_SelectBusinessType'>Select Business Type</label></td>
+		<td>Government</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_EmployerName' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_EmployerName'>Employer Name</label></td>
+		<td>DB RESULTS PTY LTD</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessTradingName' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessTradingName'>Business Trading Name</label></td>
+		<td>DB RESULTS PTY LTD</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_AustralianBusinessNumber_ABN' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_AustralianBusinessNumber_ABN'>Australian Business Number (ABN)</label></td>
+		<td>97110187767</td>
+	</tr>
+</table></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtBusinessAddress" class="TableWrapper OSAutoMarginTop"><div  class="Bold"><table class="OSFillParent">
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAddress' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAddress'>Business Address</label></td>
+		<td></td>
+	</tr>
+</table></div ><table class="OSFillParent OSAutoMarginTop">
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAdress_Country' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAdress_Country'>Country</label></td>
+		<td>Australia</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAdress_AdressLine1' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAdress_AdressLine1'>Address Line 1</label></td>
+		<td>TEST</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAdress_AdressLine2' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAdress_AdressLine2'>Address Line 2</label></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAdress_Suburb' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAdress_Suburb'>Suburb / City</label></td>
+		<td>TEST</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAdress_Territory' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAdress_Territory'>Territory / State</label></td>
+		<td>ACT</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAdress_Postcode' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAdress_Postcode'>Postcode</label></td>
+		<td>3333</td>
+	</tr>
+</table></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtPostalAddress" class="TableWrapper OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><label class=' Bold OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_PostalAddress' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_PostalAddress'>Postal Address</label></td>
+		<td><div ><div  class="OSInline"><span class="fa fa-fw fa-check-square-o"></span></div ><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_SameAsBusinessAddress' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_SameAsBusinessAddress'>Same as Business Address</label></div ></td>
+	</tr>
+</table></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtJurisdictionAddress" class="TableWrapper OSAutoMarginTop"><div ><table class="OSFillParent">
+	<tr>
+		<td><label class=' Bold OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_JurisdictionAddress' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_JurisdictionAddress'>Jurisdiction Address</label></td>
+		<td><div ><div  class="OSInline"><span class="fa fa-fw fa-check-square-o"></span></div ><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_SameAsBusinessAddress2' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_SameAsBusinessAddress2'>Same as Business Address</label></div ></td>
+	</tr>
+</table></div ></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtContactPersonData" class="TableWrapper OSAutoMarginTop"><div  class="Bold"><table class="OSFillParent">
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_ContactPerson' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_ContactPerson'>Contact Person</label></td>
+		<td></td>
+	</tr>
+</table></div ><table class="OSFillParent OSAutoMarginTop">
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAdress_AdressLine9' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAdress_AdressLine9'>First Name</label></td>
+		<td>TEST</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessAdress_AdressLine10' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessAdress_AdressLine10'>Last Name</label></td>
+		<td>TEST</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_ContactPerson_ContactPhoneNumber' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_ContactPerson_ContactPhoneNumber'>Contact Phone Number</label></td>
+		<td>3333333333</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_ContactPerson_EmailAddress' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_ContactPerson_EmailAddress'>Email Address</label></td>
+		<td>test@test.com</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_PreferedCommunicationMethod' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_PreferedCommunicationMethod'>Preferred Communication Method</label></td>
+		<td>Direct Post</td>
+	</tr>
+</table></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtContactPersonAddress" class="TableWrapper" style="margin-top: 20px"><table class="OSFillParent">
+	<tr>
+		<td><label class=' Bold OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_PostalAddress2' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_PostalAddress2'>Postal Address</label></td>
+		<td><div ><div  class="OSInline"><span class="fa fa-fw fa-check-square-o"></span></div ><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_SameAsBusinessAddress3' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_SameAsBusinessAddress3'>Same as Business Address</label></div ></td>
+	</tr>
+</table></div ></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtBusinessActivityDetails" class="FormSection OSAutoMarginTop"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtHeader_BusinessActivityDetails" class="SettingsHeadings">Business Activity Details</div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtBusinessActivityCategory" class="TableWrapper OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessActivityElsewhereinAustralia' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessActivityElsewhereinAustralia'>Business Activity Elsewhere in Australia</label></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='DBResultsSG_Theme_wt295_block_wtMainContent_wtBusinessActivityCategory' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessActivityCategory' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessActivityCategory'>Business Activity Category</label></td>
+		<td>Adult, Community and Other Education n.e.c. 8219</td>
+	</tr>
+</table></div ><div  class="Separator"></div ><div  class="TableWrapper OSAutoMarginTop"><span id="DBResultsSG_Theme_wt295_block_wtMainContent_wtText_ControlandFinancialInterest" class="Bold">Control and Financial Interest</span><div  style="margin-top: 0px"><span id="DBResultsSG_Theme_wt295_block_wtMainContent_wtText__shares_beneficiariesifgreaterthan20_each_" class="Italic">(shares, beneficiaries if greater than 20% each)</span></div ></div ><div  class="TableWrapper OSAutoMarginTop"><span id="DBResultsSG_Theme_wt295_block_wtMainContent_wtListRecords1"></span></div ></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtPayrollTaxInformation" class="FormSection OSAutoMarginTop"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtHeader_PayrollTaxInformation" class="SettingsHeadings">Payroll Tax Information</div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtBusinessActivityintheACT" class="OSAutoMarginTop"><div  class="TableWrapper Bold"><table class="OSFillParent">
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_BusinessActivityintheACT' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_BusinessActivityintheACT'>Business Activity in the ACT</label></td>
+		<td></td>
+	</tr>
+</table></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtBusinessActivityintheACTTable" class="TableWrapper OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_DateBusinessCommencedEmployinginACT_orRecomm' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_DateBusinessCommencedEmployinginACT_orRecomm'>Date Business Commenced Employing in ACT (or Recommenced)</label></td>
+		<td>2017-04-04</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_DateBusinessBecameLiableintheACT_orReactivat' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_DateBusinessBecameLiableintheACT_orReactivat'>Date Business Became Liable in the ACT (or Reactivated its Liability)</label></td>
+		<td>2017-04-05</td>
+	</tr>
+	<tr>
+		<td><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_NumberofEmployeesinyourACTBusiness' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_NumberofEmployeesinyourACTBusiness'>Number of Employees in your ACT Business</label></td>
+		<td>33</td>
+	</tr>
+</table></div ></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtGroupingforPayrollTaxPurposes" class="TableWrapper OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><label class=' Bold OSFillParent' style='' for='' >Grouping for Payroll Tax Purposes</label></td>
+		<td></td>
+	</tr>
+</table><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtGroupingforPayrollTaxPurposesTable" class="OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_Areyouamemberofagroup' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_Areyouamemberofagroup'>Are you a member of a group?</label></td>
+		<td>No</td>
+	</tr>
+</table></div ></div ><div  class="Separator"></div ><div  class="TableWrapper OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><span class="Bold">Total Taxable Wages for the five previous financial years</span> (dollars only)</td>
+		<td></td>
+	</tr>
+</table><div  class="OSAutoMarginTop" align="left"><table class="TableWrapper OSFillParent Empty" cellspacing="0" id="DBResultsSG_Theme_wt295_block_wtMainContent_wtPreviousTaxableWageTable">
+	<thead>
+		<tr>
+			<th class="TableRecords_Header" style="width:25%;"><div  align="left"><span class="NormalText">Year</span></div ></th><th class="TableRecords_Header" style="width:25%;"><span class="NormalText">Total taxable ACT Wages</span></th><th class="TableRecords_Header" style="width:25%;"><span class="NormalText">Total taxable Australia-wide  Wages</span></th><th class="TableRecords_Header" style="width:25%;"><span class="NormalText">Total Group Australia-wide  Wages (if applicable)</span></th>
+		</tr>
+	</thead><tbody>
+		<tr>
+			<td class="TableRecords_OddLine" colspan="4"></td>
+		</tr>
+	</tbody>
+</table></div ></div ><div  class="Separator"></div ><div  class="TableWrapper OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_Areyouamemberofagroup2' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_Areyouamemberofagroup2'>As an eligible employer, do you wish to apply for annual lodgement approval?</label></td>
+		<td>No</td>
+	</tr>
+</table></div ><div  class="TableWrapper OSAutoMarginTop"><div  class="Separator"></div ><table class="OSFillParent OSAutoMarginTop">
+	<tr>
+		<td><label class=' Bold OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_ContactPerson2' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_ContactPerson2'>Contact Person for Payroll Tax</label></td>
+		<td><div ><div  class="OSInline"><span class="fa fa-fw fa-check-square-o"></span></div ><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_SameAsBusinessAddress4' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_SameAsBusinessAddress4'>Same as Business Contact Person</label></div ></td>
+	</tr>
+</table><table class="OSFillParent OSAutoMarginTop">
+	<tr>
+		<td><label class=' Bold OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_PostalAddress3' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_PostalAddress3'>Postal Address</label></td>
+		<td><div ><div  class="OSInline"><span class="fa fa-fw fa-check-square-o"></span></div ><label class='' style=' margin-left: 0px' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_SameAsBusinessAddress5' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_SameAsBusinessAddress5'>Same as Business Address</label></div ></td>
+	</tr>
+</table></div ></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtRefundDetails" class="FormSection OSAutoMarginTop"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtHeader_RefundDetails" class="SettingsHeadings">Refund Details</div ><div  class="TableWrapper OSAutoMarginTop"><table class="OSFillParent">
+	<tr>
+		<td><span class="Bold">Set Up Bank Account for Refunds</span></td>
+		<td>No</td>
+	</tr>
+</table></div ></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtDeclaration" class="FormSection OSAutoMarginTop"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtDeclaration" style="margin-top: 0px"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtHeader_Declaration" class="SettingsHeadings">Declaration</div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtDeclarationData" class="TableWrapper" style="margin-top: 10px"><table class="OSFillParent">
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtLabel_Declarer' name='DBResultsSG_Theme_wt295$block$wtMainContent$TSSAdminCore_wt572$block$wtLabel_Declarer'>Declarer</label></td>
+		<td>TEST TEST</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtLabel_Organisation' name='DBResultsSG_Theme_wt295$block$wtMainContent$TSSAdminCore_wt572$block$wtLabel_Organisation'>Organisation</label></td>
+		<td>DB RESULTS PTY LTD</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtLabel_ContactPhone' name='DBResultsSG_Theme_wt295$block$wtMainContent$TSSAdminCore_wt572$block$wtLabel_ContactPhone'>Contact Phone</label></td>
+		<td>3333333333</td>
+	</tr>
+	<tr>
+		<td><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtLabel_EmailAdress' name='DBResultsSG_Theme_wt295$block$wtMainContent$TSSAdminCore_wt572$block$wtLabel_EmailAdress'>Email Address</label></td>
+		<td>test@test.com</td>
+	</tr>
+</table></div ></div ><div  class="OSInline" style="width: 30px; margin-top: 10px"><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtPlaceholder1" class="TableWrapper"><input type="checkbox" name="DBResultsSG_Theme_wt295$block$wtMainContent$TSSAdminCore_wt572$block$wtPlaceholder1$wtCorrectInfoDeclared" id="DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtPlaceholder1_wtCorrectInfoDeclared" tabindex="1" class="Mandatory" onoschange="unsavedChanges = &#39;True&#39;;" onclick="OsAjax(arguments[0] || window.event,&#39;DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtPlaceholder1_wtCorrectInfoDeclared&#39;,&#39;DBResultsSG_Theme_wt295$block$wtMainContent$TSSAdminCore_wt572$block$wtPlaceholder1$wtCorrectInfoDeclared&#39;,&#39;Change&#39;,&#39;__OSVSTATE,&#39;,&#39;&#39;);" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtPlaceholder1_wtCorrectInfoDeclared"></span></div ></div ><div  class="ThemeGrid_Width11" style="margin-left: 2%; margin-top: 10px"><label class=' OSFillParent' style='' for='' id='DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtLabel_Declaration' name='DBResultsSG_Theme_wt295$block$wtMainContent$TSSAdminCore_wt572$block$wtLabel_Declaration'>I declare that this information is true and correct to the best of my knowledge. </label></div ><label class=' ThemeGrid_Width10 ThemeGrid_MarginGutter' style=' display:none;' for='DBResultsSG_Theme_wt295_block_wtMainContent_TSSAdminCore_wt572_block_wtPlaceholder1_wtCorrectInfoDeclared' id='DBResultsSG_Theme_wt295_block_wtMainContent_wtLabel_Declaration' name='DBResultsSG_Theme_wt295$block$wtMainContent$wtLabel_Declaration' >I declare that this information is true and correct to the best of my knowledge. </label></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt295_block_wtMainContent_wtButtonsDiv" class="OSAutoMarginTop"><div  class="ThemeGrid_Width6"><input type="submit" name="DBResultsSG_Theme_wt295$block$wtMainContent$wtBackBt" value="Back" id="DBResultsSG_Theme_wt295_block_wtMainContent_wtBackBt" tabindex="2" class="Button Is_Default" /></div ><div  class="ThemeGrid_Width6 ThemeGrid_MarginGutter" align="right"><span id="DBResultsSG_Theme_wt295_block_wtMainContent_wtSummarySubmitBTAjaxRfrsh"><input disabled="disabled" type="submit" name="DBResultsSG_Theme_wt295$block$wtMainContent$wtSummarySubmitBT" value="Submit" id="DBResultsSG_Theme_wt295_block_wtMainContent_wtSummarySubmitBT" tabindex="3" class="Button Is_Default" /></span></div ></div ></div ><div  class="Sidebar PH"><div  id="DBResultsSG_Theme_wt295_block_wtSidebar" class="Sidebar_Content PH"></div ></div ></div ><div  class="Footer" style="margin-top: 0px"><div  id="DBResultsSG_Theme_wt295_block_wtFooter" role="contentinfo"></div ></div ></div ><script>SilkDeviceDetect.init('desktop', false, false, 'chrome', false, false)</script><div  id="DBResultsSG_Theme_wt295_block_SilkUIFramework_wt12_block_wt17_wtdivWait" class="Feedback_AjaxWait" align="center" style="display:none"><div  id="DBResultsSG_Theme_wt295_block_SilkUIFramework_wt12_block_wt17_wtloader" class="Loader"></div >Loading</div ><script>RichWidgets_Feedback_AjaxWait_init('DBResultsSG_Theme_wt295_block_SilkUIFramework_wt12_block_wt17_wtdivWait');</script><span id="DBResultsSG_Theme_wt295_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block"><script type='text/javascript'>
+OsRegisterExceptionHandler(RichWidgets_Feedback_Message_ErrorHandler)
+</script><div  id="DBResultsSG_Theme_wt295_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtFeedback_Wrapper" class="Feedback_Message_Wrapper"><span id="DBResultsSG_Theme_wt295_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtnotify"><span class="NotifyWidget"></span><SCRIPT type="text/javascript">
+//<![CDATA[
+RichWidgets_Feedback_Message_notifyWidget ='DBResultsSG_Theme_wt295_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtnotify';
+//]]>
+</SCRIPT></span></div ></span></div ></div >
+    
+<script type="text/javascript">
+//<![CDATA[
+var OsPage_ValidatorsOrder =  new Array("DBResultsSG_Theme_wt295_block_SilkUIFramework_wt12_block_wt8_wtCommandLine");
+var OsPage_Validators =  new Array({});
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var OsPage_ValidationActive = false;
+OsValidatorOnLoad();
+
+function OsValidatorOnSubmit() {
+  if (OsPage_ValidationActive) { return OsValidatorCommonOnSubmit(); }
+  return true;
+}
+// ]]>
+</script>
+</form><script type="text/javascript">outsystems.internal.$._waitForViewstate = true;outsystems.internal.$(document).ready(function() {outsystems.internal.$('input[name=__OSVSTATE]').val('vQzSbVcYQiR0+buubuNMThkR6CM3hUZv6k77x57S6p+0P5dxSRubdSsV0li0MlGgnAVEE16uBKRVi3I09H/REO0PzcV4Oy0Met9U781oTfI2fSZIVLfL/WQr/mpq+9CUlpRh1AmVZn4gK3m4y372AdWfvG0eP75UYnsUT+JMmXZxZ/KpndE5y5amE0IhBWHDl+FrrIiFMUVAoh33hoP+99dqw2hQsWsdLrb9KMSwPCm+WtYymN0m4xaO2sjR7Y9EuGCxjFNw9ZO/m/NER05vOSvsyoyYGE0P3N0VCHhyHiCKtbuJOQ2nFO0bvOS1b7vqWRdHjkcoTK5c7dRGJKrDrzWjrc+qd40MyZqKtXnwVPMa/mLBfz3BITtq0eXdoJH/HjGMBGG5QfTy+m3qdqPthUJgg2CDm0UOy3KVjrF8H50j7rbbMcKDsqgJ4WyBDQRUXAdAiMwUAd2mWqSbbtvH7dtIXoad+npN3mxbs370g8ACzOS/2LgGin7uK75C9LMzhXQjt5QxOEVaJLc1yLqunhulkeGPfSNCozOfzhtIm5TEl5Xw1SRcJ2PvmwUEuHau/qOLTGXPzrzF0h7Nf/AJMJLV9Be5Oi42wWQq81gdPYILHwD95FrCASJOSzcoRz2qJg28hXRmAvWKNioFnJbTqQDgQ1rYh/nM6UC7lpbpWeEa0lSm2Trvu8B4qHR/jzKxhsV9MwLZizHR0FtG/jANHCKF2OffDOGVs25dM2TWXCPNbsQwy9vs+7NZhM1o9KjMbPEXJNJpEikNyjStrqi0/6pup7O/gplCC+pA3lGHVVtEymTJuyrn3jtUaUxc7wGFFAdRivFV/B0/AooTXKrso/ai2y2tlvSGQ0ZpKu+10Ur3i12gaYWncBqkz8r0wR+k');outsystems.internal.$._waitForViewstate = false;});</script>
+<!-- Begin Inbox Block --><link href="/EPA_Taskbox/Blocks/EPA_Taskbox/Inbox_Flow/Inbox.css?812" type="text/css" rel="stylesheet" /><script src="/EPA_Taskbox/Blocks/EPA_Taskbox/Inbox_Flow/Inbox.js?812" type="text/javascript" charset="UTF-8"></script><div><span id="epa_wtEPATaskbox_ViewOptions_JS"><script language="javascript">var EPATaskbox_ViewOptions = { allowGlow : false, pollInterval : 20, maxPollInterval : 1800, cookieTimeout : 2, applicationServer : ".Net", developmentMode : true};</script></span><!--[if gte IE 5.5]><![if lt IE 7]><style type="text/css">div#epa_wtEPATaskbox_ExtraStylesContainer {  _right: auto; _bottom: auto; _left: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetWidth + ( document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth ) + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' ); _top: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetHeight + ( document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight ) + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );}</style><![endif]><![if gte IE 7]><script>if(document.compatMode == 'BackCompat') { window.attachEvent('onload', function() { var div = document.createElement('div'); div.style.display = 'none'; div.innerHTML = "style<style type=\"text/css\">"+ " div#epa_wtEPATaskbox_ExtraStylesContainer { "+ "  "+ " _right: auto; _bottom: auto; "+ " _left: expression( ( -51 - epa_wtEPATaskbox_ExtraStylesContainer.offsetWidth + ( document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth ) + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' ); "+ " _top: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetHeight + ( document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight ) + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); "+ " } "+ " </style>"; document.body.appendChild(div);});};</script><![endif]><![endif]--><div id="epa_wtEPATaskbox_Container" class="EPATaskbox_Container"><div id="epa_wtEPATaskbox_ExtraStylesContainer" class="EPATaskbox_ExtraStylesContainer"><div class="EPATaskbox_IconifiedContainer"><div class="EPATaskbox_Icon_EPATaskbox_NotGlowing"></div><div class="EPATaskbox_Icon_EPATaskbox_Glowing"></div><div class="EPATaskbox_ActivityCount"></div></div><div class="EPATaskbox_ExpandedContainer"><div class="EPATaskbox_ExpandedIcon_EPATaskbox_NotGlowing"></div><div class="EPATaskbox_ExpandedIcon_EPATaskbox_Glowing"></div><div class="EPATaskbox_ExpandedText">Click here to see your activities</div></div><div class="EPATaskbox_OpenedContainer"><div class="EPATaskbox_FrameContainer"></div></div></div></div></div><!-- End Inbox Block --><script type='text/javascript'> EPATaskbox.instance = new EPATaskbox(outsystems.internal.$('.EPATaskbox_Container'), 157, 0, false, null); </script>
+  </body>
+</html>

@@ -101,7 +101,7 @@ public class StepImpe {
 		driver = new ChromeDriver();
 		
 
-	    driver.manage().window().maximize();
+	    //driver.manage().window().maximize();
 	    
 	}
 		// **************disable to leave browser open***************************************

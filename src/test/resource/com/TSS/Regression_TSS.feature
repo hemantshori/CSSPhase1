@@ -452,7 +452,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | LodgePayrollAnswer_ExemptWages                 | ABC   |
       | LodgePayrollAnswer_AustralianWide              | ABC   |
       | LodgePayrollAnswer_DaysPaidTaxable             | ABC   |
-      | LodgePayrollAnswer_GroupActWages| ABC   |
+     # | LodgePayrollAnswer_GroupActWages| ABC   |
     Then I check "SalariesAndWages" is empty
     Then I check "BonusesAndCommissions" is empty
     Then I check "LodgePayrollAnswer_Commissions" is empty
@@ -467,7 +467,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I check "LodgePayrollAnswer_ExemptWages" is empty
     Then I check "LodgePayrollAnswer_AustralianWide" is empty
     Then I check "LodgePayrollAnswer_DaysPaidTaxable" is empty
-    Then I check "LodgePayrollAnswer_GroupActWages" is empty
+    #Then I check "LodgePayrollAnswer_GroupActWages" is empty
     #scenario 5: Mandatory fields not filled in
     Then I check "Submit" is readonly
     #scenario 2:  Restricted fields contain correct text type
@@ -487,7 +487,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | LodgePayrollAnswer_ExemptWages                 |  100000 |
       | LodgePayrollAnswer_AustralianWide              | 1500000 |
       | LodgePayrollAnswer_DaysPaidTaxable             |     999 |
-      | LodgePayrollAnswer_GroupActWages| 1500000 |
+      #| LodgePayrollAnswer_GroupActWages| 1500000 |
     Then I check "SalariesAndWages" contains "$ 100,000"
     Then I check "BonusesAndCommissions" contains "$ 100,000"
     Then I check "LodgePayrollAnswer_Commissions" contains "$ 100,000"
@@ -502,7 +502,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I check "LodgePayrollAnswer_ExemptWages" contains "$ 100,000"
     Then I check "LodgePayrollAnswer_AustralianWide" contains "$ 1,500,000"
     Then I check "LodgePayrollAnswer_DaysPaidTaxable" contains "999"
-    Then I check "LodgePayrollAnswer_GroupActWages" contains "$ 1,500,000"
+    #Then I check "LodgePayrollAnswer_GroupActWages" contains "$ 1,500,000"
     #Scenario 7: Number of days is invalid
     Then I click on button "SubmitBT"
     Then I see text "Days where 1 group member paid or was liable to pay taxable or interstate should be less than or equal to the number of days in that particular filing period." displayed
@@ -519,7 +519,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 98765123456 | 12345678902 |
 
 
-     Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
+      Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -533,7 +533,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value |
-      | s2id_autogen1_search | DESIGNATE |
+      | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeAnnual"
     Then I select "2015" from "AnnualObligationSelect"
@@ -542,8 +542,9 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I check "AnnualObligationSelect" is readonly
 
     Examples: 
-      | PortalName | UserName | Password   |
-      | TSS        | jbradley   | Dbresults1 |
+      | PortalName | UserName | Password   | BusinessName |
+      | TSS        | jbradley   | Dbresults1 | For Bearly Nothing |
+
   
 	###########################################################################################################
   #################################### PHASE 1 ITERATION 3 ################################################
@@ -585,8 +586,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I see text "The combination of the provided information does not refer to a registered in PSRM Entity" displayed
     Then I enter the details as
       | Fields         | Value       |
-      | InputABNNumber | 85085664197 |
-      | InputCRNNumber | 400107 |
+      | InputABNNumber | 12054547368 |
+      | InputCRNNumber | 400043 |
     Then I click on button "RegistrationSubmit"
     Then I check I am on "Registration" page
     #DTSP-29: As a user I want to enter my user details so that I can complete the registration process (page 2)
@@ -609,8 +610,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I click on button "RegistrationAsBusiness"
     Then I enter the details as
       | Fields         | Value       |
-      | InputABNNumber | 85085664197 |
-      | InputCRNNumber | 400107 |
+      | InputABNNumber | 12054547368 |
+      | InputCRNNumber | 400043 |
     Then I click on button "RegistrationSubmit"
     Then I click on button "TermsandConditionsCheckBox"
     Then I check I am on "Registration" page
@@ -929,7 +930,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | TSS        | jscott   | Dbresults1 |
 
 
-   @done
+ @done
   Scenario Outline: DTSP-459
     Given I want to login to portal "<PortalName>"
     Then I click on "Create Account"
@@ -981,8 +982,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     #Scenario 5: Registration details verified with stubs
     Then I enter the details as
       | Fields         | Value       |
-      | InputABNNumber | 85085664197 |
-      | InputCRNNumber | 400107 |
+      | InputABNNumber | 12054547368 |
+      | InputCRNNumber | 400043 |
     Then I click on button "RegistrationSubmit"
     Then I check I am on "Complete Registration" page
 
@@ -992,7 +993,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
 
   
 
-  @done
+  #NOTE: Ensure that jbradley has a current employee type selected in the data extensions page
+@done
   Scenario Outline: DTSP-461: Update the Capture User Details page
     Given I want to login to portal "<PortalName>"
     Then I click on "Create Account"
@@ -1001,8 +1003,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
      Then I click on "Register as a Business"
     Then I enter the details as
       | Fields         | Value       |
-      | InputABNNumber | 85085664197 |
-      | InputCRNNumber | 400107 |
+      | InputABNNumber | <ABN> |
+      | InputCRNNumber | <CRN> |
     Then I click on button "TermsandConditionsCheckBox2"
     Then I click on button "RegistrationSubmit"
     Then I check I am on "Complete Registration" page
@@ -1051,8 +1053,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
      Then I click on "Register as a Business"
     Then I enter the details as
       | Fields         | Value       |
-      | InputABNNumber | 85085664197 |
-      | InputCRNNumber | 400107 |
+      | InputABNNumber | <ABN> |
+      | InputCRNNumber | <CRN> |
     Then I click on button "TermsandConditionsCheckBox2"
     Then I click on button "RegistrationSubmit"
     #Scenario 6: User cancels registration with no unsaved changes
@@ -1062,8 +1064,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
      Then I click on "Register as a Business"
    Then I enter the details as
       | Fields         | Value       |
-      | InputABNNumber | 85085664197 |
-      | InputCRNNumber | 400107 |
+      | InputABNNumber | <ABN> |
+      | InputCRNNumber | <CRN> |
     Then I click on button "TermsandConditionsCheckBox2"
     Then I click on button "RegistrationSubmit"
     Then I enter the details as
@@ -1079,8 +1081,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I check "Submit" is not readonly
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ABN | CRN |
+      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12054547368 | 400043 |
 
   @done
   Scenario Outline: DTSP-463: Display all the mandatory fields with an Asterisk (*)
@@ -1101,7 +1103,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
      Then I click on button "select2-chosen-1"
   	 Then I enter the details as
       | Fields               | Value                |
-      | s2id_autogen1_search | DESIGNATE |
+      | s2id_autogen1_search | For Bearly Nothing |
    Then I click on button "select2-results-1"
     Then I click on "Annual Reconciliation"
     

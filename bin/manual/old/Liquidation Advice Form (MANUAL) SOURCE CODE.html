@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
+  <head><title>
+	LiquidationAdvice
+</title><meta name="msapplication-tap-highlight" content="no" scheme=""/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" scheme=""/><meta name="apple-mobile-web-app-capable" content="yes" scheme=""/><meta name="mobile-web-app-capable" content="yes" scheme=""/><meta name="format-detection" content="telephone=no" scheme=""/><link type="text/css" rel="stylesheet" href="/SS_Admin_Core/GetCSS.aspx" charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" /><meta http-equiv="Content-Style-Type" content="text/css" />
+<style>
+.OSFillParent { 
+ display: block;
+ width: 100%;
+}
+table.OSFillParent {
+ display: table;
+}
+input.OSFillParent,
+button.OSFillParent,
+select.OSFillParent,
+textarea.OSFillParent {
+ display: inline-block;
+ box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+}
+.OSInline {
+ display: inline-block;
+ *zoom: 1;
+ *display: inline;
+ vertical-align: top;
+}
+table.OSInline {
+ display: inline-table;
+}
+.OSAutoMarginTop {
+ margin-top: 10px;
+}
+table[class*="ThemeGrid_Width"] {
+ display: inline-table;
+ vertical-align: top;
+}
+div[class*="ThemeGrid_Width"] {
+ vertical-align: top;
+}
+th[class*="ThemeGrid_Width"],
+td[class*="ThemeGrid_Width"] {
+ display: table-cell;
+}
+[class*="ThemeGrid_Width"] {
+ display: inline-block;
+ box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+ *zoom: 1;
+ *display: inline;
+}
+.ThemeGrid_Container {
+ box-sizing: border-box;
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing: border-box;
+}
+
+</style>
+<link href="/RichWidgets/Blocks/RichWidgets/RichWidgets/Icon.css?817" type="text/css" rel="stylesheet" />
+<link href="/SilkUIFramework/Blocks/SilkUIFramework/Private/Tooltipster_3_0_6.css?989" type="text/css" rel="stylesheet" />
+<link href="/SilkUIFramework/Blocks/SilkUIFramework/Javascript/SilkUI.css?989" type="text/css" rel="stylesheet" />
+<link href="/RichWidgets/Blocks/RichWidgets/jQueryUI/jQueryUIInternal.css?817" type="text/css" rel="stylesheet" />
+<link href="/RichWidgets/Blocks/RichWidgets/RichWidgets/Feedback_Message.css?817" type="text/css" rel="stylesheet" />
+<link href="/DBResultsSG_Theme/Blocks/DBResultsSG_Theme/DBResultsBase/Layout_DBResults.css?2070" type="text/css" rel="stylesheet" />
+<link href="/RichWidgets/Blocks/RichWidgets/RichWidgets/DropDownMenu.css?817" type="text/css" rel="stylesheet" />
+<link href="/SilkUIFramework/Blocks/SilkUIFramework/Controls/Select2.css?989" type="text/css" rel="stylesheet" />
+<link href="/TSSAccountMgmtCore/Widgets/Form/Form.css?10_0_200_0" type="text/css" rel="stylesheet" />
+    <link href="/TSSCommon/Theme.TSSTheme.css?2054" type="text/css" rel="stylesheet" />
+    <link href="/DBResultsSG_Theme/Theme.DBResultsSG_Theme.extra.css?2070" type="text/css" rel="stylesheet" />
+    <script id="_OSrequestInfoScript" type="text/javascript">(function(global) { global.outsystems = global.outsystems || {};global.outsystems.internal = global.outsystems.internal || {};global.outsystems.internal.requestInfo = {visitorKey:'c035789c-c752-4ac6-ade0-d22ea0943da5',visitKey:'1ed1ff8e-213e-42bc-952d-8937ddf42b49',sessionKey:'5a158aea-8da1-e8ed-6593-5a9ae088ba17',userKey:'880fc586-6227-bd0f-4759-1701901edad5',requestKey:'a0d5dc48-2847-4abf-906e-eeec47bb6553',webScreenKey:'f488d4ce-e252-4199-be8e-0b005aca79c6',webScreenName:'LiquidationAdvice',espaceKey:'f0665616-c313-4579-a967-db2568332f14',espaceName:'ServiceRequests',applicationKey:'223483f2-a483-4dab-aba5-e279d3882685',applicationName:'TaxPortal',tenantKey:'4e2b2e2f-e178-5a45-1f5e-310891360efa',tenantName:'Users',environmentKey:'a1061ea8-e9c7-443c-b6ee-cae67431e48b',environmentName:'Testing',frontendKey:'$1$PgyBgTrjzkmrOeYH0DOylQ==sMhJWwSJqnDwlfVrOvc9cA=='}})(this);</script>
+    <script src="_osjs.js?10_0_200_0" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/SilkUIFramework/Javascript/SilkUICommon.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/SilkUIFramework/Javascript/SilkUI.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/SilkUIFramework/Utilities/Feedback_AjaxWait.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/RichWidgets/jQueryUI/jQueryUIInternal.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/RichWidgets/jQueryUI/jQueryComponents.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/RichWidgets/RichWidgets/Feedback_Message.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/DBResultsSG_Theme/DBResultsBase/Layout_DBResults.js?2070" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/RichWidgets/RichWidgets/DropDownMenu.en.js?817" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/SilkUIFramework/Controls/Select2.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/SilkUIFramework/Private/Tooltipster_3_0_6.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/CustomMasks/Private/MaskPlugin.js?1013" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/CustomMasks/CustomMasks/MaskText.js?1013" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Blocks/SilkUIFramework/Controls/Calendar.en.js?989" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSAccountMgmtCore/Widgets/Form/fastclick.js?10_0_200_0" type="text/javascript" charset="UTF-8"></script>
+    <script src="/TSSAccountMgmtCore/Widgets/Form/Form.js?10_0_200_0" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Widgets/Form/fastclick.js?10_0_200_0" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/Widgets/Form/Form.js?10_0_200_0" type="text/javascript" charset="UTF-8"></script>
+    <script src="/ServiceRequests/LiquidationAdvice.js?2077" type="text/javascript" charset="UTF-8"></script>
+
+</head>
+  <body onbeforeunload="return checkChanges()">
+    <form method="post" action="LiquidationAdvice.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="WebForm1" name="WebForm1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__OSVSTATE" id="__OSVSTATE" value="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" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['WebForm1'];
+if (!theForm) {
+    theForm = document.WebForm1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+OsPrepareCheckboxesForSubmit();
+OsFixUploadBeforeSubmit();
+if (!OsValidatorOnSubmit()) return false;
+return true;
+}
+//]]>
+</script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="6EA02FC4" />
+</div>
+<div  class="Page startHidden windows chrome en DBResultsSG_Theme"><div  id="DBResultsSG_Theme_wt49_block_wtHeader" class="Header" role="navigation"><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_title" class="Header_title"><div  class="Application_Title" style="margin-top: 0px"><a id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_title_wt3" tabindex="1" href="#!"><img alt="DB Results" src="/TSSCommon/img/logo_greyscale.png?2054" /></a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_content_wrap" class="Header_content_wrap"><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader__MenuLink" class="Header__MenuLink PH"><a id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader__MenuLink_wt9" tabindex="2" class="Button Icon Header_buttonMenu" title="Menu" href="#!"><span class="fa fa-fw fa-bars"></span></a></div ><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader__HomeLink" class="Header__HomeLink" ishomepage="False"><a id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader__HomeLink_wtHomeLink" tabindex="3" class="Button Icon Header_button" taget="_self" title="Back to Home" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtHeader$TSSCommon_wt23$block$SS_Common_wt20$block$wtHeader__HomeLink$wtHomeLink&#39;,&#39;&#39;)"><span class="fa fa-fw fa-home"></span></a></div ><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_loginInfo" class="Header__loginInfo"><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_loginInfo_wtLoginInfo"></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_content_wrap__mobile" class="Header_content_wrap__mobile"><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_search" class="Header_search PH"><a id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_search_wt5" tabindex="4" class="Button Icon Header_buttonMenu" title="Menu" href="#!"><span class="fa fa-fw fa-bars"></span></a></div ><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader__activity" class="Header__activity" ishomepage="False"><a id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader__activity_wtHomeLinkMobile" tabindex="5" class="Button Icon Header_buttonMiddle" title="Back to Home" target="_self" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtHeader$TSSCommon_wt23$block$SS_Common_wt20$block$wtHeader__activity$wtHomeLinkMobile&#39;,&#39;&#39;)"><span class="fa fa-fw fa-home"></span></a></div ><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_loginInfoMobile" class="Header__loginInfo" issettingspage="False"><div  id="DBResultsSG_Theme_wt49_block_wtHeader_TSSCommon_wt23_block_SS_Common_wt20_block_wtHeader_loginInfoMobile_wtLoginInfoMobile"></div ></div ></div ><div  class="OSAutoMarginTop"></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu" class="Menu OSInline" role="navigation"><div  class="Menu_TopMenus"><span id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="6" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl00$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Dashboard</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl00_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="8" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl02$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Transaction History</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl02_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl04_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl04_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl04_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl04_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="10" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl04$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Payroll Tax Lodgement</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl04_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl04_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl06_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl06_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl06_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl06_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="12" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl06$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Payroll Tax Registration</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl06_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl06_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="14" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl08$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Payroll Tax Registration Updates</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"><span id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl00_wtSubMenuLink" tabindex="16" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl08$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl00$wtSubMenuLink&#39;,&#39;&#39;)">Update Business Address</a><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl02_wtSubMenuLink" tabindex="18" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl08$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl02$wtSubMenuLink&#39;,&#39;&#39;)">Update Contact Details</a><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl08_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl04_wtSubMenuLink" tabindex="20" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl08$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl04$wtSubMenuLink&#39;,&#39;&#39;)">Update Refund Details</a></span></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl10_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl10_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl10_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl10_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="22" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl10$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Manage Tax Details</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl10_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl10_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu Menu_TopMenuActive"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="24" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl12$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Service Requests</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"><span id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl00_wtSubMenuLink" tabindex="26" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl12$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl00$wtSubMenuLink&#39;,&#39;&#39;)">Annual Lodgement Request</a><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl02_wtSubMenuLink" tabindex="28" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl12$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl02$wtSubMenuLink&#39;,&#39;&#39;)">Exemption Request</a><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl04_wtSubMenuLink" tabindex="30" class="Menu_SubMenuItem Menu_SubMenuItem Menu_SubMenuItemActive" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl12$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl04$wtSubMenuLink&#39;,&#39;&#39;)">Liquidation Advice</a><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl06_wtSubMenuLink" tabindex="32" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl12$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl06$wtSubMenuLink&#39;,&#39;&#39;)">Objection Request</a><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl12_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems_wtSubMenuWebBlock_wtListRecords1_ctl08_wtSubMenuLink" tabindex="34" class="Menu_SubMenuItem Menu_SubMenuItem" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl12$RichWidgets_wtMenuWebBlock$block$wtMenuSubItems$wtSubMenuWebBlock$wtListRecords1$ctl08$wtSubMenuLink&#39;,&#39;&#39;)">Payroll Tax Cancellation</a></span></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl14_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl14_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl14_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl14_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="36" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl14$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Group Management</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl14_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl14_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl16_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl16_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl16_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl16_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="38" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl16$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">User Profile</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl16_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl16_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl18_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonRoot" class="Menu_DropDownButton OSInline"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl18_RichWidgets_wtMenuWebBlock_block_wtDropDownButtonElement" class="Menu_TopMenu"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl18_RichWidgets_wtMenuWebBlock_block_wtMenuItem"><a id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl18_RichWidgets_wtMenuWebBlock_block_wtMenuItem_wtMenuButtonLink" tabindex="40" href="javascript:__doPostBack(&#39;DBResultsSG_Theme_wt49$block$wtMenu$SS_Menu_Core_wt68$block$wtListRecords1$ctl18$RichWidgets_wtMenuWebBlock$block$wtMenuItem$wtMenuButtonLink&#39;,&#39;&#39;)">Sign Out</a></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl18_RichWidgets_wtMenuWebBlock_block_wtDropDownPanel" class="Menu_DropDownPanel"><div  id="DBResultsSG_Theme_wt49_block_wtMenu_SS_Menu_Core_wt68_block_wtListRecords1_ctl18_RichWidgets_wtMenuWebBlock_block_wtMenuSubItems" class="Menu_SubItemsPlaceholder"></div ></div ></div ></span></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtContent_Top" class="Content_Top PH"></div ><div  class="Content ThemeGrid_Wrapper"><div  class="ThemeGrid_Container" style="margin-top: 0px"><div  class="HeaderPage ThemeGrid_Width12"><div  id="DBResultsSG_Theme_wt49_block_wtBreadcrumbs" class="BreadcrumbsContainer PH" role="navigation"></div ><div  class="TitleActions"><div  id="DBResultsSG_Theme_wt49_block_wtTitle" class="Heading1 Title PH OSInline" role="banner">Liquidation Advice</div ><div  id="DBResultsSG_Theme_wt49_block_wtActions" class="Actions Title_Links PH" style="margin-top: 0px"></div ></div ></div ><div  class="OSAutoMarginTop"><div  id="DBResultsSG_Theme_wt49_block_wtMainContent" class="MainContent" role="main"><div ><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1"><div ><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtTaxPayerDetailsDiv"><label class=' SettingsHeadings' style='' for='' >Tax Payer Details</label><div  class="Separator"></div ><div class='form-left Form OSFillParent' style='' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtForm1' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$TSSAccountMgmtCore_wt22$block$wtForm1'><div  style="margin-top: 20px"><label class=' ThemeGrid_Width4' style='' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtSelectTaxPayer' >Choose a Tax Payer ABN</label><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><select name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$TSSAccountMgmtCore_wt22$block$wtSelectTaxPayer" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtSelectTaxPayer" tabindex="43" class="OSFillParent" onchange="OsAjax(arguments[0] || window.event,&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtSelectTaxPayer&#39;,&#39;DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$TSSAccountMgmtCore_wt22$block$wtSelectTaxPayer&#39;,&#39;Change&#39;,&#39;__OSVSTATE,&#39;,&#39;&#39;);" onkeyup="this.onchange();">
+	<option value="__ossli_0">Choose a Tax Payer ABN</option>
+	<option value="51">ACTIVE BOTTLE PTY. LTD. (48613935005)</option>
+	<option value="61">AQUA PTY LTD (96107641949)</option>
+	<option value="22">BROWNCORP PTY. LTD. (96100437787)</option>
+	<option value="28">CO CONSULTANTS PTY. LTD (88070527276)</option>
+	<option value="33">Fish Enterprise (12312312312)</option>
+	<option value="56">Green Pty Ltd (56141093085)</option>
+	<option value="13">LONG LOG PTY LTD (67607795808)</option>
+	<option value="57">NAVY PTY LTD (69164983386)</option>
+	<option value="8">SIT SPOT PTY LTD (23163154934)</option>
+	<option value="14">USED IN TESTING DO NOT CHANGE (4) (17165369906)</option>
+
+</select><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtSelectTaxPayer"></span><script>$(document).ready(function() {$('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtSelectTaxPayer').select2({ formatNoMatches: function() { return 'No Tax Payers with this Name/ABN '} }).addClass('select-hide');});</script></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtTaxPayerData" class="OSAutoMarginTop"><div  style="margin-top: 20px"><label class=' ThemeGrid_Width4' style='' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_OrganizationalName' >Organisational Name</label><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$TSSAccountMgmtCore_wt22$block$wtLodgePayrollAnswer_OrganizationalName" type="text" maxlength="50" readonly="readonly" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_OrganizationalName" tabindex="44" class="OSFillParent" onoschange="unsavedChanges = &#39;True&#39;;" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_OrganizationalName"></span></div ><div  class="ThemeGrid_Width1 ThemeGrid_MarginGutter"></div ></div ><div  class="OSAutoMarginTop"><label class=' ThemeGrid_Width4' style='' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_ABN' >Australian Business Number (ABN)</label><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$TSSAccountMgmtCore_wt22$block$wtLodgePayrollAnswer_ABN" type="number" maxlength="50" readonly="readonly" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_ABN" tabindex="45" class="OSFillParent" onchange="OsLimitInput(this,event,50);" onkeyup="OsLimitInput(this,event,50);" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_ABN"></span></div ><div  class="ThemeGrid_Width1 ThemeGrid_MarginGutter"><div  class="hint" name="ToolTipId51_"><span id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_SS_Admin_Core_wt12_block_RichWidgets_wtHintInfoIcon_block"><span class="fa fa-fw fa-question-circle fa-lg"></span></span></div ><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_SS_Admin_Core_wt12_block_SilkUIFramework_wt9_block_wtTooltipContent" class="tooltip-content"><span id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_SS_Admin_Core_wt12_block_SilkUIFramework_wt9_block_wtTooltipContent_wtPasswordValidationLabel">Gavin at full forward</span></div ><script>$('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_SS_Admin_Core_wt12_block_RichWidgets_wtHintInfoIcon_block').tooltipster({
+    content: $( '<span>' + $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_SS_Admin_Core_wt12_block_SilkUIFramework_wt9_block_wtTooltipContent').html() + '</span>' ),
+    trigger: 'hover',
+    position: 'bottom',
+    maxWidth: '',
+    theme: 'tooltip_style'
+});
+$('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_SS_Admin_Core_wt12_block_SilkUIFramework_wt9_block_wtTooltipContent').remove();</script></div ><script type="text/JavaScript">
+    $(document).ready(function () {
+        OSPage_InputMaskText('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_ABN', '99999999999', {clearMaskOnLostFocus: true,
+    placeholder: ""}, 'False');     
+    });
+</script></div ><div  class="OSAutoMarginTop"><label class=' ThemeGrid_Width4' style='' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_CRN' >Client Reference Number (CRN)</label><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$TSSAccountMgmtCore_wt22$block$wtLodgePayrollAnswer_CRN" type="text" maxlength="50" readonly="readonly" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_CRN" tabindex="46" class="OSFillParent" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_CRN"></span></div ><div  class="ThemeGrid_Width1 ThemeGrid_MarginGutter"></div ><script type="text/JavaScript">
+    $(document).ready(function () {
+        OSPage_InputMaskText('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_CRN', '999999', {clearMaskOnLostFocus: true,
+    placeholder: ""}, 'False');     
+    });
+</script></div ></div ></div><script type="text/javascript">outsystems.internal.$(function() { OutSystems.Plugin.Widgets.Form.init('DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtForm1');});</script><div  class="OSAutoMarginTop"></div ></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtApplicationDetailsDiv" class="OSAutoMarginTop"><label class=' SettingsHeadings' style='' for='' >Application Details</label><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtApplicationDetailsFormDiv" style="margin-top: 0px"><div class='form-left Form OSFillParent ReadOnly' style='' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationRequestForm' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLiquidationRequestForm'><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPersonDiv"><div ><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style='' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate' >Liquidation Start Date</label></div ><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLiquidationStartDate" type="text" maxlength="10" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate" tabindex="47" class="ThemeGrid_Width4 ThemeGrid_MarginGutter Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate"></span><script type='text/javascript'>
+$(function() {
+    if ($('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate').attr('readonly'))
+    return;
+
+    if($('.Page').hasClass('desktop')) {
+        $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate').bind('keypress', function(e) {
+            var code = e.keyCode || e.which;
+            if(code == 13) {
+                $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate').blur();
+                $('.calTriggerOut').click();
+            }
+        });
+    } else {
+        $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate').click(function(){
+            $(this).blur();
+        });
+    }
+
+    dateServer = 'YYYY-MM-DD';
+
+    
+        var DefaultDate = $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate').val();
+        if (DefaultDate == "" || DefaultDate == null) {
+            DefaultDate = CalendarSilk.getTodayDate('%d-%m-%Y');
+        }
+    var DefaultDateNew = CalendarSilk.convertDateToInt(DefaultDate.substring(0,10),'%d-%m-%Y');
+
+    CalendarSilk.setup(
+    {
+        dateFormat      :   "%d-%m-%Y",
+        fdow            :   0,
+        animation       :   false,
+        fixed           :   true,
+        inputField      :   "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate",
+        date            :   DefaultDateNew,
+        selection       :   DefaultDateNew,
+        onTimeChange    :   function() {
+                                $("#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate").val(this.selection.print("%d-%m-%Y", " ... ")).change();
+                            },
+        onSelect        :   function() {
+                                $("#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate").val(this.selection.print("%d-%m-%Y", " ... ")).change();this.hide();$('.calTriggerOut').remove()
+                            },
+        onFocus         :   function() {
+                                $('.Page').append('<div class="calTriggerOut"></div>');
+                                $('.Calendar-topBar td, .Calendar-day-disabled').on('click', function(){ return false; });
+                                $(document).on('click','.Calendar-topCont *',function(){
+                                    $('body').click();
+                                });
+                                $(document).on('click','.calTriggerOut',function(){
+                                    $(this).remove();
+                                    $('body > .Calendar-topCont').hide();
+                                });
+                            },
+        trigger         :   "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate",
+        align           :   "tR"
+    });
+});
+</script><script type="text/javascript">
+
+
+$(function() {
+
+
+var inpid='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate';
+var inputData=OsInputPrompt_GetInputData($('#'+inpid));
+var prompt = (inputData || {}).prompt;
+if(typeof(prompt)=='undefined'||prompt==''){
+OsInputPrompt_Bootstrap('DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate', 'DD-MM-YYYY');}
+});
+
+
+
+</script></div ><div  class="Bold OSAutoMarginTop"><span id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtText_ContactPerson">Liquidator Contact Details</span></div ><div  class="OSAutoMarginTop"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_FirstName' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_ContactPerson_FirstName' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_ContactPerson_FirstName'>First Name</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtContactPerson_FirstName" type="text" maxlength="200" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_FirstName" tabindex="48" class="OSFillParent Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_FirstName"></span></div ></div ><div  class="OSAutoMarginTop"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_LastName' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_ContactPerson_LastName' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_ContactPerson_LastName'>Last Name</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtContactPerson_LastName" type="text" maxlength="200" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_LastName" tabindex="49" class="OSFillParent Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_LastName"></span></div ></div ><div  class="OSAutoMarginTop"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_PhoneNumber' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_ContactPerson_ContactPhoneNumber' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_ContactPerson_ContactPhoneNumber'>Contact Phone Number</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><div  class="ThemeGrid_Width2" align="right" style="padding-top: 5px;">(+61) </div ><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtContactPerson_PhoneNumber" type="text" maxlength="20" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_PhoneNumber" tabindex="50" class="ThemeGrid_Width10 ThemeGrid_MarginGutter Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_PhoneNumber"></span></div ><script type="text/JavaScript">
+    $(document).ready(function () {
+        OSPage_InputMaskText('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_PhoneNumber', '99 9999 9999', {clearMaskOnLostFocus: true,
+    placeholder: ""}, 'False');     
+    });
+</script></div ><div  class="OSAutoMarginTop"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_Email' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_ContactPerson_EmailAddress' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_ContactPerson_EmailAddress'>Email Address</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtContactPerson_Email" type="text" maxlength="250" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_Email" tabindex="51" class="OSFillParent Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_Email"></span></div ><script type="text/JavaScript">
+    $(document).ready(function () {
+        OSPage_InputMaskText('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_Email', 'email', {clearMaskOnLostFocus: true,
+    placeholder: ""}, 'True');     
+    });
+</script></div ><div  class="OSAutoMarginTop"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_CommunicationMethodId' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_PreferedCommunicationMethod' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_PreferedCommunicationMethod'>Preferred Communication Method</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><select name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtContactPerson_CommunicationMethodId" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_CommunicationMethodId" tabindex="52" class="OSFillParent Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;">
+	<option value="__ossli_0">Select</option>
+	<option value="DPOS">Direct Post</option>
+	<option value="EMAI">Email</option>
+	<option value="PNOT">Portal Notification</option>
+
+</select><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_CommunicationMethodId"></span></div ></div ><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtCustomPersonPostalAddressDiv" class="OSAutoMarginTop"><div ><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_CountryId4' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtlabel_Country' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtlabel_Country'>Country</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><select name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtAddress_CountryId4" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_CountryId4" tabindex="53" class="OSFillParent Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;" onchange="OsAjax(arguments[0] || window.event,&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_CountryId4&#39;,&#39;DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtAddress_CountryId4&#39;,&#39;Change&#39;,&#39;__OSVSTATE,&#39;,&#39;&#39;);" onkeyup="this.onchange();">
+	<option value="ABW">Aruba</option>
+	<option value="AFG">Afghanistan</option>
+	<option value="AGO">Angola</option>
+	<option value="AIA">Anguilla</option>
+	<option value="ALA">Aland Islands</option>
+	<option value="ALB">Albania</option>
+	<option value="AND">Andorra</option>
+	<option value="ARE">United Arab Emirates</option>
+	<option value="ARG">Argentina</option>
+	<option value="ARM">Armenia</option>
+	<option value="ASM">American Samoa</option>
+	<option value="ATA">Antarctica</option>
+	<option value="ATF">French Southern Territories</option>
+	<option value="ATG">Antigua and Barbuda</option>
+	<option selected="selected" value="AUS">Australia</option>
+	<option value="AUT">Austria</option>
+	<option value="AZE">Azerbaijan</option>
+	<option value="BDI">Burundi</option>
+	<option value="BEL">Belgium</option>
+	<option value="BEN">Benin</option>
+	<option value="BES">Bonaire, Sint Eustatius and Saba</option>
+	<option value="BFA">Burkina Faso</option>
+	<option value="BGD">Bangladesh</option>
+	<option value="BGR">Bulgaria</option>
+	<option value="BHR">Bahrain</option>
+	<option value="BHS">Bahamas</option>
+	<option value="BIH">Bosnia and Herzegovina</option>
+	<option value="BLM">Saint Barthelemy</option>
+	<option value="BLR">Belarus</option>
+	<option value="BLZ">Belize</option>
+	<option value="BMU">Bermuda</option>
+	<option value="BOL">Bolivia, Plurinational State of</option>
+	<option value="BRA">Brazil</option>
+	<option value="BRB">Barbados</option>
+	<option value="BRN">Brunei Darussalam</option>
+	<option value="BTN">Bhutan</option>
+	<option value="BVT">Bouvet Island</option>
+	<option value="BWA">Botswana</option>
+	<option value="CAF">Central African Republic</option>
+	<option value="CAN">Canada</option>
+	<option value="CCK">Cocos (Keeling) Islands</option>
+	<option value="CHE">Switzerland</option>
+	<option value="CHL">Chile</option>
+	<option value="CHN">China</option>
+	<option value="CIV">Cote d&#39;Ivoire</option>
+	<option value="CMR">Cameroon</option>
+	<option value="COD">Congo, the Democratic Republic of the</option>
+	<option value="COG">Congo</option>
+	<option value="COK">Cook Islands</option>
+	<option value="COL">Colombia</option>
+	<option value="COM">Comoros</option>
+	<option value="CPV">Cabo Verde</option>
+	<option value="CRI">Costa Rica</option>
+	<option value="CUB">Cuba</option>
+	<option value="CUW">Curacao</option>
+	<option value="CXR">Christmas Island</option>
+	<option value="CYM">Cayman Islands</option>
+	<option value="CYP">Cyprus</option>
+	<option value="CZE">Czech Republic</option>
+	<option value="DEU">Germany</option>
+	<option value="DJI">Djibouti</option>
+	<option value="DMA">Dominica</option>
+	<option value="DNK">Denmark</option>
+	<option value="DOM">Dominican Republic</option>
+	<option value="DZA">Algeria</option>
+	<option value="ECU">Ecuador</option>
+	<option value="EGY">Egypt</option>
+	<option value="ERI">Eritrea</option>
+	<option value="ESH">Western Sahara</option>
+	<option value="ESP">Spain</option>
+	<option value="EST">Estonia</option>
+	<option value="ETH">Ethiopia</option>
+	<option value="FIN">Finland</option>
+	<option value="FJI">Fiji</option>
+	<option value="FLK">Falkland Islands (Malvinas)</option>
+	<option value="FRA">France</option>
+	<option value="FRO">Faroe Islands</option>
+	<option value="FSM">Micronesia, Federated States of</option>
+	<option value="GAB">Gabon</option>
+	<option value="GBR">United Kingdom</option>
+	<option value="GEO">Georgia</option>
+	<option value="GGY">Guernsey</option>
+	<option value="GHA">Ghana</option>
+	<option value="GIB">Gibraltar</option>
+	<option value="GIN">Guinea</option>
+	<option value="GLP">Guadeloupe</option>
+	<option value="GMB">Gambia</option>
+	<option value="GNB">Guinea-Bissau</option>
+	<option value="GNQ">Equatorial Guinea</option>
+	<option value="GRC">Greece</option>
+	<option value="GRD">Grenada</option>
+	<option value="GRL">Greenland</option>
+	<option value="GTM">Guatemala</option>
+	<option value="GUF">French Guiana</option>
+	<option value="GUM">Guam</option>
+	<option value="GUY">Guyana</option>
+	<option value="HKG">Hong Kong</option>
+	<option value="HMD">Heard Island and McDonald Islands</option>
+	<option value="HND">Honduras</option>
+	<option value="HRV">Croatia</option>
+	<option value="HTI">Haiti</option>
+	<option value="HUN">Hungary</option>
+	<option value="IDN">Indonesia</option>
+	<option value="IMN">Isle of Man</option>
+	<option value="IND">India</option>
+	<option value="IOT">British Indian Ocean Territory</option>
+	<option value="IRL">Ireland</option>
+	<option value="IRN">Iran, Islamic Republic of</option>
+	<option value="IRQ">Iraq</option>
+	<option value="ISL">Iceland</option>
+	<option value="ISR">Israel</option>
+	<option value="ITA">Italy</option>
+	<option value="JAM">Jamaica</option>
+	<option value="JEY">Jersey</option>
+	<option value="JOR">Jordan</option>
+	<option value="JPN">Japan</option>
+	<option value="KAZ">Kazakhstan</option>
+	<option value="KEN">Kenya</option>
+	<option value="KGZ">Kyrgyzstan</option>
+	<option value="KHM">Cambodia</option>
+	<option value="KIR">Kiribati</option>
+	<option value="KNA">Saint Kitts and Nevis</option>
+	<option value="KOR">Korea, Republic of</option>
+	<option value="KWT">Kuwait</option>
+	<option value="LAO">Lao People&#39;s Democratic Republic</option>
+	<option value="LBN">Lebanon</option>
+	<option value="LBR">Liberia</option>
+	<option value="LBY">Libya</option>
+	<option value="LCA">Saint Lucia</option>
+	<option value="LIE">Liechtenstein</option>
+	<option value="LKA">Sri Lanka</option>
+	<option value="LSO">Lesotho</option>
+	<option value="LTU">Lithuania</option>
+	<option value="LUX">Luxembourg</option>
+	<option value="LVA">Latvia</option>
+	<option value="MAC">Macao</option>
+	<option value="MAF">Saint Martin (French part)</option>
+	<option value="MAR">Morocco</option>
+	<option value="MCO">Monaco</option>
+	<option value="MDA">Moldova, Republic of</option>
+	<option value="MDG">Madagascar</option>
+	<option value="MDV">Maldives</option>
+	<option value="MEX">Mexico</option>
+	<option value="MHL">Marshall Islands</option>
+	<option value="MKD">Macedonia, the former Yugoslav Republic of</option>
+	<option value="MLI">Mali</option>
+	<option value="MLT">Malta</option>
+	<option value="MMR">Myanmar</option>
+	<option value="MNE">Montenegro</option>
+	<option value="MNG">Mongolia</option>
+	<option value="MNP">Northern Mariana Islands</option>
+	<option value="MOZ">Mozambique</option>
+	<option value="MRT">Mauritania</option>
+	<option value="MSR">Montserrat</option>
+	<option value="MTQ">Martinique</option>
+	<option value="MUS">Mauritius</option>
+	<option value="MWI">Malawi</option>
+	<option value="MYS">Malaysia</option>
+	<option value="MYT">Mayotte</option>
+	<option value="NAM">Namibia</option>
+	<option value="NCL">New Caledonia</option>
+	<option value="NER">Niger</option>
+	<option value="NFK">Norfolk Island</option>
+	<option value="NGA">Nigeria</option>
+	<option value="NIC">Nicaragua</option>
+	<option value="NIU">Niue</option>
+	<option value="NLD">Netherlands</option>
+	<option value="NOR">Norway</option>
+	<option value="NPL">Nepal</option>
+	<option value="NRU">Nauru</option>
+	<option value="NZL">New Zealand</option>
+	<option value="OMN">Oman</option>
+	<option value="PAK">Pakistan</option>
+	<option value="PAN">Panama</option>
+	<option value="PCN">Pitcairn</option>
+	<option value="PER">Peru</option>
+	<option value="PHL">Philippines</option>
+	<option value="PLW">Palau</option>
+	<option value="PNG">Papua New Guinea</option>
+	<option value="POL">Poland</option>
+	<option value="PRI">Puerto Rico</option>
+	<option value="PRK">Korea, Democratic People&#39;s Republic of</option>
+	<option value="PRT">Portugal</option>
+	<option value="PRY">Paraguay</option>
+	<option value="PSE">Palestine, State of</option>
+	<option value="PYF">French Polynesia</option>
+	<option value="QAT">Qatar</option>
+	<option value="REU">Reunion</option>
+	<option value="ROU">Romania</option>
+	<option value="RUS">Russian Federation</option>
+	<option value="RWA">Rwanda</option>
+	<option value="SAU">Saudi Arabia</option>
+	<option value="SDN">Sudan</option>
+	<option value="SEN">Senegal</option>
+	<option value="SGP">Singapore</option>
+	<option value="SGS">South Georgia and the South Sandwich Islands</option>
+	<option value="SHN">Saint Helena, Ascension and Tristan da Cunha</option>
+	<option value="SJM">Svalbard and Jan Mayen</option>
+	<option value="SLB">Solomon Islands</option>
+	<option value="SLE">Sierra Leone</option>
+	<option value="SLV">El Salvador</option>
+	<option value="SMR">San Marino</option>
+	<option value="SOM">Somalia</option>
+	<option value="SPM">Saint Pierre and Miquelon</option>
+	<option value="SRB">Serbia</option>
+	<option value="SSD">South Sudan</option>
+	<option value="STP">Sao Tome and Principe</option>
+	<option value="SUR">Suriname</option>
+	<option value="SVK">Slovakia</option>
+	<option value="SVN">Slovenia</option>
+	<option value="SWE">Sweden</option>
+	<option value="SWZ">Swaziland</option>
+	<option value="SXM">Sint Maarten (Dutch part)</option>
+	<option value="SYC">Seychelles</option>
+	<option value="SYR">Syrian Arab Republic</option>
+	<option value="TCA">Turks and Caicos Islands</option>
+	<option value="TCD">Chad</option>
+	<option value="TGO">Togo</option>
+	<option value="THA">Thailand</option>
+	<option value="TJK">Tajikistan</option>
+	<option value="TKL">Tokelau</option>
+	<option value="TKM">Turkmenistan</option>
+	<option value="TLS">Timor-Leste</option>
+	<option value="TON">Tonga</option>
+	<option value="TTO">Trinidad and Tobago</option>
+	<option value="TUN">Tunisia</option>
+	<option value="TUR">Turkey</option>
+	<option value="TUV">Tuvalu</option>
+	<option value="TWN">Taiwan, Province of China</option>
+	<option value="TZA">Tanzania, United Republic of</option>
+	<option value="UGA">Uganda</option>
+	<option value="UKR">Ukraine</option>
+	<option value="UMI">United States Minor Outlying Islands</option>
+	<option value="URY">Uruguay</option>
+	<option value="USA">United States of America</option>
+	<option value="UZB">Uzbekistan</option>
+	<option value="VAT">Holy See (Vatican City State)</option>
+	<option value="VCT">Saint Vincent and the Grenadines</option>
+	<option value="VEN">Venezuela, Bolivarian Republic of</option>
+	<option value="VGB">Virgin Islands, British</option>
+	<option value="VIR">Virgin Islands, U.S.</option>
+	<option value="VNM">Viet Nam</option>
+	<option value="VUT">Vanuatu</option>
+	<option value="WLF">Wallis and Futuna</option>
+	<option value="WSM">Samoa</option>
+	<option value="YEM">Yemen</option>
+	<option value="ZAF">South Africa</option>
+	<option value="ZMB">Zambia</option>
+	<option value="ZWE">Zimbabwe</option>
+
+</select><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_CountryId4"></span></div ></div ><div  class="OSAutoMarginTop"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_AddressLine7' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_AddressLine1' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_AddressLine1'>Address</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><textarea name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtAddress_AddressLine7" rows="2" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_AddressLine7" tabindex="54" class="OSFillParent Mandatory" onchange="OsLimitInput(this,event,500);" onkeyup="OsLimitInput(this,event,500);" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;"></textarea><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_AddressLine7"></span></div ></div ><span id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtIsAustraliaCountrySelected"><div  style="margin-top: 20px"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_City4' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_Suburb_City' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_Suburb_City'>Suburb / City</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtAddress_City4" type="text" maxlength="50" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_City4" tabindex="55" class="OSFillParent Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_City4"></span></div ></div ><div  class="OSAutoMarginTop"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_State4' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_Territory_State' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_Territory_State'>Territory / State</label></div ><div  class="ThemeGrid_Width4 ThemeGrid_MarginGutter"><select name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtAddress_State4" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_State4" tabindex="56" class="OSFillParent Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;">
+	<option value="ACT">Australian Capital Territory</option>
+	<option value="NSW">New South Wales</option>
+	<option value="NT">Northern Territory</option>
+	<option value="QLD">Queensland</option>
+	<option value="SA">South Australia</option>
+	<option value="TAS">Tasmania</option>
+	<option value="VIC">Victoria</option>
+	<option value="WA">Western Australia</option>
+
+</select><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_State4"></span></div ></div ><div  class="OSAutoMarginTop"><div  class="ThemeGrid_Width4"><label class=' MandatoryLabel' style=' margin-left: 0px' for='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_PostCode' id='DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLabel_Postcode' name='DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtLabel_Postcode'>Postcode</label></div ><div  class="ThemeGrid_Width2 ThemeGrid_MarginGutter"><input name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtAddress_PostCode" type="text" maxlength="50" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_PostCode" tabindex="57" class="OSFillParent Mandatory" onkeydown="return OsEnterKey(&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;, arguments[0] || window.event)" onoschange="unsavedChanges = &#39;True&#39;;" /><span style="display: none;" class="ValidationMessage" id="ValidationMessage_DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_PostCode"></span></div ><script type="text/JavaScript">
+    $(document).ready(function () {
+        OSPage_InputMaskText('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_PostCode', '9999', {clearMaskOnLostFocus: true,
+    placeholder: ""}, 'False');     
+    });
+</script></div ></span></div ></div ></div><script type="text/javascript">outsystems.internal.$(function() { OutSystems.Plugin.Widgets.Form.init('DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationRequestForm');});</script></div ><div  class="Separator"></div ><div  id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtButtonsDiv" align="right" style="margin-top: 0px"><input onclick="window.location.href=&#39;https://test-ssc.dbresults.com.au/TSSPortal/Dashboard.aspx&#39;; return false;" type="submit" name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtCancelBT" value="Cancel" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtCancelBT" tabindex="58" class="Button Cancel" /><input disabled="disabled" onclick="OsAjax(arguments[0] || window.event,&#39;DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT&#39;,&#39;DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtNextBT&#39;,&#39;&#39;,&#39;__OSVSTATE,&#39;,&#39;&#39;); return false;" type="submit" name="DBResultsSG_Theme_wt49$block$wtMainContent$TSSAdminCore_wt77$block$wtPlaceholder1$wtNextBT" value="Next" id="DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT" tabindex="59" class="Button Is_Default ThemeGrid_MarginGutter" /><script>(function() {
+    $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtApplicationDetailsFormDiv .Mandatory').change(function() {
+        var empty = false;
+        $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtApplicationDetailsFormDiv .Mandatory').each(function() {
+            if ($(this).val() == '' || 
+            $(this).val() =='__ossli_0') {
+                empty = true;
+            }
+        });
+        if (empty) {
+            $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT').attr('disabled', 'disabled');
+        } else {
+            $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT').removeAttr('disabled');
+        }
+    });
+
+$('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtApplicationDetailsFormDiv .Mandatory').keyup(function() {
+        var empty = false;
+        $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtApplicationDetailsFormDiv .Mandatory').each(function() {
+            if ($(this).val() == '' || 
+            $(this).val() =='__ossli_0') {
+                empty = true;
+            } 
+                    });
+        if (empty) {
+            $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT').attr('disabled', 'disabled');
+        } else {
+            $('#DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtNextBT').removeAttr('disabled');
+        }
+    });
+
+})()</script></div ></div ></div ></div ></div ></div ><div  class="Sidebar PH"><div  id="DBResultsSG_Theme_wt49_block_wtSidebar" class="Sidebar_Content PH"></div ></div ></div ><div  class="Footer" style="margin-top: 0px"><div  id="DBResultsSG_Theme_wt49_block_wtFooter" role="contentinfo"><script>var unsavedChanges = 'False';</script></div ></div ></div ><script>SilkDeviceDetect.init('desktop', false, false, 'chrome', false, false)</script><div  id="DBResultsSG_Theme_wt49_block_SilkUIFramework_wt12_block_wt17_wtdivWait" class="Feedback_AjaxWait" align="center" style="display:none"><div  id="DBResultsSG_Theme_wt49_block_SilkUIFramework_wt12_block_wt17_wtloader" class="Loader"></div >Loading</div ><script>RichWidgets_Feedback_AjaxWait_init('DBResultsSG_Theme_wt49_block_SilkUIFramework_wt12_block_wt17_wtdivWait');</script><span id="DBResultsSG_Theme_wt49_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block"><script type='text/javascript'>
+OsRegisterExceptionHandler(RichWidgets_Feedback_Message_ErrorHandler)
+</script><div  id="DBResultsSG_Theme_wt49_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtFeedback_Wrapper" class="Feedback_Message_Wrapper"><span id="DBResultsSG_Theme_wt49_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtnotify"><span class="NotifyWidget"></span><SCRIPT type="text/javascript">
+//<![CDATA[
+RichWidgets_Feedback_Message_notifyWidget ='DBResultsSG_Theme_wt49_block_SilkUIFramework_wt12_block_RichWidgets_wt11_block_wtnotify';
+//]]>
+</SCRIPT></span></div ></span></div ></div >
+    
+<script type="text/javascript">
+//<![CDATA[
+var OsPage_ValidatorsOrder =  new Array("DBResultsSG_Theme_wt49_block_SilkUIFramework_wt12_block_wt8_wtCommandLine", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtSelectTaxPayer", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_OrganizationalName", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_ABN", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_CRN", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_FirstName", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_LastName", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_PhoneNumber", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_Email", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_CommunicationMethodId", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_CountryId4", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_AddressLine7", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_City4", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_State4", "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_PostCode");
+var OsPage_Validators =  new Array({}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_OrganizationalName", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_ABN", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_TSSAccountMgmtCore_wt22_block_wtLodgePayrollAnswer_CRN", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtLiquidationStartDate", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_FirstName", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_FirstName", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_LastName", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_LastName", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_PhoneNumber", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_PhoneNumber", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Phone Number expected!", clientvalidationfunction: "OsCustomValidatorPhoneNumber"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_Email", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_Email", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Email expected!", clientvalidationfunction: "OsCustomValidatorEmail"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtContactPerson_CommunicationMethodId", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_CountryId4", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_AddressLine7", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_AddressLine7", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_City4", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_City4", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_State4", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_PostCode", evaluationfunction: "OsRequiredFieldValidatorEvaluateIsValid", errormessage: "Required field!", initialvalue: ""}, 
+{controltovalidate: "DBResultsSG_Theme_wt49_block_wtMainContent_TSSAdminCore_wt77_block_wtPlaceholder1_wtAddress_PostCode", evaluationfunction: "OsCustomValidatorEvaluateIsValid", errormessage: "Text expected!", clientvalidationfunction: "OsCustomValidatorText"});
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var OsPage_ValidationActive = false;
+OsValidatorOnLoad();
+
+function OsValidatorOnSubmit() {
+  if (OsPage_ValidationActive) { return OsValidatorCommonOnSubmit(); }
+  return true;
+}
+// ]]>
+</script>
+</form><script type="text/javascript">outsystems.internal.$._waitForViewstate = true;outsystems.internal.$(document).ready(function() {outsystems.internal.$('input[name=__OSVSTATE]').val('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');outsystems.internal.$._waitForViewstate = false;});</script>
+<!-- Begin Inbox Block --><link href="/EPA_Taskbox/Blocks/EPA_Taskbox/Inbox_Flow/Inbox.css?812" type="text/css" rel="stylesheet" /><script src="/EPA_Taskbox/Blocks/EPA_Taskbox/Inbox_Flow/Inbox.js?812" type="text/javascript" charset="UTF-8"></script><div><span id="epa_wtEPATaskbox_ViewOptions_JS"><script language="javascript">var EPATaskbox_ViewOptions = { allowGlow : false, pollInterval : 20, maxPollInterval : 1800, cookieTimeout : 2, applicationServer : ".Net", developmentMode : true};</script></span><!--[if gte IE 5.5]><![if lt IE 7]><style type="text/css">div#epa_wtEPATaskbox_ExtraStylesContainer {  _right: auto; _bottom: auto; _left: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetWidth + ( document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth ) + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' ); _top: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetHeight + ( document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight ) + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );}</style><![endif]><![if gte IE 7]><script>if(document.compatMode == 'BackCompat') { window.attachEvent('onload', function() { var div = document.createElement('div'); div.style.display = 'none'; div.innerHTML = "style<style type=\"text/css\">"+ " div#epa_wtEPATaskbox_ExtraStylesContainer { "+ "  "+ " _right: auto; _bottom: auto; "+ " _left: expression( ( -51 - epa_wtEPATaskbox_ExtraStylesContainer.offsetWidth + ( document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth ) + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' ); "+ " _top: expression( ( -95 - epa_wtEPATaskbox_ExtraStylesContainer.offsetHeight + ( document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight ) + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); "+ " } "+ " </style>"; document.body.appendChild(div);});};</script><![endif]><![endif]--><div id="epa_wtEPATaskbox_Container" class="EPATaskbox_Container"><div id="epa_wtEPATaskbox_ExtraStylesContainer" class="EPATaskbox_ExtraStylesContainer"><div class="EPATaskbox_IconifiedContainer"><div class="EPATaskbox_Icon_EPATaskbox_NotGlowing"></div><div class="EPATaskbox_Icon_EPATaskbox_Glowing"></div><div class="EPATaskbox_ActivityCount"></div></div><div class="EPATaskbox_ExpandedContainer"><div class="EPATaskbox_ExpandedIcon_EPATaskbox_NotGlowing"></div><div class="EPATaskbox_ExpandedIcon_EPATaskbox_Glowing"></div><div class="EPATaskbox_ExpandedText">Click here to see your activities</div></div><div class="EPATaskbox_OpenedContainer"><div class="EPATaskbox_FrameContainer"></div></div></div></div></div><!-- End Inbox Block --><script type='text/javascript'> EPATaskbox.instance = new EPATaskbox(outsystems.internal.$('.EPATaskbox_Container'), 157, 0, false, null); </script>
+  </body>
+</html>

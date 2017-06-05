@@ -1,0 +1,11 @@
+Registration as Business Confirmation Page
+Registration as Tax Agent Confirmation Page
+Liquidation Advice Confirmation
+Liquidation Advice Summary
+Liquidation Advice Form
+Reset Password (Where the password is actually reset)
+Reset Password Confirmation (After Forgot Password Page)
+Tax Registration Confirmation
+Tax Registration Summary
+Login with AUSKey 
+Lodgement Confirmation

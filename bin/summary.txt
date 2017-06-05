@@ -1,0 +1,28 @@
+Edit User Profile: 9 Errors.
+Home: 1 Errors.
+Return History: 1 Errors.
+Tax Registration Form: 0 Errors.
+View User Profile: 0 Errors.
+Account Already Activated: 0 Errors.
+Activity History: 0 Errors.
+Manage Account Details: 0 Errors.
+Reset Password Link Expired: 0 Errors.
+Forgot Your Password: 1 Errors.
+Login: 0 Errors.
+REGISTRATION CONFIRMATION: 0 Errors.
+Registration as Business Part 1: 5 Errors.
+Registration as Business Part 2: 0 Errors.
+Registration as Tax Agent Part 1: 5 Errors.
+Registration as Tax Agent Part 2: 0 Errors.
+Tooltips: 0 Errors.
+Update Business Trading Name Confirmation: 0 Errors.
+Update Business Trading Name Form: 5 Errors.
+Update Business Trading Name Summary: 0 Errors.
+Tax Registration Cancellation: 4 Errors.
+Tax Registration Cancellation Confirmation: 0 Errors.
+Tax Registration Cancellation Summary: 0 Errors.
+Edit User Profile: 9 Errors.
+Home: 1 Errors.
+Return History: 1 Errors.
+Tax Registration Form: 0 Errors.
+View User Profile: 0 Errors.

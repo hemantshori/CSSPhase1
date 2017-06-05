@@ -1,0 +1,27 @@
+Forgot Your Password: 1 Errors.
+Login: 0 Errors.
+Registration as Business Part 1: 5 Errors.
+Registration as Business Part 2: 0 Errors.
+Registration as Tax Agent Part 1: 5 Errors.
+Registration as Tax Agent Part 2: 0 Errors.
+Edit User Profile: 9 Errors.
+Home: 1 Errors.
+Lodgement Summary: 0 Errors.
+Payroll Lodgement Form: 2 Errors.
+Return History: 1 Errors.
+Tax Registration Form: 1 Errors.
+View User Profile: 0 Errors.
+Tooltips: 0 Errors.
+Update Business Trading Name Confirmation: 0 Errors.
+Update Business Trading Name Form: 4 Errors.
+Update Business Trading Name Summary: 53 Errors.
+Payroll Tax Cancellation: 4 Errors.
+Payroll Tax Cancellation Confirmation: 0 Errors.
+Payroll Tax Cancellation Summary: 9 Errors.
+Account Already Activated: 0 Errors.
+Activity History: 0 Errors.
+Generic Request Confirmation: 0 Errors.
+Generic Request Form: 4 Errors.
+Generic Request Summary: 0 Errors.
+Liquidation Advice Form: 4 Errors.
+Reset Password Link Expired: 0 Errors.
