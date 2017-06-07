@@ -21,7 +21,7 @@ import cucumber.api.junit.Cucumber;
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@current"},
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@shakeout"},
     //*********************for SHAKE	OUT*************************************
-	//	 features = "src/test/resource/com/CSS/SanityTestScript.feature") 
+	//	 featuresf = "src/test/resource/com/CSS/SanityTestScript.feature") 
 
 //features = "src/test/resource/com/WCAG/WCAG.feature") 
 

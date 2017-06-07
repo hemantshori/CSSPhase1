@@ -1173,7 +1173,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
      Then I check "Label_AustralianBusinessNumber_ABN" has CSS property "content" with value ""*""
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I select "Company" from "SelectBusinessTypeCode"
@@ -1264,7 +1264,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
 
    Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
       
   @done
    Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
@@ -1411,7 +1411,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
      Then I wait for "1000" millisecond
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
@@ -1496,7 +1496,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
 
     Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
  @wip
   Scenario Outline: DTSP-537
     Given I want to login to portal "<PortalName>"
@@ -1674,7 +1674,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I check I am on "Payroll Tax Registration" page
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "2000" millisecond
     Then I enter the details as
@@ -1717,7 +1717,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
 
     Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 
 	# OUTDATED
   #@done
@@ -1977,7 +1977,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | ContactPerson_PhoneNumber |    1234567890 |
       Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 
      @done
   Scenario Outline: DTSP-527: Update the relationship between Business Taxpayer, Tax Agent Organisation and Users
@@ -2080,7 +2080,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
      Then I wait for "1000" millisecond
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
@@ -2116,7 +2116,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     
     Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
@@ -3667,7 +3667,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I wait for "1000" millisecond
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
@@ -3707,7 +3707,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
      Then I wait for "1000" millisecond
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
@@ -3794,7 +3794,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     
 		 Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 	
   @review
   Scenario Outline: DTSP-647: Update Payroll Tax Registration form for ease of use
@@ -3809,7 +3809,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I wait for "1000" millisecond
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
@@ -3874,7 +3874,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I see text "Title" not displayed
     		 Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
       
   @redo
   Scenario Outline: DTSP-649: Add Validation Rules and make other changes to the Payroll Tax Lodgement Form
@@ -4137,7 +4137,7 @@ Then I click on "Payroll Tax"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
       And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
@@ -4188,7 +4188,7 @@ Then I click on "Payroll Tax"
     Then I check "Address_State3" does not exist
     Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
       
  @review
    Scenario Outline: DTSP-758: As an end user, I want to be limited to only a month and year selection when I am creating/editing my Payroll Tax Group
@@ -4631,7 +4631,7 @@ Then I click on "Payroll Tax"
    Then I click on "Payroll Tax Registration"
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
@@ -4687,7 +4687,7 @@ Then I click on "Payroll Tax"
     #Bugged...?
      Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 
    @review
   Scenario Outline: DTSP-704: To update the ABN Lookup Rule on the Payroll Tax Registration Form and Tax Agent Portal Registration
@@ -4745,15 +4745,15 @@ Then I click on "Payroll Tax"
     #Scenario 1: Correct Employer Name on the Payroll Tax Registration
     Then I enter the details as
       | Fields              | Value              |
-      | EmployerName        |the firE CompaNY Pty Limited |
-      | BusinessTradingName | the firE CompaNY Pty Limited |
+      | EmployerName        |Dynamic Fire Pty Ltd|
+      | BusinessTradingName | Dynamic Fire Pty Ltd|
     Then I click on button "TaxPayerDetailsNextBT"
     Then I see text "Address where Business Records are located (Jurisdiction)" displayed
 
         #Bugged...?
      Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-712: To update all wording on the portal from "Tax Payer" to the single word "Taxpayer"
@@ -5142,7 +5142,7 @@ Then I click on "Payroll Tax"
      Then I click on "Payroll Tax Registration"
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
 		Then I check label "Label_EmployerName" contains "Organisation Name"
@@ -5204,7 +5204,7 @@ Then I click on "Payroll Tax"
     
         	Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
    
     @manual
    Scenario Outline: As an end user I want to see the Industry codes before Industry name in the Business Activity Category Drop down on Payroll Tax registration form
@@ -5217,7 +5217,7 @@ Then I click on "Payroll Tax"
    Then I click on "Payroll Tax Registration"
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
 		Then I check label "Label_EmployerName" contains "Organisation Name"
@@ -5253,8 +5253,313 @@ Then I click on "Payroll Tax"
     
           	Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
       
+
+		###########################################################################################################
+  #################################### PHASE 1.2 ITERATION 1.2 ################################################
+  ########################################################################################################### 
+  
+  @review
+  Scenario Outline: DTSP-33: As an end user, I want to be able to submit an Ambulance Levy Lodgement Form so that I can validate in PSRM
+    #Scenario 1: Ambulance Levy  Lodgement
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Lodgements"
+    Then I see text "Payroll Tax" displayed
+    Then I see text "Ambulance Levy" displayed
+    Then I click on "Ambulance Levy"
+    Then I check I am on "Ambulance Levy Lodgement Form" page
+    Then I click on button "GeneralDiscardBt"
+    Then I check "SelectTaxPayer" exists
+    Then I check "LodgePayrollAnswer_OrganizationalName" exists
+    Then I check "LodgePayrollAnswer_ABN" exists
+    Then I check "LodgePayrollAnswer_CRN" exists
+    Then I check "ObligationsDropdown" exists
+    #Scenario 2: Selected ABN is not registered for "Ambulance Levy "
+    Then I click on button "GeneralDiscardBt"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | <WrongOrganisation> |
+    Then I click on button "select2-results-1"
+    Then I see text "You are currently not registered for Ambulance Levy" displayed
+    Then I check "ObligationsDropdown" is readonly
+    #Scenario 3: Selected ABN is registered for "Ambulance Levy"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value                 |
+      | s2id_autogen1_search | <CorrectOrganisation> |
+    Then I click on button "select2-results-1"
+    Then I check "ObligationsDropdown" is not readonly
+    Then I select "2014" from "ObligationsDropdown"
+    #Scenario 4: Buttons
+    Then I click on button "SaveNextBT"
+    Then I check "SaveAndNextToSummaryBT" is readonly
+    #Scenario 5: PSRM validation
+    Then I enter the details as
+      | Fields                                       | Value |
+      | LodgeAmbulanceLevyAnswer_NumberSingleMembers |    11 |
+      | LodgeAmbulanceLevyAnswer_NumberFamilyMembers |    11 |
+    Then I check "SaveAndNextToSummaryBT" is not readonly
+    Then I click on button "SaveAndNextToSummaryBT"
+    Then I check I am on "Lodgement Summary" page
+
+    Examples: 
+      | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
+      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+
+  @review
+  Scenario Outline: DTSP-34: As an end user, I want to be able to submit a Energy Industry Levy Return form so that I can validate in PSRM
+    #Scenario 1: Ambulance Levy  Lodgement
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Lodgements"
+    Then I see text "Payroll Tax" displayed
+    Then I see text "Energy Industry Levy" displayed
+    Then I click on "Energy Industry Levy"
+    Then I check I am on "Energy Industry Levy Lodgement Form" page
+    Then I click on button "GeneralDiscardBt"
+    Then I check "SelectTaxPayer" exists
+    Then I check "LodgePayrollAnswer_OrganizationalName" exists
+    Then I check "LodgePayrollAnswer_ABN" exists
+    Then I check "LodgePayrollAnswer_CRN" exists
+    Then I check "ObligationsDropdown" exists
+    #Scenario 2: Selected ABN is not registered for "Ambulance Levy "
+    Then I click on button "GeneralDiscardBt"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | <WrongOrganisation> |
+    Then I click on button "select2-results-1"
+    Then I see text "You are currently not registered for the Energy Industry Levy" displayed
+    Then I check "ObligationsDropdown" is readonly
+    #Scenario 3: Selected ABN is registered for "Ambulance Levy"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value                 |
+      | s2id_autogen1_search | <CorrectOrganisation> |
+    Then I click on button "select2-results-1"
+    Then I check "ObligationsDropdown" is not readonly
+    Then I select "2014" from "ObligationsDropdown"
+    #Scenario 4: Buttons
+    Then I click on button "SaveNextBT"
+    Then I check "RemoveBTN" is readonly
+    Then I check "AddBTN" is readonly
+    Then I check "SaveAndNextToSummaryBT" is readonly
+    #Scenario 5: PSRM validation
+    Then I select "Electricity Distribution Sector" from "SupplyDistributionSector_SectorType"
+    Then I enter the details as
+      | Fields                                             | Value |
+      | SupplyDistributionSector_EstimateMegawattHours     |    50 |
+      | SupplyDistributionSector_ActualMegawattHours       |    50 |
+      | SupplyDistributionSector_MethodCalculateTotalMegaw | TeST  |
+    Then I check "SaveAndNextToSummaryBT" is not readonly
+    Then I check "AddBTN" is not readonly
+    Then I check "RemoveBTN" is readonly
+    Then I click on button "AddBTN"
+    Then I click on button "AddBTN"
+    Then I check "RemoveBTN" is readonly
+    Then I select "Electricity Supply Sector" from "SupplyDistributionSector_SectorType"
+    Then I enter the details as
+      | Fields                                             | Value |
+      | SupplyDistributionSector_EstimateMegawattHours     |    50 |
+      | SupplyDistributionSector_ActualMegawattHours       |    50 |
+      | SupplyDistributionSector_MethodCalculateTotalMegaw | TeST  |
+    Then I check "SaveAndNextToSummaryBT" is not readonly
+    Then I click on button "SaveAndNextToSummaryBT"
+    Then I check I am on "Lodgement Summary" page
+
+    Examples: 
+      | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
+      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+		
+	@review
+  Scenario Outline: DTSP-38: As an end user, I want to be able to complete a Utilities(Network Facilities) Tax Return Form so that I can validate it in PSRM
+    #Scenario 1: Ambulance Levy  Lodgement
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Lodgements"
+    Then I see text "Payroll Tax" displayed
+    Then I see text "Utilities (Network Facilities) Tax" displayed
+    Then I click on "Utilities (Network Facilities) Tax"
+    Then I check I am on "Network Utilities Lodgement Form" page
+    Then I click on button "GeneralDiscardBt"
+    Then I check "SelectTaxPayer" exists
+    Then I check "LodgePayrollAnswer_OrganizationalName" exists
+    Then I check "LodgePayrollAnswer_ABN" exists
+    Then I check "LodgePayrollAnswer_CRN" exists
+    Then I check "ObligationsDropdown" exists
+    #Scenario 2: Selected ABN is not registered for "Ambulance Levy "
+    Then I click on button "GeneralDiscardBt"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | <WrongOrganisation> |
+    Then I click on button "select2-results-1"
+    Then I see text "You are currently not registered for Utilities(Network Facilities) Tax" displayed
+    Then I check "ObligationsDropdown" is readonly
+    #Scenario 3: Selected ABN is registered for "Ambulance Levy"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value                 |
+      | s2id_autogen1_search | <CorrectOrganisation> |
+    Then I click on button "select2-results-1"
+    Then I check "ObligationsDropdown" is not readonly
+    Then I select "2017" from "ObligationsDropdown"
+    #Scenario 4: Buttons
+    Then I click on button "SaveNextBT"
+    Then I check "Content_wt99" is readonly
+    Then I check "AddBTN" is readonly
+    Then I check "SaveAndNextToSummaryBT" is readonly
+    #Scenario 5: PSRM validation
+    Then I select "Gas Distribution Network" from "NetworkDetail_UtilityTypeDropdown"
+    Then I enter the details as
+      | Fields                                             | Value |
+      | KMOfRouteLength     |    50 |
+      #| SupplyDistributionSector_ActualMegawattHours       |    50 |
+      #| SupplyDistributionSector_MethodCalculateTotalMegaw | TeST  |
+    Then I check "SaveAndNextToSummaryBT" is not readonly
+    Then I check "AddBTN" is not readonly
+    Then I check "Content_wt99" is readonly
+    Then I click on button "AddBTN"
+    Then I click on button "AddBTN"
+    Then I check "Content_wt99" is readonly
+    Then I select "Sewerage Network" from "NetworkDetail_UtilityTypeDropdown"
+    Then I enter the details as
+      | Fields                                             | Value |
+       | KMOfRouteLength     |    50 |
+    Then I check "SaveAndNextToSummaryBT" is not readonly
+    Then I click on button "SaveAndNextToSummaryBT"
+    Then I check I am on "Lodgement Summary" page
+
+    Examples: 
+      | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
+      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+		
+		@review
+		 Scenario Outline: DTSP-151: As an end user, I want to be able to view my Return History for Network Utilities Tax Type
+    
+    #Scenario 1: Selecting relevant tab 
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Return History"
+     Then I click on button "select2-chosen-1"
+     Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | <Organisation> |
+    Then I click on button "select2-results-1"
+    Then I click on "Utilities (Network Facilities)"
+    Then I wait for "1000" millisecond
+    Then I see text "RETURN PERIOD" displayed
+		Then I see text "PAYMENT DUE DATE" displayed
+		Then I see text "TAX PAYABLE" displayed
+		Then I see text "INTEREST" displayed
+		Then I see text "PENALTY" displayed
+		Then I see text "PAID AMOUNT" displayed
+		Then I see text "BALANCE" displayed
+		Then I see text "PAYMENT" displayed
+		Then I see text "SUBMIT" displayed
+      
+    #Scenario 2: PAYMENT DETAILS link 
+    Then I click on "DETAILS"
+    Then I switch to frame "0"
+    #Then I see text "Please Note: Payment cannot be made directly through the Self-Serve portal. Please use the details below to make payment through your financial institution." displayed
+     #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                        |
+      #| item | Amount |
+      #| item | Due Date |
+      #| item | Biller Code |
+      #| item | Reference Number |
+    Then I click on button with value "CANCEL"
+
+      Examples: 
+      | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
+      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
+    
+    	@review
+		 Scenario Outline: DTSP-154: As an end user, I want to be able to navigate to different Tax type return history pages using tabs
+    
+    #Scenario 1: Scenario 1: Order of Tax type Tabs 
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Return History"
+     Then I click on button "select2-chosen-1"
+     Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | <Organisation> |
+    Then I click on button "select2-results-1"
+    Then I check object with xpath "//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]" contains "Payroll"
+    Then I check object with xpath "//div[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')][2]" contains "Utilities (Network Facilities)"
+    Then I check object with xpath "//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')][3]" contains "Ambulance Levy"
+    Then I check object with xpath "//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')][4]" contains "Energy Industry Levy"
+    Then I check object with xpath "//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')][5]" contains "Income Tax Equivalent"
+    Then I click on "Payroll"
+    Then I wait for "1000" millisecond
+    Then I see text "RETURN PERIOD" displayed
+		Then I see text "PAYMENT DUE DATE" displayed
+		Then I see text "TAX PAYABLE" displayed
+		Then I see text "INTEREST" displayed
+		Then I see text "PENALTY" displayed
+		Then I see text "PAID AMOUNT" displayed
+		Then I see text "BALANCE" displayed
+		Then I see text "PAYMENT" displayed
+		Then I see text "SUBMIT" displayed
+		
+		Then I click on "Utilities (Network Facilities)"
+		Then I click on object with xpath "//div[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//a[text() = 'Ambulance Levy']"
+		
+		Then I click on object with xpath "//div[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//a[text() = 'Energy Industry Levy']"
+		Then I click on "Income Tax Equivalent"
+		
+		Then I click on button "select2-chosen-1"
+     Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | BLATCHFORD |
+    Then I click on button "select2-results-1"
+    
+    Then I see text "This ABN is currently not registered for any tax types." displayed
+    		Then I click on button "select2-chosen-1"
+     Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | SUBMIT |
+    Then I click on button "select2-results-1"
+		Then I see text "Utilities (Network Facilities)" not displayed
+		Then I see text "Ambulance Levy" not displayed
+		Then I see text "Energy Industry Levy" not displayed
+		Then I see text "Income Tax Equivalent" not displayed
+		
+		Then I click on button "select2-chosen-1"
+     Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | BULB |
+    Then I click on button "select2-results-1"
+    
+    Then I check object with xpath "//div[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//div[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')][2]" contains "Utilities (Network Facilities)"
+		
+      Examples: 
+      | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
+      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
 
 		###########################################################################################################
   #################################### MISSING ACTRO BUGS ################################################
@@ -5423,7 +5728,7 @@ Then I click on "Payroll Tax"
     Then I click on "Payroll Tax Registration"
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "3000" millisecond
     Then I enter the details as
@@ -5447,7 +5752,7 @@ Then I click on "Payroll Tax"
     Then I click on "Payroll Tax Registration"
      And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "3000" millisecond
     Then I enter the details as
@@ -5477,7 +5782,7 @@ Then I click on "Payroll Tax"
 
     Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 
 @done
   Scenario Outline: Total Taxable Wages in Payroll Tax Registration dropdown bug
@@ -5490,7 +5795,7 @@ Then I click on "Payroll Tax"
     Then I click on "Payroll Tax Registration"
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
@@ -5529,7 +5834,7 @@ Then I click on "Payroll Tax"
 		
     Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 
    @done
    Scenario Outline: Current Employer Status on Dashboard bug
@@ -5576,7 +5881,7 @@ Then I click on "Payroll Tax"
    
    	Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
       
       
     @done
@@ -5590,7 +5895,7 @@ Then I click on "Payroll Tax"
     Then I click on "Payroll Tax Registration"
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 83117378917 |
+      | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
 		Then I check label "Label_EmployerName" contains "Organisation Name"
@@ -5633,7 +5938,7 @@ Then I click on "Payroll Tax"
     Then I check label "Label_Declarer_Organisation" contains "Organisation Name"
    	Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
 
       
    
@@ -5720,7 +6025,7 @@ Then I click on "Payroll Tax"
  		
    Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
    
    @wip
    Scenario Outline: Group Management Create group with DGE bug
@@ -5746,7 +6051,7 @@ Then I click on "Payroll Tax"
    		
    	 Examples: 
       | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | The Fire Company Pty Limited | 83117378917 | jbradley | Dbresults1 |
+      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
    
    
 	

@@ -139,16 +139,16 @@ Feature: Shakeout Test to be done before every deployment
     Then I check I am on "Registration" page
     #DTSP-29: As a user I want to enter my user details so that I can complete the registration process (page 2)
     #Scenario 1
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                 |
-      | item2 | First Name               |
-      | item3 | Last Name                |
-      | item4 | Email Address            |
-      | item5 | Choose Username          |
-      | item6 | Choose Password          |
-      | item7 | Hint                     |
-      | item7 | Confirm Password         |
-      | item7 | Already have an account? |
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                 |
+      #| item2 | First Name               |
+      #| item3 | Last Name                |
+      #| item4 | Email Address            |
+      #| item5 | Choose Username          |
+      #| item6 | Choose Password          |
+      #| item7 | Hint                     |
+      #| item7 | Confirm Password         |
+      #| item7 | Already have an account? |
     #Scenario 4: User cancels with unsaved changes
     Then I click on button "Cancel"
     Then I check I am on "Login" page
@@ -205,21 +205,21 @@ Feature: Shakeout Test to be done before every deployment
     Then I click on "Service Requests"
     Then I click on "Exemption Request"
     #Scenario 1: Display "Objection Request" Form
-    Then I check "OrganizationalName" is readonly
-    Then I check "PayrollAnswer_ABN" is readonly
-    Then I check "PayrollAnswer_CRN" is readonly
-    Then I check "ExemptionStartDateInput" is readonly
-    Then I check "ExemptionEndDateInput" is readonly
-    Then I check "JustificationInput" is readonly
+    #Then I check "OrganizationalName" is readonly
+    #Then I check "PayrollAnswer_ABN" is readonly
+    #Then I check "PayrollAnswer_CRN" is readonly
+    #Then I check "ExemptionStartDateInput" is readonly
+    #Then I check "ExemptionEndDateInput" is readonly
+    #Then I check "JustificationInput" is readonly
     #Scenario 2: "Objection Information" section displayed on the "Objection Request" Form
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value |
       | s2id_autogen1_search | Aqua  |
     Then I click on button "select2-results-1"
-    Then I check "ExemptionStartDateInput" is not readonly
-    Then I check "ExemptionEndDateInput" is not readonly
-    Then I check "JustificationInput" is not readonly
+    #Then I check "ExemptionStartDateInput" is not readonly
+    #Then I check "ExemptionEndDateInput" is not readonly
+    #Then I check "JustificationInput" is not readonly
     #Scenario 4: Error display
     Then I click on button "ExemptionStartDateInput"
     Then I click on "20170602"
@@ -242,20 +242,20 @@ Feature: Shakeout Test to be done before every deployment
       | JustificationInput | TEST  |
     Then I click on button with value "Next"
     Then I check I am on "Exemption Request Summary" page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                         |
-      | item2 | Organisation Name                |
-      | item3 | Australian Business Number (ABN) |
-      | item4 | Client Reference Number (CRN)    |
-      | item5 | Requested Exemption Start Date   |
-      | item6 | Requested Exemption End Date     |
-      | item7 | Exemption Request Justification  |
-      | item7 | Declaration                      |
-      | item7 | Organisation                     |
-      | item7 | Contact Phone                    |
-      | item7 | Email Address                    |
-      | item8 | 	02 Jun 2017                     |
-      | item9 | 	03 Jun 2017                      |
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                         |
+      #| item2 | Organisation Name                |
+      #| item3 | Australian Business Number (ABN) |
+      #| item4 | Client Reference Number (CRN)    |
+      #| item5 | Requested Exemption Start Date   |
+      #| item6 | Requested Exemption End Date     |
+      #| item7 | Exemption Request Justification  |
+      #| item7 | Declaration                      |
+      #| item7 | Organisation                     |
+      #| item7 | Contact Phone                    |
+      #| item7 | Email Address                    |
+      #| item8 | 	02 Jun 2017                     |
+      #| item9 | 	03 Jun 2017                      |
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Position>"
