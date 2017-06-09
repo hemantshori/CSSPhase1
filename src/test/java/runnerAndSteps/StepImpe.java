@@ -75,19 +75,20 @@ public class StepImpe {
 	
 	@Before()
 	public void startUp() {
-//		File pathToBinary = new File("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
+//		File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
 //		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 //		FirefoxProfile firefoxProfile = new FirefoxProfile();      
 //		File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
 //		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 //		FirefoxProfile firefoxProfile = new FirefoxProfile();
 //		driver = new FirefoxDriver(ffBinary,firefoxProfile);
-		//driver = new FirefoxDriver();
+		
 		
 	   // driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		System.setProperty("webdriver.gecko.driver", "C:\\Program Files\\Automation Tools\\Drivers\\geckodriver.exe");
 		
 //		String downloadFilepath = "/pdfs";
 //		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
@@ -98,8 +99,8 @@ public class StepImpe {
 //		DesiredCapabilities cap = DesiredCapabilities.chrome();
 //		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 //		cap.setCapability(ChromeOptions.CAPABILITY, options);
-		driver = new ChromeDriver();
-		
+		//driver = new ChromeDriver();
+		//driver = new FirefoxDriver(ffBinary,firefoxProfile);
 
 	    driver.manage().window().maximize();
 	    
@@ -108,7 +109,7 @@ public class StepImpe {
 
 	@After()
 	public void tearDown() {	
-		//driver.quit();
+		driver.quit();
 	}
 	//******************************************************************************   
 	    
@@ -548,7 +549,7 @@ public class StepImpe {
 	
 	@And("^I click on button with value \"(.*?)\"$")
 	public void i_click_on_button_with_value(String arg1) throws Throwable {
-		Thread.sleep(1000);
+		Thread.sleep(2500);
 		String myXpath = null;
 		DBUtilities createXpath = new DBUtilities(driver);
 		myXpath = createXpath.xpathMakerByValue(arg1);
@@ -577,86 +578,7 @@ public class StepImpe {
 		Thread.sleep(1000);
 		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the calendar popup
 
-//		if(arg1.equals("Current_Bill")
-//				||arg1.equals("InfoIcon")
-//				||arg1.equals("Pay")
-//				||arg1.equals("Next")
-//				||arg1.equals("Search")
-//				||arg1.equals("Serch")
-//				||arg1.equals("Edit")
-//				||arg1.equals("NextSection")
-//				||arg1.equals("MessageEdit")
-//				||arg1.equals("TaxPayerDetailsSave")
-//				||arg1.equals("SaveAndExit")
-//				||arg1.equals("Cancel")
-//				||arg1.equals("AddNew")
-//				||arg1.equals("Delete")
-//				||arg1.equals("RemoveLine")
-//				||arg1.equals("GroupMember_UNSURE")
-//				||arg1.equals("ConfirmBack")
-//				||arg1.equals("DeclarationBack")
-//				||arg1.equals("AddTotalWages")
-//				||arg1.equals("DateBusinessStart")
-//				||arg1.equals("DateBusinessLiable")
-//				||arg1.equals("TaxPayerDetailsNext")
-//				||arg1.equals("MonthlyReturnBack")
-//				||arg1.equals("PayrollNext")
-//				||arg1.equals("RefundDetailsNext")
-//				||arg1.equals("ClaimingACTProportion_Yes")
-//				||arg1.equals("ClaimingACTProportion_No")
-//				||arg1.equals("BackBt")
-//				||arg1.equals("Refunds_NO")
-//				||arg1.equals("DBResultsSG_Theme_wt6_block_wtActions_wt8")
-//				||arg1.equals("LodgePayrollAnswer_EmployerStatus_Independent")
-//				||arg1.equals("LodgePayrollAnswer_EmployerStatus_Opt2")
-//				||arg1.equals("LodgePayrollAnswer_EmployerStatus_Opt3")
-//				||arg1.equals("LodgePayrollAnswer_EmployerStatus_Opt4")
-//				||arg1.equals("Answer_TypeAnnual")
-//				||arg1.equals("Answer_TypeMonthly")
-//				||arg1.equals("YearOfReturn")
-//				||arg1.equals("CorrectInfoDeclared")
-//				||arg1.equals("SummarySubmit")
-//				||arg1.equals("PageText_TextCode")
-//				||arg1.equals("TaxPayerDetailsNext")
-//				||arg1.equals("Current_Bill")
-//				||arg1.equals("DeclarationNext")
-//				||arg1.equals("DeclarationConfirm")
-//				||arg1.equals("MonthlyReturnNext")
-//				||arg1.equals("ACTWagesPaidNext")
-//				||arg1.equals("ReSendEmailButton")
-//				||arg1.equals("PasswordSaveButton")
-//				||arg1.equals("ActivityHistoryButton")
-//				||arg1.equals("MakeAnotherPaymentButton")
-//				||arg1.equals("ConfirmForSubmission")
-//				||arg1.equals("EditSettings")
-//				||arg1.equals("Submit")
-//				||arg1.equals("ButtonShowAll")
-//				||arg1.equals("AllTransactions")
-//				||arg1.equals("Reset")
-//				||arg1.equals("MenuIcon")
-//				||arg1.equals("PasswordInfoIcon")
-//				||arg1.equals("HintInfoIcon")
-//				||arg1.equals("SetGoal")		
-//				||arg1.equals("wtSubmitButton3")      // to do ask M lara to change thename ....this is for Reset Password
-//				||arg1.equals("checkpaste") 
-//				){
-//			Thread.sleep(3000);
-//			DBUtilities createXpath = new DBUtilities(driver);
-//			String myxpath2 = createXpath.xpathMakerById(arg1);
-//			WebElement button = driver.findElement(By.xpath(myxpath2));
-//			
-//			JavascriptExecutor executor = (JavascriptExecutor)driver;
-//			executor.executeScript("arguments[0].scrollIntoView(true);",button);
-//			button.click();
-//			
-//		}
-//
-//		else if (arg1.equals("Welcome")){
-//			DBUtilities createXpath2 = new DBUtilities(driver);
-//			String myxpath3 = createXpath2.xpathMakerContainsText(arg1);	
-//		}
-//		// for calendar stuff found in the PAYROLL TAX INFORMATION part of the tax registration page
-//		else 
+//		
 		if (datePattern.matcher(arg1).matches()){
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath4 = createXpath.xpathMakerContainsCustomField("dyc-date", arg1);
@@ -685,7 +607,7 @@ public class StepImpe {
 			driver.findElement(By.xpath(myxpath)).click();
 			
 		}
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 	}
 
@@ -736,7 +658,7 @@ public class StepImpe {
 	
 	@Then("^I check \"(.*?)\" exists$")
 	public void i_check_exists(String arg1) throws Throwable {
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		DBUtilities checkElementDisplayed = new DBUtilities(driver);
 		try {
 			String myxpath = checkElementDisplayed.xpathMakerById(arg1);

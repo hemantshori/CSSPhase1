@@ -1,7 +1,7 @@
 #Sample Feature Definition Template
 Feature: WORK IN PROGRESS
 
-  @review
+  @wip
   Scenario Outline: DTSP-33: As an end user, I want to be able to submit an Ambulance Levy Lodgement Form so that I can validate in PSRM
     #Scenario 1: Ambulance Levy  Lodgement
     Given I want to login to portal "<PortalName>"
@@ -302,96 +302,9 @@ Feature: WORK IN PROGRESS
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
    
-   @review
-    Scenario Outline: DTSP-530: As a Customer Portal Admin, I want to be able to deactivate end user accounts so that I can remove invalid portal accounts
-    	 Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I click on button "RegistrationAsTaxAgent"
-    Then I wait for "1000" millisecond
-    Then I enter the details as
-      | Fields                   | Value         |
-      | TaxAgentBusinessName     | <CompanyName> |
-      | InputTaxAgentABN         | <ABN>         |
-      | BusinessAddress_Postcode |          3333 |
-      | BusinessAddress_Address  | TEST          |
-      | BusinessAddress_Suburb   | TEST          |
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I select "Victoria" from "BusinessAddress_StateId"
-    Then I click on button "RegistrationSubmit"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields                       | Value                           |
-      | Registration_FirstName       | TEST                            |
-      | Registration_LastName        | TEST                            |
-      | Registration_Position        | TEST                            |
-      | Registration_PhoneNumber     |                      1234567890 |
-      | Registration_Email           | <NewUserName>@automation.com                     |
-      | Registration_Username        | <NewUserName>                   |
-      | Registration_NewPassword     | <Password>                      |
-      | Registration_ConfirmPassword | <Password>                      |
-      | Registration_Hint            | Done as a result of automation! |
-    Then I click on button "SubmitAjaxRfrsh"
-    Then I wait for "5000" millisecond
-    Then I see text "Registration Confirmation" displayed
-    Then I want to login to portal "RegistrationLinkTable"
-    Then I click on object with xpath "//*[contains(text(), '<NewUserName>')]/../following-sibling::td/a"
 
-    #Scenario 1: Navigation 
-      Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I see text "Manage User Accounts" displayed
-    
-    #Scenario 2:Full Name Search 
-    Then I enter the details as
-      | Fields                       | Value                           |
-      | SearchInput       | taxagent                            |
-    Then I click on button with value "Search"
-    Then I see text "TaxAgent8@automation.com" displayed
-    Then I see text "TaxAgent6@automation.com" displayed
-    Then I see text "TaxAgent13@automation.com" displayed
-    Then I see text "TaxAgent5@automation.com" displayed
-    
-    #Scenario 3: Reset 
-    Then I click on button with value "Reset"
-    Then I check "SearchInput" is empty
-    
-    #Scenario 4: Columns 
-     Then I see text "Select" displayed
-		Then I see text "Full Name" displayed
-		Then I see text "User Type" displayed
-		Then I see text "Email" displayed
-		Then I see text "Phone Number" displayed
-		Then I see text "Status" displayed
-	
-		#Scenario 5: Deactivate 
-		 Then I enter the details as
-      | Fields                       | Value                           |
-      | SearchInput       | <NewUserName>                            |
-    Then I click on button with value "Search"
-    Then I click on button "UsersTable_ctl03_wt48"
-    Then I click on button with value "Deactivate"
-    Then I see "Are you sure you want to deactivate the user?" displayed on popup and I click "Cancel"
-    Then I click on button with value "Deactivate"
-    Then I see "Are you sure you want to deactivate the user?" displayed on popup and I click "OK"
-    Then I see text "Inactive" displayed
-    Then I click on "Sign Out"
-     And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <NewUserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I see text "Invalid Username, Email or Password. Please try again." displayed
-    
-        Examples: 
-      | PortalName | UserName | Password   |  CompanyName                                 | ABN         | NewUserName          | NewEmail                 | Password   |
-      | TSS        | TSSAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp530-2 | dtsp530@automation.com | Dbresults1 |
    
-   
-   @onhold
+   @review
    Scenario Outline:  DTSP-705: As an end user, I want to be able to raise a Voluntary Disclosure Request on the portal so that I can disclose any changes in date for my tax registration for a chosen tax type
      Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -399,13 +312,78 @@ Feature: WORK IN PROGRESS
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    #IGNORE UNTIL THE DATE FIELDS CAN BE FILLED IN WITH THE KEYBOARD INSTEAD OF CLICKING
+    #Scenario 1: Display "Voluntary Disclosure Request" Form 
+     Then I click on "Service Requests"
+     Then I see text "Update Liability Commencement Date Request" displayed
+     Then I click on "Update Liability Commencement Date Request"
+    Then I check "SelectTaxPayer" exists
+    Then I check "LodgePayrollAnswer_OrganizationalName" is readonly
+    Then I check "LodgePayrollAnswer_ABN" is readonly
+    Then I check "LodgePayrollAnswer_CRN" is readonly
     
+    #Scenario 2: "Voluntary Disclosure Request" section displayed on the "Voluntary Disclosure Request" Form 
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | <Organisation> |
+    Then I click on button "select2-results-1"
+    Then I check "NextBT" is readonly
+    
+    
+   Then I click on button "TaxTypeSelection"		
+		Then I see text "Ambulance Levy" displayed
+		Then I see text "Energy Industry Levy" displayed
+		Then I see text "Income Tax Equivalent" displayed
+		Then I see text "Payroll Tax" displayed
+   #Then I select "Payroll Tax" from "TaxTypeSelection"
+   #Scenario 3: Request details pass PSRM validation 
+    Then I enter the details as 
+    	| Fields 			| Value |
+    	| DisclosureDateInput | 090916 |
+   
+   Then I check "NextBT" is not readonly
+   Then I click on button "NextBT" 
+   
+   Then I see text "For tax type PAYROLL disclosure form is not valid because there is a tax role 6800964293 starting at 2013-05-01 which is prior to the disclosure date." displayed
+   
+    Then I enter the details as 
+    	| Fields 			| Value |
+    	| DisclosureDateInput | 010513 |
+   Then I click on button "NextBT"
+   Then I check I am on "Update Liability Commencement Date Request Summary" page
+   
+     #check declaration
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+    
+      #Then I check object with xpath "//*[contains(text(), 'Utility Type')]//following-sibling::td" contains "Gas Distribution Network"
+    #Then I check object with xpath "//*[contains(text(), 'Kilometres of Route Length')]//following-sibling::td" contains "50.00 KM"
+    #Then I check object with xpath "//*[contains(text(), 'Rate Per Kilometre')]//following-sibling::td" contains "$1,042.00 /KM"
+    #Then I check object with xpath "//*[contains(text(), 'Tax Payable')]//following-sibling::td" contains "$52,100.00"
+    #
+    #Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$52,100.00"
+    
+    Then I check object with xpath "//*[contains(text(), 'Organisation Name')]/..//following-sibling::td" contains "<Organisation>"
+    Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "85085664197"
+    Then I check object with xpath "//*[contains(text(), 'Client Reference Number (CRN)')]/..//following-sibling::td" contains "400107"
+
+    Then I check object with xpath "//*[contains(text(), 'Liability Commencement Date')]//following-sibling::td" contains "01 May 2013"
+   	Then I check object with xpath "//*[contains(text(), 'Tax Type')]//following-sibling::td" contains "Payroll Tax"
+   	
+   	 Then I click on button "CorrectInfoDeclared"
+    Then I check "SummarySubmitBT" is not readonly
+		Then I click on button with value "Back"
+		Then I click on button with value "Cancel"
+		Then I check I am on "Home" page
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
       
-  @onhold
+  @current
   Scenario Outline: DTSP-706: As an end user, I want to be able to raise a Refund Request on the portal so that I can request a refund for the Carry forward amount to the Tax Office
   
    Given I want to login to portal "<PortalName>"
@@ -414,7 +392,61 @@ Feature: WORK IN PROGRESS
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    #IGNORE UNTIL THE DATE FIELDS CAN BE FILLED IN WITH THE KEYBOARD INSTEAD OF CLICKING
+     Then I click on "Service Requests"
+     Then I see text "Refund Request" displayed
+     Then I click on "Refund Request"
+		#Scenario 1: Selected ABN is not eligible for "Refund Request"     Then I check "SelectTaxPayer" exists
+    Then I check "LodgePayrollAnswer_OrganizationalName" is readonly
+    Then I check "LodgePayrollAnswer_ABN" is readonly
+    Then I check "LodgePayrollAnswer_CRN" is readonly
+    
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | DESIGNATE |
+    Then I click on button "select2-results-1"
+    Then I check "NextBT" is readonly
+    Then I see text "You currently do not have any obligations with credit balance." displayed
+    
+    Then I check "LodgePayrollAnswer_OrganizationalName" is readonly
+    Then I check "LodgePayrollAnswer_ABN" is readonly
+    Then I check "LodgePayrollAnswer_CRN" is readonly
+    
+    #Scenario 2: Selected ABN is eligible for "Refund Request" 
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value               |
+      | s2id_autogen1_search | Late Cut Pty Ltd |
+    Then I click on button "select2-results-1"
+     Then I check "LodgePayrollAnswer_OrganizationalName" contains "Late Cut Pty Ltd"
+    Then I check "LodgePayrollAnswer_ABN" contains "56114795274"
+    Then I check "LodgePayrollAnswer_CRN" contains "400106"
+    
+    Then I check "RefundRequest_TaxPayerBalance" contains "$ -30,490.83"
+    Then I check "ObligationDescription" contains "Utilities Network Tax,01/07/2015-31/03/2016"
+    Then I check "CreditAmount" contains "$ -30,490.83"
+     Then I enter the details as 
+    	| Fields 			| Value |
+    	| CarryForwardAmount | 23423423423243 |
+   	Then I click on button with value "Next"
+   	Then I see text "Amount to Carry Forward cannot be greater than Credit Amount" displayed
+   	Then I see text "There are outstanding filing/lodgments that the taxpayer is eligible for." displayed
+
+    
+   #Then I click on button "TaxTypeSelection"		
+#		Then I see text "Ambulance Levy" displayed
+#		Then I see text "Energy Industry Levy" displayed
+#		Then I see text "Income Tax Equivalent" displayed
+#		Then I see text "Payroll Tax" displayed
+   #Then I select "Payroll Tax" from "TaxTypeSelection"
+   #Scenario 3: Request details pass PSRM validation 
+   
+   #Then I check "NextBT" is not readonly
+   #Then I click on button "NextBT" 
+    #
+    Then I click on button "CancelBT"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    Then I check I am on "Home" page
     
    Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
@@ -466,7 +498,8 @@ Feature: WORK IN PROGRESS
       | Fields               | Value               |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-		Then I select "Utilities(Network Facilities) Tax" from "TaxTypeSelection"
+    Then I click on button "TaxTypeSelection"
+    Then I click on "Utilities(Network Facilities) Tax"
 		
 #		Then I see text "Ambulance Levy" displayed
 #		Then I see text "Energy Industry Levy" displayed
@@ -491,11 +524,19 @@ Feature: WORK IN PROGRESS
       | item6 | Is the Objection out of time                      |
       | item7 | Reason for failing to lodge the objection on time |
       | item7 | Comments                                          |
-    Then I check object with xpath "//*[contains(@id, 'ObjectionInformation')]//..//tr[1]//td[2]" contains "Utilities (Network Facilities) Tax"
-    Then I check object with xpath "//*[contains(@id, 'ObjectionInformation')]//..//tr[2]//td[2]" contains "Penalty"
     Then I check object with xpath "//*[contains(@id, 'ObjectionInformation')]//..//tr[3]//td[2]" contains "Yes"
-    Then I check object with xpath "//*[contains(@id, 'ObjectionInformation')]//..//tr[4]//td[2]" contains "LodgementFailureReason"
-    Then I check object with xpath "//*[contains(@id, 'ObjectionInformation')]//..//tr[5]//td[2]" contains "ObjectionComment"
+    Then I check object with xpath "//*[contains(text(), 'Tax Type')]/following-sibling::td" contains "Utilities (Network Facilities) Tax"
+    Then I check object with xpath "//*[contains(text(), 'Subject of Objection')]/..//following-sibling::td" contains "Penalty"
+    Then I check object with xpath "//*[contains(text(), 'Reason for failing to lodge the objection on time')]/..//following-sibling::td" contains "LodgementFailureReason"
+    Then I check object with xpath "//*[contains(text(), 'Comments')]/..//following-sibling::td" contains "ObjectionComment"
+    
+    #check declaration
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
 		
 		
    Examples: 
@@ -548,26 +589,42 @@ Feature: WORK IN PROGRESS
       | Fields               | Value               |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-		Then I select "Utilities(Network Facilities) Tax" from "TaxTypeSelection"
+#		Then I click on button "TaxTypeSelection"
+    #Then I click on "Income Tax Equivalent Tax"
 		
 #		Then I see text "Ambulance Levy" displayed
 #		Then I see text "Energy Industry Levy" displayed
 #		Then I see text "Income Tax Equivalent" displayed
 #		Then I see text "Payroll Tax" displayed
 #		Then I see text "Utilities(Network Facilities) Tax" displayed
-#		
-		Then I click on button "ExemptionStartDateInput"
-    Then I click on "20170602"
+			 Then I enter the details as
+      | Fields               | Value               |
+      | ExemptionStartDateInput | 020617 |
+      | ExemptionEndDateInput | 030617 |
+#		Then I click on button "ExemptionStartDateInput"
+    #Then I click on "20170602"
     #Then I click on button "calTriggerOut"
-    Then I click on button "ExemptionEndDateInput"
-    Then I click on "20170603"
+    #Then I click on button "ExemptionEndDateInput"
+    #Then I click on "20170603"
     # Then I click on button "calTriggerOut"
     Then I enter the details as
       | Fields             | Value |
       | JustificationInput | TEST  |
     Then I click on button with value "Next"
+    Then I check object with xpath "//*[contains(text(), 'Requested Exemption Start Date')]/..//following-sibling::td" contains "02 Jun 2017"
+    Then I check object with xpath "//*[contains(text(), 'Requested Exemption End Date')]/..//following-sibling::td" contains "03 Jun 2017"
+    Then I check object with xpath "//*[contains(text(), 'Tax Type')]//following-sibling::td" contains "Payroll Tax"
+    Then I check object with xpath "//*[contains(text(), 'Exemption Request Justification')]/..//following-sibling::td" contains "TEST"
     Then I check I am on "Exemption Request Summary" page
-    Then I see text "Utilities (Network Facilities) Tax" displayed
+    
+    
+     #check declaration
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
 
 		
    Examples: 
@@ -619,9 +676,11 @@ Feature: WORK IN PROGRESS
 #		Then I see text "Income Tax Equivalent" displayed
 #		Then I see text "Payroll Tax" displayed
 #		Then I see text "Utilities(Network Facilities) Tax" displayed
-#		
-		Then I click on button "LiquidationStartDate"
-    Then I click on "20170603"
+			 Then I enter the details as
+      | Fields               | Value               |
+      | LiquidationStartDate | 020617 |
+#		Then I click on button "LiquidationStartDate"
+    #Then I click on "20170603"
     Then I click on button "ContactPerson_CommunicationMethodId"
     Then I click on "Email"
      Then I select "Victoria" from "Address_State4"
@@ -695,15 +754,29 @@ Feature: WORK IN PROGRESS
 #		Then I see text "Income Tax Equivalent" displayed
 #		Then I see text "Payroll Tax" displayed
 #		Then I see text "Utilities(Network Facilities) Tax" displayed
-#		
-		Then I click on button "CancellationStartDate"
-    Then I click on "20170603"
+ Then I enter the details as
+      | Fields               | Value               |
+      | CancellationStartDate | 020617 |
+#		Then I click on button "CancellationStartDate"
+    #Then I click on "20170603"
     Then I enter the details as
       | Fields            | Value |
       | ReasonDescription | TEST  |
     Then I click on button with value "Next"
     Then I check I am on "Tax Cancellation Request Summary" page
-    Then I see text "Payroll Tax" displayed
+    Then I check object with xpath "//*[contains(text(), 'Cancellation Effective Date')]/..//following-sibling::td" contains "02 Jun 2017"
+    #Then I check object with xpath "//*[contains(text(), 'Requested Exemption End Date')]/..//following-sibling::td" contains "03 Jun 2017"
+    Then I check object with xpath "//*[contains(text(), 'Tax Type')]//following-sibling::td" contains "Payroll Tax"
+    Then I check object with xpath "//*[contains(text(), 'Reason Description')]/..//following-sibling::td" contains "TEST"
+    
+    
+     #check declaration
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
 
 		
    Examples: 
@@ -763,13 +836,13 @@ Feature: WORK IN PROGRESS
     Then I check "AddBTN" is not readonly
     Then I check "RemoveBTN" is readonly
     Then I click on button "AddBTN"
-    Then I click on button "AddBTN"
-    Then I check "RemoveBTN" is readonly
-    Then I select "Sewerage Network" from "NetworkDetail_UtilityTypeDropdown"
-    Then I enter the details as
-      | Fields                                             | Value |
-       | KMOfRouteLength     |    50 |
-    Then I check "SaveAndNextToSummaryBT" is not readonly
+    #Then I click on button "AddBTN"
+    #Then I check "RemoveBTN" is readonly
+    #Then I select "Sewerage Network" from "NetworkDetail_UtilityTypeDropdown"
+    #Then I enter the details as
+      #| Fields                                             | Value |
+       #| KMOfRouteLength     |    50 |
+    #Then I check "SaveAndNextToSummaryBT" is not readonly
     Then I click on button "SaveAndNextToSummaryBT"
     Then I check I am on "Lodgement Summary" page
      Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
@@ -778,6 +851,23 @@ Feature: WORK IN PROGRESS
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+    
+    
+    Then I check object with xpath "//*[contains(text(), 'Utility Type')]//following-sibling::td" contains "Gas Distribution Network"
+    Then I check object with xpath "//*[contains(text(), 'Kilometres of Route Length')]//following-sibling::td" contains "50.00 KM"
+    Then I check object with xpath "//*[contains(text(), 'Rate Per Kilometre')]//following-sibling::td" contains "$1,042.00 /KM"
+    Then I check object with xpath "//*[contains(text(), 'Tax Payable')]//following-sibling::td" contains "$52,100.00"
+    
+    Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$52,100.00"
+    
+    Then I check object with xpath "//*[contains(text(), 'Organisation Name')]/..//following-sibling::td" contains "JOINT ACTION PTY. LTD."
+    Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "58080858724"
+    Then I check object with xpath "//*[contains(text(), 'Client Reference Number (CRN)')]/..//following-sibling::td" contains "400108"
+
+    Then I check object with xpath "//*[contains(text(), 'Return Period')]//following-sibling::td" contains "01 Apr 2017 - 31 Mar 2018"
+
+
+    
 		Then I click on button with value "Back"
 		Then I check I am on "Network Utilities Lodgement Form" page
 		Then I click on button "SaveNextBT"
@@ -841,8 +931,31 @@ Feature: WORK IN PROGRESS
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
     Then I check object with xpath "//*[contains(text(), 'Number of Single Members')]/..//following-sibling::td//div" contains "11"
+    Then I check object with xpath "//*[contains(text(), 'Single Member Rate Per Week')]/..//following-sibling::td//div" contains "$2.20"
+    Then I check object with xpath "//*[contains(text(), 'Amount Payable Per Week (Single Member)')]/..//following-sibling::td//div" contains "$24.20"
+    
     Then I check object with xpath "//*[contains(text(), 'Number of Family Members')]/..//following-sibling::td//div" contains "11"
+    Then I check object with xpath "//*[contains(text(), 'Family Members Rate Per Week')]/..//following-sibling::td//div" contains "$4.40"
+    Then I check object with xpath "//*[contains(text(), 'Amount Payable Per Week (Family Members)')]/..//following-sibling::td//div" contains "$48.40"
+    Then I check object with xpath "//*[contains(text(), 'Total Amount Payable (Weekly)')]/..//following-sibling::td//div" contains "$72.60"
+    
     Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$72.60"
+    
+    #
+    #Then I check object with xpath "//*[contains(text(), 'Utility Type')]//following-sibling::td" contains "Gas Distribution Network"
+    #Then I check object with xpath "//*[contains(text(), 'Kilometres of Route Length')]//following-sibling::td" contains "50.00 KM"
+    #Then I check object with xpath "//*[contains(text(), 'Rate Per Kilometre')]//following-sibling::td" contains "$1,042.00 /KM"
+    #Then I check object with xpath "//*[contains(text(), 'Tax Payable')]//following-sibling::td" contains "$52,100.00"
+    #
+    #Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$52,100.00"
+    #
+    Then I check object with xpath "//*[contains(text(), 'Organisation Name')]/..//following-sibling::td" contains "DESIGNATE PTY. LTD."
+    Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "85085664197"
+    Then I check object with xpath "//*[contains(text(), 'Client Reference Number (CRN)')]/..//following-sibling::td" contains "400107"
+
+    Then I check object with xpath "//*[contains(text(), 'Return Date')]//following-sibling::td" contains "May 2014"
+    Then I check object with xpath "//*[contains(text(), 'Reference Period')]//following-sibling::td" contains "Feb 2014"
+    
 		Then I click on button with value "Back"
 		Then I check I am on "Ambulance Levy Lodgement Form" page
 		Then I click on button "SaveNextBT"
@@ -983,7 +1096,7 @@ Feature: WORK IN PROGRESS
     	Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
     Then I click on button with value "Next"
-    Then I wait for "1400" millisecond
+    Then I wait for "1500" millisecond
     Then I check I am on "Payroll Tax Group Update Summary" page
     
 
@@ -1124,7 +1237,7 @@ Feature: WORK IN PROGRESS
     	Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
     Then I click on button with value "Next"
-    Then I wait for "1400" millisecond
+    Then I wait for "2400" millisecond
     Then I check I am on "Payroll Tax Group Update Summary" page
     Then I check object with xpath "//*[contains(@id, 'NewNonACTGrpMembersDiv')]//tr//td" contains "Overseas Member"
     Then I check object with xpath "//*[contains(@id, 'NewNonACTGrpMembersDiv')]//tr//td[2]" contains "Yes"
@@ -1218,7 +1331,7 @@ Feature: WORK IN PROGRESS
 		   | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         | CompanyName                  |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
   
-	@wip
+	@review
 	Scenario Outline: DTSP-899: As an end user I want to see the "Activity Type" drop down on activity history updated to cater for all Tax types
 		Given I want to login to portal "<PortalName>"
     And I enter the details as
