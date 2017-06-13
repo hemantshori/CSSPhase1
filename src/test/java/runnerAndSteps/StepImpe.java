@@ -38,6 +38,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -52,6 +53,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import reporting.com.HTMLReports.AccountFinancialHistorypage;
 import reporting.com.HTMLReports.BillingHistoryPage;
 import reporting.com.HTMLReports.DBUtilities;
@@ -73,22 +76,28 @@ public class StepImpe {
 	Hashtable<String, Integer> summary = new Hashtable<String, Integer>();
 
 	
+	
 	@Before()
 	public void startUp() {
+		//ChromeDriverManager.getInstance().setup();
+//		FirefoxDriverManager.getInstance().setup();
+//		System.setProperty("webdriver.gecko.driver", "C:\\Program Files\\Automation Tools\\Drivers\\geckodriver.exe");
 //		File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
 //		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 //		FirefoxProfile firefoxProfile = new FirefoxProfile();      
-//		File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
 //		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 //		FirefoxProfile firefoxProfile = new FirefoxProfile();
-//		driver = new FirefoxDriver(ffBinary,firefoxProfile);
-		
+//		FirefoxOptions ffo =  new FirefoxOptions().setBinary(ffBinary).setProfile(firefoxProfile);
+
+
+//		driver = new FirefoxDriver(ffo);
+//		
 		
 	   // driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
-		System.setProperty("webdriver.gecko.driver", "C:\\Program Files\\Automation Tools\\Drivers\\geckodriver.exe");
+
 		
 //		String downloadFilepath = "/pdfs";
 //		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
@@ -99,9 +108,10 @@ public class StepImpe {
 //		DesiredCapabilities cap = DesiredCapabilities.chrome();
 //		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 //		cap.setCapability(ChromeOptions.CAPABILITY, options);
-		//driver = new ChromeDriver();
-		//driver = new FirefoxDriver(ffBinary,firefoxProfile);
+		driver = new ChromeDriver();
+		//driver = new FirefoxDriver();
 
+//		driver = new FirefoxDriver();
 	    driver.manage().window().maximize();
 	    
 	}
