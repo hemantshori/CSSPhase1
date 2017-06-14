@@ -96,7 +96,7 @@ public class StepImpe {
 	   // driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
-		//System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+
 
 		
 //		String downloadFilepath = "/pdfs";
@@ -109,8 +109,11 @@ public class StepImpe {
 //		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 //		cap.setCapability(ChromeOptions.CAPABILITY, options);
 		
-		/* jenkins only */;
+		// jenkins only ;
 		ChromeDriverManager.getInstance().setup();
+		
+		// local only
+		//System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
 		driver = new ChromeDriver();
 		//driver = new FirefoxDriver();
 
@@ -122,7 +125,7 @@ public class StepImpe {
 
 	@After()
 	public void tearDown() {	
-		//driver.quit();
+		driver.quit();
 	}
 	//******************************************************************************   
 	    
