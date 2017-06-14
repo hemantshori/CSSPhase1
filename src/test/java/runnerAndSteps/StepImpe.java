@@ -79,7 +79,7 @@ public class StepImpe {
 	
 	@Before()
 	public void startUp() {
-		//ChromeDriverManager.getInstance().setup();
+	
 //		FirefoxDriverManager.getInstance().setup();
 //		System.setProperty("webdriver.gecko.driver", "C:\\Program Files\\Automation Tools\\Drivers\\geckodriver.exe");
 //		File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
@@ -96,7 +96,7 @@ public class StepImpe {
 	   // driver.manage().window().maximize();
 
 	    // the location of the driver is been changed to match with remote server setting.....  HS
-		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
 
 		
 //		String downloadFilepath = "/pdfs";
@@ -108,6 +108,9 @@ public class StepImpe {
 //		DesiredCapabilities cap = DesiredCapabilities.chrome();
 //		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 //		cap.setCapability(ChromeOptions.CAPABILITY, options);
+		
+		/* jenkins only */;
+		ChromeDriverManager.getInstance().setup();
 		driver = new ChromeDriver();
 		//driver = new FirefoxDriver();
 
@@ -119,7 +122,7 @@ public class StepImpe {
 
 	@After()
 	public void tearDown() {	
-		driver.quit();
+		//driver.quit();
 	}
 	//******************************************************************************   
 	    
