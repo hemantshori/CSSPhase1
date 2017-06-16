@@ -2,10 +2,12 @@
 package runnerAndSteps;
 
 
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -110,10 +112,11 @@ public class StepImpe {
 //		cap.setCapability(ChromeOptions.CAPABILITY, options);
 		
 		// jenkins only ;
-		ChromeDriverManager.getInstance().setup();
+		//ChromeDriverManager.getInstance().setup();
 		
 		// local only
-		//System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		
 		driver = new ChromeDriver();
 		//driver = new FirefoxDriver();
 
@@ -125,7 +128,7 @@ public class StepImpe {
 
 	@After()
 	public void tearDown() {	
-		driver.quit();
+		//driver.quit();
 	}
 	//******************************************************************************   
 	    
@@ -1130,9 +1133,15 @@ public class StepImpe {
 		String value = inputBox.getText();
 		System.out.println("value: " + value);
 		System.out.println("arg2: " + arg2);
-		
-		Assert.assertTrue(regex.matcher(value).matches());
-		
+		try {
+			Assert.assertTrue(regex.matcher(value).matches());
+		}
+		catch (AssertionError | Exception e){
+			String value2 = inputBox.getAttribute("value");;
+			System.out.println("value: " + value2);
+			System.out.println("arg2: " + arg2);
+			Assert.assertTrue(regex.matcher(value2).matches());
+		}
 	}
 	
 	@Then("^I click on object with xpath \"(.*?)\"$")
@@ -1140,4 +1149,29 @@ public class StepImpe {
 		WebElement object = driver.findElement(By.xpath(arg1));
 		object.click();
 	}
+	
+	@Then("^I upload file with path \"(.*?)\" to \"(.*?)\"$")
+	public void i_upload_file_with_path_to(String arg1, String arg2) throws Throwable{
+		DBUtilities dbutil = new DBUtilities(driver);
+		String xpath1 = dbutil.xpathMakerById(arg2);
+		driver.findElement(By.id(xpath1)).click();
+
+	    //put path to your image in a clipboard
+	    StringSelection ss = new StringSelection("C:\\IMG_3827.JPG");
+	    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+
+	    //imitate mouse events like ENTER, CTRL+C, CTRL+V
+	    Robot robot = new Robot();
+	    robot.keyPress(KeyEvent.VK_ENTER);
+	    robot.keyRelease(KeyEvent.VK_ENTER);
+	    robot.keyPress(KeyEvent.VK_CONTROL);
+	    robot.keyPress(KeyEvent.VK_V);
+	    robot.keyRelease(KeyEvent.VK_V);
+	    robot.keyRelease(KeyEvent.VK_CONTROL);
+	    robot.keyPress(KeyEvent.VK_ENTER);
+	    robot.keyRelease(KeyEvent.VK_ENTER);
+
+
+	}
 }
+
