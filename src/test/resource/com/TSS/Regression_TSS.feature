@@ -52,11 +52,11 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | PortalName2 | SearchValue   | SearchDescription       | SearchValue2 | SearchDescription2                         | UserName | Password   |
-      | TSS        | TSSUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | jbradley | Dbresults1 |
+      | TSS        | TSSUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | TSSAdmin | Dbresults1 |
   #alt username: hemant.shori
   #alt password: USBcoffee1
   @tss
-    	Scenario Outline: DTSP-55 : As a DB Portal Administrator I want to edit a message's description so that I can customise the description for an organisation
+  Scenario Outline: DTSP-55 : As a DB Portal Administrator I want to edit a message's description so that I can customise the description for an organisation
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -64,23 +64,41 @@ Feature: Regression for TSS.
       | PasswordInput | <Password> |
     And I hit Enter
     Given I want to login to portal "MessageEdit"
-    Then I click on "Edit"
-    #Scenario 1: Administrator accesses the edit function 
+    Then I see text "<DescriptionBefore>" displayed
+    Then I see text "<DescriptionAfter>" not displayed
+    Then I click on object with xpath "//td//span[contains(text(), '<DescriptionBefore>')]/../..//td//a"
+    #Scenario 1: Administrator accesses the edit function
     Then "<Item>" is displayed as "<ItemName>"
-      | Item   | ItemName          |
-      | text1  | Feedback Msg Code |
-      | text2  | Description       |
+      | Item  | ItemName          |
+      | text1 | Feedback Msg Code |
+      | text2 | Description       |
     Then I check "SaveButton" exists
     Then I check "CancelButton" exists
-    Then I click on "Cancel"
-    #Scenario 2: Administrator cancels edit function with no unsaved changes 
-  	Then I check I am on "Feedback Msg Texts" page
+    And I enter the details as 
+    	| Fields 		| Value |
+    	| FeedbackMsgText_Description | <DescriptionAfter> |
+    Then I click on button with value "Save"
+    Then I see text "<DescriptionAfter>" displayed
+    Then I see text "<DescriptionBefore>" not displayed
+    Then I click on object with xpath "//td//span[contains(text(), '<DescriptionAfter>')]/../..//td//a"
+    And I enter the details as 
+    	| Fields 		| Value |
+    	| FeedbackMsgText_Description | <DescriptionBefore> |
+    Then I click on button with value "Save"
+     Then I see text "<DescriptionBefore>" displayed
+    Then I see text "<DescriptionAfter>" not displayed
+    Then I click on object with xpath "//td//span[contains(text(), '<DescriptionBefore>')]/../..//td//a"
+    Then I click on button with value "Cancel"
+    #Scenario 2: Administrator cancels edit function with no unsaved changes
+    Then I check I am on "Feedback Msg Texts" page
+     Then I see text "<DescriptionBefore>" displayed
+    Then I see text "<DescriptionAfter>" not displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  | DropDownName    | DropDownOption      |
-      | TSS        | UserNameInput | PasswordInput | jbradley      | Dbresults1 | FeedbackMsgText | Username Exists |
-
-  Scenario Outline: DTSP-56 :As a DB Portal Administrator I want to add a new message so that required messages are displayed in the portal
+      | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | DescriptionBefore                          | DescriptionAfter |
+      | TSS        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
+      
+    Scenario Outline: DTSP-56 :As a DB Portal Administrator I want to add a new message so that required messages are displayed in the portal
     								#DTSP-57 :As a DB Portal Administrator I want to delete a message so that I can remove messages no longer required
 
     Given I want to login to portal "<PortalName>"
@@ -90,46 +108,43 @@ Feature: Regression for TSS.
       | PasswordInput | <Password> |
     And I hit Enter
     Given I want to login to portal "MessageEdit"
+    Then I see text "<NewMessage>" not displayed
     Then I click on button with value "Add New"
+     Then I click on button "CancelButton"
+    #Scenario 2: Administrator cancels edit function with no unsaved changes 
+  	Then I check I am on "Feedback Msg Texts" page
     #Scenario 1: Administrator accesses the edit function 
     Then "<Item>" is displayed as "<ItemName>"
       | Item   | ItemName          |
       | text1  | Feedback Msg Code |
       | text2  | Description       |
+       Then I click on button "AddNewButton"
     Then I check "SaveButton" exists
     Then I check "CancelButton" exists
-    Then I click on "Cancel"
-    #Scenario 2: Administrator cancels edit function with no unsaved changes 
-  	Then I check I am on "Feedback Msg Texts" page
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  | DropDownName    | DropDownOption      |
-      | TSS        | UserNameInput | PasswordInput | jbradley      | Dbresults1 | FeedbackMsgText | Username Exists |
-
-Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a message so that I can remove messages no longer required
-
-    Given I want to login to portal "<PortalName>"
+         
+   
     And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Given I want to login to portal "MessageEdit"
-    #Scenario 1: Administrator deletes an existing message 
+    	| Fields 			| Value 	|
+    	| FeedbackMsgText_Description | <NewMessage> |
+    Then I select "Invalid ABN" from "FeedbackMsgText_FeedbackMsgCode"
     
-    Then I click on button "DeleteLink"
-    #Scenario 3: Administrator does not confirm cancellation 
+    Then I click on button with value "Save"
+    Then I see text "<NewMessage>" displayed
+    Then I click on object with xpath "//td//span[contains(text(), '<NewMessage>')]/../following-sibling::td//a"
     Then I see "Are you sure you want to delete?" displayed on popup and I click "Cancel"
-    Then I check I am on "Feedback Msg Texts" page
-    
-		#Do Scenario 2 when you've figured out how to 'store variables' in Cucumber
+    Then I click on object with xpath "//td//span[contains(text(), '<NewMessage>')]/../following-sibling::td//a"
+    Then I see "Are you sure you want to delete?" displayed on popup and I click "OK"
+        Then I see text "<NewMessage>" not displayed
 
+  	
+  	
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  | DropDownName    | DropDownOption      |
-      | TSS        | UserNameInput | PasswordInput | jbradley      | Dbresults1 | FeedbackMsgText | Username Exists |
-	
-  @WORK_ON_LATER
+      | PortalName | UserNameField | PasswordField | UserName | Password  | DropDownName    | DropDownOption      | NewMessage |
+      | TSS        | UserNameInput | PasswordInput | TSSAdmin      | Dbresults1 | FeedbackMsgText | Username Exists | This is a test message! |
+
+
+  @done
   Scenario Outline: DTSP-233: As a DB Portal Administrator, I want to be able to search/add/edit/remove the tool tips displayed on forms so that I can help the end user better understand the form field/s
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -138,94 +153,74 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | PasswordInput | <Password> |
     And I hit Enter
     Given I want to login to portal "PageTexts"
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName  |
-      #| item2 | Text Code |
-      #| item4 | Is Active |
-    #Then I see text "Description" displayed
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName  |
+      | item2 | Text Code |
+      | item4 | Is Active |
+    Then I see text "Description" displayed
     # check for search
-    #And I enter the details as
-      #| Fields      | Value    |
-      #| SearchInput | Password |
-    #Then I click on "Serch"
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName                  |
-      #| item2 | PasswordValidation        |
-      #| item2 | ResetPasswordExpiredLine2 |
-      #| item2 | ResetPasswordInvalidLine1 |
-      #| item2 | ForgotPasswordEmailLine3  |
-      #| item2 | ResetPasswordLine2        |
-      #| item2 | ResetPasswordInvalidLine2 |
-      #| item2 | ResetPasswordExpiredLine1 |
-      #| item2 | ForgotPasswordEmailLine2  |
-      #| item2 | ResetPasswordLine1        |
-      #| item2 | ForgotPasswordEmailLine1  |
-    #And I enter the details as
-      #| Fields      | Value |
-      #| SearchInput |       |
-    #
-    #Then I click on "Serch"
-    #Then I click on "Edit"
-    # check for editing
-    #
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName    |
-      #| item2 | Text Code   |
-      #| item3 | Description |
-      #| item4 | Is Visible  |
-    #Then I click on "Cancel"
-    #
-    #edit a dummy description
-    #Then I click on "Edit"
-    #Then I click on "PageText_TextCode"
-    #Then I click on "RegistrationConfirmationLine1"
-    #And I enter the details as
-      #| Fields               | Value |
-      #| PageText_Description | TEST  |
-    #Then I click on "Save"
-    #
-    #set the description back to normal
-    #Then I click on "Edit"
-    #Then I click on "PageText_TextCode"
-    #Then I click on "RegistrationConfirmationLine1"
-    #And I enter the details as
-      #| Fields               | Value                         |
-      #| PageText_Description | RegistrationConfirmationLine1 |
-    #Then I click on "Save"
-    #
-    # add a new message
-    #Then I click on "AddNew"
-    #Then "<Item>" is displayed as "<ItemName>"
-      #| Item  | ItemName    |
-      #| item2 | Text Code   |
-      #| item3 | Description |
-      #| item4 | Is Visible  |
-    #Then I click on "Cancel"
-    #Then I click on "AddNew"
-    #Then I click on "PageText_TextCode"
-    #Then I click on "RegistrationConfirmationLine1"
-    #And I enter the details as
-      #| Fields               | Value                         |
-      #| PageText_Description | RegistrationConfirmationLine1 |
-    #Then I click on "Save"
-    #
-    # now delete it
-    #Then I click on "Delete"
-    #Given I want to login to portal "PageTexts"
+    And I enter the details as
+      | Fields      | Value    |
+      | SearchInput | Password |
+    Then I click on button "PageTextSerchBt"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                  |
+      | item2 | ResetPasswordLine1        |
+      | item2 | HintToolTip               |
+      | item2 | PasswordValidation        |
+      | item2 | ForgotPasswordEmailLine3  |
+      | item2 | ResetPasswordExpiredLine1 |
+      | item2 | ResetPasswordInvalidLine2 |
+      | item2 | ForgotPasswordEmailLine2  |
+      | item2 | ForgotPasswordEmailLine1  |
+      | item2 | LockedAccountLine2        |
+    And I enter the details as
+      | Fields      | Value |
+      | SearchInput |       |
+    Then I see text "<NewDescription>" not displayed
+    #check for editing
+    #add tips
+    Then I click on button "AddNewButton"
+    And I enter the details as
+      | Fields               | Value            |
+      | PageText_Description | <NewDescription> |
+    Then I select "EmailSignature" from "PageText_TextCode"
+    Then I click on button with value "Save"
+    Then I wait for "2000" millisecond
+     And I enter the details as
+      | Fields      | Value |
+      | SearchInput |     a  |
+    
+    Then I click on button "PageTextSerchBt"
+    #Edit
+    Then I see text "<NewDescription>" displayed
+    Then I click on object with xpath "//td[contains(text(), '<NewDescription>')]/..//a"
+    And I enter the details as
+      | Fields               | Value             |
+      | PageText_Description | <NewDescription2> |
+    Then I click on button with value "Save"
+    Then I see text "<NewDescription>" not displayed
+    Then I see text "<NewDescription2>" displayed
+    #Delete
+    Then I click on object with xpath "//td[contains(text(), '<NewDescription2>')]/..//a[contains(@id, 'PageTextDeleteLink')]"
+    Given I want to login to portal "PageTexts"
+    Then I see text "<NewDescription>" not displayed
+    Then I see text "<NewDescription2>" not displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  |
-      | TSS        | UserNameInput | PasswordInput | jbradley      | Dbresults1|
+      | PortalName | UserNameField | PasswordField | UserName | Password   | NewDescription  | NewDescription2     |
+      | TSS        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | This is a test! | This is a test two! |
+
       
 
-  @BEST_DONE_MANUALLY
-  Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
+  #@BEST_DONE_MANUALLY
+  #Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
     #And I check I am on "HomePage" page
     #And I click on "Payroll Tax"
     #And I click on "Cancel"
@@ -250,10 +245,10 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     #Then I click on "SummarySubmit"
     #Then I check I am on "Submission Confirmation" page
     #And I click on "Download"
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password  | ButtonName1 | DropDownValue1 | DropDownField | DropDownValue2 | DropDownField2 | Message                                    |
-      | TSS        | UserNameInput | PasswordInput | jbradley      | Dbresults1| TypeMonthly |           2012 | YearOfReturn  | September      | MonthOfReturn  | Your changes have been successfully saved. |			
+#
+    #Examples: 
+      #| PortalName | UserNameField | PasswordField | UserName | Password  | ButtonName1 | DropDownValue1 | DropDownField | DropDownValue2 | DropDownField2 | Message                                    |
+      #| TSS        | UserNameInput | PasswordInput | jbradley      | Dbresults1| TypeMonthly |           2012 | YearOfReturn  | September      | MonthOfReturn  | Your changes have been successfully saved. |			
 
   @tss
   Scenario Outline: DTSP-358: As an end user, I want to be able to submit my Annual Payroll Tax Return Form
@@ -1323,10 +1318,9 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
   #################################### PHASE 1 ITERATION 4 ################################################
   ###########################################################################################################
 
-@done
+  @done
   Scenario Outline: DTSP-523
     # Part of this story is automatically tested by others...
-  
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -1335,21 +1329,21 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     And I hit Enter
     Then I click on "Lodgements"
     Then I click on "Payroll Tax"
-    
     #PAYROLL TAX FORM TESTING WITH ANNUAL RECONCILIATION IS BLOCKED BY BUG DTSP-603
     Then I click on button "Discard"
     Then I check "NextSection" is readonly
-     Then I click on button "select2-chosen-1"
-  	 Then I enter the details as
-      | Fields               | Value                |
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
-   Then I click on button "select2-results-1"
-   Then I wait for "1000" millisecond
+    Then I click on button "select2-results-1"
+    Then I wait for "1000" millisecond
     Then I click on "Monthly Return"
-    Then I select "Jan 2017" from "MonthlyObligationSelect"
-    Then I click on "Jan 2017"
+    Then I select "Mar 2017" from "MonthlyObligationSelect"
+    Then I click on "Mar 2017"
     Then I wait for "1000" millisecond
     Then I click on button with value "Save and Next"
+    Then I wait for "2000" millisecond
     Then I check "SubmitBT" is readonly
     Then I click on button "ClaimingACTProportion_Yes"
     Then I enter the details as
@@ -1367,7 +1361,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | LodgePayrollAnswer_OtherTaxablePayment         | NO    |
       | LodgePayrollAnswer_ExemptWages                 | NO    |
       | PayrollAnswer_AustralianWide                   | NO    |
-      | GroupActWages                                | NO    |
+      | GroupActWages                                  | NO    |
     Then I check "SalariesAndWages" is readonly
     Then I check "BonusesAndCommissions" is readonly
     Then I check "LodgePayrollAnswer_Commissions" is readonly
@@ -1396,54 +1390,53 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | LodgePayrollAnswer_Superannuation              |   100 |
       | LodgePayrollAnswer_OtherTaxablePayment         |   100 |
       | LodgePayrollAnswer_ExemptWages                 |   100 |
-      | GroupActWages	                                 |     0 |
-      | PayrollAnswer_AustralianWide              |     0 |
+      | GroupActWages                                  |     0 |
+      | PayrollAnswer_AustralianWide                   |     0 |
     Then I click on button "SubmitBT"
     #Then I enter the details as
-      #| Fields                 | Value |
-      #| AnnualLessTotalTaxPaid | NO    |
+    #| Fields                 | Value |
+    #| AnnualLessTotalTaxPaid | NO    |
     #Then I check "AnnualLessTotalTaxPaid" is readonly
     #Then I click on button "Discard"
     #Tax Registration Form
-    
-     Then I click on "Payroll Tax Registration"
-         Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-     Then I wait for "1000" millisecond
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    Then I wait for "1000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
     Then I wait for "1500" millisecond
     Then I enter the details as
-      | Fields              | Value              |
-      | EmployerName        | <CompanyName> |
-      | BusinessTradingName | <CompanyName>  |
-      | RegistrationAnswer_ACN    | NO                 |
+      | Fields                 | Value         |
+      | EmployerName           | <CompanyName> |
+      | BusinessTradingName    | <CompanyName> |
+      | RegistrationAnswer_ACN | NO            |
     Then I select "Government" from "SelectBusinessTypeCode"
     #Then I check "RegistrationAnswer_ACN" is empty
-		Then I click on button "TaxPayerDetailsNextBT"
-		Then I wait for "1500" millisecond
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "1500" millisecond
     #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
-      | Fields                    | Value              |
-      | AddressLine1              | TEST               |
-      | Address_City              | TEST               |
-      | PostCode                  | NO                 |
-      | ContactPerson_FirstName   | TEST               |
-      | ContactPerson_LastName    | TEST               |
-      | ContactPerson_PhoneNumber | NO                 |
-      | ContactPerson_Email       | TEST@TEST.com      |
+      | Fields                    | Value         |
+      | AddressLine1              | TEST          |
+      | Address_City              | TEST          |
+      | PostCode                  | NO            |
+      | ContactPerson_FirstName   | TEST          |
+      | ContactPerson_LastName    | TEST          |
+      | ContactPerson_PhoneNumber | NO            |
+      | ContactPerson_Email       | TEST@TEST.com |
     Then I check "PostCode" is readonly
     Then I check "ContactPerson_PhoneNumber" is readonly
     #Then I select "AL" from "Address_State"
     Then I enter the details as
-      | Fields                    | Value       |
-      | AddressLine1              | TEST        |
-      | Address_City              | TEST        |
-      | PostCode                  |        3333 |
-      | ContactPerson_FirstName   | TEST        |
-      | ContactPerson_LastName    | TEST        |
-      | ContactPerson_PhoneNumber |    1234567890 |
+      | Fields                    | Value      |
+      | AddressLine1              | TEST       |
+      | Address_City              | TEST       |
+      | PostCode                  |       3333 |
+      | ContactPerson_FirstName   | TEST       |
+      | ContactPerson_LastName    | TEST       |
+      | ContactPerson_PhoneNumber | 1234567890 |
     Then I click on button "AddressLine1"
     Then I click on button "OrgDetailsNext"
     Then I wait for "2000" millisecond
@@ -1466,37 +1459,38 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Then I check "GroupAusWideTaxableWages" is readonly
     Then I check "NumberOfEmployees" is readonly
     Then I enter the details as
-      | Fields                   | Value |
-      | NumberOfEmployees          |    33 |
-    Then I click on "DateBusinessStart"
-    Then I click on "20170528"
-    Then I click on "DateBusinessLiable"
-    Then I click on "20170528"
-    Then I click on "PayrollNext"
+      | Fields             | Value |
+      | NumberOfEmployees  |    33 |
+      | DateBusinessStart  | 28517 |
+      | DateBusinessLiable | 28517 |
+    #Then I click on "DateBusinessStart"
+    #Then I click on "20170528"
+    #Then I click on "DateBusinessLiable"
+    #Then I click on "20170528"
+    Then I click on button "PayrollNext"
     Then I enter the details as
-      | Fields                   | Value |
-      | RegistrationAnswer_BSB          | NO    |
-      | BankAccountNumber    | NO    |
-      | BankAccountName | NO    |
+      | Fields                 | Value |
+      | RegistrationAnswer_BSB | NO    |
+      | BankAccountNumber      | NO    |
+      | BankAccountName        | NO    |
     Then I check "RegistrationAnswer_BSB" is readonly
     Then I check "BankAccountNumber" is readonly
     Then I check "BankAccountName" is readonly
     Then I check "RefundDetailsBT" is readonly
     Then I enter the details as
-      | Fields                   | Value |
-      | RegistrationAnswer_BSB          | 333333    |
-      | BankAccountNumber    | 333333333    |
-      | BankAccountName | TEST    |
+      | Fields                 | Value     |
+      | RegistrationAnswer_BSB |    333333 |
+      | BankAccountNumber      | 333333333 |
+      | BankAccountName        | TEST      |
     Then I click on button "RefundDetailsBT"
     Then I enter the details as
-      | Fields                   | Value |
-      | Declarer_PhoneNumber          | NO    |
+      | Fields               | Value |
+      | Declarer_PhoneNumber | NO    |
     Then I check "Declarer_PhoneNumber" is empty
-    
 
     Examples: 
-      | PortalName | CompanyName                  | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd| 80134834334 | jbradley | Dbresults1 |
+      | PortalName | CompanyName          | ABN         | UserName | Password   |
+      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
  @wip
   Scenario Outline: DTSP-537
     Given I want to login to portal "<PortalName>"
@@ -1515,7 +1509,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | s2id_autogen1_search | QUICK |
     Then I click on button "select2-results-1"
     Then I click on "Annual Reconciliation"
-    Then I select "2014" from "AnnualObligationSelect"
+    Then I select "2016" from "AnnualObligationSelect"
     Then I click on button with value "Save and Next"
     Then I wait for "5000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / [\w|\s|\W|\(|\)]+\)"
@@ -1529,7 +1523,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | s2id_autogen1_search | QUICK |
     Then I click on button "select2-results-1"
     Then I click on "Annual Reconciliation"
-    Then I select "2014" from "AnnualObligationSelect"
+    Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
     Then I wait for "3000" millisecond
     Then I see text "Annual Reconciliation Return" displayed
@@ -1547,7 +1541,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I select "Jan 2017" from "MonthlyObligationSelect"
+    Then I select "May 2017" from "MonthlyObligationSelect"
      Then I click on button "NextSection"
      Then I wait for "3000" millisecond
     #Scenario 4: Exempt wages question updated
@@ -1562,7 +1556,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
     Then I click on "Annual Reconciliation"
-    Then I select "2014" from "AnnualObligationSelect"
+    Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
      Then I wait for "3000" millisecond
     Then I click on button "ClaimingACTProportion_Yes"
@@ -1596,7 +1590,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
     Then I click on "Annual Reconciliation"
-    Then I select "2012" from "AnnualObligationSelect"
+    Then I select "2016" from "AnnualObligationSelect"
      Then I click on button "NextSection"
     Then I click on button "ClaimingACTProportion_Yes"
     Then I see text "Days where 1 group member paid or was liable to pay taxable or interstate wages" displayed
@@ -1659,6 +1653,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
     Examples: 
       | PortalName | UserNameField | PasswordField | Password   |
       | TSS        | UserNameInput | PasswordInput | Dbresults1 |
+
  @done
   Scenario Outline: DTSP-501: As an end user, I want the Payroll Tax Registration Form to be updated for Ease of Use
     Given I want to login to portal "<PortalName>"
@@ -1908,6 +1903,8 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | Fields                 | Value             |
       | EmployerName           | The Fire Company Pty Limite |
       | BusinessTradingName    | The Fire Company Pty Limite |
+    Then I click on button "RegistrationAnswer_ACN"
+    Then I wait for "2000" millisecond
     Then I click on button "TaxPayerDetailsNextBT"
     Then I wait for "1000" millisecond
     Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
@@ -2588,7 +2585,7 @@ Scenario Outline: DTSP-57 :As a DB Portal Administrator I want to delete a messa
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
     Then I click on "Annual Reconciliation"
-    Then I select "2014" from "AnnualObligationSelect"
+    Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
     #Then I click on button "TaxPayerDetailsNext"
     Then I enter the details as
@@ -5418,10 +5415,10 @@ Then I click on "Payroll Tax"
       | s2id_autogen1_search | <CorrectOrganisation> |
     Then I click on button "select2-results-1"
     Then I check "ObligationsDropdown" is not readonly
-    Then I select "2017" from "ObligationsDropdown"
+    Then I select "2015" from "ObligationsDropdown"
     #Scenario 4: Buttons
     Then I click on button "SaveNextBT"
-    Then I check "Content_wt99" is readonly
+    Then I check "RemoveBTN" is readonly
     Then I check "AddBTN" is readonly
     Then I check "SaveAndNextToSummaryBT" is readonly
     #Scenario 5: PSRM validation
@@ -5433,10 +5430,10 @@ Then I click on "Payroll Tax"
       #| SupplyDistributionSector_MethodCalculateTotalMegaw | TeST  |
     Then I check "SaveAndNextToSummaryBT" is not readonly
     Then I check "AddBTN" is not readonly
-    Then I check "Content_wt99" is readonly
+    Then I check "RemoveBTN" is readonly
     Then I click on button "AddBTN"
     Then I click on button "AddBTN"
-    Then I check "Content_wt99" is readonly
+    Then I check "RemoveBTN" is readonly
     Then I select "Sewerage Network" from "NetworkDetail_UtilityTypeDropdown"
     Then I enter the details as
       | Fields                                             | Value |
@@ -5491,7 +5488,6 @@ Then I click on "Payroll Tax"
 
       Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
     
     	@review
 		 Scenario Outline: DTSP-154: As an end user, I want to be able to navigate to different Tax type return history pages using tabs
@@ -5561,7 +5557,8 @@ Then I click on "Payroll Tax"
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
       
-      @current
+   
+   @current
     Scenario Outline: DTSP-530: As a Customer Portal Admin, I want to be able to deactivate end user accounts so that I can remove invalid portal accounts
     	 Given I want to login to portal "<PortalName>"
     Then I click on "Create Account"
@@ -5617,6 +5614,7 @@ Then I click on "Payroll Tax"
     
     #Scenario 3: Reset 
     Then I click on button with value "Reset"
+    Then I wait for "1500" millisecond
     Then I check "SearchInput" is empty
     
     #Scenario 4: Columns 
@@ -5632,7 +5630,7 @@ Then I click on "Payroll Tax"
       | Fields                       | Value                           |
       | SearchInput       | <NewUserName>                            |
     Then I click on button with value "Search"
-    Then I click on button "UsersTable_ctl03_wt48"
+    Then I click on button "CheckboxUserSelect"
     Then I click on button with value "Deactivate"
     Then I see "Are you sure you want to deactivate the user?" displayed on popup and I click "Cancel"
     Then I click on button with value "Deactivate"
@@ -5648,7 +5646,7 @@ Then I click on "Payroll Tax"
     
         Examples: 
       | PortalName | UserName | Password   |  CompanyName                                 | ABN         | NewUserName          | NewEmail                 | Password   |
-      | TSS        | TSSAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5306 | dtsp5305@automation.com | Dbresults1 |
+      | TSS        | TSSAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5311 | dtsp5307@automation.com | Dbresults1 |
    
  @current
   Scenario Outline: DTSP-742: As an end user I want to be able to update Objection Request Form to cater for different Tax Types
@@ -5739,99 +5737,10 @@ Then I click on "Payroll Tax"
    Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
+
       
       
-      
-@done
-  Scenario Outline: DTSP-742: As an end user I want to be able to update Objection Request Form to cater for different Tax Types
-  
-  Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    
-    Then I click on "Service Requests"
-    #Scenario 1: Portal Navigation 
-    Then I see text "Objection Request" displayed
-    Then I click on "Objection Request"
-    Then I check "SelectTaxPayer" exists
-    Then I check "LodgePayrollAnswer_OrganizationalName" exists
-    Then I check "LodgePayrollAnswer_ABN" exists
-    Then I check "LodgePayrollAnswer_CRN" exists
-    #Then I click on button "GeneralDiscardBt"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value               |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-		Then I click on button "TaxTypeSelection"
-		
-		Then I see text "Ambulance Levy" displayed
-		Then I see text "Energy Industry Levy" displayed
-		Then I see text "Income Tax Equivalent" displayed
-		Then I see text "Payroll Tax" displayed
-		Then I see text "Utilities(Network Facilities) Tax" displayed
-		
-		Then I click on button "select2-chosen-1"
-		 Then I enter the details as
-      | Fields               | Value               |
-      | s2id_autogen1_search | Abacus |
-    Then I click on button "select2-results-1"
-		Then I check "TaxTypeSelection" is readonly
-		Then I check "TaxTypeSelection" contains "PAYROLL"
-		Then I click on "Objection Request"
-		Then I click on button "select2-chosen-1"
-		 Then I enter the details as
-      | Fields               | Value               |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I click on button "TaxTypeSelection"
-    Then I click on "Utilities(Network Facilities) Tax"
-		
-#		Then I see text "Ambulance Levy" displayed
-#		Then I see text "Energy Industry Levy" displayed
-#		Then I see text "Income Tax Equivalent" displayed
-#		Then I see text "Payroll Tax" displayed
-#		Then I see text "Utilities(Network Facilities) Tax" displayed
-#		
-		  Then I click on button "ObjectionOutOfTimeYES"
-    Then I enter the details as
-      | Fields             | Value                  |
-      | Objection_Comments | ObjectionComment       |
-      | LodgeFailureReason | LodgementFailureReason |
-    Then I click on button "CheckPenalty"
-    Then I click on button with value "Next"
-    Then I check I am on "Objection Request Summary" page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                                          |
-      | item2 | Organisation Name                                 |
-      | item3 | Australian Business Number (ABN)                  |
-      | item4 | Client Reference Number (CRN)                     |
-      | item5 | Subject of Objection                              |
-      | item6 | Is the Objection out of time                      |
-      | item7 | Reason for failing to lodge the objection on time |
-      | item7 | Comments                                          |
-    Then I check object with xpath "//*[contains(@id, 'ObjectionInformation')]//..//tr[3]//td[2]" contains "Yes"
-    Then I check object with xpath "//*[contains(text(), 'Tax Type')]/following-sibling::td" contains "Utilities (Network Facilities) Tax"
-    Then I check object with xpath "//*[contains(text(), 'Subject of Objection')]/..//following-sibling::td" contains "Penalty"
-    Then I check object with xpath "//*[contains(text(), 'Reason for failing to lodge the objection on time')]/..//following-sibling::td" contains "LodgementFailureReason"
-    Then I check object with xpath "//*[contains(text(), 'Comments')]/..//following-sibling::td" contains "ObjectionComment"
-    
-    #check declaration
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-		
-		
-   Examples: 
-      | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
-      
+
       
      @current
   Scenario Outline: DTSP-743: As an end user I want to be able to update Exemption Request Form to cater for different Tax Types
@@ -6039,7 +5948,7 @@ Then I click on "Payroll Tax"
       | s2id_autogen1_search | <CorrectOrganisation> |
     Then I click on button "select2-results-1"
     Then I check "ObligationsDropdown" is not readonly
-    Then I select "2017" from "ObligationsDropdown"
+    Then I select "2015" from "ObligationsDropdown"
     #Scenario 4: Buttons
     Then I click on button "SaveNextBT"
     Then I check "RemoveBTN" is readonly
@@ -6075,16 +5984,16 @@ Then I click on "Payroll Tax"
     
     Then I check object with xpath "//*[contains(text(), 'Utility Type')]//following-sibling::td" contains "Gas Distribution Network"
     Then I check object with xpath "//*[contains(text(), 'Kilometres of Route Length')]//following-sibling::td" contains "50.00 KM"
-    Then I check object with xpath "//*[contains(text(), 'Rate Per Kilometre')]//following-sibling::td" contains "$1,042.00 /KM"
-    Then I check object with xpath "//*[contains(text(), 'Tax Payable')]//following-sibling::td" contains "$52,100.00"
+    Then I check object with xpath "//*[contains(text(), 'Rate Per Kilometre')]//following-sibling::td" contains "$992.00 /KM"
+    Then I check object with xpath "//*[contains(text(), 'Tax Payable')]//following-sibling::td" contains "$49,600.00"
     
-    Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$52,100.00"
+    Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$49,600.00"
     
     Then I check object with xpath "//*[contains(text(), 'Organisation Name')]/..//following-sibling::td" contains "JOINT ACTION PTY. LTD."
     Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "58080858724"
     Then I check object with xpath "//*[contains(text(), 'Client Reference Number (CRN)')]/..//following-sibling::td" contains "400108"
 
-    Then I check object with xpath "//*[contains(text(), 'Return Period')]//following-sibling::td" contains "01 Apr 2017 - 31 Mar 2018"
+    Then I check object with xpath "//*[contains(text(), 'Return Period')]//following-sibling::td" contains "01 Apr 2014 - 31 Mar 2015"
 
 
     
@@ -6100,9 +6009,7 @@ Then I click on "Payroll Tax"
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
-		
-		
-			@review
+					@review
   Scenario Outline: DTSP-792: As an end user, I want to be able to view the Ambulance Levy lodgement summary page
     #Scenario 1: Ambulance Levy  Lodgement
     Given I want to login to portal "<PortalName>"
@@ -6173,8 +6080,8 @@ Then I click on "Payroll Tax"
     Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "85085664197"
     Then I check object with xpath "//*[contains(text(), 'Client Reference Number (CRN)')]/..//following-sibling::td" contains "400107"
 
-    Then I check object with xpath "//*[contains(text(), 'Return Date')]//following-sibling::td" contains "May 2014"
-    Then I check object with xpath "//*[contains(text(), 'Reference Period')]//following-sibling::td" contains "Feb 2014"
+    Then I check object with xpath "//*[contains(text(), 'Return Date')]//following-sibling::td" contains "Jun 2014"
+    Then I check object with xpath "//*[contains(text(), 'Reference Period')]//following-sibling::td" contains "Mar 2014"
     
 		Then I click on button with value "Back"
 		Then I check I am on "Ambulance Levy Lodgement Form" page
@@ -6227,7 +6134,7 @@ Then I click on "Payroll Tax"
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
     Then I check "ObligationsDropdown" is not readonly
-    Then I select "2014" from "ObligationsDropdown"
+    Then I select "2017" from "ObligationsDropdown"
     #Scenario 4: Buttons
     Then I click on button "SaveNextBT"
     Then I check "RemoveBTN" is readonly
@@ -6264,7 +6171,7 @@ Then I click on "Payroll Tax"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
     Then I check object with xpath "//*[contains(text(), 'Sector Type')]/..//following-sibling::td//div" contains "Electricity Supply Sector"
     #Then I check object with xpath "//*[contains(text(), 'Return Period')]/..//following-sibling::td//div" contains "01 Jul 2013 - 30/06/2014"
-    Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$15,183.90"
+    Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$10,046.69"
     Then I check object with xpath "//*[contains(text(), 'Estimate Megawatt Hours')]/..//following-sibling::td//div" contains "50"
 		Then I check object with xpath "//*[contains(text(), 'Actual Megawatt Hours')]/..//following-sibling::td//div" contains "50"
 		Then I check object with xpath "//*[contains(text(), 'Method used to Calculate Total Megawatt Hours')]/..//following-sibling::td//div" contains "TeST"

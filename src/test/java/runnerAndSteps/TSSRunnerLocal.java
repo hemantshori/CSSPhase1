@@ -17,9 +17,9 @@ import cucumber.api.junit.Cucumber;
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@all"},
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@runthrough"},
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSS_Regression_Prod"},
-//(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSSRegression"},
+(format = { "pretty", "html:target/html/result.html" },  tags = {"@TSSRegression"},
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@current"},
-(format = { "pretty", "html:target/html/result.html" },  tags = {"@wip"},
+//(format = { "pretty", "html:target/html/result.html" },  tags = {"@wip"},
 //(format = { "pretty", "html:target/html/result.html" },  tags = {"@shakeout"},
     //*********************for SHAKE	OUT*************************************
 	//	 featuresf = "src/test/resource/com/CSS/SanityTestScript.feature") 
@@ -28,12 +28,12 @@ import cucumber.api.junit.Cucumber;
 
 		
 //****************for wip****************************
-features = "src/test/resource/com/TSS/wip.feature")
-//features = "src/test/resource/com/TSS/ShakeoutTest.feature")
+//features = "src/test/resource/com/TSS/wip.feature")
+//8features = "src/test/resource/com/TSS/ShakeoutTest.feature")
 
 
 //****************for TSS Regression****************************
-//features = "src/test/resource/com/TSS/Regression_TSS.feature")
+features = "src/test/resource/com/TSS/Regression_TSS.feature")
 
 
 
