@@ -29,7 +29,7 @@ import cucumber.api.junit.Cucumber;
 		
 //****************for wip****************************
 //features = "src/test/resource/com/TSS/wip.feature")
-//8features = "src/test/resource/com/TSS/ShakeoutTest.feature")
+//features = "src/test/resource/com/TSS/ShakeoutTest.feature")
 
 
 //****************for TSS Regression****************************

@@ -91,27 +91,7 @@ public class StepImpe {
 //		FirefoxProfile firefoxProfile = new FirefoxProfile();
 //		FirefoxOptions ffo =  new FirefoxOptions().setBinary(ffBinary).setProfile(firefoxProfile);
 
-
-//		driver = new FirefoxDriver(ffo);
-//		
-		
-	   // driver.manage().window().maximize();
-
-	    // the location of the driver is been changed to match with remote server setting.....  HS
-
-
-		
-//		String downloadFilepath = "/pdfs";
-//		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-//		chromePrefs.put("profile.default_content_settings.popups", 0);
-//		chromePrefs.put("download.default_directory", downloadFilepath);
-//		ChromeOptions options = new ChromeOptions();
-//		options.setExperimentalOption("prefs", chromePrefs);
-//		DesiredCapabilities cap = DesiredCapabilities.chrome();
-//		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-//		cap.setCapability(ChromeOptions.CAPABILITY, options);
-		
-		// jenkins only ;
+		// use this if your Chrome is only at the latest version
 		ChromeDriverManager.getInstance().setup();
 		
 		// local only
@@ -170,23 +150,24 @@ public class StepImpe {
 
 			
 		
-			if(arg1.equals("html")){
-				StepImpe.sourceCode = driver.getPageSource();
-				StepImpe.URLCaptured = driver.getCurrentUrl();
-
-			}else{
-				DBUtilities createXpath = new DBUtilities(driver);
-				String myxpath = createXpath.xpathMakerById(arg1);
-				System.out.println(myxpath);
-				
-				WebElement xyz = driver.findElement(By.xpath(myxpath));
-				StepImpe.Capture= xyz.getText();
-				System.out.println("*****************************FINAL RESULTS*****************************\n");
-				System.out.println(StepImpe.URLCaptured + " HAS " + Capture + " WCAG ERRORS\n");
-				System.out.println("***********************************************************************");
-			}
-			//StepImpe.URLCaptured = "";
-			return Capture;
+		if(arg1.equals("html")){
+			StepImpe.sourceCode = driver.getPageSource();
+			StepImpe.URLCaptured = driver.getCurrentUrl();
+	
+		}
+		else {
+			DBUtilities createXpath = new DBUtilities(driver);
+			String myxpath = createXpath.xpathMakerById(arg1);
+			System.out.println(myxpath);
+			
+			WebElement xyz = driver.findElement(By.xpath(myxpath));
+			StepImpe.Capture= xyz.getText();
+			System.out.println("*****************************FINAL RESULTS*****************************\n");
+			System.out.println(StepImpe.URLCaptured + " HAS " + Capture + " WCAG ERRORS\n");
+			System.out.println("***********************************************************************");
+		}
+		//StepImpe.URLCaptured = "";
+		return Capture;
   
 	}
 	
@@ -226,6 +207,7 @@ public class StepImpe {
 
 	}
 	
+	// writes the WCAG summary to the file summary.txt
 	@Then("^I write to the summary file")
 	public void i_write_to_the_summary_file() throws Throwable {
 		String summaryFilePath = "summary.txt";
@@ -247,28 +229,37 @@ public class StepImpe {
 		fw.close();
 	}
 	
+	// sorts the summary file. Currently not working?
 	@Then("^I sort the summary file")
 	public void i_sort_the_summary_file() throws Throwable {
 		String summaryFilePath = "summary.txt";
 		BufferedReader br = null;
 		
+		//open the summary file
 		File summaryFile = new File("summary.txt");
 		if (!summaryFile.exists()){
 			summaryFile.createNewFile();
 		}
+		
 		
 		ArrayList<String> lines = new ArrayList<String>();
 		FileWriter fw = new FileWriter(summaryFile, true);
 		try {
 			br = new BufferedReader(new FileReader(summaryFile));
 			String line;
+			
+			//add the contents of the file to the arraylist
 			while ((line = br.readLine()) != null){
 				lines.add(line);
 			}
+			
+			//sort and write it it
 			Collections.sort(lines);
 			for (String content: lines){
 				fw.write(content + "\n");
 			}
+			
+
 			
 		}
 		catch (Exception e){
@@ -282,17 +273,13 @@ public class StepImpe {
 			fw.close();
 		}
 		
+		// now write it
 		
-//		ArrayList<String> keys = Collections.list(summary.keys());
-//		Collections.sort(keys);
-//		for (String key: keys){
-//			fw.write(key + ": " + summary.get(key) + " Errors.\n");
-//		}
-//		
-//		fw.close();
 	}
 	
 	
+	// step for pasting clipboard text into something
+	// make sure what's copied doesn't contain any unicode characters
 	@Given("^I paste \"(.*?)\"$")
 	public void i_paste(String arg1) throws Throwable {
 
@@ -306,7 +293,6 @@ public class StepImpe {
 			clipboard.setContents(selection, selection);
 			
 
-			
 			// find the element
 			WebElement inputField =  driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]"));
 			inputField.click();
@@ -320,6 +306,8 @@ public class StepImpe {
 			clipboard.setContents(oldSelection, oldSelection);
 		
 	}
+	
+	// checks if something is not readonly (i.e. activated)
 	@Then("^I check \"(.*?)\" is not readonly$")
 	public void i_check_is_not_readonly(String arg1) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
@@ -370,7 +358,9 @@ public class StepImpe {
 				boxContents = inputBox.getAttribute("value");
 				System.out.println("boxContents: " + boxContents);
 				System.out.println("arg2: " + arg2);
+				Assert.assertTrue(boxContents.equals(arg2));
 			}
+			//check for origvalue
 			catch (AssertionError | Exception ae){
 				try{
 					System.out.println("Attempting to search for origvalue...");
@@ -396,6 +386,7 @@ public class StepImpe {
 		Thread.sleep(2000);
 
 	}
+	
 	
 	@Then("^I check label \"(.*?)\" contains \"(.*?)\"$")
 	public void i_Check_label_contains(String arg1, String arg2) throws Throwable {
@@ -431,6 +422,8 @@ public class StepImpe {
 //	}
 
 	
+	// checks if something is empty,
+	// uses the 'value' attribute as a basis
 	@Then("^I check \"(.*?)\" is empty$")
 	public void i_check_is_empty(String arg1) throws Throwable {
 		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
@@ -446,6 +439,7 @@ public class StepImpe {
 		}
 	}
 	
+	// opposite of above
 	@Then("^I check \"(.*?)\" is not empty$")
 	public void i_check_is_not_empty(String arg1) throws Throwable {
 		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
@@ -462,6 +456,8 @@ public class StepImpe {
 		}
 	}
 	
+	// checks if contents of something match a java regex
+	// checks by class, then by id, 
 	@Then("^I check \"(.*?)\" contents match regex \"(.*?)\"$")
 	public void i_check_contents_are_of_pattern(String arg1, String arg2) throws Throwable{
 		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
@@ -469,10 +465,7 @@ public class StepImpe {
 		try {
 			WebElement inputBox = driver.findElement(By.xpath(myxpath));
 			String value = inputBox.getAttribute("value");
-	//		System.out.println("pattern quote: " + Pattern.quote(arg2));
-	//		System.out.println("value: " + value);
-	//		Assert.assertTrue(value.matches(Pattern.quote(arg2)));
-			//System.out.println("pattern quote: " + Pattern.quote(arg2));
+
 			System.out.println("value: " + value);
 			System.out.println("arg2: " + arg2);
 			
@@ -566,6 +559,7 @@ public class StepImpe {
 
 	}
 	
+	// clicks an object based on the 'value' attribute
 	@And("^I click on button with value \"(.*?)\"$")
 	public void i_click_on_button_with_value(String arg1) throws Throwable {
 		Thread.sleep(2500);
@@ -580,17 +574,20 @@ public class StepImpe {
 		}
 	}
 	
+	// scrolls down the page, may not be working correctly
 	@And("^I scroll \"(.*?)\" the page$")
 	public void i_scroll_the_page(String arg1) throws Throwable {
 		new DBUtilities(driver).scrollDownThePage(arg1);
 	}
 	
+	// scrolls up the page, may not be working correctly
 	@And("^I scroll up$")
 	public void i_scroll_up() throws Throwable {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,-5000)", "");
 	}
 	
+	// for clicking on text
 	@And("^I click on \"(.*?)\"$")
 	public void i_click_on(String arg1) throws Throwable {
 		// give time for page loading

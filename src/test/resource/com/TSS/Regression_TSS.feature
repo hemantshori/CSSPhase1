@@ -6382,7 +6382,6 @@ Then I click on "Payroll Tax"
   Examples:
 		   | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
-      
       @review
   Scenario Outline: DTSP-850: As an end user, I want to update the Payroll Tax Registration form, so that it is easier to use
   	Given I want to login to portal "<PortalName>"
@@ -6398,7 +6397,7 @@ Then I click on "Payroll Tax"
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 17118795716 |
     Then I click on button with value "Next"
-    
+    Then I wait for "1500" millisecond
     Then I see text "You are already registered for another tax type, please provide your Customer Reference Number (CRN) below to continue registering for Payroll Tax" displayed
    	Then I check "RegistrationAnswer_CRN" exists
    	Then I check "SelectBusinessTypeCode" does not exist
@@ -6458,7 +6457,6 @@ Then I click on "Payroll Tax"
   Examples:
 		   | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         | CompanyName                  |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
-      
       
   @review
 	Scenario Outline: DTSP-899: As an end user I want to see the "Activity Type" drop down on activity history updated to cater for all Tax types
@@ -6557,6 +6555,7 @@ Then I click on "Payroll Tax"
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD.  | 04 5678 9767 | jbradley@hotmail.com |
+      
       
    @current
   Scenario Outline: DTSP-706: As an end user, I want to be able to raise a Refund Request on the portal so that I can request a refund for the Carry forward amount to the Tax Office
