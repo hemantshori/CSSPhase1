@@ -112,10 +112,10 @@ public class StepImpe {
 //		cap.setCapability(ChromeOptions.CAPABILITY, options);
 		
 		// jenkins only ;
-		//ChromeDriverManager.getInstance().setup();
+		ChromeDriverManager.getInstance().setup();
 		
 		// local only
-		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
 		
 		driver = new ChromeDriver();
 		//driver = new FirefoxDriver();
