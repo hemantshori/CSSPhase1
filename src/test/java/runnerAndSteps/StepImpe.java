@@ -771,9 +771,9 @@ public class StepImpe {
 	@Then("^I see text \"(.*?)\" displayed$")
 	public void i_see_text_displayed(String arg1) throws Throwable {
       LandingPage AU = PageFactory.initElements(driver, LandingPage.class);
-      Thread.sleep(1000);
+
       DBUtilities checkElementDisplayed = new DBUtilities(driver);
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		//String myxpath=checkElementDisplayed.xpathMaker(arg1);
 		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
 		System.out.println("checking for text " +myxpath);
