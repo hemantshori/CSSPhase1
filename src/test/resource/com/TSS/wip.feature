@@ -1,8 +1,8 @@
 #Sample Feature Definition Template
-@wip
+
 Feature: WORK IN PROGRESS
 
-@redo
+
   Scenario Outline: DTSP-770: To update the information sent to PSRM in the declaration section
     #Scenario 1: Declaration on Summary Page of all forms
     Given I want to login to portal "<PortalName>"
@@ -218,3 +218,33 @@ Feature: WORK IN PROGRESS
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation         | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | QUICK SINGLE PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
+      
+
+   @wip
+  Scenario Outline: DTSP-894: As an end user, I want to limit my options on the Generic Request form in the Request Type Dropdown
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Service Requests"
+    Then I click on "Generic Request"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value          |
+      | s2id_autogen1_search | <Organisation> |
+    Then I click on button "select2-results-1"
+    Then I click on button "GenericRequest_RequestType"
+    Then I see text "Compliance tip-off" displayed
+    Then I see text "Exemption" displayed
+    Then I see text "Payroll Tax Exclusion" displayed
+    Then I see text "General Enquiry" displayed
+    Then I see text "Variation" displayed
+    Then I see text "Freedom of Information" not displayed
+    Then I see text "Objection" not displayed
+    Then I see text "Ombudsman's Request" not displayed
+
+    Examples: 
+      | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
+      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |

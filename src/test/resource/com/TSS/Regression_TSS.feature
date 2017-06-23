@@ -490,6 +490,7 @@ Feature: Regression for TSS.
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 98765123456 | 12345678902 |
 
+	@update
   Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -515,6 +516,8 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | UserName | Password   | BusinessName       |
       | TSS        | jbradley | Dbresults1 | Designate  |
+
+
 
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 3 ################################################
@@ -615,7 +618,7 @@ Feature: Regression for TSS.
       | PortalName | UserNameField | PasswordField | UserName | Password   | ABN         | CRN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 96107641949 | 400066 |
 
-  @done
+  @wip
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
     Given I want to login to portal "TSS_Tooltips"
     And I enter the details as
@@ -671,8 +674,9 @@ Feature: Regression for TSS.
     Then I see "Counter" displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | PortalName | UserNameField | PasswordField | UserName | Password   |
+      | TSS        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 |
+
 
   @testagain
   Scenario Outline: DTSP-145
@@ -2130,7 +2134,7 @@ Feature: Regression for TSS.
   # Find jbradley's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
   #NOTE: Ensure that jbradley has a current employee type selected in the data extensions page
-  @review
+  @wip
   Scenario Outline: DTSP-78: As an end user, I want to be able to select an ABN and view next payment information and lodge from the Right Navigation Panel on my Basic Dashboard
     #Business Taxpayer with many: jbradley
     #Business Taxpayer with only one: camido
@@ -2145,6 +2149,7 @@ Feature: Regression for TSS.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
+   	Then I click on "Home"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value     |
@@ -2199,7 +2204,8 @@ Feature: Regression for TSS.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Then I see text "Next Lodgement Due" displayed
+    Then I click on "Home"
+    Then I see text "Your Outstanding Tax Returns to Lodge" displayed
     #Scenario 7: User clicks on “View History” button
     # Then I click on "View History"
     Then I click on button with value "View History"
@@ -2229,12 +2235,13 @@ Feature: Regression for TSS.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
+    Then I click on "Home"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value  |
       | s2id_autogen1_search | SUBMIT |
     Then I click on button "select2-results-1"
-    Then I see text "You do not have any outstanding lodgements" displayed
+    #Then I see text "You do not have any outstanding lodgements" displayed
 
     #Scenario 11: TODO when 'View History' and 'Lodge Return' buttons have actual ids.
     Examples: 
@@ -4450,7 +4457,7 @@ Feature: Regression for TSS.
       | TSS        | jbradley | Dbresults1 |
 
 
-  @review
+ @wip
   Scenario Outline: DTSP-692: As an end user, I want to see an updated version of the Return History page, so that it is more user-friendly
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -4465,7 +4472,7 @@ Feature: Regression for TSS.
     Then I see text "Monthly Return History" displayed
     Then I see text "Annual Return History" displayed
     #Scenario 3: Payment Details
-    Then I click on "PAYMENT DETAILS"
+    Then I click on "DETAILS"
     Then I switch to frame "0"
     Then I see text "Payment cannot be made directly through the Self-Serve portal. Please use the details below to make payment through your financial institution." displayed
     Then I see text "Amount" displayed
@@ -4476,6 +4483,7 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | UserName | Password   |
       | TSS        | jbradley | Dbresults1 |
+
 
   @ignore_until_fixed
   Scenario Outline: DTSP-702: Check if a Taxpayer has already registered for other tax types at Payroll Tax Registration
@@ -5466,7 +5474,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | CompanyName                                 | ABN         | NewUserName | NewEmail                | Password   |
-      | TSS        | TSSAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5311    | dtsp5307@automation.com | Dbresults1 |
+      | TSS        | TSSAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5312    | dtsp5307@automation.com | Dbresults1 |
 
   @current
   Scenario Outline: DTSP-742: As an end user I want to be able to update Objection Request Form to cater for different Tax Types
@@ -6836,7 +6844,7 @@ Feature: Regression for TSS.
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          | ABN         | CRN    |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
 
-  @review
+   @wip
   Scenario Outline: DTSP-894: As an end user, I want to limit my options on the Generic Request form in the Request Type Dropdown
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -7271,7 +7279,8 @@ Feature: Regression for TSS.
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
-  @done
+       
+ @wip
   Scenario Outline: ACN field in Payroll Tax Registration Form bug
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -7282,7 +7291,7 @@ Feature: Regression for TSS.
     Then I click on "Payroll Tax Registration"
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 80134834334 |
+      | RegistrationAnswer_ABN | <ABN> |
     Then I click on button with value "Next"
     Then I wait for "3000" millisecond
     Then I enter the details as
@@ -7290,7 +7299,8 @@ Feature: Regression for TSS.
       | EmployerName        | <CompanyName> |
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
-    Then I check "Content_wtRegistrationAnswer_ACN" is empty
+    Then I wait for "1500" millisecond
+    Then I check "RegistrationAnswer_ACN" is empty
     Then I click on button "TaxPayerDetailsNextBT"
     Then I wait for "3000" millisecond
     Then I enter the details as
@@ -7306,7 +7316,7 @@ Feature: Regression for TSS.
     Then I click on "Payroll Tax Registration"
     And I enter the details as
       | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 80134834334 |
+      | RegistrationAnswer_ABN | <ABN> |
     Then I click on button with value "Next"
     Then I wait for "3000" millisecond
     Then I enter the details as
@@ -7323,7 +7333,7 @@ Feature: Regression for TSS.
       | Fields                 | Value         |
       | EmployerName           | <CompanyName> |
       | BusinessTradingName    | <CompanyName> |
-      | RegistrationAnswer_ACN |     117378917 |
+      | RegistrationAnswer_ACN |  134834334 |
     Then I click on button "TaxPayerDetailsNextBT"
     Then I wait for "3000" millisecond
     Then I enter the details as
@@ -7337,7 +7347,6 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
-
   @done
   Scenario Outline: Total Taxable Wages in Payroll Tax Registration dropdown bug
     Given I want to login to portal "<PortalName>"
