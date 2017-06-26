@@ -1,250 +1,92 @@
 #Sample Feature Definition Template
-
+@wip
 Feature: WORK IN PROGRESS
 
-
-  Scenario Outline: DTSP-770: To update the information sent to PSRM in the declaration section
-    #Scenario 1: Declaration on Summary Page of all forms
+ @BLOCKED
+  Scenario Outline: DTSP-583: As an end user, I want to be able to edit my Contact Person details on my Tax Registration form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Then I click on "Lodgements"
-    Then I click on "Payroll Tax"
-    And I check I am on "Payroll Lodgement Form" page
-    Then I click on button "Discard"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I click on "Monthly Return"
-    Then I select "Nov 2016" from "MonthlyObligationSelect"
-    Then I click on button "NextSection"
-    Then I wait for "2000" millisecond
-    #Then I click on button "TaxPayerDetailsNext"
-    Then I enter the details as
-      | Fields                                         | Value   |
-      | SalariesAndWages                               | 1000000 |
-      | BonusesAndCommissions                          |       1 |
-      | LodgePayrollAnswer_Commissions                 |       1 |
-      | LodgePayrollAnswer_Allowances                  |       1 |
-      | LodgePayrollAnswer_DirectorsFees               |       1 |
-      | LodgePayrollAnswer_EligibleTerminationPayments |       1 |
-      | LodgePayrollAnswer_ValueOfBenefits             |       1 |
-      | LodgePayrollAnswer_ShareValue                  |       1 |
-      | LodgePayrollAnswer_ServiceContracts            |       1 |
-      | LodgePayrollAnswer_Superannuation              |       1 |
-      | LodgePayrollAnswer_OtherTaxablePayment         |       1 |
-      | LodgePayrollAnswer_ExemptWages                 |       1 |
-    Then I click on button "wtSubmitBT"
-    Then I wait for "2000" millisecond
-    Then I check I am on "Payroll Tax Lodgement Summary" page
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+    #	Scenario 1: User views update left hand Navigation menu items
+    # Scenario 2: User views "Tax Registration Updates" sub menu items
     Then I click on "Tax Registration Update"
-    Then I click on "Update Business Address"
+    Then I see text "Update Business Address" displayed
+    Then I see text "Update Contact Details" displayed
+    Then I see text "Update Refund Details" displayed
+    # Scenario 3: User elects to view "Update Business Address" details form
+    Then I click on "Update Contact Details"
+    Then I check I am on "Update Contact Details" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName          |
+      | item2 | Taxpayer Details |
+    #| item3 | Update Business Address                                   |
+    #| item5 | Business Address                                          |
+    #| item5 | Update Contact Details                                           |
+    #		Scenario 4: User elects to edit "Update Business Address" details form
     Then I click on button "select2-chosen-1"
     Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
+      | Fields               | Value         |
+      | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I wait for "2000" millisecond
-    Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+    Then I check "ContactPerson_FirstName" is not readonly
+    Then I check "ContactPerson_LastName" is not readonly
+    Then I check "ContactPerson_PhoneNumber" is not readonly
+    Then I check "ContactPerson_Email" is not readonly
+    Then I check "Address_AddressLine7" is not readonly
+    Then I check "Address_City4" is not readonly
+    Then I check "Address_PostCode4" is not readonly
+    #Then I check "Address_AddressLine7" is not readonly
+    Then I click on button "NextBT"
+    #		Scenario 5: User views 'Tax Registration Update ' Summary page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName      |
+      | item3 | Declaration   |
+      | item5 | Organisation  |
+      | item5 | Contact Phone |
+      | item5 | Email Address |
+    #		Scenario 6: Submit 'Tax Registration Update ' data to PSRM without errors
+    Then I click on button "CorrectInfoDeclared"
+    Then I click on button "SubmitBT"
+    Then I see text "Your Payroll Tax Update Contact Details Request has been successfully submitted. An email has been sent to you for your reference." displayed
+    Then I see text "To download the details you have submitted, please click the button below." displayed
+    #		Scenario 7: Submit 'Tax Registration Updates 'data to PSRM with errors
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Tax Registration Update"
     Then I click on "Update Contact Details"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
+      | Fields               | Value         |
+      | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I wait for "2000" millisecond
-    Then I click on button "NextBT"
-
-    #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-    Then I click on "Update Refund Details"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I wait for "2000" millisecond
-    Then I click on button with value "Next"
-    #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-    Then I click on "Update Business Trading Name"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I wait for "2000" millisecond
-    Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-    #Then I click on "Service Requests"
-    #Then I click on "Exemption Request"
-    #Then I click on button "select2-chosen-1"
-    #Then I enter the details as
-      #| Fields               | Value          |
-      #| s2id_autogen1_search | <Organisation> |
-    #Then I click on button "select2-results-1"
-    #Then I wait for "2000" millisecond
-    #Then I click on button "ExemptionStartDateInput"
-    #Then I click on "20170527"
-    #Then I enter the details as
-      #| Fields             | Value |
-      #| JustificationInput | TEST  |
-    #Then I click on button with value "Next"
-    #Then I wait for "2000" millisecond
-    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-    Then I click on "Service Requests"
-    Then I click on "Objection Request"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I click on button "CheckInterest"
-    Then I enter the details as
-      | Fields             | Value |
-      | Objection_Comments | TEST  |
-    Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-    Then I click on "Tax Registration Cancellation"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value               |
-      | s2id_autogen1_search | DUSTER PTY. LIMITED |
-    Then I click on button "select2-results-1"
-    Then I click on button "CancellationStartDate"
-    Then I click on "20170527"
     Then I enter the details as
       | Fields            | Value |
-      | ReasonDescription | TEST  |
-    Then I click on button "ReasonDescription"
-    Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "DUSTER PTY. LIMITED"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-    Then I click on "Annual Lodgement Request"
-    Then I click on button "select2-chosen-1"
+      | Address_PostCode4 |    33 |
+    Then I click on button "NextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Invalid Post Code, should have length 4 and should contain only digits." displayed
+    #		Scenario 8: User clicks 'Back' on the 'Tax Registration Updates' Summary page
     Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I select "2018" from "YearCombo"
-    Then I click on button "MonthCombo"
-    Then I click on "Jan"
+      | Fields            | Value |
+      | Address_PostCode4 |  3333 |
+    #		Scenario 9: User views Tax Registration Updates Confirmation page
+    Then I click on button "NextBT"
+    Then I check I am on "Update Contact Details Summary" page
+    Then I click on button with value "Back"
+    Then I check I am on "Update Contact Details" page
+    #		Scenario 11: User selects "Cancel" and common browser message is displayed and the user is re directed to the Dashboard
     Then I enter the details as
-      | Fields                              | Value |
-      | AnnualLodgementRequestJustification | TEST  |
-    Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-    Then I click on "Group Management"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I wait for "2000" millisecond
-    Then I click on button with value "Update Group"
-    Then I select "2018" from "YearCombo"
-    Then I click on button "MonthCombo"
-    Then I click on "Jan"
-    Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
-    #Scenario 3: View User Profile
-    Then I click on "User Profile"
-    Then I see text "Position" displayed
-    #Scenario 4: Edit User Profile
-    Then I click on button "EditBT"
-    Then I see text "Position" displayed
-    Then I check "Input_LastName2" exists
+      | Fields           | Value |
+      | Address_PostCode |  4444 |
+    Then I click on button with value "Cancel"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
+    Then I click on button with value "Cancel"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
 
     Examples: 
-      | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation         | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | QUICK SINGLE PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
-      
+      | PortalName | UserName | Password   | BusinessName |
+      | TSS        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
 
-   @wip
-  Scenario Outline: DTSP-894: As an end user, I want to limit my options on the Generic Request form in the Request Type Dropdown
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Service Requests"
-    Then I click on "Generic Request"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I click on button "GenericRequest_RequestType"
-    Then I see text "Compliance tip-off" displayed
-    Then I see text "Exemption" displayed
-    Then I see text "Payroll Tax Exclusion" displayed
-    Then I see text "General Enquiry" displayed
-    Then I see text "Variation" displayed
-    Then I see text "Freedom of Information" not displayed
-    Then I see text "Objection" not displayed
-    Then I see text "Ombudsman's Request" not displayed
 
-    Examples: 
-      | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |

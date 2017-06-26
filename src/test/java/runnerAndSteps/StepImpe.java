@@ -75,6 +75,7 @@ public class StepImpe {
 	static String URLCaptured;
 	final String wcag_subdirectory = "wcagoutput";
 	final String screenshot_subdirectory = "screenshots";
+	boolean printErrors = false;
 	Hashtable<String, Integer> summary = new Hashtable<String, Integer>();
 
 	
@@ -108,7 +109,7 @@ public class StepImpe {
 
 	@After()
 	public void tearDown() {	
-		driver.quit();
+		//driver.quit();
 	}
 	//******************************************************************************   
 	    
@@ -200,7 +201,7 @@ public class StepImpe {
 
 		}
 		catch (IOException e){
-			e.printStackTrace();
+			if (printErrors) {e.printStackTrace(); }
 		}
 		
 		summary.put(arg1, Integer.parseInt(Capture));
@@ -263,7 +264,7 @@ public class StepImpe {
 			
 		}
 		catch (Exception e){
-			e.printStackTrace();
+			if (printErrors) e.printStackTrace();
 		}
 		finally {
 			if (br != null){
@@ -371,7 +372,7 @@ public class StepImpe {
 				}
 				catch (AssertionError | Exception ae2) {
 					// for input fields that default to the placeholder value when empty (very specific ones)
-					ae2.printStackTrace();
+					if (printErrors) ae2.printStackTrace();
 					System.out.println("Attempting to search for placeholder...");
 					boxContents = inputBox.getAttribute("placeholder");
 					System.out.println("boxContents: " + boxContents);
@@ -550,7 +551,7 @@ public class StepImpe {
 				driver.findElement(By.xpath(myXpath)).click();
 			}
 			catch (Exception e){
-				e.printStackTrace();
+				if (printErrors) e.printStackTrace();
 				myXpath = createXpath.xpathMakerByClass(arg1);
 				driver.findElement(By.xpath(myXpath)).click();
 			}
@@ -682,7 +683,7 @@ public class StepImpe {
 			Assert.assertTrue(object.isDisplayed());
 		}
 		catch (Exception e){
-			e.printStackTrace();
+			if (printErrors) e.printStackTrace();
 			String myxpath = checkElementDisplayed.xpathMakerByClass(arg1);
 			WebElement object = driver.findElement(By.xpath(myxpath));
 			Assert.assertTrue(object.isDisplayed());

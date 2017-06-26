@@ -1,5 +1,5 @@
 @all
-Feature: Wip in stuff.
+Feature: updated in stuff.
 
   #TODO: Fix Lodgement Summary and Update Refund Summary wrong page errors
   @erase
@@ -15,7 +15,7 @@ Feature: Wip in stuff.
 	##################################################################################################################################################
 	
 
-  @done
+  @updated
   Scenario Outline: WCAG Analysis Login and Registration
     # LOGIN SCREEN
     Given I want to login to portal "<PortalName>"
@@ -81,6 +81,7 @@ Feature: Wip in stuff.
     Then I click on "Create Account"
     Then I check I am on "Registration" page
     Then I click on "Register as a Tax Agent"
+    Then I wait for "2000" millisecond
     Then I enter the details as
       | Fields                    | Value             |
       | InputTaxAgentABN          | <TaxABN>          |
@@ -125,7 +126,7 @@ Feature: Wip in stuff.
       | Registration_LastName        | TEST                            |
       | Registration_Position        | TEST                            |
       | Registration_PhoneNumber     |                      1234567890 |
-      | Registration_Email           | <NewEmail>                      |
+      | Registration_Email           | <NewUserName>@automation.com                      |
       | Registration_Username        | <NewUserName>                   |
       | Registration_NewPassword     | <Password>                      |
       | Registration_ConfirmPassword | <Password>                      |
@@ -167,9 +168,9 @@ Feature: Wip in stuff.
 
     Examples: 
       | PortalName | PortalName2 | BusinessABN | BusinessCRN | TaxABN      | TaxBusinessName      | UserName | Password   | NewUserName          | NewEmail                 |
-      | TSS        | AC CHECKER  | 12054547368 |      400043 | 21006819692 | TOYOTA SUPER PTY LTD | jbradley | Dbresults1 | wcag_automation4 | wcag4@automation.com |
+      | TSS        | AC CHECKER  | 85085664197 |      400107 | 21006819692 | TOYOTA SUPER PTY LTD | jbradley | Dbresults1 | wcag_automation9 | wcag4@automation.com |
 
-  @current
+  @updated
   Scenario Outline: WCAG Forms: Tax Registration, User Settings
     # HOMEPAGE
     Given I want to login to portal "<PortalName>"
@@ -178,7 +179,7 @@ Feature: Wip in stuff.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "Home" page
+    Then I click on "Home"
     And I capture "html"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
@@ -232,7 +233,7 @@ Feature: Wip in stuff.
   
     #Return History
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Return History"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -254,7 +255,7 @@ Feature: Wip in stuff.
       | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | For Bearly Nothing |
       
   
-  @done
+  @wip
   Scenario Outline: Other Stuff
     # ACTIVITY HISTORY
     Given I want to login to portal "<PortalName>"
@@ -275,7 +276,7 @@ Feature: Wip in stuff.
  	
  		#Manage Account Details
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Manage Account Details"
     And I capture "html"
     And I want to login to portal "<PortalName2>"
@@ -306,6 +307,34 @@ Feature: Wip in stuff.
     And I click on button "validate_paste"
     And I capture "AC_num_of_errors"
     Then I write "Reset Password Link Expired" information to file
+    Then I write to the summary file
+    
+     # Manage Tooltips
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Manage Tooltips"
+    And I check I am on "Tooltips" page
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    Then I write "Manage Tooltips" information to file
+    Then I write to the summary file
+    
+      # Manage User Accounts
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Manage User Accounts"
+    #And I check I am on "Tooltips" page
+    And I capture "html"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    Then I write "Manage User Accounts" information to file
     Then I write to the summary file
 
     #
@@ -443,7 +472,7 @@ Feature: Wip in stuff.
       | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | For Bearly Nothing |
 	
   @done
-  Scenario Outline: Utilities (Network Facilities) Tax
+  Scenario Outline: Utilities Network Facilities Tax
     Given I want to login to portal "<PortalName>"
      And I enter the details as
       | Fields        | Value      |
@@ -715,7 +744,7 @@ Feature: Wip in stuff.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Address"
     Then I check I am on "Update Business Address" page
@@ -734,7 +763,7 @@ Feature: Wip in stuff.
     Then I write "Update Business Address Main" information to file
     #UPDATE BUSINESS ADDRESS PART 2
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Address"
     Then I check I am on "Update Business Address" page
@@ -756,7 +785,7 @@ Feature: Wip in stuff.
     Then I write "Update Business Address Summary" information to file
     #UPDATE BUSINESS ADDRESS PART 3
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Address"
     Then I check I am on "Update Business Address" page
@@ -796,9 +825,9 @@ Feature: Wip in stuff.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
-    Then I click on "Update Payroll Contact Details"
+    Then I click on "Update Contact Details"
     Then I check I am on "Update Contact Details" page
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -815,9 +844,9 @@ Feature: Wip in stuff.
     Then I write "Update Payroll Contact Details Main" information to file
     #Update Payroll Contact Details PART 2
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
-    Then I click on "Update Payroll Contact Details"
+    Then I click on "Update Contact Details"
     Then I check I am on "Update Contact Details" page
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -836,9 +865,9 @@ Feature: Wip in stuff.
     Then I write "Update Payroll Contact Details Summary" information to file
     #Update Payroll Contact Details PART 3
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
-    Then I click on "Update Payroll Contact Details"
+    Then I click on "Update Contact Details"
     Then I check I am on "Update Contact Details" page
     
     Then I click on button "select2-chosen-1"
@@ -877,9 +906,9 @@ Feature: Wip in stuff.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
-    Then I click on "Update Payroll Refund Details"
+    Then I click on "Update Refund Details"
     Then I click on button "select2-chosen-1"
     Then I check I am on "Update Refund Details" page
     Then I enter the details as
@@ -896,9 +925,9 @@ Feature: Wip in stuff.
     Then I write "Update Payroll Refund Details Main" information to file
     #Update Payroll Refund Details PART 2
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
-    Then I click on "Update Payroll Refund Details"
+    Then I click on "Update Refund Details"
     Then I check I am on "Update Refund Details" page
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -916,9 +945,9 @@ Feature: Wip in stuff.
     Then I write "Update Payroll Refund Details Summary" information to file
     #Update Payroll Refund Details PART 3
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
-    Then I click on "Update Payroll Refund Details"
+    Then I click on "Update Refund Details"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value         |
@@ -954,7 +983,7 @@ Feature: Wip in stuff.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Trading Name"
     Then I check I am on "UpdateBusinessTradingName" page
@@ -973,7 +1002,7 @@ Feature: Wip in stuff.
     Then I write "Update Business Trading Name Form" information to file
     #UPDATE BUSINESS TRADING NAME SUMMARY
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Trading Name"
     Then I check I am on "UpdateBusinessTradingName" page
@@ -994,7 +1023,7 @@ Feature: Wip in stuff.
     Then I write "Update Business Trading Name Summary" information to file
     #UPDATE BUSINESS TRADING NAME CONFIRMATION
     Given I want to login to portal "<PortalName>"
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Trading Name"
     Then I click on button "select2-chosen-1"
@@ -1017,18 +1046,6 @@ Feature: Wip in stuff.
     And I click on button "validate_paste"
     And I capture "AC_num_of_errors"
     Then I write "Update Business Trading Name Confirmation" information to file
-    # TOOLTIPS
-    Given I want to login to portal "TSS_Tooltips"
-    And I check I am on "Tooltips" page
-    And I capture "html"
-    And I want to login to portal "<PortalName2>"
-    And I click on "Paste HTML Markup"
-    And I click on button "checkpaste"
-    And I paste "html"
-    And I click on button "validate_paste"
-    And I capture "AC_num_of_errors"
-    Then I write "Tooltips" information to file
-    Then I write to the summary file
 
     Examples: 
       | PortalName | PortalName2 |  UserName | Password   | BusinessName |
@@ -1629,9 +1646,75 @@ Feature: Wip in stuff.
       | PortalName | PortalName2 |  UserName | Password   | BusinessName |
       | TSS        | AC CHECKER  |  jbradley | Dbresults1 |  For Bearly Nothing |
       
-  
-  
-  
+  @onhold
+  Scenario Outline: Credit Transfer Authorization
+ 	 #Form
+  	Given I want to login to portal "<PortalName>"
+  	  And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+  	Then I click on "Service Requests"
+    Then I click on "Credit Transfer Authorization"
+  	Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value    |
+      | s2id_autogen1_search | <BusinessName> |
+    Then I click on button "select2-results-1"
+    
+   
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    Then I write "Credit Transfer Authorisation Form" information to file
+    
+  	#Summary
+ 	 Given I want to login to portal "<PortalName>"
+
+  	Then I click on "Service Requests"
+    Then I click on "Credit Transfer Authorization"
+  	Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value    |
+      | s2id_autogen1_search | <BusinessName> |
+    Then I click on button "select2-results-1"
+    Then I click on button with value "Next"
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    Then I write "Credit Transfer Authorisation Summary" information to file
+    
+    Given I want to login to portal "<PortalName>"
+
+  	Then I click on "Service Requests"
+    Then I click on "Credit Transfer Authorization"
+  	Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value    |
+      | s2id_autogen1_search | <BusinessName> |
+    Then I click on button "select2-results-1"
+    Then I click on button with value "Next"
+    Then I click on button "CorrectInfoDeclared"
+    Then I click on button "SummarySubmitBT"
+    
+    And I want to login to portal "<PortalName2>"
+    And I click on "Paste HTML Markup"
+    And I click on button "checkpaste"
+    And I paste "html"
+    And I click on button "validate_paste"
+    And I capture "AC_num_of_errors"
+    Then I write "Credit Transfer Authorisation Confirmation" information to file
+ 	 #Confirmation
+  	Examples: 
+      | PortalName | PortalName2 |  UserName | Password   | BusinessName |
+      | TSS        | AC CHECKER  |  jbradley | Dbresults1 |  	TAGCORP PTY. LIMITED |
 
 
 	##################################################################################################################################################

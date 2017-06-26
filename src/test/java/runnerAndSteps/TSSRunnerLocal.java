@@ -24,11 +24,11 @@ import cucumber.api.junit.Cucumber;
     //*********************for SHAKE	OUT*************************************
 	//	 featuresf = "src/test/resource/com/CSS/SanityTestScript.feature") 
 
-//features = "src/test/resource/com/WCAG/WCAG.feature") 
+features = "src/test/resource/com/WCAG/WCAG.feature") 
 
 		
 //****************for wip****************************
-features = "src/test/resource/com/TSS/wip.feature")
+//features = "src/test/resource/com/TSS/wip.feature")
 //features = "src/test/resource/com/TSS/ShakeoutTest.feature")
 
 

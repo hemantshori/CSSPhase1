@@ -263,7 +263,7 @@ Feature: Regression for TSS.
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
     Then I select "2017" from "MonthlyObligationSelect"
-    Then I click on "NextSection"
+    Then I click on button "NextSection"
     Then I wait for "2000" millisecond
     Then I enter the details as
       | Fields                                         | Value  |
@@ -345,7 +345,7 @@ Feature: Regression for TSS.
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeAnnual"
     Then I select "01 Jul 2012 - 30 Jun 2013" from "AnnualObligationSelect"
-    Then I click on "NextSection"
+    Then I click on button "NextSection"
     Then I click on button "ClaimingACTProportion_Yes"
     #Scenario 2: Aus wide wages is not greater than ACT Taxable wages
     Then I enter the details as
@@ -405,7 +405,7 @@ Feature: Regression for TSS.
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeAnnual"
     Then I select "2015" from "AnnualObligationSelect"
-    Then I click on "NextSection"
+    Then I click on button "NextSection"
     Then I click on button "ClaimingACTProportion_Yes"
     #scenario 1: Restricted fields contain incorrect text type
     Then I enter the details as
@@ -3172,24 +3172,23 @@ Feature: Regression for TSS.
     #Scenario 2: "Payroll Tax Cancellation Information" section becomes
     Then I click on button "select2-chosen-1"
     Then I enter the details as
-      | Fields               | Value  |
-      | s2id_autogen1_search | DUSTER |
+      | Fields               | Value          |
+      | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
     Then I check "CancellationStartDate" is not readonly
     Then I check "ReasonDescription" is not readonly
     ##Scenario 4: Error display
-    Then I click on button "CancellationStartDate"
-    Then I click on "20170520"
     Then I enter the details as
-      | Fields            | Value |
-      | ReasonDescription | TEST  |
+      | Fields                | Value |
+      | ReasonDescription     | TEST  |
+      | CancellationStartDate | 20517 |
     Then I click on button with value "Next"
     Then I check I am on "Tax Cancellation Request Summary" page
     #Scenario 5: Payroll Tax Cancellation Submission
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Organisation>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
     Then I click on button "CorrectInfoDeclared"
@@ -3200,8 +3199,8 @@ Feature: Regression for TSS.
     Then I check I am on "Tax Cancellation Request Confirmation" page
 
     Examples: 
-      | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | DUSTER PTY. LIMITED | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | PortalName | UserName | Password   | FirstName | LastName | Organisation | Position   | ContactPhone | EmailAddress         |
+      | TSS        | jbradley | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant | 04 5678 9767 | jbradley@hotmail.com |
 
   @done
   Scenario Outline: DTSP-124: As an end user, I want to be able to submit an Annual Lodgement Request so that I can submit a request to change my lodgement frequency from monthly to annual
@@ -3268,7 +3267,7 @@ Feature: Regression for TSS.
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
 
-  @has_bug
+  @review
   Scenario Outline: DTSP-127: As an end user, I want to be able to submit a Liquidation Advice service request
     #Known error relating to the title of Liquidation Advice Summary and Confirmation page. Has been flagged
     Given I want to login to portal "<PortalName>"
@@ -3324,8 +3323,10 @@ Feature: Regression for TSS.
       | Address_AddressLine | TesT  |
       | Address_City4       | TEST  |
       | Address_PostCode    |    33 |
-    Then I click on button with value "Next"
-    Then I see text "Invalid Phone Number. Phone Number should be 10 digits. Please try again." displayed
+    
+    # CAN NO LONGER DO THE FOLLOWING DUE TO UPLOADING REQUIREMENTS
+    #Then I click on button with value "Next"
+    #Then I see text "Invalid Phone Number. Phone Number should be 10 digits. Please try again." displayed
     #Then I see text "Invalid Postcode. Postcode should be 4 Digits. Please try again." displayed
     #Then I see text "Incorrect Email Format." displayed
     #Scenario 3: "Payroll Tax Cancellation" Summary page
@@ -3369,8 +3370,8 @@ Feature: Regression for TSS.
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
 
-  @ONHOLD
-  Scenario Outline: DTSP-595: As an end user, I want to be able to add/edit/remove ACT group members to my Payroll Tax Group
+
+   Scenario Outline: DTSP-595: As an end user, I want to be able to add/edit/remove ACT group members to my Payroll Tax Group
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -3381,7 +3382,7 @@ Feature: Regression for TSS.
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value         |
-      | s2id_autogen1_search | NIGHT PTY LTD |
+      | s2id_autogen1_search | QUICK SINGLE PTY LTD |
     Then I click on button "select2-results-1"
     #Scenario 1: Display "Add ACT Group Member" button
     #Scenario 2: Display "Add ACT Group Member" button
@@ -3430,7 +3431,7 @@ Feature: Regression for TSS.
     Then I select "Common Control" from "GroupReasonComboBox"
     And I enter the details as
       | Fields        | Value       |
-      | GrpMember_ABN | 67607795808 |
+      | GrpMember_ABN | 85085664197 |
     Then I click on button "PopUpSaveBT"
     Then I see text "Please enter an ABN that is not already part of a Payroll Tax Group." displayed
     #Scenario 15: Group Member (lodging for itself)
@@ -4759,7 +4760,7 @@ Feature: Regression for TSS.
       #| PortalName | UserName | Password   |
       #| TSS        | jbradley | Dbresults1 |
 
-  @redo
+  @wip
   Scenario Outline: DTSP-770: To update the information sent to PSRM in the declaration section
     #Scenario 1: Declaration on Summary Page of all forms
     Given I want to login to portal "<PortalName>"
@@ -4778,9 +4779,9 @@ Feature: Regression for TSS.
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
     Then I click on "Monthly Return"
-    Then I select "Dec 2016" from "MonthlyObligationSelect"
+    Then I select "Nov 2016" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     #Then I click on button "TaxPayerDetailsNext"
     Then I enter the details as
       | Fields                                         | Value   |
@@ -4797,7 +4798,7 @@ Feature: Regression for TSS.
       | LodgePayrollAnswer_OtherTaxablePayment         |       1 |
       | LodgePayrollAnswer_ExemptWages                 |       1 |
     Then I click on button "wtSubmitBT"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I check I am on "Payroll Tax Lodgement Summary" page
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
@@ -4812,9 +4813,9 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I click on button with value "Next"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4827,9 +4828,9 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I click on button "NextBT"
-    Then I click on button "NextBT"
+
     #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4842,7 +4843,7 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I click on button with value "Next"
     #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
@@ -4856,36 +4857,37 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I click on button with value "Next"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+    #Then I click on "Service Requests"
+    #Then I click on "Exemption Request"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value          |
+      #| s2id_autogen1_search | <Organisation> |
+    #Then I click on button "select2-results-1"
+    #Then I wait for "2000" millisecond
+    #Then I click on button "ExemptionStartDateInput"
+    #Then I click on "20170527"
+    #Then I enter the details as
+      #| Fields             | Value |
+      #| JustificationInput | TEST  |
+    #Then I click on button with value "Next"
+    #Then I wait for "2000" millisecond
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
     Then I click on "Service Requests"
-    Then I click on "Exemption Request"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
-    Then I wait for "1000" millisecond
-    Then I click on button "ExemptionStartDateInput"
-    Then I click on "20170527"
-    Then I enter the details as
-      | Fields             | Value |
-      | JustificationInput | TEST  |
-    Then I click on button with value "Next"
-    Then I wait for "1000" millisecond
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
     Then I click on "Objection Request"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -4897,7 +4899,7 @@ Feature: Regression for TSS.
       | Fields             | Value |
       | Objection_Comments | TEST  |
     Then I click on button with value "Next"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4908,19 +4910,18 @@ Feature: Regression for TSS.
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value               |
-      | s2id_autogen1_search | DUSTER PTY. LIMITED |
+      | s2id_autogen1_search | AQUA |
     Then I click on button "select2-results-1"
-    Then I click on button "CancellationStartDate"
-    Then I click on "20170527"
     Then I enter the details as
       | Fields            | Value |
       | ReasonDescription | TEST  |
+     	| CancellationStartDate | 27517 |
     Then I click on button "ReasonDescription"
     Then I click on button with value "Next"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "DUSTER PTY. LIMITED"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "AQUA PTY LTD"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
@@ -4937,7 +4938,7 @@ Feature: Regression for TSS.
       | Fields                              | Value |
       | AnnualLodgementRequestJustification | TEST  |
     Then I click on button with value "Next"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4948,18 +4949,19 @@ Feature: Regression for TSS.
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
+      | s2id_autogen1_search | DESIGNATE PTY. LTD. |
     Then I click on button "select2-results-1"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I click on button with value "Update Group"
     Then I select "2018" from "YearCombo"
     Then I click on button "MonthCombo"
     Then I click on "Jan"
+    Then I click on button "CheckboxJRL"
     Then I click on button with value "Next"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<DESIGNATE PTY. LTD."
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
@@ -4974,7 +4976,9 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation         | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | QUICK SINGLE PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
+      
 
+   
   @review
   Scenario Outline: DTSP-779: To update the Payroll Tax Registration Form to remove the autopopulated declaration section
     Given I want to login to portal "<PortalName>"
@@ -5265,7 +5269,8 @@ Feature: Regression for TSS.
     Then I check "AddBTN" is readonly
     Then I check "SaveAndNextToSummaryBT" is readonly
     #Scenario 5: PSRM validation
-    Then I select "Gas Distribution Network" from "NetworkDetail_UtilityTypeDropdown"
+    Then I select "Water Network" from "NetworkDetail_UtilityTypeDropdown"
+    Then I wait for "2000" millisecond
     Then I enter the details as
       | Fields          | Value |
       | KMOfRouteLength |    50 |
@@ -5621,19 +5626,19 @@ Feature: Regression for TSS.
     Then I enter the details as
       | Fields             | Value |
       | JustificationInput | TEST  |
-    Then I click on button with value "Next"
-    Then I check object with xpath "//*[contains(text(), 'Requested Exemption Start Date')]/..//following-sibling::td" contains "02 Jun 2017"
-    Then I check object with xpath "//*[contains(text(), 'Requested Exemption End Date')]/..//following-sibling::td" contains "03 Jun 2017"
-    Then I check object with xpath "//*[contains(text(), 'Tax Type')]//following-sibling::td" contains "Payroll Tax"
-    Then I check object with xpath "//*[contains(text(), 'Exemption Request Justification')]/..//following-sibling::td" contains "TEST"
-    Then I check I am on "Exemption Request Summary" page
+    #Then I click on button with value "Next"
+    #Then I check object with xpath "//*[contains(text(), 'Requested Exemption Start Date')]/..//following-sibling::td" contains "02 Jun 2017"
+    #Then I check object with xpath "//*[contains(text(), 'Requested Exemption End Date')]/..//following-sibling::td" contains "03 Jun 2017"
+    #Then I check object with xpath "//*[contains(text(), 'Tax Type')]//following-sibling::td" contains "Payroll Tax"
+    #Then I check object with xpath "//*[contains(text(), 'Exemption Request Justification')]/..//following-sibling::td" contains "TEST"
+    #Then I check I am on "Exemption Request Summary" page
     #check declaration
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
-    Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
@@ -5881,8 +5886,7 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
-
-  @current
+ @current
   Scenario Outline: DTSP-796: As an end user, I want to be able to view the Energy Industry Levy lodgement summary page with all calculated fields for Energy Industry Levy
     #Scenario 1: Ambulance Levy  Lodgement
     Given I want to login to portal "<PortalName>"
@@ -6102,12 +6106,13 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "1000" millisecond
+    Then I wait for "2000" millisecond
     Then I click on button with value "Update Group"
     #Scenario 1: Pop up
+    Then I wait for "1500" millisecond
     Then I click on button "AddNonActPopUp"
     Then I wait for "3000" millisecond
-    Then I switch to frame "0"
+    Then I switch to frame "1"
     Then I click on button "OverseasRadioButtonYES"
     Then I enter the details as
       | Fields            | Value        |
@@ -6121,7 +6126,7 @@ Feature: Regression for TSS.
     Then I check object with xpath "//*[contains(@id, 'TableNonACTMembers')]//td[4]" contains "234234234"
     Then I check object with xpath "//*[contains(@id, 'TableNonACTMembers')]//td[6]" contains "Lebanon"
     #Scenario 3: Summary page
-    Then I click on button "ctl03_wt49"
+    Then I click on button "CheckboxJRL"
     Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
     Then I click on button with value "Next"
@@ -6139,7 +6144,6 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
-
   @review
   Scenario Outline: DTSP-850: As an end user, I want to update the Payroll Tax Registration form, so that it is easier to use
     Given I want to login to portal "<PortalName>"
@@ -6889,49 +6893,49 @@ Feature: Regression for TSS.
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
       | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
-  @review
-  Scenario Outline: DTSP-910: As an end user, I want to see more accurate error messages on the Service Request forms, so that I know how to fix my error
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Service Requests"
+  #@review
+  #Scenario Outline: DTSP-910: As an end user, I want to see more accurate error messages on the Service Request forms, so that I know how to fix my error
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Service Requests"
     #Scenario 1: Cancellation
-    Then I click on "Tax Registration Cancellation"
-    Then I see text "Cancellation End Date" not displayed
+    #Then I click on "Tax Registration Cancellation"
+    #Then I see text "Cancellation End Date" not displayed
     #Scenario 2: Cancellation start date
-    Then I see text "Cancellation Effective Date" displayed
-    Then I check "CancellationStartDate" exists
+    #Then I see text "Cancellation Effective Date" displayed
+    #Then I check "CancellationStartDate" exists
     #Scenario 3: Exemption error message
-    Then I click on "Exemption Request"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value          |
-      | s2id_autogen1_search | <Organisation> |
-    Then I click on button "select2-results-1"
+    #Then I click on "Exemption Request"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value          |
+      #| s2id_autogen1_search | <Organisation> |
+    #Then I click on button "select2-results-1"
     #Then I click on button "ExemptionStartDateInput"
     #Then I click on "20170502"
     #Then I click on button "calTriggerOut"
     #Then I click on button "ExemptionEndDateInput"
     #Then I click on "20170529"
-    Then I enter the details as
-      | Fields                  | Value  |
-      | JustificationInput      | TEST   |
-      | ExemptionStartDateInput | 120617 |
-      | ExemptionEndDateInput   | 110617 |
+    #Then I enter the details as
+      #| Fields                  | Value  |
+      #| JustificationInput      | TEST   |
+      #| ExemptionStartDateInput | 120617 |
+      #| ExemptionEndDateInput   | 110617 |
     #Then I upload file with path "C:\\Users\\CTang\\git\\SSCP\\CSSPhase1\\ConfigData.xlsx" to "DBResultsSG_Theme_wt59_block_wtMainContent_TSSAdminCore_wt78_block_wtPlaceholder1_TSSDropZone_wt54_block_wt14"
-    Then I click on button with value "Next"
-    Then I see text "The Requested Exemption End Date must be later than the Requested Exemption Start Date." displayed
+    #Then I click on button with value "Next"
+    #Then I see text "The Requested Exemption End Date must be later than the Requested Exemption Start Date." displayed
     #Scenario 4: Voluntary Disclosure
-    Then I click on "Update Liability Commencement Date Request"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I see text "Voluntary Disclosure" not displayed
-
-    Examples: 
-      | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+    #Then I click on "Update Liability Commencement Date Request"
+    #Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Then I see text "Voluntary Disclosure" not displayed
+#
+    #Examples: 
+      #| PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
+      #| TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @wip
   Scenario Outline: DTSP-920: As an end user, I want to see an updated Return History for all tax types, so that I can select an obligation to amend
@@ -7445,7 +7449,8 @@ Feature: Regression for TSS.
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
-  @done
+  
+ @done
   Scenario Outline: Organisation Name on Payroll Tax Registration instead of Employer Name
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -7485,14 +7490,13 @@ Feature: Regression for TSS.
       | s2id_autogen1_search |  6940 |
     Then I click on button "select2-results"
     Then I click on button "ACTWagesPaidNextBt"
-    Then I click on "DateBusinessStart"
-    Then I click on "20170501"
-    Then I click on "DateBusinessLiable"
-    Then I click on "20170502"
     Then I enter the details as
       | Fields            | Value |
       | NumberOfEmployees |    33 |
-    Then I click on "PayrollNext"
+      | DateBusinessStart | 010517 |
+      | DateBusinessLiable | 020517 |
+    
+    Then I click on button "PayrollNext"
     Then I click on button "Refunds_NO"
     Then I wait for "2000" millisecond
     Then I click on button "RefundDetailsBT"
@@ -7501,8 +7505,8 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+  @wip
 
-  @done
   Scenario Outline: <return period> / <employer status> / Group Number <group number> under wages section
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -7521,7 +7525,7 @@ Feature: Regression for TSS.
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
     Then I select "May 2017" from "MonthlyObligationSelect"
-    Then I click on "NextSection"
+    Then I click on button "NextSection"
     Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)\)"
     Then I click on button with value "Discard"
@@ -7537,7 +7541,7 @@ Feature: Regression for TSS.
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
     Then I select "May 2017" from "MonthlyObligationSelect"
-    Then I click on "NextSection"
+    Then I click on button "NextSection"
     Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)\)"
     Then I click on button with value "Discard"
@@ -7549,11 +7553,11 @@ Feature: Regression for TSS.
     #Independent employer (non-group) lodging for itself
     Then I enter the details as
       | Fields               | Value  |
-      | s2id_autogen1_search | DUSTER |
+      | s2id_autogen1_search | GOOD FOR |
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
     Then I select "May 2017" from "MonthlyObligationSelect"
-    Then I click on "NextSection"
+    Then I click on button "NextSection"
     Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)|([\w|\s|\W]+)\)"
     Then I click on button with value "Discard"
@@ -7568,15 +7572,15 @@ Feature: Regression for TSS.
       | s2id_autogen1_search | JOINT |
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeAnnual"
-    Then I select "01 Jul 2016 - 30 Jun 2017" from "AnnualObligationSelect"
-    Then I click on "NextSection"
+    Then I select "01 Jul 2014 - 30 Jun 2015" from "AnnualObligationSelect"
+    Then I click on button "NextSection"
     Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)\)"
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
-
+      
   @wip
   Scenario Outline: Group Management Create group with DGE bug
     Given I want to login to portal "<PortalName>"
