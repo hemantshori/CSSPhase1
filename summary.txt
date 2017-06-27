@@ -32,3 +32,17 @@ Manage Account Details: 0 Errors.
 Manage Tooltips: 0 Errors.
 Manage User Accounts: 0 Errors.
 Reset Password Link Expired: 0 Errors.
+Account Already Activated: 0 Errors.
+Activity History: 0 Errors.
+Manage Account Details: 0 Errors.
+Reset Password Link Expired: 0 Errors.
+Account Already Activated: 0 Errors.
+Activity History: 0 Errors.
+Manage Account Details: 0 Errors.
+Reset Password Link Expired: 0 Errors.
+Account Already Activated: 0 Errors.
+Activity History: 0 Errors.
+Manage Account Details: 0 Errors.
+Manage Tooltips: 0 Errors.
+Manage User Accounts: 0 Errors.
+Reset Password Link Expired: 0 Errors.

@@ -255,7 +255,7 @@ Feature: updated in stuff.
       | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | For Bearly Nothing |
       
   
-  @wip
+  @review
   Scenario Outline: Other Stuff
     # ACTIVITY HISTORY
     Given I want to login to portal "<PortalName>"
@@ -279,6 +279,7 @@ Feature: updated in stuff.
     Then I click on "Home"
     Then I click on "Manage Account Details"
     And I capture "html"
+   	Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -307,13 +308,19 @@ Feature: updated in stuff.
     And I click on button "validate_paste"
     And I capture "AC_num_of_errors"
     Then I write "Reset Password Link Expired" information to file
-    Then I write to the summary file
+    #Then I write to the summary file
     
      # Manage Tooltips
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Manage Tooltips"
     And I check I am on "Tooltips" page
     And I capture "html"
+    Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -321,13 +328,19 @@ Feature: updated in stuff.
     And I click on button "validate_paste"
     And I capture "AC_num_of_errors"
     Then I write "Manage Tooltips" information to file
-    Then I write to the summary file
+    #Then I write to the summary file
     
       # Manage User Accounts
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Manage User Accounts"
     #And I check I am on "Tooltips" page
     And I capture "html"
+    Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -345,7 +358,7 @@ Feature: updated in stuff.
 	##################################################################################################################################################
 	################################################################ LODGEMENT FORMS ################################################################
 	##################################################################################################################################################
-	@done
+	@review
 	Scenario Outline: Payroll Tax Lodgement Form
 		 #PAYROLL FORM
     Given I want to login to portal "<PortalName>"
@@ -379,7 +392,7 @@ Feature: updated in stuff.
       | s2id_autogen1_search | <PayrollName> |
     Then I click on button "select2-results-1"
     Then I click on "Monthly Return"
-    Then I select "Sep 2016" from "MonthlyObligationSelect"
+    Then I select "Mar 2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
     #Then I click on button "TaxPayerDetailsNext"
     Then I enter the details as
@@ -428,7 +441,7 @@ Feature: updated in stuff.
       | s2id_autogen1_search | <PayrollName> |
     Then I click on button "select2-results-1"
     Then I click on "Monthly Return"
-    Then I select "Sep 2016" from "MonthlyObligationSelect"
+    Then I select "Mar 2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
     #Then I click on button "TaxPayerDetailsNext"
     Then I enter the details as
@@ -469,9 +482,9 @@ Feature: updated in stuff.
     
       Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | PayrollName |
-      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | For Bearly Nothing |
+      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | QUICK SINGLE PTY LTD |
 	
-  @done
+  @review
   Scenario Outline: Utilities Network Facilities Tax
     Given I want to login to portal "<PortalName>"
      And I enter the details as
@@ -482,7 +495,9 @@ Feature: updated in stuff.
     Then I click on "Lodgements"
     Then I click on "Utilities (Network Facilities) Tax"
     Then I check I am on "Network Utilities Lodgement Form" page
+    
  		And I capture "html"
+ 		Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -493,22 +508,35 @@ Feature: updated in stuff.
     
     #Summary
     Given I want to login to portal "<PortalName>"
+      And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Lodgements"
     Then I click on "Utilities (Network Facilities) Tax"
     Then I check I am on "Network Utilities Lodgement Form" page
+    Then I click on button with value "Discard"
         Then I click on button "select2-chosen-1"
     
     Then I enter the details as
       | Fields               | Value         |
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I select "2013" from "ObligationsDropdown"
+    Then I wait for "3000" millisecond
+    #Then I click on button "Content_wtObligationsDropdown"
+    #Then I click on "2014"
+    Then I select "01 Apr 2013 - 31 Mar 2014" from "ObligationsDropdown"
     Then I click on button "SaveNextBT"
     Then I select "Water Network" from "NetworkDetail_UtilityTypeDropdown" 
+     Then I enter the details as
+      | Fields               | Value         |
+      | KMOfRouteLength | 50 |
     Then I click on button "SaveAndNextToSummaryBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Lodgement Summary" page
     And I capture "html"
+    Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -520,6 +548,11 @@ Feature: updated in stuff.
     
     #Confirmation
     Given I want to login to portal "<PortalName>"
+      And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Lodgements"
     Then I click on "Utilities (Network Facilities) Tax"
     Then I check I am on "Network Utilities Lodgement Form" page
@@ -529,16 +562,24 @@ Feature: updated in stuff.
       | Fields               | Value         |
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I select "2013" from "ObligationsDropdown"
+    Then I wait for "3000" millisecond
+    
+    #Then I click on button "Content_wtObligationsDropdown"
+    #Then I click on "2014"
+   Then I select "01 Apr 2013 - 31 Mar 2014" from "Content_wtObligationsDropdown"
     Then I click on button "SaveNextBT"
     Then I select "Water Network" from "NetworkDetail_UtilityTypeDropdown" 
+     Then I enter the details as
+      | Fields               | Value         |
+      | KMOfRouteLength | 50 |
     Then I click on button "SaveAndNextToSummaryBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
      Then I click on button "CorrectInfoDeclared"
     Then I click on button "SummarySubmitBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Submission Confirmation" page
    And I capture "html"
+   Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -548,11 +589,11 @@ Feature: updated in stuff.
     Then I write "Utilities (Network Facilities) Lodgement Confirmation" information to file
    Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | BusinessName |
-      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | INTO THE NEW |
+      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | Bye Debts Pty Ltd |
       
   
   
-  @done
+  @review
   Scenario Outline: Ambulance Levy
     Given I want to login to portal "<PortalName>"
      And I enter the details as
@@ -564,19 +605,27 @@ Feature: updated in stuff.
     Then I click on "Ambulance Levy"
     Then I check I am on "Ambulance Levy Lodgement Form" page
  		And I capture "html"
+ 		 Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
     And I paste "html"
+    Then I click on "Sign Out"
     And I click on button "validate_paste"
     And I capture "AC_num_of_errors"
     Then I write "Ambulance Levy Lodgement Form" information to file
     
     #Summary
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Lodgements"
     Then I click on "Ambulance Levy"
     Then I check I am on "Ambulance Levy Lodgement Form" page
+    Then I click on button with value "Discard"
     Then I click on button "select2-chosen-1"
     
     Then I enter the details as
@@ -593,6 +642,7 @@ Feature: updated in stuff.
      Then I wait for "5000" millisecond
     Then I check I am on "Lodgement Summary" page
      		And I capture "html"
+     		 Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -603,6 +653,11 @@ Feature: updated in stuff.
     
       #Confirmation
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Lodgements"
     Then I click on "Ambulance Levy"
     Then I check I am on "Ambulance Levy Lodgement Form" page
@@ -637,9 +692,9 @@ Feature: updated in stuff.
     
     Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | BusinessName |
-      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | For Bearly Nothing |
+      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | Bye Debts Pty Ltd  |
   
-  @done
+  @review
   Scenario Outline: Energy Industry Levy 
    Given I want to login to portal "<PortalName>"
      And I enter the details as
@@ -651,16 +706,23 @@ Feature: updated in stuff.
     Then I click on "Energy Industry Levy"
     Then I check I am on "Energy Industry Levy Lodgement Form" page
  		And I capture "html"
+ 		Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
     And I paste "html"
+    
     And I click on button "validate_paste"
     And I capture "AC_num_of_errors"
     Then I write "Energy Industry Levy Lodgement Form" information to file
     
     #Summary
     Given I want to login to portal "<PortalName>"
+     And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Lodgements"
     Then I click on "Energy Industry Levy"
     Then I check I am on "Energy Industry Levy Lodgement Form" page
@@ -678,9 +740,10 @@ Feature: updated in stuff.
       | ActualMegawattHours | 11 |
       |	MethodCalculateTotalMegaw |			11			 |
     Then I click on button "SaveAndNextToSummaryBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Lodgement Summary" page
     And I capture "html"
+    Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -691,6 +754,11 @@ Feature: updated in stuff.
     
     #Confirmation
     Given I want to login to portal "<PortalName>"
+     And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Lodgements"
     Then I click on "Energy Industry Levy"
     #Then I check I am on "Energy Industry Levy Lodgement Form" page
@@ -728,14 +796,14 @@ Feature: updated in stuff.
     
     Examples: 
       | PortalName | PortalName2 | UserNameField | PasswordField | UserName | Password   | BusinessName |
-      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | INTO THE NEW |
+      | TSS        | AC CHECKER  | UserNameInput | PasswordInput | jbradley | Dbresults1 | Bye Debts Pty Ltd |
   
   
 	##################################################################################################################################################
 	############################################################# TAX REGISTRATION UPDATES ###########################################################
 	##################################################################################################################################################
 
-  @done
+  @review
   Scenario Outline: Update Business Address
     #UPDATE BUSINESS ADDRESS PART 1
     Given I want to login to portal "<PortalName>"
@@ -754,6 +822,7 @@ Feature: updated in stuff.
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
     And I capture "html"
+    Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -763,6 +832,11 @@ Feature: updated in stuff.
     Then I write "Update Business Address Main" information to file
     #UPDATE BUSINESS ADDRESS PART 2
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Address"
@@ -773,9 +847,10 @@ Feature: updated in stuff.
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
     Then I wait for "1000" millisecond
-    Then I click on button with value "Next"
+    Then I click on button "NextBT"
     Then I check I am on "Update Business Address Summary" page
     And I capture "html"
+    Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -785,6 +860,11 @@ Feature: updated in stuff.
     Then I write "Update Business Address Summary" information to file
     #UPDATE BUSINESS ADDRESS PART 3
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Address"
@@ -795,7 +875,7 @@ Feature: updated in stuff.
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
     Then I wait for "1000" millisecond
-    Then I click on button with value "Next"
+    Then I click on button "NextBT"
     Then I wait for "1000" millisecond
     Then I check I am on "Update Business Address Summary" page
     
@@ -804,6 +884,7 @@ Feature: updated in stuff.
     Then I wait for "5000" millisecond
     Then I check I am on "Update Complete" page
     And I capture "html"
+    
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -814,9 +895,9 @@ Feature: updated in stuff.
 
     Examples: 
       | PortalName | PortalName2 |  UserName | Password   | BusinessName |
-      | TSS        | AC CHECKER  |  jbradley | Dbresults1 | HEMPSON |
+      | TSS        | AC CHECKER  |  jbradley | Dbresults1 | Bye Debts Pty Ltd |
 
-  @done
+  @wip
   Scenario Outline: Payroll Contact Details
     #Update Payroll Contact Details PART 1
     Given I want to login to portal "<PortalName>"
@@ -835,6 +916,7 @@ Feature: updated in stuff.
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
     And I capture "html"
+    Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
@@ -844,6 +926,11 @@ Feature: updated in stuff.
     Then I write "Update Payroll Contact Details Main" information to file
     #Update Payroll Contact Details PART 2
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Contact Details"
@@ -853,10 +940,17 @@ Feature: updated in stuff.
       | Fields               | Value         |
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I click on button with value "Next"
+    Then I click on button "NextBt"
+    Then I wait for "3000" millisecond
     Then I check I am on "Update Contact Details Summary" page
     And I capture "html"
+    Then I click on "Sign Out"
     And I want to login to portal "<PortalName2>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     And I click on "Paste HTML Markup"
     And I click on button "checkpaste"
     And I paste "html"
@@ -865,6 +959,11 @@ Feature: updated in stuff.
     Then I write "Update Payroll Contact Details Summary" information to file
     #Update Payroll Contact Details PART 3
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Contact Details"
@@ -875,13 +974,13 @@ Feature: updated in stuff.
       | Fields               | Value         |
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I click on button "NextBt"
+    Then I wait for "3000" millisecond
     Then I check I am on "Update Contact Details Summary" page
     
     Then I click on button "CorrectInfoDeclared"
     Then I click on button "SummarySubmitBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Update Complete" page
     And I capture "html"
     And I want to login to portal "<PortalName2>"
@@ -894,7 +993,7 @@ Feature: updated in stuff.
 
        Examples: 
       | PortalName | PortalName2 |  UserName | Password   | BusinessName |
-      | TSS        | AC CHECKER  |  jbradley | Dbresults1 | HEMPSON |
+      | TSS        | AC CHECKER  |  jbradley | Dbresults1 | Bye Debts Pty Ltd |
 
 
   @done
@@ -925,6 +1024,11 @@ Feature: updated in stuff.
     Then I write "Update Payroll Refund Details Main" information to file
     #Update Payroll Refund Details PART 2
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Refund Details"
@@ -945,6 +1049,11 @@ Feature: updated in stuff.
     Then I write "Update Payroll Refund Details Summary" information to file
     #Update Payroll Refund Details PART 3
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Refund Details"
@@ -971,7 +1080,7 @@ Feature: updated in stuff.
 
     Examples: 
       | PortalName | PortalName2 |  UserName | Password   | BusinessName |
-      | TSS        | AC CHECKER  |  jbradley | Dbresults1 | HEMPSON |
+      | TSS        | AC CHECKER  |  jbradley | Dbresults1 | Bye Debts Pty Ltd |
 
 
   @done
@@ -1002,6 +1111,11 @@ Feature: updated in stuff.
     Then I write "Update Business Trading Name Form" information to file
     #UPDATE BUSINESS TRADING NAME SUMMARY
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Trading Name"
@@ -1023,6 +1137,11 @@ Feature: updated in stuff.
     Then I write "Update Business Trading Name Summary" information to file
     #UPDATE BUSINESS TRADING NAME CONFIRMATION
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Business Trading Name"
@@ -1049,7 +1168,7 @@ Feature: updated in stuff.
 
     Examples: 
       | PortalName | PortalName2 |  UserName | Password   | BusinessName |
-      | TSS        | AC CHECKER  |  jbradley | Dbresults1 | HEMPSON |
+      | TSS        | AC CHECKER  |  jbradley | Dbresults1 | Bye Debts Pty Ltd |
 
 	##################################################################################################################################################
 	############################################################# SERVICE REQUEST PAGES #############################################################
@@ -1077,6 +1196,11 @@ Feature: updated in stuff.
     Then I write "Exemption Request" information to file
     #EXEMPTION REQUEST SUMMARY
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Service Requests"
     Then I click on "Exemption Request"
     Then I click on button "select2-chosen-1"
@@ -1108,6 +1232,11 @@ Feature: updated in stuff.
     Then I write "Exemption Request Summary" information to file
     #EXEMPTION REQUEST CONFIRMATION
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Service Requests"
     Then I click on "Exemption Request"
     Then I click on button "select2-chosen-1"
@@ -1149,6 +1278,7 @@ Feature: updated in stuff.
   Scenario Outline: Objection Request Form
     #OBJECTION REQUEST FORM
     Given I want to login to portal "<PortalName>"
+    
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
@@ -1166,6 +1296,11 @@ Feature: updated in stuff.
     Then I write "Objection Request" information to file
     #OBJECTION REQUEST SUMMARY
     Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
     Then I click on "Service Requests"
     Then I click on "Objection Request"
     Then I click on button "select2-chosen-1"
@@ -1190,6 +1325,7 @@ Feature: updated in stuff.
     Then I write "Objection Request Summary" information to file
     #OBJECTION REQUEST CONFIRMATION
     Given I want to login to portal "<PortalName>"
+    
     Then I click on "Service Requests"
     Then I click on "Objection Request"
     Then I click on button "select2-chosen-1"

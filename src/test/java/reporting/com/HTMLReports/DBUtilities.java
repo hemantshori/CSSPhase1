@@ -307,7 +307,7 @@ public class DBUtilities extends XPathGenerator {
 							  driver.findElement(By.xpath(myXpath)).clear();
 						  }
 						  catch (Exception e){
-							  e.printStackTrace();
+							  //e.printStackTrace();
 							  System.out.println("Cannot find an input field! Now trying to find a textarea field...");
 							  myXpath = createXpath.xpathMakerByTextAreaId(data.get(i).get(0));
 							  System.out.println(i);

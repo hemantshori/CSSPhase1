@@ -2,7 +2,7 @@
 @wip
 Feature: WORK IN PROGRESS
 
- @BLOCKED
+ @updated
   Scenario Outline: DTSP-583: As an end user, I want to be able to edit my Contact Person details on my Tax Registration form
     Given I want to login to portal "<PortalName>"
     And I enter the details as

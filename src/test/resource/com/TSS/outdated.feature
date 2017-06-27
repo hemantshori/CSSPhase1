@@ -5,6 +5,251 @@
 Feature: Outdated stuff
 	#OUTDATED:  240, 310, 311, 355, 358, 401, 443,
 
+
+ #@done
+  #Scenario Outline: DTSP-617: Annual Payroll Tax Lodgements (Check for outstanding monthly obligations in PSRM)
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Lodgements"
+    #Then I click on "Payroll Tax"
+    #Then I click on button with value "Discard"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value          |
+      #| s2id_autogen1_search | <SearchString> |
+    #Then I click on button "select2-results-1"
+    #Then I click on "Annual Reconciliation"
+    #Then I click on button "AnnualObligationSelect"
+    #Then I see text "2012" displayed
+    #Then I see text "01 Jul 2012 - 30 Jun 2013" displayed
+    #Then I see text "01 Jul 2013 - 30 Jun 2014" displayed
+    #Then I see text "01 Jul 2014 - 30 Jun 2015" displayed
+    #Then I see text "01 Jul 2015 - 30 Jun 2016" displayed
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value           |
+      #| s2id_autogen1_search | <SearchString2> |
+    #Then I click on button "select2-results-1"
+    #Then I click on "Monthly Return"
+    #Then I click on button "MonthlyObligationSelect"
+    #Then I see text "Aug 2016" displayed
+    #Then I see text "Sep 2016" displayed
+    #Then I see text "Oct 2016" displayed
+    #Then I see text "Nov 2016" displayed
+    #Then I see text "Dec 2016" displayed
+    #Then I see text "Jan 2017" displayed
+#
+    #Then I see text "Feb 2017" displayed
+    #Examples: 
+      #| PortalName | UserName | Password   | SearchString | SearchString2 |
+      #| TSS        | jbradley | Dbresults1 | DESIGNATE    | QUICK SINGLE  |
+
+	  # OUTDATED
+  #@done
+  #Scenario Outline: DTSP-566: As an end user, I want the Payroll Tax Information accordion, sub section Total Taxable Wages) on the Payroll Tax Registration Form to accept calendar year input
+  #Given I want to login to portal "<PortalName>"
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | <UserName> |
+  #| PasswordInput | <Password> |
+  #And I hit Enter
+  #And I click on "Payroll Tax Registration"
+  #Then I select "Company" from "SelectBusinessTypeCode"
+  #Then I select "Mr" from "ContactPerson_Title"
+  #Then I select "Direct Post" from "CommunicationMethodId"
+  #Then I check "TaxPayerDetailsNext" is readonly
+  #Then I enter the details as
+  #| Fields                    | Value              |
+  #| EmployerName              | DB RESULTS PTY LTD |
+  #| BusinessTradingName       | DB RESULTS PTY LTD |
+  #| RegistrationAnswer_ABN    |        97110187767 |
+  #| AddressLine1              | TEST               |
+  #| Address_City              | TEST               |
+  #| PostCode                  |               3333 |
+  #| ContactPerson_FirstName   | TEST               |
+  #| ContactPerson_LastName    | TEST               |
+  #| ContactPerson_PhoneNumber |          333333333 |
+  #| ContactPerson_Email       | test@test.com      |
+  #Then I select "Other" from "SelectBusinessTypeCode"
+  #Then I click on "TaxPayerDetailsNext"
+  #Then I click on button "select2-chosen-1"
+  #Then I enter the details as
+  #| Fields               | Value        |
+  #| s2id_autogen1_search | Turf Growing |
+  #Then I click on button "select2-results-1"
+  #Then I click on button "ACTWagesPaidNextBt"
+  #Then I click on button "YearComjbradleyox"
+  #Then I see text "2012" displayed
+  #Then I see text "2013" displayed
+  #Then I see text "2014" displayed
+  #Then I see text "2015" displayed
+  #Then I see text "2016" displayed
+  #
+  #Examples:
+  #| PortalName | UserName | Password   |
+  #| TSS        | jbradley | Dbresults1 |
+  #OUTDATED; TOTAL TAX PAYABLE SECTION NO LONGER REQUIRED IN PAYROLL TAX LODGEMENT FORM
+  #@done
+  #Scenario Outline: DTSP-553: As a user, I want to see a "Total Amounts" section on my Annual Payroll Tax return form so I can enter my "Less Total Tax Paid" amount
+  #Given I want to login to portal "<PortalName>"
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | <UserName> |
+  #| PasswordInput | <Password> |
+  #And I hit Enter
+  #And I click on "Payroll Tax Lodgement"
+  #Then I click on button "Discard"
+  #Then I click on "Annual Reconciliation"
+  #Then I select "2014" from "AnnualObligationSelect"
+  #Then I click on button "NextSection"
+  #Then I click on button "TaxPayerDetailsNext"
+  #Then I enter the details as
+  #| Fields                                         | Value |
+  #| SalariesAndWages                               |   100 |
+  #| BonusesAndCommissions                          |   100 |
+  #| LodgePayrollAnswer_Commissions                 |   100 |
+  #| LodgePayrollAnswer_Allowances                  |   100 |
+  #| LodgePayrollAnswer_DirectorsFees               |   100 |
+  #| LodgePayrollAnswer_EligibleTerminationPayments |   100 |
+  #| LodgePayrollAnswer_ValueOfBenefits             |   100 |
+  #| LodgePayrollAnswer_ShareValue                  |   100 |
+  #| LodgePayrollAnswer_ServiceContracts            |   100 |
+  #| LodgePayrollAnswer_Superannuation              |   100 |
+  #| LodgePayrollAnswer_OtherTaxablePayment         |   100 |
+  #| LodgePayrollAnswer_ExemptWages                 |   100 |
+  #Then I click on button "SubmitBT"
+  #Then I see text "Total Tax Payable" displayed
+  #Then I see text "Less Total Tax Paid" displayed
+  #Then I see text "Total Amount Payable" displayed
+  #Then I enter the details as
+  #| Fields                 | Value |
+  #| AnnualLessTotalTaxPaid |    50 |
+  #Then I check "AnnualTotalTaxPayable" contains "$ 75.35"
+  #Then I check "AnnualTotalAmountPayable" contains "$ 25.35"
+  #
+  #Examples:
+  #| PortalName | UserName | Password   |
+  #| TSS        | jbradley | Dbresults1 |
+  
+  
+   #OUTDATED
+  #@review
+  #Scenario Outline: DTSP-136: As an end user, I want to be able to view the left navigation panel so that I can quickly access the functions that I need
+  #Given I want to login to portal "<PortalName>"
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | <UserName> |
+  #| PasswordInput | <Password> |
+  #And I hit Enter
+  #Then "<Item>" is displayed as "<ItemName>"
+  #| Item  | ItemName                         |
+  #| text1 | Dashboard                        |
+  #| text1 | Transaction History              |
+  #| text2 | Payroll Tax Lodgement            |
+  #| text2 | Payroll Tax Registration         |
+  #| text2 | Payroll Tax Registration Updates |
+  #| text2 | Manage Tax Details               |
+  #| text2 | User Profile                     |
+  #| text2 | Sign Out                         |
+  #Then I click on "Payroll Tax Lodgement"
+  #Then I check I am on "Payroll Lodgement Form" page
+  #Then I click on "Manage Account Details"
+  #Then I check I am on "Manage Account Details" page
+  #
+  #Then I click on "Payroll Tax Registration"
+  #Then I check I am on "Payroll Tax Registration" page
+  #Then I click on "User Profile"
+  #Then I check I am on "View User Profile" page
+  #Then I click on "Dashboard"
+  #Then I check I am on "HomePage" page
+  #Then I click on "Sign Out"
+  #Then I check I am on "Login" page
+  #
+  #Examples:
+  #| PortalName | UserName | Password   |
+  #| TSS        | jbradley | Dbresults1 |
+  
+  #OUTDATED
+  #@review
+  #Scenario Outline: DTSP-176: As an end user, I want to be able to view my Transaction History for Payroll Tax
+  #Scenarios 1-4 are already tested in DTSP-78.
+  #Scenarios 13-14 are already tested in DTSP-141
+  #Scenarios 5, 6, 8 and 10 are best tested manually
+  #Given I want to login to portal "<PortalName>"
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | <UserName> |
+  #| PasswordInput | <Password> |
+  #And I hit Enter
+  #Then I click on button "select2-chosen-1"
+  #Then I enter the details as
+  #| Fields               | Value            |
+  #| s2id_autogen1_search | SIT SPOT PTY LTD |
+  #Then I click on button "select2-results-1"
+  #Then I click on button "select2-chosen-1"
+  #Then I click on "Payroll Tax Registration"
+  #Then I click on "Transaction History"
+  #Scenario 7: “Next” button
+  #Then I click on button "ListNavigation_Next"
+  #Scenario 8: "Previous" button
+  #Then I click on button "ListNavigation_Previous"
+  #Scenario 12: BPAY and EFT Info
+  #Then I see text "Payment Options" displayed
+  #Then I see text "Biller Code" displayed
+  #Then I see text "EFTBSB" displayed
+  #Then I click on "Sign Out"
+  #Given I want to login to portal "<PortalName>"
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | mbisping   |
+  #| PasswordInput | <Password> |
+  #And I hit Enter
+  #Scenario 9 and 11
+  #Then I click on "Transaction History"
+  #Then I see text "You do not have any monthly transaction history available" displayed
+  #Then I see text "You do not have any annual transaction history available" displayed
+  #Then I click on "Sign Out"
+  #
+  #Examples:
+  #| PortalName | UserName | Password   |
+  #| TSS        | jbradley | Dbresults1 |
+  
+  
+  #OUTDATED
+  #@done
+  #Scenario Outline: DTSP-536: As a Business Tax Payer, I want my details pre populated on the Payroll Tax form when I select an outstanding obligation
+  #Given I want to login to portal "<PortalName>"
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | <UserName> |
+  #| PasswordInput | <Password> |
+  #And I hit Enter
+  #And I click on "Payroll Tax Lodgement"
+  #Scenario 1: User chooses outstanding monthly obligation
+  #Then I click on button "Discard"
+  #Then I click on "Monthly Return"
+  #Then I select "Jan 2017" from "MonthlyObligationSelect"
+  #Then I click on button "NextSection"
+  #Then I see text "50600468817" displayed
+  #Then I see text "400011" displayed
+  #Then I click on "Payroll Tax Lodgement"
+  #Scenario 2: User chooses outstanding yearly obligation
+  #Then I click on button "Discard"
+  #Then I click on "Annual Reconciliation"
+  #Then I select "2014" from "AnnualObligationSelect"
+  #Then I click on button "NextSection"
+  #Then I see text "50600468817" displayed
+  #Then I see text "400011" displayed
+  #
+  #Scenario 3: User chooses outstanding (Monthly or Yearly) obligation and no Payroll Tax Group Number is returned (user is an independent and is not part of a group)
+  #Examples:
+  #| PortalName | UserNameField | PasswordField | UserName | Password   |
+  #| TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 |
+
 	 #@tss
   # BETTER OFF DONE MANUALLY
   #Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
