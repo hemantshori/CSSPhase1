@@ -906,7 +906,7 @@ Feature: updated in stuff.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Then I click on "Home"
+    #Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Contact Details"
     Then I check I am on "Update Contact Details" page
@@ -931,7 +931,7 @@ Feature: updated in stuff.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Then I click on "Home"
+    #Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Contact Details"
     Then I check I am on "Update Contact Details" page
@@ -940,7 +940,7 @@ Feature: updated in stuff.
       | Fields               | Value         |
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I click on button "NextBt"
+    Then I click on button "NextBT"
     Then I wait for "3000" millisecond
     Then I check I am on "Update Contact Details Summary" page
     And I capture "html"
@@ -964,7 +964,7 @@ Feature: updated in stuff.
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Then I click on "Home"
+    #Then I click on "Home"
     Then I click on "Tax Registration Update"
     Then I click on "Update Contact Details"
     Then I check I am on "Update Contact Details" page
@@ -974,7 +974,7 @@ Feature: updated in stuff.
       | Fields               | Value         |
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I click on button "NextBt"
+    Then I click on button "NextBT"
     Then I wait for "3000" millisecond
     Then I check I am on "Update Contact Details Summary" page
     

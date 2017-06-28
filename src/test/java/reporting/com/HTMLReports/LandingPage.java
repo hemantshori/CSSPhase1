@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -152,22 +153,32 @@ public class LandingPage extends DBUtilities {
       
       public void selectDropdownValue(String arg1, String arg2) throws InterruptedException
       {
+    	  JavascriptExecutor executor = (JavascriptExecutor)driver;
     	  try {
 	    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
+	    	  //WebElement element1 =  driver.findElement(By.xpath(myxpath));
 	    	  driver.findElement(By.xpath(myxpath)).click();
+	    	  
 	    	  
 	    	  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
 	    	  myxpath2 = myxpath2.replace("*", "select");
 	    	  System.out.println(myxpath2);
+	    	 // WebElement element2 =driver.findElement(By.xpath(myxpath2));
+	    	  
+	    	  //executor.executeScript("arguments[0].click()", element2);
 	    	  driver.findElement(By.xpath(myxpath2)).click();
     	  }
     	  catch (Exception e){
     		  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
 	    	  myxpath2 = myxpath2.replace("*", "select");
 	    	  System.out.println(myxpath2);
+//	    	  WebElement element2 =driver.findElement(By.xpath(myxpath2));
+//	    	  executor.executeScript("arguments[0].click()", element2);
 	    	  driver.findElement(By.xpath(myxpath2)).click();
 	    	  
 	    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
+//	    	  WebElement element1 =  driver.findElement(By.xpath(myxpath));
+//	    	  executor.executeScript("arguments[0].click()", element1);
 	    	  driver.findElement(By.xpath(myxpath)).click();
 	    	  
     	  }

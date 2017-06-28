@@ -34,6 +34,12 @@ public class HomePage extends DBUtilities {
 			//driver.get("https://dev2-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
 			driver.get("http://dev2-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
 		}
+		else if(arg1.equals("TSSAdmin")){
+			//driver.get("https://dev2-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
+			driver.get("http://dev2-ssc.dbresults.com.au/TSSPortal/Loginadmin.aspx");
+		}
+		
+		
 		 
 		else if(arg1.equals("TSSUAP")){
 			driver.get("https://dev2-ssc.dbresults.com.au/TSSAdminPortal");

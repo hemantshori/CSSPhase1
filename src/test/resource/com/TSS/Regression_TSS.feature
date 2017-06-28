@@ -47,7 +47,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | PortalName2 | SearchValue   | SearchDescription       | SearchValue2 | SearchDescription2                         | UserName | Password   |
-      | TSS        | TSSUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | TSSAdmin | Dbresults1 |
+      | TSSAdmin        | TSSAdminUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | TSSAdminAdmin | Dbresults1 |
 
   #alt username: hemant.shori
   #alt password: USBcoffee1
@@ -92,7 +92,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | DescriptionBefore                          | DescriptionAfter |
-      | TSS        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
+      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdminAdmin | Dbresults1 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
 
 	@wip
   Scenario Outline: DTSP-56 :As a DB Portal Administrator I want to add a new message so that required messages are displayed in the portal
@@ -131,7 +131,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | NewMessage              |
-      | TSS        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | This is a test message! |
+      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdminAdmin | Dbresults1 | FeedbackMsgText | Username Exists | This is a test message! |
 
   @done
   Scenario Outline: DTSP-233: As a DB Portal Administrator, I want to be able to search/add/edit/remove the tool tips displayed on forms so that I can help the end user better understand the form field/s
@@ -197,7 +197,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | NewDescription  | NewDescription2     |
-      | TSS        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | This is a test! | This is a test two! |
+      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdminAdmin | Dbresults1 | This is a test! | This is a test two! |
 
   #@BEST_DONE_MANUALLY
   #Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
@@ -234,7 +234,7 @@ Feature: Regression for TSS.
   #
   #Examples:
   #| PortalName | UserNameField | PasswordField | UserName | Password  | ButtonName1 | DropDownValue1 | DropDownField | DropDownValue2 | DropDownField2 | Message                                    |
-  #| TSS        | UserNameInput | PasswordInput | jbradley      | Dbresults1| TypeMonthly |           2012 | YearOfReturn  | September      | MonthOfReturn  | Your changes have been successfully saved. |
+  #| TSSAdmin        | UserNameInput | PasswordInput | jbradley      | Dbresults1| TypeMonthly |           2012 | YearOfReturn  | September      | MonthOfReturn  | Your changes have been successfully saved. |
   @tss
   Scenario Outline: DTSP-358: As an end user, I want to be able to submit my Annual Payroll Tax Return Form
     Given I want to login to portal "<PortalName>"
@@ -307,8 +307,8 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation                           | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | COFFEE CORP PTY LTD                    | 04 5678 9767 | jbradley@hotmail.com |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | GOOD FOR SOMETHING PROPRIETARY LIMITED | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | COFFEE CORP PTY LTD                    | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | GOOD FOR SOMETHING PROPRIETARY LIMITED | 04 5678 9767 | jbradley@hotmail.com |
 
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 2 ################################################
@@ -374,7 +374,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12345678901 | 12345678901 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12345678901 | 12345678901 |
 
   #NOTE: Ensure that jbradley has a current employee type selected in the data extensions page
   @tss_review
@@ -488,9 +488,9 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 98765123456 | 12345678902 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 98765123456 | 12345678902 |
 
-	@update
+		@update
   Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -507,15 +507,20 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    Then I click on button "LodgePayrollAnswer_TypeAnnual"
-    Then I select "2015" from "AnnualObligationSelect"
+    
+    Then I click on button "LodgePayrollAnswer_TypeAnnual2"
+    Then I wait for "2000" millisecond
+    Then I click on button "MonthlyObligationSelect"
+    Then I click on "2017"
+   # Then I select "2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
     Then I click on button with value "Back"
-    Then I check "AnnualObligationSelect" is readonly
+    Then I check "MonthlyObligationSelect" is readonly
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName       |
-      | TSS        | jbradley | Dbresults1 | Designate  |
+      | TSSAdmin        | jbradley | Dbresults1 | Designate  |
+
 
 
 
@@ -616,7 +621,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ABN         | CRN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 96107641949 | 400066 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 96107641949 | 400066 |
 
   @wip
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
@@ -675,7 +680,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
-      | TSS        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 |
+      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdminAdmin | Dbresults1 |
 
 
   @testagain
@@ -706,7 +711,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
   @done
   Scenario Outline: DTSP-147
@@ -790,7 +795,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
   @done
   Scenario Outline: DTSP-460: s an organisation I want user inputs to be restricted & validated during Tax Agent's portal registration so that human error can be minimised
@@ -826,7 +831,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jscott   | Dbresults1 |
+      | TSSAdmin        | jscott   | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-440 and DTSP-441: As an organisation I want to know the type of user who is registering so that the relevant verification information can be presented.
@@ -899,7 +904,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jscott   | Dbresults1 |
+      | TSSAdmin        | jscott   | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-459
@@ -960,7 +965,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jscott   | Dbresults1 |
+      | TSSAdmin        | jscott   | Dbresults1 |
 
   #NOTE: Ensure that jbradley has a current employee type selected in the data extensions page
   @done
@@ -1051,7 +1056,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | ABN         | CRN    |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12054547368 | 400043 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12054547368 | 400043 |
 
   @done
   Scenario Outline: DTSP-463: Display all the mandatory fields with an Asterisk (*)
@@ -1221,7 +1226,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
@@ -1236,7 +1241,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   #@review
   #Scenario Outline: DTSP-8
@@ -1257,7 +1262,7 @@ Feature: Regression for TSS.
   #
   #Examples:
   #| PortalName | UserNameField | PasswordField | UserName | Password   |
-  #| TSS        | UserNameInput | PasswordInput | jscott   | Dbresults1 |
+  #| TSSAdmin        | UserNameInput | PasswordInput | jscott   | Dbresults1 |
   #
   #@review
   #Scenario Outline: DTSP-13, DTSP-14
@@ -1275,7 +1280,7 @@ Feature: Regression for TSS.
   #
   #Examples:
   #| PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-  #| TSS        | UserNameInput | PasswordInput | jscott   | Dbresults1 | 12345678901 | 12345678901 |
+  #| TSSAdmin        | UserNameInput | PasswordInput | jscott   | Dbresults1 | 12345678901 | 12345678901 |
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 4 ################################################
   ###########################################################################################################
@@ -1451,7 +1456,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @wip
   Scenario Outline: DTSP-537
@@ -1553,7 +1558,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | Password   |
-      | TSS        | UserNameInput | PasswordInput | Dbresults1 |
+      | TSSAdmin        | UserNameInput | PasswordInput | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-444: As an end user, I want to know my Payroll Tax Obligations (including Month and Year) which have not been lodged so I can lodge my monthly payroll tax accordingly
@@ -1605,9 +1610,9 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | Password   |
-      | TSS        | UserNameInput | PasswordInput | Dbresults1 |
+      | TSSAdmin        | UserNameInput | PasswordInput | Dbresults1 |
 
-  @done
+ @done
   Scenario Outline: DTSP-501: As an end user, I want the Payroll Tax Registration Form to be updated for Ease of Use
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -1624,15 +1629,15 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
+    Then I wait for "4000" millisecond
     Then I enter the details as
       | Fields                 | Value         |
-      | EmployerName           | <CompanyName> |
+      | RegistrationAnswer_EmployerName           | <CompanyName> |
       | BusinessTradingName    | <CompanyName> |
       | RegistrationAnswer_ACN | NO            |
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "2000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
@@ -1645,14 +1650,14 @@ Feature: Regression for TSS.
       | ContactPerson_Email       | TEST@TEST.com |
     #Then I select "AL" from "Address_State"
     Then I click on button "OrgDetailsNextBt"
-    Then I wait for "2000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value        |
       | s2id_autogen1_search | Turf Growing |
     Then I click on button "select2-results-1"
     Then I click on button "ACTWagesPaidNextBt"
-    Then I wait for "2000" millisecond
+    Then I wait for "3000" millisecond
     #Scenario 1: Contact Person for Payroll Tax
     Then I see text "Same as Business Contact Person" displayed
     Then I click on "Same as Business Contact Person"
@@ -1665,8 +1670,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
-
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @redo
   Scenario Outline: DTSP-526, 531: Update the ABN LookUp Rules for Payroll Tax Registration Form / Update the first page of the Portal Registration process
@@ -1803,7 +1807,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
   @done
   Scenario Outline: DTSP-527: Update the relationship between Business Taxpayer, Tax Agent Organisation and Users
     Given I want to login to portal "<PortalName>"
@@ -1838,7 +1842,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | UserName2 | Password2  |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | toyota    | Dbresults1 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | toyota    | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-392:
@@ -1891,7 +1895,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
 
 
   @done
@@ -1941,7 +1945,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
   @done
   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
     Given I want to login to portal "<PortalName>"
@@ -1955,7 +1959,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-524: As an organisation, I want to force the user to key in every 'dollar' field on the Payroll Tax Lodgement Form so that the user won't miss out any of these fields
@@ -2008,7 +2012,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 1 ################################################
@@ -2131,7 +2135,7 @@ Feature: Regression for TSS.
     #Scenario 11: TODO when 'View History' and 'Lodge Return' buttons have actual ids.
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
  
     @review
@@ -2197,7 +2201,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   
  @BLOCKED
@@ -2285,7 +2289,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |  
-      | TSS        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
+      | TSSAdmin        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
 
   @review
   Scenario Outline: DTSP-522: As a end user I want the settings page updated so I can understand what the settings page is used for
@@ -2311,7 +2315,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   @wip
   Scenario Outline: DTSP-567: As an end user, I don't want to see any tax calculations while I am filling out the Payroll Tax Lodgement Form until they are retrieved from PSRM and populated on the Lodgement Summary page
@@ -2359,7 +2363,7 @@ Feature: Regression for TSS.
     #Scenario 3 is currently blocked by bug DTSP-684
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-578: Update Portal Registration Form to re-enable front end validation on CRN
@@ -2391,7 +2395,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | ABN         | CRN    |
-      | TSS        | jbradley | Dbresults1 | 13058370433 | 400014 |
+      | TSSAdmin        | jbradley | Dbresults1 | 13058370433 | 400014 |
 
   @updated
   Scenario Outline: DTSP-583: As an end user, I want to be able to edit my Contact Person details on my Tax Registration form
@@ -2478,7 +2482,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |
-      | TSS        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
+      | TSSAdmin        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
 
    @BLOCKED
   Scenario Outline: DTSP-592: As an end user, I want to be able to edit my Refund details on my Tax Registration form
@@ -2571,7 +2575,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |
-      | TSS        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
+      | TSSAdmin        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
   @review
   Scenario Outline: DTSP-608: As a user I want to choose a Tax Payer's ABN so that those details are populated on forms
     #Scenario 2: Business Taxpayer associated with multiple ABNs
@@ -2704,7 +2708,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
  
   @BLOCKED
@@ -2763,7 +2767,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | SearchString |
-      | TSS        | jbradley | Dbresults1 | DB RESULTS   |
+      | TSSAdmin        | jbradley | Dbresults1 | DB RESULTS   |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 2 ################################################
@@ -2845,7 +2849,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
 
   @fixed
   Scenario Outline: DTSP-105: As an end user, I want to be able to submit an Exemption Request so that I can request for an exemption on my Payroll Tax
@@ -2919,7 +2923,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position     | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
 
   @has_bug
   Scenario Outline: DTSP-116: As an end user, I want to be able to submit a Payroll Tax Registration Cancellation Request so that I can cancel my current
@@ -2967,7 +2971,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Organisation | Position   | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant | 04 5678 9767 | jbradley@hotmail.com |
 
   @done
   Scenario Outline: DTSP-124: As an end user, I want to be able to submit an Annual Lodgement Request so that I can submit a request to change my lodgement frequency from monthly to annual
@@ -3032,7 +3036,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-127: As an end user, I want to be able to submit a Liquidation Advice service request
@@ -3135,7 +3139,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
 
 
    Scenario Outline: DTSP-595: As an end user, I want to be able to add/edit/remove ACT group members to my Payroll Tax Group
@@ -3238,7 +3242,7 @@ Feature: Regression for TSS.
     #Scenarios 5, 6, 9, 10, 11 are best done manually
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
      @done
   Scenario Outline: DTSP-596: As a Payroll Tax Group member, I want to be able to view the details of my Payroll Tax Group
@@ -3326,7 +3330,7 @@ Feature: Regression for TSS.
     #Scenarios 2, 3, 8, 9, 12 are best done manually
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley   | Dbresults1 |
+      | TSSAdmin        | jbradley   | Dbresults1 |
 
  @onhold
   Scenario Outline: DTSP-646: Update phone number field validation rules to reflect Australian numbers and allow future dates selection in PayRoll Tax Registration form
@@ -3458,7 +3462,7 @@ Feature: Regression for TSS.
     #Scenarios 3 and 4 are best done manuallyS
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-647: Update Payroll Tax Registration form for ease of use
@@ -3536,7 +3540,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @redo
   Scenario Outline: DTSP-649: Add Validation Rules and make other changes to the Payroll Tax Lodgement Form
@@ -3669,7 +3673,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | UserName2 |
-      | TSS        | jbradley | Dbresults1 | jscott    |
+      | TSSAdmin        | jbradley | Dbresults1 | jscott    |
   @review
   Scenario Outline: DTSP-676:  As a Payroll Tax Group Member, I want to be able to add/edit/remove 'Non-ACT Group Members' to my group
     Given I want to login to portal "<PortalName>"
@@ -3725,7 +3729,7 @@ Feature: Regression for TSS.
     #Scenarios 5, 6 and 7 are best tested manually
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   @onhold
   Scenario Outline: DTSP-682: Update Country field in Pay Roll Tax Registration form
@@ -3830,7 +3834,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-758: As an end user, I want to be limited to only a month and year selection when I am creating/editing my Payroll Tax Group
@@ -3875,12 +3879,12 @@ Feature: Regression for TSS.
     #Scenario 3
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 3 ################################################
   ###########################################################################################################
-  @review
+ @review
   Scenario Outline: DTSP-89: As an end user, I want to be able to view my Activity History so that I can track my previous activities
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -3902,6 +3906,7 @@ Feature: Regression for TSS.
     #Scenario 3: More than 10 activity history
     Then I check "ListNavigation_PageNumber" exists
     Then I click on "Sign Out"
+    Given I want to login to portal "<PortalName>"
     #Scenario 4: No Activity History
     And I enter the details as
       | Fields        | Value      |
@@ -3913,9 +3918,9 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
-  @review
+     @review
   Scenario Outline: DTSP-108: As an end user, I want to raise a Generic Request so that I don't need to contact customer service.
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -3937,6 +3942,7 @@ Feature: Regression for TSS.
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
+    Then I wait for "4000" millisecond
     #Scenario 2: "Request Details" section displayed on the "Generic Request" Form
     Then I check "OrganizationalName" is readonly
     Then I check "PayrollAnswer_ABN" is readonly
@@ -3953,6 +3959,7 @@ Feature: Regression for TSS.
       | Fields                         | Value |
       | GenericRequest_RequestComments | TEST  |
     Then I click on button with value "Next"
+    Then I wait for "3000" millisecond
     Then I check I am on "Generic Request Summary" page
     Then I click on button with value "Submit"
     Then I wait for "2000" millisecond
@@ -3962,7 +3969,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-574: As an end user I want to be able to see a summary of my payroll tax details on the dashboard so that I know if my information is up-to-date
@@ -4005,7 +4012,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
    Scenario Outline: DTSP-685: As an end user, I want all pre populated and non editable fields on the portal to be greyed out
     #Scenario 1: Portal Registration
@@ -4123,7 +4130,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
       
   @review
   Scenario Outline: DTSP-689: As a user I want to update the order of menu items on the left navigation panel
@@ -4173,7 +4180,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-690: As an end user, I want to be able to update my Business Trading Name on my Tax Registration so that I can keep my Tax Registration information up-to-date
@@ -4222,7 +4229,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
 
  @wip
@@ -4250,7 +4257,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
 
   @ignore_until_fixed
@@ -4319,7 +4326,7 @@ Feature: Regression for TSS.
     #Bugged...?
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-704: To update the ABN Lookup Rule on the Payroll Tax Registration Form and Tax Agent Portal Registration
@@ -4385,7 +4392,7 @@ Feature: Regression for TSS.
     #Bugged...?
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-712: To update all wording on the portal from "Tax Payer" to the single word "Taxpayer"
@@ -4450,7 +4457,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-703: As an user, I want to fill in a declaration section when I fill in an Objection Request, so that I can verify that I have submitted this request
@@ -4487,7 +4494,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSS        | jbradley | Dbresults1 |
+      | TSSAdmin        | jbradley | Dbresults1 |
 
   #@review
   # CAN NO LONGER AUTOMATE EXEMPTION REQUEST TESTS
@@ -4525,7 +4532,7 @@ Feature: Regression for TSS.
 #
     #Examples: 
       #| PortalName | UserName | Password   |
-      #| TSS        | jbradley | Dbresults1 |
+      #| TSSAdmin        | jbradley | Dbresults1 |
 
   @wip
   Scenario Outline: DTSP-770: To update the information sent to PSRM in the declaration section
@@ -4742,7 +4749,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation         | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | QUICK SINGLE PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | QUICK SINGLE PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
       
 
    
@@ -4818,7 +4825,7 @@ Feature: Regression for TSS.
     #Scenarios 2-5 should be done manually
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @manual
   Scenario Outline: As an end user I want to see the Industry codes before Industry name in the Business Activity Category Drop down on Payroll Tax registration form
@@ -4866,7 +4873,7 @@ Feature: Regression for TSS.
     #maybe this should be done manually...
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   ###########################################################################################################
   #################################### PHASE 1.2 ITERATION 1.2 ################################################
@@ -4922,7 +4929,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-34: As an end user, I want to be able to submit a Energy Industry Levy Return form so that I can validate in PSRM
@@ -4991,7 +4998,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-38: As an end user, I want to be able to complete a Utilities(Network Facilities) Tax Return Form so that I can validate it in PSRM
@@ -5059,7 +5066,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation    | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-151: As an end user, I want to be able to view my Return History for Network Utilities Tax Type
@@ -5161,7 +5168,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @current
   Scenario Outline: DTSP-530: As a Customer Portal Admin, I want to be able to deactivate end user accounts so that I can remove invalid portal accounts
@@ -5246,7 +5253,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | CompanyName                                 | ABN         | NewUserName | NewEmail                | Password   |
-      | TSS        | TSSAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5312    | dtsp5307@automation.com | Dbresults1 |
+      | TSSAdmin        | TSSAdminAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5312    | dtsp5307@automation.com | Dbresults1 |
 
   @current
   Scenario Outline: DTSP-742: As an end user I want to be able to update Objection Request Form to cater for different Tax Types
@@ -5329,7 +5336,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @current
   Scenario Outline: DTSP-743: As an end user I want to be able to update Exemption Request Form to cater for different Tax Types
@@ -5409,7 +5416,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @current
   Scenario Outline: DTSP-745: As an end user I want to be able to update Tax Registration Cancellation Form to cater for registration cancellation of different Tax Types
@@ -5481,7 +5488,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
 
   @current
   Scenario Outline: DTSP-788: As an end user, I want to be able to complete a Utilities(Network Facilities) Tax Return Form so that I can validate it in PSRM
@@ -5571,7 +5578,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation    | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-792: As an end user, I want to be able to view the Ambulance Levy lodgement summary page
@@ -5652,7 +5659,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
  @current
   Scenario Outline: DTSP-796: As an end user, I want to be able to view the Energy Industry Levy lodgement summary page with all calculated fields for Energy Industry Levy
     #Scenario 1: Ambulance Levy  Lodgement
@@ -5732,7 +5739,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-836: As an end user, I want to be required to select a JRL if I have group members that are not lodging itselfs
@@ -5776,7 +5783,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-837: As a an end user creating/updating a group, I want to see a more detailed error message when I am prevented from adding a particular group member
@@ -5835,7 +5842,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-838: As an end user, I want to see instructions when I am submitting an Annual Lodgement request
@@ -5857,7 +5864,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @current
   Scenario Outline: DTSP-840: As a user I want to add Non-ACT members in my group using Radio buttons for overseas members
@@ -5910,7 +5917,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
   @review
   Scenario Outline: DTSP-850: As an end user, I want to update the Payroll Tax Registration form, so that it is easier to use
     Given I want to login to portal "<PortalName>"
@@ -5981,7 +5988,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-899: As an end user I want to see the "Activity Type" drop down on activity history updated to cater for all Tax types
@@ -6001,7 +6008,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-705: As an end user, I want to be able to raise aUpdate Liability Commencement Date Request on the portal so that I can disclose any changes in date for my tax registration for a chosen tax type
@@ -6070,7 +6077,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @current
   Scenario Outline: DTSP-706: As an end user, I want to be able to raise a Refund Request on the portal so that I can request a refund for the Carry forward amount to the Tax Office
@@ -6131,7 +6138,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   ###########################################################################################################
   #################################### PHASE 1.2 ITERATION 2 ################################################
@@ -6205,7 +6212,7 @@ Feature: Regression for TSS.
    	
    Examples:
 		  | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
   @review
   Scenario Outline: DTSP-747: As an end user I want to be able to update refund details on Tax Registration updates for different tax types
     Given I want to login to portal "<PortalName>"
@@ -6273,7 +6280,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-749: As an end user I want to be able to update refund details on Tax Registration updates for different tax types
@@ -6357,7 +6364,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ABN         | CRN    |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 85085664197 | 400107 |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 85085664197 | 400107 |
 
   @review
   Scenario Outline: DTSP-814: As an end user, I want to be able to amend my lodged Payroll Tax returns, so that I can fix any mistakes I have made
@@ -6406,7 +6413,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-865: As a user I want to see changes made on Payroll tax lodgements, registration page and return history so that its consistent with additional tax types
@@ -6507,7 +6514,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-870: As an end user, I want to be able to amend my lodgements for Ambulance Levy, so that I can rectify errors  + DTSP-879: As an end user, I want to see a Summary Page, Confirmation Page, PDF and email notification for an Ambulance Levy Amendment
@@ -6555,7 +6562,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          | ABN         | CRN    |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
 
   @review
   Scenario Outline: DTSP-877: As an end user, I want to be able to amend my lodgements for Utilitites (Network Facilities) Tax, so that I can rectify errors + DTSP-884: As an end user, I want to be able to see the Summary Page, Confirmation Page, PDF, and email notification for Energy Industry Levy Amendments
@@ -6613,7 +6620,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          | ABN         | CRN    |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
 
    @wip
   Scenario Outline: DTSP-894: As an end user, I want to limit my options on the Generic Request form in the Request Type Dropdown
@@ -6642,7 +6649,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-895: As an end user, I want to see instructions on the Activity History page, so that I understand how to filter my entries
@@ -6658,7 +6665,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   #@review
   #Scenario Outline: DTSP-910: As an end user, I want to see more accurate error messages on the Service Request forms, so that I know how to fix my error
@@ -6702,7 +6709,7 @@ Feature: Regression for TSS.
 #
     #Examples: 
       #| PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      #| TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      #| TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @wip
   Scenario Outline: DTSP-920: As an end user, I want to see an updated Return History for all tax types, so that I can select an obligation to amend
@@ -6727,7 +6734,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-962: As an end user, I want to see an updated portal, so that it is easier for me to use
@@ -6795,7 +6802,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-940: As an end user, I want to be displayed a message on forms if I do not have any ABNs linked to my account, so that I know why I cannot access them
@@ -6816,7 +6823,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-966: As a Business Taxpayer registering for Payroll Tax, I want to see an updated Taxpayer details section, so that it is easier to use
@@ -6841,7 +6848,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   @review
   Scenario Outline: DTSP-986: As an end user, I want to see updated date field on my Ambulance Levy Lodgement and Amendment forms, so that I know when my return is due
@@ -6894,7 +6901,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSS        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
   ###########################################################################################################
   #################################### MISSING ACTRO BUGS ################################################
@@ -6947,7 +6954,7 @@ Feature: Regression for TSS.
     #NewUserName and NewEmail must be changed with every registration
     Examples: 
       | PortalName | CompanyName                                 | ABN         | NewUserName           | NewEmail                  | Password   |
-      | TSS        | The trustee for MD & KJ Fragar Family Trust | 70167081615 | automation_taxagent10 | TaxAgent10@automation.com | Dbresults1 |
+      | TSSAdmin        | The trustee for MD & KJ Fragar Family Trust | 70167081615 | automation_taxagent10 | TaxAgent10@automation.com | Dbresults1 |
 
   @done
   Scenario Outline: Disappearing Position field after Registration bug (Business Registration)
@@ -6995,7 +7002,7 @@ Feature: Regression for TSS.
     #automation_business1 needs to be changed with every success!
     Examples: 
       | PortalName | CompanyName                                 | ABN         | NewUserName | Password   |
-      | TSS        | The trustee for MD & KJ Fragar Family Trust | 70167081615 | taxAgent13  | Dbresults1 |
+      | TSSAdmin        | The trustee for MD & KJ Fragar Family Trust | 70167081615 | taxAgent13  | Dbresults1 |
 
   @done
   Scenario Outline: The Exemption Request Form does not allow the user to enter a start date in the past but PSRM will allow a past date.
@@ -7025,7 +7032,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
   @done
   Scenario Outline: Check if Update Refund Details form has the Organization section of the Declaration filled
@@ -7048,7 +7055,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSS        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
        
  @wip
@@ -7117,7 +7124,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
   @done
   Scenario Outline: Total Taxable Wages in Payroll Tax Registration dropdown bug
     Given I want to login to portal "<PortalName>"
@@ -7167,7 +7174,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @done
   Scenario Outline: Current Employer Status on Dashboard bug
@@ -7214,7 +7221,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   
  @done
@@ -7271,7 +7278,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
   @wip
 
   Scenario Outline: <return period> / <employer status> / Group Number <group number> under wages section
@@ -7346,7 +7353,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
       
   @wip
   Scenario Outline: Group Management Create group with DGE bug
@@ -7371,4 +7378,4 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSS        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
