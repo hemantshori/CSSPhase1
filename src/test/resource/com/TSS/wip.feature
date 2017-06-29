@@ -2,139 +2,109 @@
 @wip
 Feature: WORK IN PROGRESS
 
-  @redo
-  Scenario Outline: DTSP-526, 531: Update the ABN LookUp Rules for Payroll Tax Registration Form / Update the first page of the Portal Registration process
+@wip
+  Scenario Outline: DTSP-537
     Given I want to login to portal "<PortalName>"
-    #This user has the ABN 12345678933, but since it's a tax agent user it isn't shown in the lodgement form
     And I enter the details as
       | Fields        | Value      |
-      | UserNameInput | <UserName> |
+      | UserNameInput | jbradley   |
       | PasswordInput | <Password> |
     And I hit Enter
-    Then I click on "Payroll Tax Registration"
-    And I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 85613104316 |
-    Then I click on button with value "Next"
-    Then I wait for "4000" millisecond
-    Then I select "Other" from "SelectBusinessTypeCode"
-    #Then I select "Mr" from "ContactPerson_Title"
-    #Then I select "Direct Post" from "CommunicationMethodId"
-    #Then I select "Other" from "SelectBusinessTypeCode"
-    #Then I enter the details as
-    #| Fields                    | Value         |
-    #| Address_AddressLine1      | TEST          |
-    #| Address_City              | TEST          |
-    #| PostCode                  |          3333 |
-    #| ContactPerson_FirstName   | TEST          |
-    #| ContactPerson_LastName    | TEST          |
-    #| ContactPerson_PhoneNumber |     333333333 |
-    #| ContactPerson_Email       | test@test.com |
-    #Scenario 7: ABN Lookup for Inactive ABN
+    #Scenario 1: Annual Rec [Single Emp Status]
+    Then I click on "Lodgements"
+    Then I click on "Payroll Tax"
+    Then I click on button "GeneralDiscardBt"
+    Then I click on button "select2-chosen-1"
     Then I enter the details as
-      | Fields              | Value                |
-      | EmployerName        | CODAVALLI, AARADHANA |
-      | BusinessTradingName | CODAVALLI, AARADHANA |
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "4000" millisecond
-    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
-    Then I click on "Payroll Tax Registration"
+      | Fields               | Value |
+      | s2id_autogen1_search | QUICK |
+    Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
+    Then I click on "Annual Reconciliation"
+    Then I select "2016" from "AnnualObligationSelect"
+    Then I click on button with value "Save and Next"
+    Then I wait for "5000" millisecond
+    Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / [\w|\s|\W|\(|\)]+\)"
+    Then I click on "Payroll Tax"
+    Then I click on button with value "Discard"
+    #Scenario 2: Annual Rec [Multi Emp Status]
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value |
+      | s2id_autogen1_search | QUICK |
+    Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
+    Then I click on "Annual Reconciliation"
+    Then I select "2016" from "AnnualObligationSelect"
+    Then I click on button "NextSection"
+    Then I wait for "3000" millisecond
+    Then I see text "Annual Reconciliation Return" displayed
+    #Scenario 5: Days paid wage group Australia-wide" field removed from Payroll Tax
+    Then I see text "Days paid wage group Australia-wide" not displayed
+    Then I wait for "5000" millisecond
+    Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / [\w|\s|\W|\(|\)]+\)"
+    #Scenario 3: Monthly Return
+    Then I click on "Payroll Tax"
+    Then I click on button with value "Discard"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value     |
+      | s2id_autogen1_search | DESIGNATE |
+    Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
+    Then I select "May 2017" from "MonthlyObligationSelect"
+    Then I click on button "NextSection"
+    Then I wait for "3000" millisecond
+    #Scenario 4: Exempt wages question updated
+    Then I see text "ACT wages not included on this return" displayed
+    #Scenario 6: (Designated group employer for a group and lodging for itself’) Rename the field ‘Days where you paid or were liable to pay taxable or interstate wages’ to ‘Days where 1 group member paid or was liable to pay taxable or interstate wages’
+    Then I click on "Payroll Tax"
+    Then I click on button with value "Discard"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value     |
+      | s2id_autogen1_search | DESIGNATE |
+    Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
+    Then I click on "Annual Reconciliation"
+    Then I select "2016" from "AnnualObligationSelect"
+    Then I click on button "NextSection"
+    Then I wait for "3000" millisecond
+    Then I click on button "ClaimingACTProportion_Yes"
+    Then I enter the details as
+      | Fields                                         | Value   |
+      | SalariesAndWages                               | 1000000 |
+      | BonusesAndCommissions                          |     100 |
+      | LodgePayrollAnswer_Commissions                 |     100 |
+      | LodgePayrollAnswer_Allowances                  |     100 |
+      | LodgePayrollAnswer_DirectorsFees               |     100 |
+      | LodgePayrollAnswer_EligibleTerminationPayments |     100 |
+      | LodgePayrollAnswer_ValueOfBenefits             |     100 |
+      | LodgePayrollAnswer_ShareValue                  |     100 |
+      | LodgePayrollAnswer_ServiceContracts            |     100 |
+      | LodgePayrollAnswer_Superannuation              |     100 |
+      | LodgePayrollAnswer_OtherTaxablePayment         |     100 |
+      | LodgePayrollAnswer_ExemptWages                 |     100 |
+    Then I see text "Days where 1 group member paid or was liable to pay taxable or interstate wages" displayed
+    #Scenario 7:  (Designated group employer and lodging a joint return for itself and other ACT group members) Rename the field ‘Days where you paid or were liable to pay taxable or interstate wages’ to ‘Days where 1 group member paid or was liable to pay taxable or interstate wages’
+    #Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    Then I click on "Home"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Then I click on button "EmployerName"
-    #Then I click on button "TaxPayerDetailsNext"
-    #Scenario 8:ABN Lookup for Invalid ABN
-    And I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 99999999999 |
-    Then I click on button with value "Next"
-    Then I wait for "4000" millisecond
-    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on "Lodgements"
+    Then I click on "Payroll Tax"
+    Then I click on button with value "Discard"
+    Then I click on button "select2-chosen-1"
     Then I enter the details as
-      | Fields              | Value |
-      | EmployerName        | TEST  |
-      | BusinessTradingName | TEST  |
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "4000" millisecond
-    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Scenario 6: ABN Lookup for Tax Agent with an active ABN, incorrect Registered Business Name, and Entity Type is not 'Individual'
-    And I enter the details as
-      | Fields                 | Value |
-      | RegistrationAnswer_ABN | <ABN> |
-    Then I click on button with value "Next"
-    Then I wait for "4000" millisecond
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I enter the details as
-      | Fields              | Value                       |
-      | EmployerName        | The Fire Company Pty Limite |
-      | BusinessTradingName | The Fire Company Pty Limite |
-    Then I click on button "RegistrationAnswer_ACN"
-    Then I wait for "4000" millisecond
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "4000" millisecond
-    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Scenario 4: ABN Lookup for Tax Agent with an active ABN, incorrect Registered Business Name, and Entity Type = Individual
-    And I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 71583328324 |
-    Then I click on button with value "Next"
-    Then I wait for "4000" millisecond
-    Then I enter the details as
-      | Fields              | Value          |
-      | EmployerName        | PSALTIS, COSMA |
-      | BusinessTradingName | PSALTIS, COSMA |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "4000" millisecond
-    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Scenario 3: ABN Lookup for Tax Agent with an active ABN, correct Registered Business Name, and Entity Type = Individual
-    And I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 71583328324 |
-    Then I click on button with value "Next"
-    Then I wait for "4000" millisecond
-    Then I enter the details as
-      | Fields              | Value           |
-      | EmployerName        | PSALTIS, COSMAS |
-      | BusinessTradingName | PSALTIS, COSMAS |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I enter the details as
-      | Fields                    | Value      |
-      | AddressLine1              | TEST       |
-      | Address_City              | TEST       |
-      | PostCode                  |       3333 |
-      | ContactPerson_FirstName   | TEST       |
-      | ContactPerson_LastName    | TEST       |
-      | ContactPerson_PhoneNumber | 1234567890 |
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Scenario 5: ABN Lookup for Tax Agent with an active ABN, correct Registered Business Name, and Entity Type is not 'Individual'
-    And I enter the details as
-      | Fields                 | Value |
-      | RegistrationAnswer_ABN | <ABN> |
-    Then I click on button with value "Next"
-    Then I wait for "4000" millisecond
-    Then I enter the details as
-      | Fields              | Value         |
-      | EmployerName        | <CompanyName> |
-      | BusinessTradingName | <CompanyName> |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I enter the details as
-      | Fields                    | Value      |
-      | AddressLine1              | TEST       |
-      | Address_City              | TEST       |
-      | PostCode                  |       3333 |
-      | ContactPerson_FirstName   | TEST       |
-      | ContactPerson_LastName    | TEST       |
-      | ContactPerson_PhoneNumber | 1234567890 |
+      | Fields               | Value     |
+      | s2id_autogen1_search | DESIGNATE |
+    Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
+    Then I click on "Annual Reconciliation"
+    Then I select "2016" from "AnnualObligationSelect"
+    Then I click on button "NextSection"
+    Then I click on button "ClaimingACTProportion_Yes"
+    Then I see text "Days where 1 group member paid or was liable to pay taxable or interstate wages" displayed
 
     Examples: 
-      | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | PortalName | UserNameField | PasswordField | Password   |
+      | TSSAdmin        | UserNameInput | PasswordInput | Dbresults1 |

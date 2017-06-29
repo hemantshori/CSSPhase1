@@ -155,6 +155,7 @@ public class LandingPage extends DBUtilities {
       {
     	  JavascriptExecutor executor = (JavascriptExecutor)driver;
     	  try {
+    		  
 	    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
 	    	  //WebElement element1 =  driver.findElement(By.xpath(myxpath));
 	    	  driver.findElement(By.xpath(myxpath)).click();

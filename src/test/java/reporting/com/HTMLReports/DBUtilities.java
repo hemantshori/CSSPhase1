@@ -27,7 +27,7 @@ public class DBUtilities extends XPathGenerator {
 	 public DBUtilities (WebDriver dr){
 		super(dr);
 	}
-	 public boolean printErrors = false;
+	 public boolean printErrors = true;
 	 
 	 // following will take 2 args  from cucumber and one from page and then compare both messages
 	 public static  void checkElement(String arg1, String arg2) {

@@ -47,7 +47,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | PortalName2 | SearchValue   | SearchDescription       | SearchValue2 | SearchDescription2                         | UserName | Password   |
-      | TSSAdmin        | TSSAdminUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | TSSAdminAdmin | Dbresults1 |
+      | TSSAdmin        | TSSUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | TSSAdmin | Dbresults1 |
 
   #alt username: hemant.shori
   #alt password: USBcoffee1
@@ -92,9 +92,9 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | DescriptionBefore                          | DescriptionAfter |
-      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdminAdmin | Dbresults1 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
+      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
 
-	@wip
+	  @updated
   Scenario Outline: DTSP-56 :As a DB Portal Administrator I want to add a new message so that required messages are displayed in the portal
     #DTSP-57 :As a DB Portal Administrator I want to delete a message so that I can remove messages no longer required
     Given I want to login to portal "<PortalName>"
@@ -130,8 +130,9 @@ Feature: Regression for TSS.
     Then I see text "<NewMessage>" not displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | NewMessage              |
-      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdminAdmin | Dbresults1 | FeedbackMsgText | Username Exists | This is a test message! |
+      | PortalName | UserNameField | PasswordField | UserName      | Password   | DropDownName    | DropDownOption  | NewMessage              |
+      | TSSAdmin   | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | This is a test message! |
+
 
   @done
   Scenario Outline: DTSP-233: As a DB Portal Administrator, I want to be able to search/add/edit/remove the tool tips displayed on forms so that I can help the end user better understand the form field/s
@@ -197,8 +198,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | NewDescription  | NewDescription2     |
-      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdminAdmin | Dbresults1 | This is a test! | This is a test two! |
-
+      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | This is a test! | This is a test two! |
   #@BEST_DONE_MANUALLY
   #Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
   #Given I want to login to portal "<PortalName>"
@@ -680,7 +680,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
-      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdminAdmin | Dbresults1 |
+      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 |
 
 
   @testagain
@@ -1285,7 +1285,7 @@ Feature: Regression for TSS.
   #################################### PHASE 1 ITERATION 4 ################################################
   ###########################################################################################################
   @done
-  Scenario Outline: DTSP-523
+    Scenario Outline: DTSP-523
     # Part of this story is automatically tested by others...
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -1303,13 +1303,13 @@ Feature: Regression for TSS.
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I wait for "1000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on "Monthly Return"
     Then I select "Mar 2017" from "MonthlyObligationSelect"
     Then I click on "Mar 2017"
-    Then I wait for "1000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Save and Next"
-    Then I wait for "2000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "SubmitBT" is readonly
     Then I click on button "ClaimingACTProportion_Yes"
     Then I enter the details as
@@ -1367,7 +1367,7 @@ Feature: Regression for TSS.
     #Tax Registration Form
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I wait for "2000" millisecond
+    Then I wait for "3000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
@@ -1405,7 +1405,7 @@ Feature: Regression for TSS.
       | ContactPerson_PhoneNumber | 1234567890 |
     Then I click on button "AddressLine1"
     Then I click on button "OrgDetailsNext"
-    Then I wait for "2000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "ACTWagesPaidNextBt" is readonly
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -1458,8 +1458,7 @@ Feature: Regression for TSS.
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
-  @wip
-  Scenario Outline: DTSP-537
+   Scenario Outline: DTSP-537
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -1475,6 +1474,7 @@ Feature: Regression for TSS.
       | Fields               | Value |
       | s2id_autogen1_search | QUICK |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button with value "Save and Next"
@@ -1488,6 +1488,7 @@ Feature: Regression for TSS.
       | Fields               | Value |
       | s2id_autogen1_search | QUICK |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
@@ -1505,6 +1506,7 @@ Feature: Regression for TSS.
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     Then I select "May 2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
     Then I wait for "3000" millisecond
@@ -1518,6 +1520,7 @@ Feature: Regression for TSS.
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
@@ -1550,6 +1553,7 @@ Feature: Regression for TSS.
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
@@ -1672,6 +1676,8 @@ Feature: Regression for TSS.
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
+
+
   @redo
   Scenario Outline: DTSP-526, 531: Update the ABN LookUp Rules for Payroll Tax Registration Form / Update the first page of the Portal Registration process
     Given I want to login to portal "<PortalName>"
@@ -1686,8 +1692,8 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 85613104316 |
     Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    Then I select "Government" from "SelectBusinessTypeCode"
+    Then I wait for "4000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
     #Then I select "Mr" from "ContactPerson_Title"
     #Then I select "Direct Post" from "CommunicationMethodId"
     #Then I select "Other" from "SelectBusinessTypeCode"
@@ -1706,7 +1712,7 @@ Feature: Regression for TSS.
       | EmployerName        | CODAVALLI, AARADHANA |
       | BusinessTradingName | CODAVALLI, AARADHANA |
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "1000" millisecond
+    Then I wait for "4000" millisecond
     Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -1717,14 +1723,14 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 99999999999 |
     Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    Then I select "Government" from "SelectBusinessTypeCode"
+    Then I wait for "4000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
     Then I enter the details as
       | Fields              | Value |
       | EmployerName        | TEST  |
       | BusinessTradingName | TEST  |
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "1000" millisecond
+    Then I wait for "4000" millisecond
     Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -1733,16 +1739,16 @@ Feature: Regression for TSS.
       | Fields                 | Value |
       | RegistrationAnswer_ABN | <ABN> |
     Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
-    Then I select "Government" from "SelectBusinessTypeCode"
+    Then I wait for "4000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
     Then I enter the details as
       | Fields              | Value                       |
       | EmployerName        | The Fire Company Pty Limite |
       | BusinessTradingName | The Fire Company Pty Limite |
     Then I click on button "RegistrationAnswer_ACN"
-    Then I wait for "2000" millisecond
+    Then I wait for "4000" millisecond
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "1000" millisecond
+    Then I wait for "4000" millisecond
     Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -1751,14 +1757,14 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 71583328324 |
     Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
+    Then I wait for "4000" millisecond
     Then I enter the details as
       | Fields              | Value          |
       | EmployerName        | PSALTIS, COSMA |
       | BusinessTradingName | PSALTIS, COSMA |
-    Then I select "Government" from "SelectBusinessTypeCode"
+    Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "1000" millisecond
+    Then I wait for "4000" millisecond
     Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -1767,12 +1773,12 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 71583328324 |
     Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
+    Then I wait for "4000" millisecond
     Then I enter the details as
       | Fields              | Value           |
       | EmployerName        | PSALTIS, COSMAS |
       | BusinessTradingName | PSALTIS, COSMAS |
-    Then I select "Government" from "SelectBusinessTypeCode"
+    Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
     Then I enter the details as
       | Fields                    | Value      |
@@ -1789,12 +1795,12 @@ Feature: Regression for TSS.
       | Fields                 | Value |
       | RegistrationAnswer_ABN | <ABN> |
     Then I click on button with value "Next"
-    Then I wait for "2000" millisecond
+    Then I wait for "4000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
       | BusinessTradingName | <CompanyName> |
-    Then I select "Government" from "SelectBusinessTypeCode"
+    Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
     Then I enter the details as
       | Fields                    | Value      |
@@ -5253,7 +5259,7 @@ Feature: Regression for TSS.
 
     Examples: 
       | PortalName | UserName | Password   | CompanyName                                 | ABN         | NewUserName | NewEmail                | Password   |
-      | TSSAdmin        | TSSAdminAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5312    | dtsp5307@automation.com | Dbresults1 |
+      | TSSAdmin        | TSSAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5312    | dtsp5307@automation.com | Dbresults1 |
 
   @current
   Scenario Outline: DTSP-742: As an end user I want to be able to update Objection Request Form to cater for different Tax Types
