@@ -2,6 +2,8 @@ package reporting.com.HTMLReports;
 
 import org.openqa.selenium.WebDriver;
 
+
+// this class should contain methods for generating xpaths and nothing else
 public class XPathGenerator {
 
 	 WebDriver driver = null;
@@ -9,7 +11,7 @@ public class XPathGenerator {
 	//constructor
 	 public XPathGenerator (WebDriver dr){
 			this.driver = dr;
-			}
+	}
 	 
 	
 	 public String xpathMaker(String buttonName)
@@ -129,7 +131,7 @@ public class XPathGenerator {
 		 return xpath;
 	 }
 	
-	 
+	// combines two xpaths into two 
 	 public String combine2Xpaths (String arg1, String arg2)
 	 {
 		 System.out.println(arg1);

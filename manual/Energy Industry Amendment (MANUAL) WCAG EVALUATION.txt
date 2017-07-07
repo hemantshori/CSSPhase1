@@ -1,0 +1,46 @@
+https://dev2-ssc.dbresults.com.au/TSSLodgement/AmendEnergyIndustryLevy.aspx?TaxFormId=680096476277&ObligationId=6800964264&BusinessEntityIdentifier=55&IsAnnual=True
+-------------------------------------------------------------------------------------------
+ NUMBER OF ERRORS 
+-------------------------------------------------------------------------------------------
+12
+-------------------------------------------------------------------------------------------
+ OUTPUT TEXT 
+-------------------------------------------------------------------------------------------
+1.3 Adaptable: Create content that can be presented in different ways (for example simpler layout) without losing information or structure.
+
+Success Criteria 1.3.1 Info and Relationships (A)
+
+Check 57: input element, type of "text", missing an associated label.
+Repair: Add a label element that surrounds the control's label. Set the for attribute on the label element to the same value as the id attribute of the control. And/or add a title attribute to the input element. And/or create a label element that contains the input element.
+Error Line 216, Column 1217:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 216, Column 2136:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 221, Column 188:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 226, Column 200:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Check 213: input element, type of "text", has no text in label.
+Repair: Add text to the input element's associated label that describes the purpose or function of the control.
+Error Line 216, Column 1217:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 216, Column 2136:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 221, Column 188:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 226, Column 200:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+3.3 Input Assistance: Help users avoid and correct mistakes.
+
+Success Criteria 3.3.2 Labels or Instructions (A)
+
+Check 188: Label text is empty.
+Repair: Add text to the label element.
+Error Line 216, Column 1217:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 216, Column 2136:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 221, Column 188:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Error Line 226, Column 200:
+<input name="DBResultsSG_Theme_wt60$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...

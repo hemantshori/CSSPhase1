@@ -1,0 +1,28 @@
+https://dev2-ssc.dbresults.com.au/TSSLodgement/AmendPayrollReturnTax.aspx?TaxFormId=680096471871&ObligationId=6800964015&BusinessEntityIdentifier=55&IsAnnual=False
+-------------------------------------------------------------------------------------------
+ NUMBER OF ERRORS 
+-------------------------------------------------------------------------------------------
+3
+-------------------------------------------------------------------------------------------
+ OUTPUT TEXT 
+-------------------------------------------------------------------------------------------
+1.3 Adaptable: Create content that can be presented in different ways (for example simpler layout) without losing information or structure.
+
+Success Criteria 1.3.1 Info and Relationships (A)
+
+Check 57: input element, type of "text", missing an associated label.
+Repair: Add a label element that surrounds the control's label. Set the for attribute on the label element to the same value as the id attribute of the control. And/or add a title attribute to the input element. And/or create a label element that contains the input element.
+Error Line 220, Column 3246:
+<input name="DBResultsSG_Theme_wt36$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+Check 213: input element, type of "text", has no text in label.
+Repair: Add text to the input element's associated label that describes the purpose or function of the control.
+Error Line 220, Column 3246:
+<input name="DBResultsSG_Theme_wt36$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...
+3.3 Input Assistance: Help users avoid and correct mistakes.
+
+Success Criteria 3.3.2 Labels or Instructions (A)
+
+Check 188: Label text is empty.
+Repair: Add text to the label element.
+Error Line 220, Column 3246:
+<input name="DBResultsSG_Theme_wt36$block$wtMainContent$SilkUIFramework_wtAccordion$block$wtItems$Si ...

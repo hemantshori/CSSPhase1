@@ -69,15 +69,19 @@ import reporting.com.HTMLReports.MakeAPaymentPage;
 public class StepImpe {
   //********************************************** following is before and after *****************************************
 	WebDriver driver;
-	private String bolt;
+	
+	// all WCAG stuff
 	static String Capture;
 	static String sourceCode;
 	static String URLCaptured;
 	final String wcag_subdirectory = "wcagoutput";
 	final String screenshot_subdirectory = "screenshots";
-	boolean printErrors = new DBUtilities(driver).printErrors;
-	private int sleepMultiplier = 4; // multiplier for the values in Thread.sleep()s. If the site is being slow, increase it for greater pauses between steps. Should not be less than 1.
 	Hashtable<String, Integer> summary = new Hashtable<String, Integer>();
+	
+	boolean printErrors = new DBUtilities(driver).printErrors; // for printing errors
+	
+	private int sleepMultiplier = 4; // multiplier for the values in Thread.sleep()s. If the site is being slow, increase it for greater pauses between steps. Should not be less than 1.
+	
 
 	
 	
@@ -96,13 +100,13 @@ public class StepImpe {
 
 		// use this if your Chrome is only at the latest version
 		ChromeDriverManager.getInstance().setup();
+		
 		// local only
 		//System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
 		
 		driver = new ChromeDriver();
-		//driver = new FirefoxDriver();
 
-//		driver = new FirefoxDriver();
+
 	    driver.manage().window().maximize();
 	    
 	    // converts sleepMultiplier to 1 if below 1
@@ -137,7 +141,7 @@ public class StepImpe {
 	
 
 	// ********************************************************************************************************************************
-	//**************************************** Capture element from Page************************************************************
+	//*************************************************************** WACG ************************************************************
 	
 	@Given("^I erase previous data$") 
 	public void i_erase_previous_data() throws Throwable {
@@ -173,7 +177,6 @@ public class StepImpe {
 			System.out.println(StepImpe.URLCaptured + " HAS " + Capture + " WCAG ERRORS\n");
 			System.out.println("***********************************************************************");
 		}
-		//StepImpe.URLCaptured = "";
 		return Capture;
   
 	}
@@ -597,11 +600,12 @@ public class StepImpe {
 	// for clicking on text
 	@And("^I click on \"(.*?)\"$")
 	public void i_click_on(String arg1) throws Throwable {
+		
 		// give time for page loading
 		Thread.sleep(2000 * sleepMultiplier);
-		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the calendar popup
+		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the old calendar popup
 
-//		
+		// this if block was used to click on the calendar popup; it is now depreciated
 		if (datePattern.matcher(arg1).matches()){
 			DBUtilities createXpath = new DBUtilities(driver);
 			String myxpath4 = createXpath.xpathMakerContainsCustomField("dyc-date", arg1);
@@ -635,6 +639,7 @@ public class StepImpe {
 	}
 
 
+	// doesn't always work, be careful
 	@Given("^I select \"(.*?)\" from \"(.*?)\"$")
 	public void i_select_from(String arg1, String arg2) throws Throwable {
 		Thread.sleep(sleepMultiplier * 2000);
@@ -717,7 +722,6 @@ public class StepImpe {
 		catch (NoSuchElementException nsee){
 			Assert.assertFalse(false);
 		}
-		//Assert.assertTrue(driver.findElements(By.xpath(myxpath)).size() < 1);
 		
 		
 	}
@@ -785,26 +789,10 @@ public class StepImpe {
 
       DBUtilities checkElementDisplayed = new DBUtilities(driver);
 		Thread.sleep(2000 * sleepMultiplier);
-		//String myxpath=checkElementDisplayed.xpathMaker(arg1);
 		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
 		System.out.println("checking for text " +myxpath);
-	
-	    //driver.getPageSource().contains(arg1);
-		Assert.assertTrue(driver.getPageSource().contains(arg1));
-//		for (int i = 0; i < 10; i++){
-//			System.out.println("(" + myxpath + ")[" + i + "]");
-//			try {
-//				Assert.assertTrue(driver.findElement(By.xpath("(" + myxpath + ")[" + i + "]")).isDisplayed());
-//				return;
-//			}
-//			catch (AssertionError | Exception e){
-//				System.out.println();
-//			}
-//		}
-		
-		//Assert.assertTrue(false);
-		
-//      AU.checkUIElementTEXTIsDisplayed(arg1);
+		Assert.assertTrue(driver.getPageSource().contains(arg1)); // other methods may not work
+
 	}
 	
 	@Then("^I see text \"(.*?)\" shown$")
@@ -812,41 +800,26 @@ public class StepImpe {
       LandingPage AU = PageFactory.initElements(driver, LandingPage.class);
       Thread.sleep(2000 * sleepMultiplier);
       DBUtilities checkElementDisplayed = new DBUtilities(driver);
-		//String myxpath=checkElementDisplayed.xpathMaker(arg1);
 		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
 		System.out.println("checking for text " +myxpath);
 	
-	    //driver.getPageSource().contains(arg1);
 		Assert.assertTrue(driver.getPageSource().contains(arg1));
 
-		//Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
-		
-//      AU.checkUIElementTEXTIsDisplayed(arg1);
 	}
 	
 	@Then("^I see text \"(.*?)\" not displayed$")
 	public void i_see_text_not_displayed(String arg1) throws Throwable {
 		DBUtilities checkElementDisplayed = new DBUtilities(driver);
 		Thread.sleep(2000 * sleepMultiplier);
-		//String myxpath=checkElementDisplayed.xpathMaker(arg1);
 		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
-		System.out.println("checking for text " +myxpath);
+		System.out.println("Checking for text: " +myxpath);
 	
-	    //driver.getPageSource().contains(arg1);
 		try {
 			Assert.assertFalse(!driver.findElement(By.xpath(myxpath)).isDisplayed());
 		}
 		catch (Exception | AssertionError ae){
 			Assert.assertFalse(false);
 		}
-		//Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
-	
-//		if(driver.findElements(By.xpath(myxpath)).size() != 0){
-//			System.out.println("Element is Present");
-//		}
-//		else {
-//			System.out.println("Element is Absent");
-//		}
 	}
 	
 	//check i am on right page
@@ -922,8 +895,7 @@ public class StepImpe {
 	@Then("^from section \"(.*?)\" I select radio button option \"(.*?)\"$")
 	public void from_section_I_select_radio_button_option(String arg1, String arg2) throws Throwable {
 		String myxpath = new DBUtilities(driver).xpathMakerById(arg1);
-		//WebElement elementName = driver.findElement(By.xpath(myxpath));
-		//System.out.println(elementName);
+
 		String myxpath2 = new DBUtilities(driver).xpathMakerById(arg2);
 
 		//following is generating a combined xpath and then looking for element
@@ -967,6 +939,7 @@ public class StepImpe {
 	//*****************************************************************************************
 	
 	
+	// don't know if this works
 	@Then("^I see a pdf document with name \"(.*?)\" generated$")
 	public void i_see_a_pdf_document_with_name_generated(String arg1) throws Throwable {
      System.out.println("Yes******************* pdf is open");
@@ -987,22 +960,8 @@ public class StepImpe {
 	 
 	}
 	
-	//******************************CRAP**********************************
-//	@Given("^I copy and paste the html in \"(.*?)\"$")
-//	public void i_copy_and_paste_the_html_in_CIChecker(String arg1) throws Throwable {
-//	 String html = driver.getPageSource();
-//	 HomePage home = PageFactory.initElements(driver, HomePage.class);
-//		home.navigateTo(arg1);
-//		Thread.sleep(1000);
-//		driver.findElement(By.xpath("//*[contains(text(),'Paste HTML Markup')]")).click();
-//		Thread.sleep(1000);
-//		driver.findElement(By.xpath("//*[contains(@id, 'checkpaste')]")).sendKeys(html);
-//Thread.sleep(3000);
-//	
-//		
-//	}
 
-
+	// used to have problems with Jenkins, but should work now
 	@Then("^I check \"(.*?)\" has CSS property \"(.*?)\" with value \"(.*?)\"$")
 	public void i_check_has_a_css_property_with_value (String arg1, String arg2, String arg3) throws Throwable{
 		DBUtilities dbutil = new DBUtilities(driver);
@@ -1063,7 +1022,7 @@ public class StepImpe {
 	}
 	
 	
-	// for those Outsystems popups, set argument as 0 if there is only one frame present
+	// for those Outsystems popups, set argument as 0 or 1 if there is only one frame present
 	@Then("^I switch to frame \"(.*?)\"$")
 	public void i_switch_to_frame(String arg1) throws Throwable {
 		int frameNum = Integer.parseInt(arg1);
@@ -1071,6 +1030,7 @@ public class StepImpe {
 	}
 	
 	
+	// similar to print screen, doesn't capture an image of the entire page
 	@Then("^I take a screenshot with name \"(.*?)\"$")
 	public void i_take_a_screenshot(String arg1) throws Throwable {
 
@@ -1079,6 +1039,7 @@ public class StepImpe {
 		FileUtils.copyFile(scrFile, new File(screenshot_subdirectory + "/" + arg1 +"_screenshot.png"));
 	}
 	
+	// doesn't seem to work, Chrome specific
 	@Then("^I change download destinations$")
 	public void i_change_download_destinations() throws Throwable{
 		String downloadFilepath = "/pdfs";
@@ -1095,17 +1056,17 @@ public class StepImpe {
 	}
 	
 	
-	//**************************************************************************************************************************
+	    //**************************************************************************************************************************
 		//**************************************************************************************************************************
 		//**************************************************************************************************************************
 		//**************************************************************************************************************************
-		//****************************************************GENERIC XPATH FUNCTIONS*************************************************************
+		//****************************************************GENERIC XPATH FUNCTIONS***********************************************
 		//**************************************************************************************************************************
 		//**************************************************************************************************************************
 		//**************************************************************************************************************************
 		//**************************************************************************************************************************
 	
-	//use these if there is nothing else that can be done
+	/* Use as a last resort */
 	
 	@Then("^I check object with xpath \"(.*?)\" exists$")
 	public void i_check_object_with_xpath_exists(String arg1) throws Throwable {
@@ -1125,7 +1086,7 @@ public class StepImpe {
 		String myxpath = arg1;
 		Thread.sleep(2000 * sleepMultiplier);
 		WebElement inputBox = driver.findElement(By.xpath(myxpath));
-		String contents = inputBox.getText();
+		String contents = inputBox.getText().trim();
 		System.out.println("boxContents: " + contents);
 		System.out.println("arg2: " + arg2);
 		
@@ -1157,6 +1118,7 @@ public class StepImpe {
 		object.click();
 	}
 	
+	// doesn't seem to work on Chrome
 	@Then("^I upload file with path \"(.*?)\" to \"(.*?)\"$")
 	public void i_upload_file_with_path_to(String arg1, String arg2) throws Throwable{
 		DBUtilities dbutil = new DBUtilities(driver);

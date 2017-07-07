@@ -95,84 +95,142 @@ Feature: Shakeout Test to be done before every deployment
       | PortalName | UserName     | Password   | FirstName | LastName | Position        | Organisation        | ContactPhone | EmailAddress             |
       | TSSDev     | jonathan.lui | Support123 | Jonathan  | Lui      | Cobra Commander | DESIGNATE PTY. LTD. | 21 2312 3122 | jonathan.lui@dbresults.com.au |
 
-  Scenario Outline: DTSP-25: As an organisation I want a user's details verified during registration so that only valid users register with the portal (page 1)
-    #
-    #scenario 1: Same year check
+@current
+  Scenario Outline: DTSP-526, 531: Update the ABN LookUp Rules for Payroll Tax Registration Form / Update the first page of the Portal Registration process
     Given I want to login to portal "<PortalName>"
-    And I click on "Create Account"
-   
-    #Scenario 3
-    Then I click on button "RegistrationAsBusiness"
-    Then I enter the details as
-      | Fields         | Value       |
-      | InputABNNumber | 33333333333 |
-      | InputCRNNumber | 33333333333 |
-    Then I click on button "RegistrationSubmit"
-    Then I see text "By creating an account, I agree to the" displayed
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I click on button "RegistrationSubmit"
-    Then I see text "The combination of the provided information does not refer to a registered in PSRM Entity" displayed
-    Then I enter the details as
-      | Fields         | Value |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber | <CRN> |
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Registration" page
-    #DTSP-29: As a user I want to enter my user details so that I can complete the registration process (page 2)
-    #Scenario 1
-    #Then "<Item>" is displayed as "<ItemName>"
-    #| Item  | ItemName                 |
-    #| item2 | First Name               |
-    #| item3 | Last Name                |
-    #| item4 | Email Address            |
-    #| item5 | Choose Username          |
-    #| item6 | Choose Password          |
-    #| item7 | Hint                     |
-    #| item7 | Confirm Password         |
-    #| item7 | Already have an account? |
-    #Scenario 4: User cancels with unsaved changes
-    Then I click on button "Cancel"
-    Then I check I am on "Login" page
-    Given I want to login to portal "<PortalName>"
-    And I click on "Create Account"
-    Then I click on button "RegistrationAsBusiness"
-    Then I enter the details as
-      | Fields         | Value |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber | <CRN> |
-    Then I click on button "RegistrationSubmit"
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I check I am on "Registration" page
-    Then I click on button "Submit"
-    #Scenario 3: Details entered do not pass validation (Can't fully complete on this due to WIP done on the page)
-    Then I enter the details as
+    #This user has the ABN 12345678933, but since it's a tax agent user it isn't shown in the lodgement form
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Payroll Tax Registration"
+    And I enter the details as
       | Fields                 | Value       |
-      | Registration_Email     | 12345678961 |
-      | Registration_FirstName | Test        |
-      | Registration_LastName  | Test        |
-      | Registration_Username  | 12345678961 |
-      | NewPassword            | 12345678961 |
-      | ConfirmPassword        |   123456781 |
-      | ConfirmPassword        |   123456781 |
-      | PhoneNumber            |    12345671 |
-      | Registration_Hint      |      123123 |
-    Then I click on button "Submit"
-    Then I wait for "2000" millisecond
-    Then I see text "Invalid email address format. Please try again." shown
-    Then I see text "Invalid password. Please try again." shown
-    Then I see text "Passwords do not match. Please try again." shown
-    Then I see text "Invalid Phone Number. Phone Number should be 10 digits. Please try again." shown
-    #Scenario 5: User cancels with unsaved changes
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
-    Then I check I am on "Registration" page
-    Then I click on button "Cancel"
+      | RegistrationAnswer_ABN | 85613104316 |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
+    #Then I select "Mr" from "ContactPerson_Title"
+    #Then I select "Direct Post" from "CommunicationMethodId"
+    #Then I select "Other" from "SelectBusinessTypeCode"
+    #Then I enter the details as
+    #| Fields                    | Value         |
+    #| Address_AddressLine1      | TEST          |
+    #| Address_City              | TEST          |
+    #| PostCode                  |          3333 |
+    #| ContactPerson_FirstName   | TEST          |
+    #| ContactPerson_LastName    | TEST          |
+    #| ContactPerson_PhoneNumber |     333333333 |
+    #| ContactPerson_Email       | test@test.com |
+    #Scenario 7: ABN Lookup for Inactive ABN
+    Then I enter the details as
+      | Fields              | Value                |
+      | EmployerName        | CODAVALLI, AARADHANA |
+      | BusinessTradingName | CODAVALLI, AARADHANA |
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
+    Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I check I am on "Login" page
+    #Then I click on button "EmployerName"
+    #Then I click on button "TaxPayerDetailsNext"
+    #Scenario 8:ABN Lookup for Invalid ABN
+    And I enter the details as
+      | Fields                 | Value       |
+      | RegistrationAnswer_ABN | 99999999999 |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I enter the details as
+      | Fields              | Value |
+      | EmployerName        | TEST  |
+      | BusinessTradingName | TEST  |
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Scenario 6: ABN Lookup for Tax Agent with an active ABN, incorrect Registered Business Name, and Entity Type is not 'Individual'
+    And I enter the details as
+      | Fields                 | Value |
+      | RegistrationAnswer_ABN | <ABN> |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I enter the details as
+      | Fields              | Value                       |
+      | EmployerName        | The Fire Company Pty Limite |
+      | BusinessTradingName | The Fire Company Pty Limite |
+    Then I click on button "RegistrationAnswer_ACN"
+    Then I wait for "5000" millisecond
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Scenario 4: ABN Lookup for Tax Agent with an active ABN, incorrect Registered Business Name, and Entity Type = Individual
+    And I enter the details as
+      | Fields                 | Value       |
+      | RegistrationAnswer_ABN | 71583328324 |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I enter the details as
+      | Fields              | Value          |
+      | EmployerName        | PSALTIS, COSMA |
+      | BusinessTradingName | PSALTIS, COSMA |
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Scenario 3: ABN Lookup for Tax Agent with an active ABN, correct Registered Business Name, and Entity Type = Individual
+    And I enter the details as
+      | Fields                 | Value       |
+      | RegistrationAnswer_ABN | 71583328324 |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I enter the details as
+      | Fields              | Value           |
+      | EmployerName        | PSALTIS, COSMAS |
+      | BusinessTradingName | PSALTIS, COSMAS |
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I enter the details as
+      | Fields                    | Value      |
+      | AddressLine1              | TEST       |
+      | Address_City              | TEST       |
+      | PostCode                  |       3333 |
+      | ContactPerson_FirstName   | TEST       |
+      | ContactPerson_LastName    | TEST       |
+      | ContactPerson_PhoneNumber | 1234567890 |
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Scenario 5: ABN Lookup for Tax Agent with an active ABN, correct Registered Business Name, and Entity Type is not 'Individual'
+    And I enter the details as
+      | Fields                 | Value |
+      | RegistrationAnswer_ABN | <ABN> |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I enter the details as
+      | Fields              | Value         |
+      | EmployerName        | <CompanyName> |
+      | BusinessTradingName | <CompanyName> |
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I enter the details as
+      | Fields                    | Value      |
+      | AddressLine1              | TEST       |
+      | Address_City              | TEST       |
+      | PostCode                  |       3333 |
+      | ContactPerson_FirstName   | TEST       |
+      | ContactPerson_LastName    | TEST       |
+      | ContactPerson_PhoneNumber | 1234567890 |
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName     | Password   | ABN         | CRN    |
-      | TSSDev     | UserNameInput | PasswordInput | jonathan.lui | Support123 | 85085664197 | 400107 |
+      | PortalName | CompanyName          | ABN         | UserName | Password   |
+      | TSSDev        | Dynamic Fire Pty Ltd | 80134834334 |  jonathan.lui  | Support123 |
 
   @test
   Scenario Outline: DTSP-743: As an end user I want to be able to update Exemption Request Form to cater for different Tax Types

@@ -26,60 +26,65 @@ public class BillingHistoryPage extends DBUtilities {
 	{
 		List<List<String>> data = table.raw();
 		System.out.println(" value is ++" +data);
+		
+		
 		for (int i = 1; i <data.size(); i++){
 			Thread.sleep(1000);
 			String name = data.get(i).get(1);
-			System.out.println(" and the name is+++++" +name);
+			System.out.println(" and the name is: " +name);
 			if(name.equals("CurrBill")||name.equals("Pay")){
 				Thread.sleep(3000);
 				DBUtilities createXpath = new DBUtilities(driver);
 				String myxpath = createXpath.xpathMakerById(name);
-				System.out.println(" and the name is++++++++++++++++" +myxpath);
+				System.out.println(" and the name is: " +myxpath);
 				Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
 			
-			}else {
-			DBUtilities createXpath = new DBUtilities(driver);
-			String myxpath = createXpath.xpathMaker(name);
-			System.out.println("**" +myxpath);
-			Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
+			} 
+			else {
+				DBUtilities createXpath = new DBUtilities(driver);
+				String myxpath = createXpath.xpathMaker(name);
+				System.out.println("**" +myxpath);
+				Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
 		
-			if(driver.findElements(By.xpath(myxpath)).size() != 0){
-				System.out.println("Element is Present");
-				}else{
-				System.out.println("Element is Absent");
+				/* if not zero, then the element is present */
+				if(driver.findElements(By.xpath(myxpath)).size() != 0){
+					System.out.println("Element is Present");
+				}
+				else {
+					System.out.println("Element is Absent");
 				}
 			}
 		}
 	
 	}
 
-      public void checkUIElementIsDisplayed (String arg1) throws InterruptedException
-    	  {
-    	  DBUtilities checkElementDisplayed = new DBUtilities(driver);
-    	  String myxpath=checkElementDisplayed.xpathMakerBySpanID(arg1);
-    	  System.out.println("**" +myxpath);
+    public void checkUIElementIsDisplayed (String arg1) throws InterruptedException {
+    	DBUtilities checkElementDisplayed = new DBUtilities(driver);
+    	String myxpath=checkElementDisplayed.xpathMakerBySpanID(arg1);
+    	System.out.println("**" +myxpath);
+    	Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
+
+    	if(driver.findElements(By.xpath(myxpath)).size() != 0){
+			System.out.println("Element is Present");
+		}
+    	else{
+			System.out.println("Element is Absent");
+		}
+    }
+      
+    public void checkUIElementTEXTIsDisplayed (String arg1) throws InterruptedException {
+		  DBUtilities checkElementDisplayed = new DBUtilities(driver);
+		  String myxpath=checkElementDisplayed.xpathMaker(arg1);
+		  System.out.println("**" +myxpath);
 		  Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
 		
-    	  if(driver.findElements(By.xpath(myxpath)).size() != 0){
-				System.out.println("Element is Present");
-				}else{
+		  if(driver.findElements(By.xpath(myxpath)).size() != 0){
+			  System.out.println("Element is Present");
+		  }
+		  else{
 				System.out.println("Element is Absent");
-				}
-		}
-      
-      public void checkUIElementTEXTIsDisplayed (String arg1) throws InterruptedException
-	  {
-	  DBUtilities checkElementDisplayed = new DBUtilities(driver);
-	  String myxpath=checkElementDisplayed.xpathMaker(arg1);
-	  System.out.println("**" +myxpath);
-	  Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
-
-	  if(driver.findElements(By.xpath(myxpath)).size() != 0){
-			System.out.println("Element is Present");
-			}else{
-			System.out.println("Element is Absent");
-			}
-	}
+		  }
+    }
       	
 	
 }

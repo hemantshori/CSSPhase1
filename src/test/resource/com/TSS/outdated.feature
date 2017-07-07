@@ -5,6 +5,108 @@
 Feature: Outdated stuff
 	#OUTDATED:  240, 310, 311, 355, 358, 401, 443,
 
+ @fixed
+  Scenario Outline: DTSP-105: As an end user, I want to be able to submit an Exemption Request so that I can request for an exemption on my Payroll Tax
+    # Bug: Title in Exemption Summary is incorrect, has been raised.
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Service Requests"
+    Then I click on "Exemption Request"
+    #Scenario 1: Display "Objection Request" Form
+    Then I check "OrganizationalName" is readonly
+    Then I check "PayrollAnswer_ABN" is readonly
+    Then I check "PayrollAnswer_CRN" is readonly
+    Then I check "ExemptionStartDateInput" is readonly
+    Then I check "ExemptionEndDateInput" is readonly
+    Then I check "JustificationInput" is readonly
+    #Scenario 2: "Objection Information" section displayed on the "Objection Request" Form
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value |
+      | s2id_autogen1_search | Aqua  |
+    Then I click on button "select2-results-1"
+    Then I check "ExemptionStartDateInput" is not readonly
+    Then I check "ExemptionEndDateInput" is not readonly
+    Then I check "JustificationInput" is not readonly
+    #Scenario 4: Error display
+    Then I click on button "ExemptionStartDateInput"
+    Then I click on "20170520"
+    #Then I click on button "calTriggerOut"
+    Then I click on button "ExemptionEndDateInput"
+    Then I click on "20170519"
+    # Then I click on button "calTriggerOut"
+    Then I enter the details as
+      | Fields             | Value |
+      | JustificationInput | TEST  |
+    Then I click on button with value "Next"
+    #Then I see text "Requested Exemption End Date should be greater than Requested Exemption Start Date" displayed
+    Then I see text "Please enter valid dates for your Exemption Request." displayed
+    #Scenario 3: "Objection Request" Summary page
+    Then I click on button "ExemptionEndDateInput"
+    Then I click on "20170521"
+    #Then I click on button "calTriggerOut"
+    Then I enter the details as
+      | Fields             | Value |
+      | JustificationInput | TEST  |
+    #Then I click on button with value "Next"
+    #Then I check I am on "Exemption Request Summary" page
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                         |
+      #| item2 | Organisation Name                |
+      #| item3 | Australian Business Number (ABN) |
+      #| item4 | Client Reference Number (CRN)    |
+      #| item5 | Requested Exemption Start Date   |
+      #| item6 | Requested Exemption End Date     |
+      #| item7 | Exemption Request Justification  |
+      #| item7 | Declaration                      |
+      #| item7 | Organisation                     |
+      #| item7 | Contact Phone                    |
+      #| item7 | Email Address                    |
+      #| item8 | 20 May 2017                      |
+      #| item9 | 21 May 2017                      |
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Position>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Organisation>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+
+    Examples: 
+      | PortalName | UserName | Password   | FirstName | LastName | Position     | Organisation | ContactPhone | EmailAddress         |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+  @done
+  Scenario Outline: The Exemption Request Form does not allow the user to enter a start date in the past but PSRM will allow a past date.
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Service Requests"
+    Then I click on "Exemption Request"
+    Then I click on button "select2-chosen-1"
+    Then I enter the details as
+      | Fields               | Value |
+      | s2id_autogen1_search | ABCAD |
+    Then I click on button "select2-results-1"
+    Then I click on button "ExemptionStartDateInput"
+    Then I click on "20170502"
+    #Then I click on button "calTriggerOut"
+    Then I click on button "ExemptionEndDateInput"
+    Then I click on "20170529"
+    Then I enter the details as
+      | Fields             | Value |
+      | JustificationInput | TEST  |
+    Then I click on button with value "Next"
+    Then I check I am on "Exemption Request Summary" page
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
  #@done
   #Scenario Outline: DTSP-617: Annual Payroll Tax Lodgements (Check for outstanding monthly obligations in PSRM)

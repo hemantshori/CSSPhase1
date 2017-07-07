@@ -12,6 +12,8 @@ public class HomePage extends DBUtilities {
 		
 	}
 
+	// redirects to a URL based on a string
+	// there might be a better way to write this
 	public void navigateTo(String arg1)  {
 		if(arg1.equals("USS")){
 			
@@ -57,7 +59,7 @@ public class HomePage extends DBUtilities {
 			driver.get("https://ssc.dbresults.com.au/SS_Admin/Tooltips.aspx");
 		}
 		else if(arg1.equals("TSSDev")){
-			driver.get("https://dev-ssc.dbresults.com.au/TSSPortal/Homepage.aspx");
+			driver.get("https://dev-ssc.dbresults.com.au/TSSPortal/LoginAdmin.aspx");
 		}
 		else if(arg1.equals("Tax_Registration")){
 			driver.get("https://dev2-ssc.dbresults.com.au/Registration/TaxRegistration_Step1_Form.aspx");
@@ -126,7 +128,7 @@ public class HomePage extends DBUtilities {
 
 		System.out.println("********************************************************************"
 		+ "************************TESTING "+arg1+"*****************************************************");
-	}
+		}
 	
 	
 	

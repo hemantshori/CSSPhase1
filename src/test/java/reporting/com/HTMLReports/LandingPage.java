@@ -1,4 +1,4 @@
-package reporting.com.HTMLReports;
+	package reporting.com.HTMLReports;
 
 import java.util.List;
 
@@ -127,18 +127,18 @@ public class LandingPage extends DBUtilities {
 	   else {
 			System.out.println("Element is Absent");
 	   }
-}
+   }
     	
    	
       
-      public void checkUIElementTEXTIsDisplayed (String arg1) throws InterruptedException {
-		  DBUtilities checkElementDisplayed = new DBUtilities(driver);
-		 //String myxpath=checkElementDisplayed.xpathMaker(arg1);
-		  String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
-		  System.out.println("checking for text " +myxpath);
+   public void checkUIElementTEXTIsDisplayed (String arg1) throws InterruptedException {
+		DBUtilities checkElementDisplayed = new DBUtilities(driver);
+		//String myxpath=checkElementDisplayed.xpathMaker(arg1);
+		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
+		System.out.println("checking for text " +myxpath);
 	
-	      driver.getPageSource().contains(arg1);
-	      Assert.assertTrue(" Varification failed as " +arg1 +"NOT FOUND",driver.getPageSource().contains(arg1));
+	    driver.getPageSource().contains(arg1);
+	    Assert.assertTrue(" Varification failed as " +arg1 +"NOT FOUND",driver.getPageSource().contains(arg1));
 		//Assert.assertTrue(" Varification failed as " +myxpath +"NOT FOUND",driver.findElement(By.xpath(myxpath)).isDisplayed());
 	
 		if(driver.findElements(By.xpath(myxpath)).size() != 0){
@@ -147,100 +147,79 @@ public class LandingPage extends DBUtilities {
 		else {
 			System.out.println("Element is Absent");
 		}
-	}
+   }
       
       // following are for RHS colouns......
       
-      public void selectDropdownValue(String arg1, String arg2) throws InterruptedException
-      {
-    	  JavascriptExecutor executor = (JavascriptExecutor)driver;
-    	  try {
-    		  
-	    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
-	    	  //WebElement element1 =  driver.findElement(By.xpath(myxpath));
-	    	  driver.findElement(By.xpath(myxpath)).click();
-	    	  
-	    	  
-	    	  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
-	    	  myxpath2 = myxpath2.replace("*", "select");
-	    	  System.out.println(myxpath2);
-	    	 // WebElement element2 =driver.findElement(By.xpath(myxpath2));
-	    	  
-	    	  //executor.executeScript("arguments[0].click()", element2);
-	    	  driver.findElement(By.xpath(myxpath2)).click();
-    	  }
-    	  catch (Exception e){
-    		  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
-	    	  myxpath2 = myxpath2.replace("*", "select");
-	    	  System.out.println(myxpath2);
-//	    	  WebElement element2 =driver.findElement(By.xpath(myxpath2));
-//	    	  executor.executeScript("arguments[0].click()", element2);
-	    	  driver.findElement(By.xpath(myxpath2)).click();
-	    	  
-	    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
-//	    	  WebElement element1 =  driver.findElement(By.xpath(myxpath));
-//	    	  executor.executeScript("arguments[0].click()", element1);
-	    	  driver.findElement(By.xpath(myxpath)).click();
-	    	  
-    	  }
+   public void selectDropdownValue(String arg1, String arg2) throws InterruptedException {
+	  JavascriptExecutor executor = (JavascriptExecutor)driver;
+	  try {
+		  
+    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
+    	  driver.findElement(By.xpath(myxpath)).click();
+    	  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
+    	  myxpath2 = myxpath2.replace("*", "select");
+    	  System.out.println(myxpath2);	    	  
+    	  driver.findElement(By.xpath(myxpath2)).click();
+	  }
+	  catch (Exception e){
+		  String myxpath2= new DBUtilities(driver).xpathMakerById(arg2);
+    	  myxpath2 = myxpath2.replace("*", "select");
+    	  System.out.println(myxpath2);
+    	  driver.findElement(By.xpath(myxpath2)).click();
     	  
+    	  String myxpath= new DBUtilities(driver).xpathMakerContainsText(arg1);
+    	  driver.findElement(By.xpath(myxpath)).click();
     	  
-//    	  DBUtilities createXpath = new DBUtilities(driver);
-//    		String myxpath = createXpath.xpathMakerById(arg1);     // disabled
-//    	  //String myxpath = createXpath.xpathMakerContainsText(arg1);
-//    		driver.findElement(By.xpath(myxpath)).click();     // to click dropdown box
-//    		//String myxpath2 = createXpath.xpathMakerById(arg1);
-//    		//String myxpath2 = createXpath.xpathMaker(arg1);
-//    		String myxpath2 = createXpath.xpathMakerContainsText(arg2);
-//    		driver.findElement(By.xpath(myxpath2)).click();  
-//    		driver.findElement(By.xpath(myxpath2)).click(); // to select dropdown value
-//    		Thread.sleep(1000);
-      }
+	  }
+
+   }
       
       
       // checks high and lower values and verify that the correct result is displayed in correct format
-      public void compareValueOneToValueTwo(String arg1, String arg2){
+   public void compareValueOneToValueTwo(String arg1, String arg2){
     	  
     	  
-    	  DBUtilities createXpath = new DBUtilities(driver);
-    		String myxpath = createXpath.xpathMakerById(arg1);
-    		String currentBill = driver.findElement(By.xpath(myxpath)).getText();
+	   DBUtilities createXpath = new DBUtilities(driver);
+	   String myxpath = createXpath.xpathMakerById(arg1);
+	   String currentBill = driver.findElement(By.xpath(myxpath)).getText();
     	
     		
-    		String myxpath2 = createXpath.xpathMakerById(arg2);
-    		String lastBill = driver.findElement(By.xpath(myxpath2)).getText();
-    		System.out.println(lastBill);
-    		
-    	
-    		String newCurrentBill = currentBill.replaceAll("[^\\d.]+", "");
-    		//System.out.println(" its "+newCurrentBill);
-    		double intnewCurrentBill = Double.parseDouble(newCurrentBill);
-    		System.out.println(" its**************************** "+intnewCurrentBill);
-    		String newLastBill = lastBill.replaceAll("[^\\d.]+", "");
-    		//System.out.println(" its "+newLastBill);
-    		double intnewLastBill = Double.parseDouble(newLastBill);
-    		System.out.println(" its*********************** "+intnewLastBill);
-    		
-    		
-    		
-    		
-    		//if val1<val2
-    		if (intnewCurrentBill<intnewLastBill){
-    			DBUtilities createXpath3 = new DBUtilities(driver);
-        		String myxpath3 = createXpath3.xpathMakerSpanClass("fa fa-fw fa-caret-down");
-        	 //driver.findElement(By.xpath(myxpath3)).getText();
-        	 Assert.assertTrue(driver.findElement(By.xpath(myxpath3)).isDisplayed());
-        	 
-    			System.out.println("*******************it should be greeen and arrow is pointing down**************");
-    		}else if(intnewCurrentBill>intnewLastBill){
-    			System.out.println("*****************it should be red and arrow is pointing up*****************");
-    			DBUtilities createXpath4 = new DBUtilities(driver);
-        		String myxpath4 = createXpath4.xpathMakerSpanClass("fa fa-fw fa-caret-up");
-        		Assert.assertTrue(driver.findElement(By.xpath(myxpath4)).isDisplayed());
+    	String myxpath2 = createXpath.xpathMakerById(arg2);
+		String lastBill = driver.findElement(By.xpath(myxpath2)).getText();
+		System.out.println(lastBill);
+		
 	
-    		}
+		String newCurrentBill = currentBill.replaceAll("[^\\d.]+", "");
+		//System.out.println(" its "+newCurrentBill);
+		double intnewCurrentBill = Double.parseDouble(newCurrentBill);
+		System.out.println(" its**************************** "+intnewCurrentBill);
+		String newLastBill = lastBill.replaceAll("[^\\d.]+", "");
+		//System.out.println(" its "+newLastBill);
+		double intnewLastBill = Double.parseDouble(newLastBill);
+		System.out.println(" its*********************** "+intnewLastBill);
+		
+		
+		
+		
+		//if val1<val2
+		if (intnewCurrentBill<intnewLastBill){
+			DBUtilities createXpath3 = new DBUtilities(driver);
+    		String myxpath3 = createXpath3.xpathMakerSpanClass("fa fa-fw fa-caret-down");
+    		//driver.findElement(By.xpath(myxpath3)).getText();
+    		Assert.assertTrue(driver.findElement(By.xpath(myxpath3)).isDisplayed());
+    	 
+			System.out.println("*******************it should be greeen and arrow is pointing down**************");
+		}
+		else if(intnewCurrentBill>intnewLastBill){
+			System.out.println("*****************it should be red and arrow is pointing up*****************");
+			DBUtilities createXpath4 = new DBUtilities(driver);
+    		String myxpath4 = createXpath4.xpathMakerSpanClass("fa fa-fw fa-caret-up");
+    		Assert.assertTrue(driver.findElement(By.xpath(myxpath4)).isDisplayed());
+
+		}
 	
-      }
+   }
 
 
 
@@ -250,13 +229,11 @@ public class LandingPage extends DBUtilities {
 		//String howManySAsInCorousel = myxpath
 		//Select listSAa = new Select(driver.findElement(By.xpath(myxpath)));
 		System.out.println(myxpath);
-	  List<WebElement> mylist =   driver.findElements(By.xpath(myxpath));
-			  for(int i=0; i<mylist.size(); i++)
-			  {
-			          System.out.println(i + mylist.get(i).getText());
-			          
-			  } 
-		
+		List<WebElement> mylist =   driver.findElements(By.xpath(myxpath));
+		for(int i=0; i<mylist.size(); i++) {
+			System.out.println(i + mylist.get(i).getText());      
+		} 
+
 	
 	}
 
