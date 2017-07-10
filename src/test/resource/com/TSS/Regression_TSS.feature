@@ -457,9 +457,9 @@ Feature: Regression for TSS.
       | LodgePayrollAnswer_Superannuation              |  100000 |
       | LodgePayrollAnswer_OtherTaxablePayment         |  100000 |
       | LodgePayrollAnswer_ExemptWages                 |  100000 |
-      | LodgePayrollAnswer_AustralianWide              | 1500000 |
+      | LodgePayrollAnswer_AustralianWide              | 5000000 |
       | LodgePayrollAnswer_DaysPaidTaxable             |     999 |
-    #| LodgePayrollAnswer_GroupActWages| 1500000 |
+    #| LodgePayrollAnswer_GroupActWages| 5000000 |
     Then I check "SalariesAndWages" contains "$ 100,000"
     Then I check "BonusesAndCommissions" contains "$ 100,000"
     Then I check "LodgePayrollAnswer_Commissions" contains "$ 100,000"
@@ -527,101 +527,7 @@ Feature: Regression for TSS.
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 3 ################################################
   ###########################################################################################################
-   @done
-  Scenario Outline: DTSP-25: As an organisation I want a user's details verified during registration so that only valid users register with the portal (page 1)
-    #
-    #scenario 1: Same year check
-    Given I want to login to portal "<PortalName>"
-    And I click on "Create Account"
-    Then I click on button "RegistrationAsBusiness"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                         |
-      | item3 | Australian Business Number (ABN) |
-      | item4 | Client Reference Number (CRN)    |
-      | item7 | By creating an account, I agree  |
-    #Scenario 4
-    Then I click on "Sign In"
-    Then I check I am on "Login" page
-    #Scenario p
-    Then I click on "Create Account"
-    Then I click on "Terms & Conditions"
-    Then a new page "http://dbresults.com.au/terms/" is launched
-    Then I check I am on "Terms of Use | DB Results - Digital Business specialists" page
-    Then I see text "Terms of Use" displayed
-    Given I want to login to portal "<PortalName>"
-    And I click on "Create Account"
-    #Scenario 3
-    Then I click on button "RegistrationAsBusiness"
-    Then I enter the details as
-      | Fields         | Value       |
-      | InputABNNumber | 33333333333 |
-      | InputCRNNumber | 33333333333 |
-    Then I click on button "RegistrationSubmit"
-    Then I see text "By creating an account, I agree to the" displayed
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I click on button "RegistrationSubmit"
-    Then I see text "The combination of the provided information does not refer to a registered in PSRM Entity" displayed
-    Then I enter the details as
-      | Fields         | Value       |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber | <CRN> |
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Registration" page
-    #DTSP-29: As a user I want to enter my user details so that I can complete the registration process (page 2)
-    #Scenario 1
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                 |
-      | item2 | First Name               |
-      | item3 | Last Name                |
-      | item4 | Email Address            |
-      | item5 | Choose Username          |
-      | item6 | Choose Password          |
-      | item7 | Hint                     |
-      | item7 | Confirm Password         |
-      | item7 | Already have an account? |
-    #Scenario 4: User cancels with unsaved changes
-    Then I click on button "Cancel"
-    Then I check I am on "Login" page
-    Given I want to login to portal "<PortalName>"
-    And I click on "Create Account"
-    Then I click on button "RegistrationAsBusiness"
-    Then I enter the details as
-      | Fields         | Value       |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber | <CRN> |
-    Then I click on button "RegistrationSubmit"
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I check I am on "Registration" page
-    Then I click on button "Submit"
-    #Scenario 3: Details entered do not pass validation (Can't fully complete on this due to WIP done on the page)
-    Then I enter the details as
-      | Fields                 | Value       |
-      | Registration_Email     | 12345678961 |
-      | Registration_FirstName | Test        |
-      | Registration_LastName  | Test        |
-      | Registration_Username  | 12345678961 |
-      | NewPassword            | 12345678961 |
-      | ConfirmPassword        |   123456781 |
-      | ConfirmPassword        |   123456781 |
-      | PhoneNumber            |    12345671 |
-      | Registration_Hint      |      123123 |
-    Then I click on button "Submit"
-    Then I wait for "5000" millisecond
-    Then I see text "Incorrect Email Format." shown
-    Then I see text "Invalid password. Please try again." shown
-    Then I see text "Passwords do not match. Please try again." shown
-    Then I see text "Invalid Phone Number. Phone Number should be 10 digits. Please try again." shown
-    #Scenario 5: User cancels with unsaved changes
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
-    Then I check I am on "Registration" page
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I check I am on "Login" page
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ABN         | CRN         |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 96107641949 | 400066 |
+     | UserNameInput | PasswordInput | jbradley | Dbresults1 | 96107641949 | 400066 |
 
   @wip
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
@@ -797,266 +703,9 @@ Feature: Regression for TSS.
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
 
-  @done
-  Scenario Outline: DTSP-460: s an organisation I want user inputs to be restricted & validated during Tax Agent's portal registration so that human error can be minimised
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    Then I see checkbox "RegistrationAsBusiness" as not selected
-    Then I see checkbox "RegistrationAsTaxAgent" as not selected
-    Then I click on "Register as a Tax Agent"
-    #Scenario 1: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a number field)
-    Then I enter the details as
-      | Fields                   | Value |
-      | InputTaxAgentRegId       | TEST  |
-      | InputTaxAgentABN         | TEST  |
-      | BusinessAddress_Postcode | TEST  |
-    Then I check "InputTaxAgentRegId" is empty
-    Then I check "InputTaxAgentABN" is empty
-    Then I check "BusinessAddress_Postcode" is empty
-    #Scenario 2: Tax Agent Registration details do not pass the frontend validation
-    Then I enter the details as
-      | Fields                    | Value              |
-      | InputTaxAgentABN          |        97110187768 |
-      | InputTaxAgentBusinessName | DB RESULTS PTY LTD |
-      | BusinessAddress_Address1  | TEST               |
-      | BusinessAddress_Suburb    | TEST               |
-      | BusinessAddress_Postcode  |               3333 |
-    Then I click on button "BusinessAddress_StateId"
-    Then I click on "Victoria"
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I wait for "5000" millisecond
-    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
 
-    Examples: 
-      | PortalName | UserName | Password   |
-      | TSSAdmin        | jscott   | Dbresults1 |
-
-  @done
-  Scenario Outline: DTSP-440 and DTSP-441: As an organisation I want to know the type of user who is registering so that the relevant verification information can be presented.
-    #ONHOLD until the tax agent registration bug can be fixed
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    #DTSP-440: Scenario 1 and 2
-    Then I see checkbox "RegistrationAsBusiness" as not selected
-    Then I see checkbox "RegistrationAsTaxAgent" as not selected
-    #DTSP-441, Scenario 1:
-    Then I click on "Register as a Tax Agent"
-    Then I wait for "5000" millisecond
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                               |
-      | item2 | Tax Agent's Registration ID            |
-      | item5 | Registered Business Name               |
-      | item5 | Registered Business Address            |
-      | item5 | Country                                |
-      | item5 | Address                                |
-      | item5 | Suburb / City                          |
-      | item5 | Territory / State                      |
-      | item5 | Postcode                               |
-      | item5 | By creating an account, I agree to the |
-    #DTSP-441, Scenario 3:
-    Then I check "RegistrationSubmit" is readonly
-    #DTSP-441, Scenario 4: User clicks on the ‘Sign In’ link
-    Then I click on "Sign In"
-    Then I check I am on "Login" page
-    #DTSP-441, Scenario 5: User views Terms and Conditions
-    Then I click on "Create Account"
-    Then I click on "Terms & Conditions"
-    Then a new page "http://dbresults.com.au/terms/" is launched
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I click on "Register as a Tax Agent"
-    Then I enter the details as
-      | Fields                    | Value              |
-      | InputTaxAgentABN          |        97110187767 |
-      | InputTaxAgentBusinessName | DB RESULTS PTY LTD |
-      | BusinessAddress_Address1  | TEST               |
-      | BusinessAddress_Suburb    | TEST               |
-      | BusinessAddress_Postcode  |               3333 |
-    Then I click on button "BusinessAddress_StateId"
-    Then I click on "Victoria"
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName         |
-      | item2 | First Name       |
-      | item3 | Last Name        |
-      | item5 | Phone Number     |
-      | item5 | Email Address    |
-      | item5 | Choose Username  |
-      | item5 | Choose Password  |
-      | item5 | Confirm Password |
-      | item5 | Hint             |
-    Then I enter the details as
-      | Fields                       | Value             |
-      | Registration_FirstName       | TEST              |
-      | Registration_LastName        | TEST              |
-      | Registration_PhoneNumber     |          33333333 |
-      | Registration_Email           | TEST@asdfasdfafsd |
-      | Registration_Username        | TeSTMANMAN        |
-      | Registration_NewPassword     | Dbresults1        |
-      | Registration_ConfirmPassword | Dbresults1        |
-      | Registration_Hint            |              3333 |
-    Then I check "Submit" is not readonly
-
-    Examples: 
-      | PortalName | UserName | Password   |
-      | TSSAdmin        | jscott   | Dbresults1 |
-
-  @done
-  Scenario Outline: DTSP-459
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    Then I click on "Register as a Business"
-    #Scenario 1: User accesses the 'Registration Verification' page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                               |
-      | item2 | Australian Business Number (ABN)       |
-      | item3 | Client Reference Number (CRN)          |
-      | item5 | By creating an account, I agree to the |
-    #Scenario 7: User clicks on the ‘Sign In’ link
-    Then I click on "Sign In"
-    Then I check I am on "Login" page
-    #Scenario 8: User views Terms and Conditions
-    Then I click on "Create Account"
-    Then I click on "Terms & Conditions"
-    Then a new page "http://dbresults.com.au/terms/" is launched
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    #Scenario 3: User has not entered all the mandatory fields
-    Then I check "RegistrationSubmit" is readonly
-    Then I click on "Register as a Business"
-    Then I wait for "5000" millisecond
-    #Scenario 2: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a Number field)
-    Then I enter the details as
-      | Fields                  | Value |
-      | InputABNNumber_Business | TEST  |
-      | InputCRNNumber_Business | TEST  |
-    Then I check "InputABNNumber_Business" is empty
-    Then I check "InputCRNNumber_Business" is empty
-    #Scenario 4: Registration details do not pass the frontend validation
-    Then I enter the details as
-      | Fields                  | Value |
-      | InputABNNumber_Business |     3 |
-      | InputCRNNumber_Business |     3 |
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I click on button "RegistrationSubmit"
-    Then I see text "Invalid ABN. ABN Should be 11 Digits. Please try again." displayed
-    Then I see text "Invalid CRN. CRN Should be 6 digits. Please try again." displayed
-    #Scenario 6: Registration details failed the verification with stubs
-    Then I enter the details as
-      | Fields                  | Value       |
-      | InputABNNumber_Business | 33333333333 |
-      | InputCRNNumber_Business |      333333 |
-    Then I click on button "RegistrationSubmit"
-    Then I wait for "5000" millisecond
-    Then I see text "The combination of the provided information does not refer to a registered in PSRM Entity" displayed
-    #Scenario 5: Registration details verified with stubs
-    Then I enter the details as
-      | Fields         | Value       |
-      | InputABNNumber | 12054547368 |
-      | InputCRNNumber |      400043 |
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
-
-    Examples: 
-      | PortalName | UserName | Password   |
-      | TSSAdmin        | jscott   | Dbresults1 |
 
   #NOTE: Ensure that jbradley has a current employee type selected in the data extensions page
-  @done
-  Scenario Outline: DTSP-461: Update the Capture User Details page
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    #Scenario 1: User accesses the 'Capture User Details' page
-    Then I click on "Register as a Business"
-    Then I enter the details as
-      | Fields         | Value |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber | <CRN> |
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName         |
-      | item2 | Choose Username  |
-      | item3 | First Name       |
-      | item5 | Last Name        |
-      | item5 | Email Address    |
-      | item5 | Phone Number     |
-      | item5 | Choose Password  |
-      | item5 | Confirm Password |
-      | item5 | Hint             |
-    #Scenario 2: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a Number field)
-    Then I enter the details as
-      | Fields      | Value |
-      | PhoneNumber | TEST  |
-    Then I check "Registration_PhoneNumber" is empty
-    #Scenario 5: Details entered do not pass validation
-    Then I check "Submit" is readonly
-    Then I enter the details as
-      | Fields          | Value                 |
-      | FirstName       | TEST                  |
-      | LastName        | TEST                  |
-      | PhoneNumber     |                 33333 |
-      | Email           | TEST                  |
-      | Username        | TEST                  |
-      | NewPassword     | adsfasdfaf            |
-      | ConfirmPassword | asfsadfsadf           |
-      | Hint            | testsetsetwetstsetset |
-    Then I wait for "5000" millisecond
-    Then I click on button "irstName"
-    Then I click on button "Submit"
-    Then I see text "Incorrect Email Format." displayed
-    #Then I see text "This is an invalid phone number" displayed
-    Then I see text "Invalid password. Please try again" displayed
-    Then I see text "Passwords do not match. Please try again." displayed
-    #Scenario 7: User cancels with unsaved changes
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
-    Then I click on button "Cancel"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    #Scenario 1: User accesses the 'Capture User Details' page
-    Then I click on "Register as a Business"
-    Then I enter the details as
-      | Fields         | Value |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber | <CRN> |
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    #Scenario 6: User cancels registration with no unsaved changes
-    Then I click on button "Cancel"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    Then I click on "Register as a Business"
-    Then I enter the details as
-      | Fields         | Value |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber | <CRN> |
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I enter the details as
-      | Fields          | Value                 |
-      | FirstName       | TEST                  |
-      | LastName        | TEST                  |
-      | PhoneNumber     |             333333333 |
-      | Email           | TEST@TEST             |
-      | Username        | TEST                  |
-      | NewPassword     | Dbresults1            |
-      | ConfirmPassword | Dbresults1            |
-      | Hint            | testsetsetwetstsetset |
-    Then I check "Submit" is not readonly
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | ABN         | CRN    |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12054547368 | 400043 |
 
   @done
   Scenario Outline: DTSP-463: Display all the mandatory fields with an Asterisk (*)
@@ -1108,28 +757,27 @@ Feature: Regression for TSS.
     Then I click on "Sign Out"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
     #PART 3: Create Account (TODO Once labels have IDs)
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I click on button "RegistrationAsBusiness"
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I check "AccountNumberLabel" has CSS property "content" with value ""*""
-    #Then I check "SelectBusinessType" has CSS property "content" with value ""*""
-    Then I click on button "RegistrationAsTaxAgent"
-    Then I check "TaxAgentABNLabel" has CSS property "content" with value ""*""
-    Then I check "TaxAgentBusinessNameLabel" has CSS property "content" with value ""*""
-    Then I click on button "RegistrationAsBusiness"
-    Then I enter the details as
-      | Fields                  | Value       |
-      | InputABNNumber_Business | 91098629095 |
-      | InputCRNNumber_Business |      400004 |
-    Then I click on button "RegistrationSubmit"
-    Then I check "Registration_FirstNameLabel" has CSS property "content" with value ""*""
-    Then I check "Registration_LastNameLabel" has CSS property "content" with value ""*""
-    Then I check "Registration_EmailLabel" has CSS property "content" with value ""*""
-    Then I check "Registration_UsernameLabel" has CSS property "content" with value ""*""
-    Then I check "Registration_NewPasswordLabel" has CSS property "content" with value ""*""
-    Then I check "Registration_ConfirmPasswordLabel" has CSS property "content" with value ""*""
-    Then I check "Registration_HintLabel" has CSS property "content" with value ""*""
+    #Given I want to login to portal "<PortalName>"
+    #Then I click on "Create Account"
+    #Then I click on button "RegistrationAsBusiness"
+    #Then I click on button "TermsandConditionsCheckBox2"
+    #Then I check "AccountNumberLabel" has CSS property "content" with value ""*""
+    #Then I click on button "RegistrationAsTaxAgent"
+    #Then I check "TaxAgentABNLabel" has CSS property "content" with value ""*""
+    #Then I check "TaxAgentBusinessNameLabel" has CSS property "content" with value ""*""
+    #Then I click on button "RegistrationAsBusiness"
+    #Then I enter the details as
+      #| Fields                  | Value       |
+      #| InputABNNumber_Business | 91098629095 |
+      #| InputCRNNumber_Business |      400004 |
+    #Then I click on button "RegistrationSubmit"
+    #Then I check "Registration_FirstNameLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_LastNameLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_EmailLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_UsernameLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_NewPasswordLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_ConfirmPasswordLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_HintLabel" has CSS property "content" with value ""*""
     #PART 4: Tax Registration Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -1144,7 +792,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I wait for "5000" millisecond
     Then I check "Label_SelectBusinessType" has CSS property "content" with value ""*""
@@ -1381,7 +1029,7 @@ Feature: Regression for TSS.
     Then I select "Government" from "SelectBusinessTypeCode"
     #Then I check "RegistrationAnswer_ACN" is empty
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
@@ -1815,37 +1463,7 @@ Feature: Regression for TSS.
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
-  @done
-  Scenario Outline: DTSP-527: Update the relationship between Business Taxpayer, Tax Agent Organisation and Users
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    Then I click on "Register as a Business"
-    #Scenario 1: User accesses the 'Capture User Details' page
-    Then I enter the details as
-      | Fields                  | Value       |
-      | InputABNNumber_Business | 91098629095 |
-      | InputCRNNumber_Business |      400004 |
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
-    #Scenario 2: A Tax Agent organisation can have multiple users
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    Then I click on "Register as a Tax Agent"
-    Then I enter the details as
-      | Fields                    | Value                |
-      | InputTaxAgentABN          |          21006819692 |
-      | InputTaxAgentBusinessName | TOYOTA SUPER PTY LTD |
-      | BusinessAddress_Address1  | TEST                 |
-      | BusinessAddress_Suburb    | TEST                 |
-      | BusinessAddress_Postcode  |                 3333 |
-    Then I click on button "BusinessAddress_Suburb"
-    Then I click on "Victoria"
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
+ 
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | UserName2 | Password2  |
@@ -1920,14 +1538,14 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     #Then I select "Direct Post" from "CommunicationMethodId"
     #Then I select "AL" from "Address_State"
     Then I enter the details as
@@ -2373,34 +1991,7 @@ Feature: Regression for TSS.
       | PortalName | UserName | Password   |
       | TSSAdmin        | jbradley | Dbresults1 |
 
-  @review
-  Scenario Outline: DTSP-578: Update Portal Registration Form to re-enable front end validation on CRN
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    #Scenario 3: Business Tax Payer fails to enter a CRN
-    Then I click on "Register as a Business"
-    Then I check "RegistrationSubmit" is readonly
-    #Scenario 4: CRN field only accepts numeric input
-    Then I enter the details as
-      | Fields         | Value |
-      | InputCRNNumber | TEST  |
-    Then I check "InputCRNNumber" is empty
-    #Scenario 2: Business Tax Payer enters a CRN of less then 6 digits during portal registration
-    Then I enter the details as
-      | Fields         | Value |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber |  4000 |
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I click on button "RegistrationSubmit"
-    Then I see text "CRN Should be 6 digits." displayed
-    #Scenario 1: Business Tax Payer enters a valid 6 digits CRN during portal registration
-    Then I enter the details as
-      | Fields         | Value |
-      | InputABNNumber | <ABN> |
-      | InputCRNNumber | <CRN> |
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
-
+  
     Examples: 
       | PortalName | UserName | Password   | ABN         | CRN    |
       | TSSAdmin        | jbradley | Dbresults1 | 13058370433 | 400014 |
@@ -3289,7 +2880,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -3327,7 +2918,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -3421,7 +3012,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -3727,7 +3318,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -4215,7 +3806,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -4255,7 +3846,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 32421342134 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -4270,71 +3861,7 @@ Feature: Regression for TSS.
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
-  @review
-  Scenario Outline: DTSP-704: To update the ABN Lookup Rule on the Payroll Tax Registration Form and Tax Agent Portal Registration
-    #Scenario 3: Correct Tax Agent Portal Registration
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I check I am on "Registration" page
-    Then I click on "Register as a Tax Agent"
-    Then I enter the details as
-      | Fields                    | Value               |
-      | InputTaxAgentABN          |         21006819692 |
-      | InputTaxAgentBusinessName | toyota SUPER pty LT |
-      | BusinessAddress_Address   | TEST                |
-      | BusinessAddress_Suburb    | TEST                |
-      | BusinessAddress_Postcode  |                3333 |
-    Then I click on button "BusinessAddress_StateId"
-    Then I click on "Victoria"
-    Then I click on button "TermsandConditionsCheckBox2"
-    Then I click on button "RegistrationSubmit"
-    Then I see text "Your Registered Business Name doesn’t match with your ABN. Please try again" displayed
-    #Scenario 4: Incorrect Tax Agent Portal Registration
-    Then I enter the details as
-      | Fields                    | Value                |
-      | InputTaxAgentBusinessName | toyota SUPER pty LTd |
-    Then I click on button "RegistrationSubmit"
-    Then I check I am on "Complete Registration" page
-    #Scenario 2: Incorrect Employer Name on the Payroll Tax Registration
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Payroll Tax Registration"
-    And I enter the details as
-      | Fields                 | Value |
-      | RegistrationAnswer_ABN | <ABN> |
-    Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
-    Then I select "Partnership" from "SelectBusinessTypeCode"
-    #Then I select "Direct Post" from "CommunicationMethodId"
-    Then I enter the details as
-      | Fields              | Value                 |
-      | EmployerName        | firE CompNY Pty Limid |
-      | BusinessTradingName | Fire CompNY Pty Limid |
-    #| AddressLine               | TEST              |
-    #| Address_City              | TEST              |
-    #| PostCode                  |              3333 |
-    #| ContactPerson_FirstName   | TEST              |
-    #| ContactPerson_LastName    | TEST              |
-    #| ContactPerson_PhoneNumber |       33333333333 |
-    #| ContactPerson_Email       | TEST@TEST.com     |
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
-    #Scenario 1: Correct Employer Name on the Payroll Tax Registration
-    Then I enter the details as
-      | Fields              | Value                |
-      | EmployerName        | Dynamic Fire Pty Ltd |
-      | BusinessTradingName | Dynamic Fire Pty Ltd |
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I see text "Address where Business Records are located (Jurisdiction)" displayed
-
-    #Bugged...?
-    Examples: 
-      | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+ |
 
   @review
   Scenario Outline: DTSP-712: To update all wording on the portal from "Tax Payer" to the single word "Taxpayer"
@@ -4708,7 +4235,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I check label "Label_EmployerName" contains "Organisation Name"
     Then I enter the details as
       | Fields              | Value         |
@@ -4782,7 +4309,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I check label "Label_EmployerName" contains "Organisation Name"
     Then I enter the details as
       | Fields              | Value         |
@@ -5112,91 +4639,7 @@ Feature: Regression for TSS.
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
       | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
-  @current
-  Scenario Outline: DTSP-530: As a Customer Portal Admin, I want to be able to deactivate end user accounts so that I can remove invalid portal accounts
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I click on button "RegistrationAsTaxAgent"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields                   | Value         |
-      | TaxAgentBusinessName     | <CompanyName> |
-      | InputTaxAgentABN         | <ABN>         |
-      | BusinessAddress_Postcode |          3333 |
-      | BusinessAddress_Address  | TEST          |
-      | BusinessAddress_Suburb   | TEST          |
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I select "Victoria" from "BusinessAddress_StateId"
-    Then I click on button "RegistrationSubmit"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields                       | Value                           |
-      | Registration_FirstName       | TEST                            |
-      | Registration_LastName        | TEST                            |
-      | Registration_Position        | TEST                            |
-      | Registration_PhoneNumber     |                      1234567890 |
-      | Registration_Email           | <NewUserName>@automation.com    |
-      | Registration_Username        | <NewUserName>                   |
-      | Registration_NewPassword     | <Password>                      |
-      | Registration_ConfirmPassword | <Password>                      |
-      | Registration_Hint            | Done as a result of automation! |
-    Then I click on button "SubmitAjaxRfrsh"
-    Then I wait for "5000" millisecond
-    Then I see text "Registration Confirmation" displayed
-    Then I want to login to portal "RegistrationLinkTable"
-    Then I click on object with xpath "//*[contains(text(), '<NewUserName>')]/../following-sibling::td/a"
-    #Scenario 1: Navigation
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I see text "Manage User Accounts" displayed
-    #Scenario 2:Full Name Search
-    And I click on "Manage User Accounts"
-    Then I enter the details as
-      | Fields      | Value    |
-      | SearchInput | taxagent |
-    Then I click on button with value "Search"
-    Then I see text "TaxAgent8@automation.com" displayed
-    Then I see text "TaxAgent6@automation.com" displayed
-    Then I see text "taxAgent13@automation.com" displayed
-    Then I see text "TaxAgent5@automation.com" displayed
-    #Scenario 3: Reset
-    Then I click on button with value "Reset"
-    Then I wait for "1500" millisecond
-    Then I check "SearchInput" is empty
-    #Scenario 4: Columns
-    Then I see text "Select" displayed
-    Then I see text "Full Name" displayed
-    Then I see text "User Type" displayed
-    Then I see text "Email" displayed
-    Then I see text "Phone Number" displayed
-    Then I see text "Status" displayed
-    #Scenario 5: Deactivate
-    Then I enter the details as
-      | Fields      | Value         |
-      | SearchInput | <NewUserName> |
-    Then I click on button with value "Search"
-    Then I click on button "CheckboxUserSelect"
-    Then I click on button with value "Deactivate"
-    Then I see "Are you sure you want to deactivate the user?" displayed on popup and I click "Cancel"
-    Then I click on button with value "Deactivate"
-    Then I see "Are you sure you want to deactivate the user?" displayed on popup and I click "OK"
-    Then I see text "Inactive" displayed
-    Then I click on "Sign Out"
-    And I enter the details as
-      | Fields        | Value         |
-      | UserNameInput | <NewUserName> |
-      | PasswordInput | <Password>    |
-    And I hit Enter
-    Then I see text "Invalid Username, Email or Password. Please try again." displayed
-
-    Examples: 
-      | PortalName | UserName | Password   | CompanyName                                 | ABN         | NewUserName | NewEmail                | Password   |
-      | TSSAdmin        | TSSAdmin | Dbresults1 | The trustee for MD & KJ Fragar Family Trust | 70167081615 | dtsp5312    | dtsp5307@automation.com | Dbresults1 |
-
+ 
   @current
   Scenario Outline: DTSP-742: As an end user I want to be able to update Objection Request Form to cater for different Tax Types
     Given I want to login to portal "<PortalName>"
@@ -5697,7 +5140,7 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I click on button with value "Update Group"
     #Scenario 1: Group members without a JRL
     #Click on ticked box
@@ -5705,7 +5148,7 @@ Feature: Regression for TSS.
     Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I see text "You must nominate a group member as a DGE and/or JRL if you have any group members with a Group Role as 'Group Member'" displayed
     Then I click on "Group Management"
     #Scenario 2: DGE is the only ACT Group Member in a 'Group Member' Group Role
@@ -5714,13 +5157,13 @@ Feature: Regression for TSS.
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I click on button with value "Update Group"
     Then I click on button "ctl03_wt49"
     Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I check I am on "Payroll Tax Group Update Summary" page
 
     Examples: 
@@ -5825,7 +5268,7 @@ Feature: Regression for TSS.
     Then I wait for "5000" millisecond
     Then I click on button with value "Update Group"
     #Scenario 1: Pop up
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I click on button "AddNonActPopUp"
     Then I wait for "5000" millisecond
     Then I switch to frame "1"
@@ -5874,7 +5317,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 17118795716 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I see text "You are already registered for another tax type, please provide your Customer Reference Number (CRN) below to continue registering for Payroll Tax" displayed
     Then I check "RegistrationAnswer_CRN" exists
     Then I check "SelectBusinessTypeCode" does not exist
@@ -5906,7 +5349,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I check label "Label_EmployerName" contains "Organisation Name"
     Then I enter the details as
       | Fields              | Value         |
@@ -6382,7 +5825,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -6849,105 +6292,9 @@ Feature: Regression for TSS.
   ###########################################################################################################
   #################################### MISSING ACTRO BUGS ################################################
   ###########################################################################################################
-  @done
-  Scenario Outline: Tax Agent Account Activation Error + Disappearing Position field after Registration bug (Tax Agent) + No ABN Information check
-    #Onhold due to laggy Registration part 2 page
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I click on button "RegistrationAsTaxAgent"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields                   | Value         |
-      | TaxAgentBusinessName     | <CompanyName> |
-      | InputTaxAgentABN         | <ABN>         |
-      | BusinessAddress_Postcode |          3333 |
-      | BusinessAddress_Address  | TEST          |
-      | BusinessAddress_Suburb   | TEST          |
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I select "Victoria" from "BusinessAddress_StateId"
-    Then I click on button "RegistrationSubmit"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields                       | Value                           |
-      | Registration_FirstName       | TEST                            |
-      | Registration_LastName        | TEST                            |
-      | Registration_Position        | TEST                            |
-      | Registration_PhoneNumber     |                      1234567890 |
-      | Registration_Email           | <NewEmail>                      |
-      | Registration_Username        | <NewUserName>                   |
-      | Registration_NewPassword     | <Password>                      |
-      | Registration_ConfirmPassword | <Password>                      |
-      | Registration_Hint            | Done as a result of automation! |
-    Then I click on button "SubmitAjaxRfrsh"
-    Then I wait for "5000" millisecond
-    Then I see text "Registration Confirmation" displayed
-    Then I want to login to portal "RegistrationLinkTable"
-    Then I click on object with xpath "//*[contains(text(), 'automation_taxagent10')]/../following-sibling::td/a"
-    And I enter the details as
-      | Fields        | Value         |
-      | UserNameInput | <NewUserName> |
-      | PasswordInput | <Password>    |
-    And I hit Enter
-    Then I check I am on "Home" page
-    Then I see text "Please note, as there are currently no taxpayer accounts associated with your login, there is no information to display." displayed
-    Then I click on "User Profile"
-    Then I click on button "EditBT"
-    Then I check "Input_LastName2" is not empty
-
-    #NewUserName and NewEmail must be changed with every registration
-    Examples: 
-      | PortalName | CompanyName                                 | ABN         | NewUserName           | NewEmail                  | Password   |
-      | TSSAdmin        | The trustee for MD & KJ Fragar Family Trust | 70167081615 | automation_taxagent10 | TaxAgent10@automation.com | Dbresults1 |
-
-  @done
-  Scenario Outline: Disappearing Position field after Registration bug (Business Registration)
-    Given I want to login to portal "<PortalName>"
-    Then I click on "Create Account"
-    Then I click on button "RegistrationAsTaxAgent"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields                   | Value         |
-      | TaxAgentBusinessName     | <CompanyName> |
-      | InputTaxAgentABN         | <ABN>         |
-      | BusinessAddress_Postcode |          3333 |
-      | BusinessAddress_Address  | TEST          |
-      | BusinessAddress_Suburb   | TEST          |
-    Then I click on button "TermsandConditionsCheckBox"
-    Then I select "Victoria" from "BusinessAddress_StateId"
-    Then I click on button "RegistrationSubmit"
-    Then I wait for "7000" millisecond
-    Then I enter the details as
-      | Fields                       | Value                           |
-      | Registration_FirstName       | TEST                            |
-      | Registration_LastName        | TEST                            |
-      | Registration_Position        | TEST                            |
-      | Registration_PhoneNumber     |                      1234567890 |
-      | Registration_Email           | <NewUserName>@automation.com    |
-      | Registration_Username        | automation_<NewUserName>        |
-      | Registration_NewPassword     | <Password>                      |
-      | Registration_ConfirmPassword | <Password>                      |
-      | Registration_Hint            | Done as a result of automation! |
-    Then I click on button "SubmitAjaxRfrsh"
-    Then I wait for "7000" millisecond
-    Then I see text "Registration Confirmation" displayed
-    Then I want to login to portal "RegistrationLinkTable"
-    Then I click on object with xpath "//*[contains(text(), '<NewUserName>')]/../following-sibling::td/a"
-    And I enter the details as
-      | Fields        | Value                    |
-      | UserNameInput | automation_<NewUserName> |
-      | PasswordInput | <Password>               |
-    And I hit Enter
-    Then I check I am on "Home" page
-    Then I click on "User Profile"
-    Then I click on button "EditBT"
-    Then I check "Input_LastName2" is not empty
-
-    #automation_business1 needs to be changed with every success!
-    Examples: 
-      | PortalName | CompanyName                                 | ABN         | NewUserName | Password   |
-      | TSSAdmin        | The trustee for MD & KJ Fragar Family Trust | 70167081615 | taxAgent13  | Dbresults1 |
 
 
+ 
 
   @done
   Scenario Outline: Check if Update Refund Details form has the Organization section of the Declaration filled
@@ -6992,7 +6339,7 @@ Feature: Regression for TSS.
       | EmployerName        | <CompanyName> |
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I check "RegistrationAnswer_ACN" is empty
     Then I click on button "TaxPayerDetailsNextBT"
     Then I wait for "5000" millisecond
@@ -7019,7 +6366,7 @@ Feature: Regression for TSS.
       | RegistrationAnswer_ACN | 27349832721342134124302 |
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
     Then I see text "Your ACN doesn't match with your ABN. Please try again." shown
     Then I enter the details as
@@ -7053,7 +6400,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -7061,7 +6408,7 @@ Feature: Regression for TSS.
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I check "RegistrationAnswer_ACN" is empty
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     #Then I select "Mr" from "ContactPerson_Title"
     # Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
@@ -7074,7 +6421,7 @@ Feature: Regression for TSS.
       | PostCode                  |          3333 |
       | ContactPerson_PhoneNumber |    1234567890 |
     Then I click on button "OrgDetailsNextBt"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I click on button "select2-chosen"
     Then I enter the details as
       | Fields               | Value |
@@ -7152,7 +6499,7 @@ Feature: Regression for TSS.
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "1500" millisecond
+    Then I wait for "5000" millisecond
     Then I check label "Label_EmployerName" contains "Organisation Name"
     Then I enter the details as
       | Fields              | Value         |

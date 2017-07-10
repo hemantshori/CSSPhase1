@@ -313,6 +313,147 @@ Feature: WORK IN PROGRESS
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
       | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      
+
+ @done
+  Scenario Outline: DTSP-461: Update the Capture User Details page
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Create Account"
+    Then I check I am on "Registration" page
+    #Scenario 1: User accesses the 'Capture User Details' page
+    Then I click on "Register as a Business"
+    Then I enter the details as
+      | Fields         | Value |
+      | InputABNNumber | <ABN> |
+      | InputCRNNumber | <CRN> |
+    Then I click on button "TermsandConditionsCheckBox2"
+    Then I click on button "RegistrationSubmit"
+    Then I check I am on "Complete Registration" page
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName         |
+      | item2 | Choose Username  |
+      | item3 | First Name       |
+      | item5 | Last Name        |
+      | item5 | Email Address    |
+      | item5 | Phone Number     |
+      | item5 | Choose Password  |
+      | item5 | Confirm Password |
+      | item5 | Hint             |
+    #Scenario 2: User tries to enter incorrect input type into a restricted fields (e.g. entering ABC into a Number field)
+    Then I enter the details as
+      | Fields      | Value |
+      | PhoneNumber | TEST  |
+    Then I check "Registration_PhoneNumber" is empty
+    #Scenario 5: Details entered do not pass validation
+    Then I check "Submit" is readonly
+    Then I enter the details as
+      | Fields          | Value                 |
+      | FirstName       | TEST                  |
+      | LastName        | TEST                  |
+      | PhoneNumber     |                 33333 |
+      | Email           | TEST                  |
+      | Username        | TEST                  |
+      | NewPassword     | adsfasdfaf            |
+      | ConfirmPassword | asfsadfsadf           |
+      | Hint            | testsetsetwetstsetset |
+    Then I wait for "5000" millisecond
+    Then I click on button "irstName"
+    Then I click on button "Submit"
+    Then I see text "Incorrect Email Format." displayed
+    #Then I see text "This is an invalid phone number" displayed
+    Then I see text "Invalid password. Please try again" displayed
+    Then I see text "Passwords do not match. Please try again." displayed
+    #Scenario 7: User cancels with unsaved changes
+    Then I click on button "Cancel"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "Cancel"
+    Then I click on button "Cancel"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    Then I click on "Create Account"
+    Then I check I am on "Registration" page
+    #Scenario 1: User accesses the 'Capture User Details' page
+    Then I click on "Register as a Business"
+    Then I enter the details as
+      | Fields         | Value |
+      | InputABNNumber | <ABN> |
+      | InputCRNNumber | <CRN> |
+    Then I click on button "TermsandConditionsCheckBox2"
+    Then I click on button "RegistrationSubmit"
+    #Scenario 6: User cancels registration with no unsaved changes
+    Then I click on button "Cancel"
+    Then I click on "Create Account"
+    Then I check I am on "Registration" page
+    Then I click on "Register as a Business"
+    Then I enter the details as
+      | Fields         | Value |
+      | InputABNNumber | <ABN> |
+      | InputCRNNumber | <CRN> |
+    Then I click on button "TermsandConditionsCheckBox2"
+    Then I click on button "RegistrationSubmit"
+    Then I enter the details as
+      | Fields          | Value                 |
+      | FirstName       | TEST                  |
+      | LastName        | TEST                  |
+      | PhoneNumber     |             333333333 |
+      | Email           | TEST@TEST             |
+      | Username        | TEST                  |
+      | NewPassword     | Dbresults1            |
+      | ConfirmPassword | Dbresults1            |
+      | Hint            | testsetsetwetstsetset |
+    Then I check "Submit" is not readonly
+
+  @done
+  Scenario Outline: Tax Agent Account Activation Error + Disappearing Position field after Registration bug (Tax Agent) + No ABN Information check
+    #Onhold due to laggy Registration part 2 page
+    Given I want to login to portal "<PortalName>"
+    Then I click on "Create Account"
+    Then I click on button "RegistrationAsTaxAgent"
+    Then I wait for "5000" millisecond
+    Then I enter the details as
+      | Fields                   | Value         |
+      | TaxAgentBusinessName     | <CompanyName> |
+      | InputTaxAgentABN         | <ABN>         |
+      | BusinessAddress_Postcode |          3333 |
+      | BusinessAddress_Address  | TEST          |
+      | BusinessAddress_Suburb   | TEST          |
+    Then I click on button "TermsandConditionsCheckBox"
+    Then I select "Victoria" from "BusinessAddress_StateId"
+    Then I click on button "RegistrationSubmit"
+    Then I wait for "5000" millisecond
+    Then I enter the details as
+      | Fields                       | Value                           |
+      | Registration_FirstName       | TEST                            |
+      | Registration_LastName        | TEST                            |
+      | Registration_Position        | TEST                            |
+      | Registration_PhoneNumber     |                      1234567890 |
+      | Registration_Email           | <NewEmail>                      |
+      | Registration_Username        | <NewUserName>                   |
+      | Registration_NewPassword     | <Password>                      |
+      | Registration_ConfirmPassword | <Password>                      |
+      | Registration_Hint            | Done as a result of automation! |
+    Then I click on button "SubmitAjaxRfrsh"
+    Then I wait for "5000" millisecond
+    Then I see text "Registration Confirmation" displayed
+    Then I want to login to portal "RegistrationLinkTable"
+    Then I click on object with xpath "//*[contains(text(), 'automation_taxagent10')]/../following-sibling::td/a"
+    And I enter the details as
+      | Fields        | Value         |
+      | UserNameInput | <NewUserName> |
+      | PasswordInput | <Password>    |
+    And I hit Enter
+    Then I check I am on "Home" page
+    Then I see text "Please note, as there are currently no taxpayer accounts associated with your login, there is no information to display." displayed
+    Then I click on "User Profile"
+    Then I click on button "EditBT"
+    Then I check "Input_LastName2" is not empty
+
+    #NewUserName and NewEmail must be changed with every registration
+    Examples: 
+      | PortalName | CompanyName                                 | ABN         | NewUserName           | NewEmail                  | Password   |
+      | TSSAdmin        | The trustee for MD & KJ Fragar Family Trust | 70167081615 | automation_taxagent10 | TaxAgent10@automation.com | Dbresults1 |
+
+    Examples: 
+      | PortalName | UserNameField | PasswordField | UserName | Password   | ABN         | CRN    |
+      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12054547368 | 400043 |
 
 #@wip
   #Scenario Outline: DTSP-537
