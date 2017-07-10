@@ -1,11 +1,53 @@
 @TSSRegression
-Feature: Regression for TSS
+Feature: Regression for TSS in the Production Environment
 
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 1 ################################################
   ###########################################################################################################
-  
+  Scenario Outline: DTSP-54 : As a DB Portal Administrator I want to search for a message so that I can quickly access the message I want to view
+    Given I want to login to portal "<PortalName>"
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Given I want to login to portal "<PortalName2>"
+    And I hit Enter
+    Given I want to login to portal "Production_MessageEdit"
+    Then I see text "Feedback Message Text" displayed
+    Then I see text "Feedback Msg Code" displayed
+    Then I see text "Description" displayed
+    And I enter the details as
+      | Fields      | Value         |
+      | SearchInput | <SearchValue> |
+    Then I click on button with value "Search"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName            |
+      | item2 | <SearchValue>       |
+      | item3 | <SearchDescription> |
+    And I enter the details as
+      | Fields      | Value          |
+      | SearchInput | <SearchValue2> |
+    Then I click on button with value "Search"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName             |
+      | item2 | <SearchValue2>       |
+      | item3 | <SearchDescription2> |
+    And I enter the details as
+      | Fields      | Value   |
+      | SearchInput | Invalid |
+    Then I click on button with value "Search"
+    Then "<Item>" is displayed as "<ItemName>"
+      | Item  | ItemName                |
+      | item2 | Invalid Business Entity |
+      | item3 | Invalid ACN             |
+      | item4 | Invalid Email           |
+      | item5 | Invalid Group ACT Wages |
+      | item6 | Invalid Form            |
 
+    Examples: 
+      | PortalName | PortalName2 | SearchValue   | SearchDescription       | SearchValue2 | SearchDescription2                         | UserName | Password   |
+      | Production  | TSSUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | TSSAdmin | Dbresults1 |
 
   #alt username: hemant.shori
   #alt password: USBcoffee1
@@ -17,7 +59,7 @@ Feature: Regression for TSS
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Given I want to login to portal "MessageEdit"
+    Given I want to login to portal "Production_MessageEdit"
     Then I see text "<DescriptionBefore>" displayed
     Then I see text "<DescriptionAfter>" not displayed
     Then I click on object with xpath "//td//span[contains(text(), '<DescriptionBefore>')]/../..//td//a"
@@ -50,7 +92,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | DescriptionBefore                          | DescriptionAfter |
-      | TSSAdmin   | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
 
 	  @updated
   Scenario Outline: DTSP-56 :As a DB Portal Administrator I want to add a new message so that required messages are displayed in the portal
@@ -61,7 +103,7 @@ Feature: Regression for TSS
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Given I want to login to portal "MessageEdit"
+    Given I want to login to portal "Production_MessageEdit"
     Then I see text "<NewMessage>" not displayed
     Then I click on button with value "Add New"
     Then I click on button "CancelButton"
@@ -88,7 +130,7 @@ Feature: Regression for TSS
     Then I see text "<NewMessage>" not displayed
 
     Examples: 
-      | PortalName | UserNameField | PasswordField | UserName      | Password   | DropDownName    | DropDownOption  | NewMessage              |
+      | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | NewMessage              |
       | TSSAdmin   | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | This is a test message! |
 
 
@@ -100,7 +142,7 @@ Feature: Regression for TSS
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Given I want to login to portal "PageTexts"
+    Given I want to login to portal "Production_PageTexts"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName  |
       | item2 | Text Code |
@@ -150,14 +192,49 @@ Feature: Regression for TSS
     Then I see text "<NewDescription2>" displayed
     #Delete
     Then I click on object with xpath "//td[contains(text(), '<NewDescription2>')]/..//a[contains(@id, 'PageTextDeleteLink')]"
-    Given I want to login to portal "PageTexts"
+    Given I want to login to portal "Production_PageTexts"
     Then I see text "<NewDescription>" not displayed
     Then I see text "<NewDescription2>" not displayed
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | NewDescription  | NewDescription2     |
-      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | This is a test! | This is a test two! |
-  
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | This is a test! | This is a test two! |
+  #@BEST_DONE_MANUALLY
+  #Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
+  #Given I want to login to portal "<PortalName>"
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | <UserName> |
+  #| PasswordInput | <Password> |
+  #And I hit Enter
+  #And I check I am on "HomePage" page
+  #And I click on "Payroll Tax"
+  #And I click on "Cancel"
+  #Then I click on "Payroll Tax"
+  #And I select "<DropDownValue1>" from "<DropDownField>"
+  #Then I click on "Answer_TypeAnnual"
+  #And I select "<DropDownValue2>" from "<DropDownField2>"
+  #And I click on "Next"
+  #And I click on "ACTWagesPaidNext"
+  #And I click on "MonthlyReturnNext"
+  #Then I wait for "3500" millisecond
+  #And I enter the details as
+  #| Fields          | Value          |
+  #| PersonFullName  | TEST           |
+  #| LegalEntityName | TEST           |
+  #| PhoneNumber     | 6143 585 74 90 |
+  #| EmailAddress    | TEST@TEST      |
+  #And I click on "DeclarationConfirm"
+  #And I click on "ConfirmForSubmission"
+  #And I click on "Submit"
+  #Then I check I am on "Lodgement Summary" page
+  #Then I click on "SummarySubmit"
+  #Then I check I am on "Submission Confirmation" page
+  #And I click on "Download"
+  #
+  #Examples:
+  #| PortalName | UserNameField | PasswordField | UserName | Password  | ButtonName1 | DropDownValue1 | DropDownField | DropDownValue2 | DropDownField2 | Message                                    |
+  #| Production  | UserNameInput | PasswordInput | TSSAdmin      | Dbresults1| TypeMonthly |           2012 | YearOfReturn  | September      | MonthOfReturn  | Your changes have been successfully saved. |
   @tss
   Scenario Outline: DTSP-358: As an end user, I want to be able to submit my Annual Payroll Tax Return Form
     Given I want to login to portal "<PortalName>"
@@ -230,17 +307,17 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation                           | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | COFFEE CORP PTY LTD                    | 04 5678 9767 | jbradley@hotmail.com |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | GOOD FOR SOMETHING PROPRIETARY LIMITED | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin   | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | COFFEE CORP PTY LTD                    | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 2 ################################################
   ###########################################################################################################
   # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
-  # Find jbradley's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
+  # Find TSSAdmin's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
   # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
   Scenario Outline: DTSP-356 Error handling for Annual Payroll Tax Reconciliation when fields returned from back end system are known error field mapping
-  
+    #Scenario 1 no longer applies as periods that have already been lodged will disappear from the selection
+    #scenario 1: Same year check
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -296,9 +373,9 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12345678901 | 12345678901 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 12345678901 | 12345678901 |
 
-  #NOTE: Ensure that jbradley has a current employee type selected in the data extensions page
+  #NOTE: Ensure that TSSAdmin has a current employee type selected in the data extensions page
   @tss_review
   Scenario Outline: DTSP-311: Validation Rules and Errors to be used across Annual Reconciliation Form
     Given I want to login to portal "<PortalName>"
@@ -381,6 +458,7 @@ Feature: Regression for TSS
       | LodgePayrollAnswer_ExemptWages                 |  100000 |
       | LodgePayrollAnswer_AustralianWide              | 5000000 |
       | LodgePayrollAnswer_DaysPaidTaxable             |     999 |
+    #| LodgePayrollAnswer_GroupActWages| 5000000 |
     Then I check "SalariesAndWages" contains "$ 100,000"
     Then I check "BonusesAndCommissions" contains "$ 100,000"
     Then I check "LodgePayrollAnswer_Commissions" contains "$ 100,000"
@@ -409,7 +487,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 98765123456 | 12345678902 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 98765123456 | 12345678902 |
 
 		@update
   Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
@@ -440,7 +518,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName       |
-      | TSSAdmin        | jbradley | Dbresults1 | Designate  |
+      | TSSAdmin   | TSSAdmin | Dbresults1 | Designate  |
 
 
 
@@ -448,7 +526,7 @@ Feature: Regression for TSS
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 3 ################################################
   ###########################################################################################################
-     | UserNameInput | PasswordInput | jbradley | Dbresults1 | 96107641949 | 400066 |
+     | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 96107641949 | 400066 |
 
   @wip
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
@@ -507,7 +585,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
-      | TSSAdmin        | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 |
 
 
   @current
@@ -537,7 +615,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 12121212121 | 21212121212 |
 		
 
   @done
@@ -563,6 +641,13 @@ Feature: Regression for TSS
       | item5 | Position      |
       | item5 | Password      |
       | item5 | Hint          |
+    #| item5 | Profile          |
+    #| item5 | Contact Details          |
+    #| item5 | Security          |
+    #		Then I check "Title_wtView_Profile" exists
+    #		Then I check "Title_wtView_Contact" exists
+    #		Then I check "Title_wtView_Security" exists
+    #Scenario 2: User enters incorrect input type into a restricted fields (e.g. entering 123 into an alphabet field)
     Then I enter the details as
       | Fields            | Value |
       | Input_PhoneNumber | TEST  |
@@ -603,7 +688,7 @@ Feature: Regression for TSS
       | Input_FirstName          | J                    |
       | Input_LastName           | Bradley              |
       | Input_PhoneNumber        |           0456789767 |
-      | Input_Email              | jbradley@hotmail.com |
+      | Input_Email              | TSSAdmin@hotmail.com |
       | Input_NewPassword        | Dbresults1           |
       | Input_NewpasswordConfirm | Dbresults1           |
       | Input_Hint               | DB RESULTS ONE       |
@@ -615,11 +700,11 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 12121212121 | 21212121212 |
 
 
 
-  #NOTE: Ensure that jbradley has a current employee type selected in the data extensions page
+  #NOTE: Ensure that TSSAdmin has a current employee type selected in the data extensions page
 
   @done
   Scenario Outline: DTSP-463: Display all the mandatory fields with an Asterisk (*)
@@ -646,13 +731,52 @@ Feature: Regression for TSS
     Then I select "2015" from "AnnualObligationSelect"
     Then I click on button "NextSection"
     Then I click on button "LodgePayrollAnswer_ClaimingACTProportion_Yes"
-
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #		Then I check "" has CSS property "content" with value ""*""
+    #
+    #
+    #Then I check "YearOfReturnLabel" has CSS property "content" with value ""*""
+    #Then I check "MonthOfReturnLabel" has CSS property "content" with value ""*""
+    #Then I check "CurrentEmployerStatusLabel" has CSS property "content" with value ""*""
+    #Then I click on "Designated group employer for a group and lodging for itself"
+    #Then I click on button "TaxPayerDetailsNext"
     Then I check "ClaimingACTProportion_Label" has CSS property "content" with value ""*""
     Then I click on button "ClaimingACTProportion_Yes"
     Then I check "AusWideWages" has CSS property "content" with value ""*""
     Then I check "GroupActWages" has CSS property "content" with value ""*""
     Then I click on "Sign Out"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #PART 3: Create Account (TODO Once labels have IDs)
+    #Given I want to login to portal "<PortalName>"
+    #Then I click on "Create Account"
+    #Then I click on button "RegistrationAsBusiness"
+    #Then I click on button "TermsandConditionsCheckBox2"
+    #Then I check "AccountNumberLabel" has CSS property "content" with value ""*""
+    #Then I click on button "RegistrationAsTaxAgent"
+    #Then I check "TaxAgentABNLabel" has CSS property "content" with value ""*""
+    #Then I check "TaxAgentBusinessNameLabel" has CSS property "content" with value ""*""
+    #Then I click on button "RegistrationAsBusiness"
+    #Then I enter the details as
+      #| Fields                  | Value       |
+      #| InputABNNumber_Business | 91098629095 |
+      #| InputCRNNumber_Business |      400004 |
+    #Then I click on button "RegistrationSubmit"
+    #Then I check "Registration_FirstNameLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_LastNameLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_EmailLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_UsernameLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_NewPasswordLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_ConfirmPasswordLabel" has CSS property "content" with value ""*""
+    #Then I check "Registration_HintLabel" has CSS property "content" with value ""*""
     #PART 4: Tax Registration Form
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -692,7 +816,12 @@ Feature: Regression for TSS
     Then I check "ContactPerson_LastName" has CSS property "content" with value ""*""
     Then I check "Label_ContactPerson_ContactPhoneNumber" has CSS property "content" with value ""*""
     Then I check "Label_ContactPerson_EmailAddress" has CSS property "content" with value ""*""
-
+   # Then I check "Label_PreferedCommunicationMethod" has CSS property "content" with value ""*""
+    #Then I check "Label_PostalAddress" has CSS property "content" with value ""*""
+    #Then I select "Company" from "SelectBusinessTypeCode"
+    #Then I select "Miss" from "ContactPerson_Title"
+    #Then I select "SMS" from "CommunicationMethodId"
+    #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
       | AddressLine1              | TEST          |
@@ -744,7 +873,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
@@ -759,9 +888,46 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
-
+  #@review
+  #Scenario Outline: DTSP-8
+  # REMEMBER TO WAIT FOR FIVE MINUTES BETWEEN EACH RUN OF THIS SCENARIO
+  #Given I want to login to portal "<PortalName>"
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | <UserName> |
+  #| PasswordInput | WRONG      |
+  #Then I hit Enter
+  #And I enter the details as
+  #| Fields        | Value      |
+  #| UserNameInput | <UserName> |
+  #| PasswordInput | WRONG      |
+  #Then I hit Enter
+  #Then I see text "Password Hint" displayed
+  #Then I see text "<Password>" displayed
+  #
+  #Examples:
+  #| PortalName | UserNameField | PasswordField | UserName | Password   |
+  #| Production  | UserNameInput | PasswordInput | jscott   | Dbresults1 |
+  #
+  #@review
+  #Scenario Outline: DTSP-13, DTSP-14
+  #Scenario 2: Reset Password link has expired
+  #Given I want to login to portal "ExpiredPassword"
+  #Then I see text "Reset Password Link Invalid" displayed
+  #Then I see text "Sorry, the link is not valid." displayed
+  #Then I see text "Please click the Reset Password button again in the email or click the button below." displayed
+  #Then I click on button "ResetPasswordInvalidButton"
+  #Then I check I am on "Forgot Your Password?" page
+  #Then I see text "Forgot Your Password?" displayed
+  #Scenario 3
+  #Given I want to login to portal "InvalidPasswordLink"
+  #Then I see text "The page cannot be found. Please make sure you typed the URL correctly." displayed
+  #
+  #Examples:
+  #| PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
+  #| Production  | UserNameInput | PasswordInput | jscott   | Dbresults1 | 12345678901 | 12345678901 |
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 4 ################################################
   ###########################################################################################################
@@ -771,7 +937,7 @@ Feature: Regression for TSS
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
-      | UserNameInput | jbradley   |
+      | UserNameInput | TSSAdmin   |
       | PasswordInput | <Password> |
     And I hit Enter
     Then I click on "Lodgements"
@@ -937,14 +1103,14 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
 
    Scenario Outline: DTSP-537
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
-      | UserNameInput | jbradley   |
+      | UserNameInput | TSSAdmin   |
       | PasswordInput | <Password> |
     And I hit Enter
     #Scenario 1: Annual Rec [Single Emp Status]
@@ -1044,7 +1210,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | Password   |
-      | TSSAdmin        | UserNameInput | PasswordInput | Dbresults1 |
+      | Production  | UserNameInput | PasswordInput | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-444: As an end user, I want to know my Payroll Tax Obligations (including Month and Year) which have not been lodged so I can lodge my monthly payroll tax accordingly
@@ -1052,7 +1218,7 @@ Feature: Regression for TSS
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
-      | UserNameInput | jbradley   |
+      | UserNameInput | TSSAdmin   |
       | PasswordInput | <Password> |
     And I hit Enter
     Then I click on "Lodgements"
@@ -1096,7 +1262,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | Password   |
-      | TSSAdmin        | UserNameInput | PasswordInput | Dbresults1 |
+      | Production  | UserNameInput | PasswordInput | Dbresults1 |
 
  @done
   Scenario Outline: DTSP-501: As an end user, I want the Payroll Tax Registration Form to be updated for Ease of Use
@@ -1156,7 +1322,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
 
 
@@ -1176,6 +1342,18 @@ Feature: Regression for TSS
     Then I click on button with value "Next"
     Then I wait for "5000" millisecond
     Then I select "Other" from "SelectBusinessTypeCode"
+    #Then I select "Mr" from "ContactPerson_Title"
+    #Then I select "Direct Post" from "CommunicationMethodId"
+    #Then I select "Other" from "SelectBusinessTypeCode"
+    #Then I enter the details as
+    #| Fields                    | Value         |
+    #| Address_AddressLine1      | TEST          |
+    #| Address_City              | TEST          |
+    #| PostCode                  |          3333 |
+    #| ContactPerson_FirstName   | TEST          |
+    #| ContactPerson_LastName    | TEST          |
+    #| ContactPerson_PhoneNumber |     333333333 |
+    #| ContactPerson_Email       | test@test.com |
     #Scenario 7: ABN Lookup for Inactive ABN
     Then I enter the details as
       | Fields              | Value                |
@@ -1283,12 +1461,12 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
  
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | UserName2 | Password2  |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | toyota    | Dbresults1 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | toyota    | Dbresults1 |
 
  @current
 	Scenario Outline: DTSP-392: As an end user, I want the Declaration section to be pre-populated on the Summary page so that I don't need to enter my details again
@@ -1342,7 +1520,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | TSSAdmin@hotmail.com |
 
 
   @done
@@ -1350,7 +1528,7 @@ Feature: Regression for TSS
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
-      | UserNameInput | jbradley   |
+      | UserNameInput | TSSAdmin   |
       | PasswordInput | <Password> |
     And I hit Enter
     Then I click on "Payroll Tax Registration"
@@ -1392,7 +1570,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
   @done
   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
     Given I want to login to portal "<PortalName>"
@@ -1406,7 +1584,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   @done
   Scenario Outline: DTSP-524: As an organisation, I want to force the user to key in every 'dollar' field on the Payroll Tax Lodgement Form so that the user won't miss out any of these fields
@@ -1459,17 +1637,25 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 1 ################################################
   ###########################################################################################################
   #STORIES DONE:  78, 136, 141, 176, 185, 522, 578, 583, 584, 592, 608, 617, 622
   #CURRENT ITERATION: 1.1
-
-  
+  # Before running this script, go to https://test-ssc.dbresults.com.au/TSSAccountMgmt/DataExtensions.aspx
+  # Find TSSAdmin's account and make sure he has an CRN, an ABN and his employer status is set to 'Designated group employer for a group and lodging for itself'
+  # As of 12 pm 9/1/2017 these settings have already been implemented, but double-checking them is advised.
+  #NOTE: Ensure that TSSAdmin has a current employee type selected in the data extensions page
   @wip
   Scenario Outline: DTSP-78: As an end user, I want to be able to select an ABN and view next payment information and lodge from the Right Navigation Panel on my Basic Dashboard
+    #Business Taxpayer with many: TSSAdmin
+    #Business Taxpayer with only one: camido
+    #Business Taxpayer with none: ccover
+    #Tax Agent with many: test_taxagent1
+    #Tax Agent with only one: test_taxagent2
+    #Tax Agent with none: test_taxagent3
     #Scenario 1: Business Taxpayer associated with multiple ABNs
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -1574,7 +1760,7 @@ Feature: Regression for TSS
     #Scenario 11: TODO when 'View History' and 'Lodge Return' buttons have actual ids.
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
  
     @review
@@ -1640,7 +1826,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   
  @BLOCKED
@@ -1728,7 +1914,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |  
-      | TSSAdmin        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
+      | Production  | TSSAdmin | Dbresults1 | DESIGNATE PTY. LTD. |
 
   @review
   Scenario Outline: DTSP-522: As a end user I want the settings page updated so I can understand what the settings page is used for
@@ -1754,7 +1940,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   @wip
   Scenario Outline: DTSP-567: As an end user, I don't want to see any tax calculations while I am filling out the Payroll Tax Lodgement Form until they are retrieved from PSRM and populated on the Lodgement Summary page
@@ -1802,12 +1988,12 @@ Feature: Regression for TSS
     #Scenario 3 is currently blocked by bug DTSP-684
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   
     Examples: 
       | PortalName | UserName | Password   | ABN         | CRN    |
-      | TSSAdmin        | jbradley | Dbresults1 | 13058370433 | 400014 |
+      | Production  | TSSAdmin | Dbresults1 | 13058370433 | 400014 |
 
   @updated
   Scenario Outline: DTSP-583: As an end user, I want to be able to edit my Contact Person details on my Tax Registration form
@@ -1894,7 +2080,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |
-      | TSSAdmin        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
+      | Production  | TSSAdmin | Dbresults1 | DESIGNATE PTY. LTD. |
 
    @BLOCKED
   Scenario Outline: DTSP-592: As an end user, I want to be able to edit my Refund details on my Tax Registration form
@@ -1987,7 +2173,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |
-      | TSSAdmin        | jbradley | Dbresults1 | DESIGNATE PTY. LTD. |
+      | Production  | TSSAdmin | Dbresults1 | DESIGNATE PTY. LTD. |
   @review
   Scenario Outline: DTSP-608: As a user I want to choose a Tax Payer's ABN so that those details are populated on forms
     #Scenario 2: Business Taxpayer associated with multiple ABNs
@@ -2120,7 +2306,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
  
   @BLOCKED
@@ -2148,6 +2334,12 @@ Feature: Regression for TSS
     Then I see text "CRN" displayed
     Then I see text "Organisation Name" displayed
     Then I see text "Tax Agent" displayed
+    #Then "<Item>" is displayed as "<ItemName>"
+    #| Item  | ItemName          |
+    #| item2 | ABN               |
+    #| item3 | CRN               |
+    #| item4 | Organisation Name |
+    #| item5 | Tax Agent         |
     #Scenario 5: Edit Tax Agent nomination of an ABN
     Then I click on button "SelectTaxAgent2"
     Then I enter the details as
@@ -2173,7 +2365,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | SearchString |
-      | TSSAdmin        | jbradley | Dbresults1 | DB RESULTS   |
+      | Production  | TSSAdmin | Dbresults1 | DB RESULTS   |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 2 ################################################
@@ -2255,7 +2447,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | TSSAdmin@hotmail.com |
 
  
 
@@ -2305,7 +2497,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Organisation | Position   | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @done
   Scenario Outline: DTSP-124: As an end user, I want to be able to submit an Annual Lodgement Request so that I can submit a request to change my lodgement frequency from monthly to annual
@@ -2370,7 +2562,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-127: As an end user, I want to be able to submit a Liquidation Advice service request
@@ -2473,7 +2665,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | TSSAdmin@hotmail.com |
 
 
    @current
@@ -2545,7 +2737,14 @@ Feature: Regression for TSS
     Then I wait for "4000" millisecond
     Then I see text "Please enter an ABN that is not already part of a Payroll Tax Group." displayed
     #Scenario 15: Group Member (lodging for itself)
-
+    #Then I click on button "l03_wtPopupLink"
+    #Then I switch to frame "1"
+    #Then I click on button "GroupRoleComboBox"
+    #Then I click on "Group Member (lodging itself)"
+    #Then I select "Common Control" from "GroupReasonComboBox"
+    #Then I click on button "PopUpSaveBT"
+    #Then I click on button "ctl03_wt83"
+    #Then I see text "The nominated DGE cannot have a Group Role of 'Group Member (lodging itself)" displayed
     #Scenario 7: Remove ACT Group Member
     Then I click on object with xpath "(//table[contains(@id, 'TableACTGroupMembers')]//tr//td//a)[2]"
     Then I see "Do you really want to remove the organisation from your Payroll Tax Group?" displayed on popup and I click "OK"
@@ -2553,7 +2752,17 @@ Feature: Regression for TSS
     Then I click on object with xpath "(//table[contains(@id, 'TableACTGroupMembers')]//tr//td//a)[2]"
     Then I see "Do you really want to remove the organisation from your Payroll Tax Group?" displayed on popup and I click "OK"
     #Scenario 16: DGE
-
+    #Then I click on button "l03_wtPopupLink"
+    #
+    #Then I switch to frame "1"
+    #Then I click on button "GroupRoleComboBox"
+    #Then I click on "Group Member (lodging itself)"
+    #Then I select "Common Control" from "GroupReasonComboBox"
+    #Then I click on button "PopUpSaveBT"
+    #Then I click on button "ctl03_wt83"
+    #Then I see text "The nominated DGE cannot have a Group Role of 'Group Member (lodging itself)" displayed
+    #
+    #
     #Scenario 12: User attempts to remove themselves
     Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
@@ -2564,7 +2773,7 @@ Feature: Regression for TSS
     #Scenarios 5, 6, 9, 10, 11 are best done manually
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
  
 
      @done
@@ -2645,10 +2854,15 @@ Feature: Regression for TSS
     Then I check "RichWidgets_wt18_block_wtMainContent_wt13" contains "Bye Debts Pty Ltd"
     Then I select "Group Member" from "GroupRoleComboBox"
     Then I select "Common Control" from "GroupReasonComboBox"
+    #Then I click on button with value "Save"
+    #Then I see text "Update Payroll Tax Group" displayed
+    #Then I see text "Bye Debts Pty Ltd" displayed
+    #Then I see text "22150972535" displayed
+
     #Scenarios 2, 3, 8, 9, 12 are best done manually
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley   | Dbresults1 |
+      | Production  | TSSAdmin   | Dbresults1 |
 
  @onhold
   Scenario Outline: DTSP-646: Update phone number field validation rules to reflect Australian numbers and allow future dates selection in PayRoll Tax Registration form
@@ -2676,6 +2890,10 @@ Feature: Regression for TSS
       | Fields                    | Value      |
       | ContactPerson_PhoneNumber | 3333333333 |
     Then I check "ContactPerson_PhoneNumber" contents match regex "\d\d \d\d\d\d \d\d\d\d"
+    #Then I click on "Payroll Tax Registration"
+    #Then I check "TaxPayerDetailsNext" is readonly
+    #Then I select "Mr" from "ContactPerson_Title"
+    # Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
       | AddressLine1              | TEST          |
@@ -2710,6 +2928,10 @@ Feature: Regression for TSS
       | Fields                    | Value      |
       | ContactPerson_PhoneNumber | 3333333333 |
     Then I check "ContactPerson_PhoneNumber" contents match regex "\d\d \d\d\d\d \d\d\d\d"
+    #Then I click on "Payroll Tax Registration"
+    #Then I check "TaxPayerDetailsNext" is readonly
+    #Then I select "Mr" from "ContactPerson_Title"
+    #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
       | AddressLine1              | TEST          |
@@ -2772,7 +2994,7 @@ Feature: Regression for TSS
     #Scenarios 3 and 4 are best done manuallyS
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-647: Update Payroll Tax Registration form for ease of use
@@ -2800,6 +3022,10 @@ Feature: Regression for TSS
       | Fields                    | Value      |
       | ContactPerson_PhoneNumber | 3333333333 |
     Then I check "ContactPerson_PhoneNumber" contents match regex "\d\d \d\d\d\d \d\d\d\d"
+    #Then I click on "Payroll Tax Registration"
+    #Then I check "TaxPayerDetailsNext" is readonly
+    #Then I select "Mr" from "ContactPerson_Title"
+    #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
       | AddressLine1              | TEST          |
@@ -2846,7 +3072,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
   @redo
   Scenario Outline: DTSP-649: Add Validation Rules and make other changes to the Payroll Tax Lodgement Form
@@ -2889,6 +3115,10 @@ Feature: Regression for TSS
     Then I click on button "SubmitBT"
     Then I see text "Your Aus wide group wages (including ACT) must be equal to or greater than your ACT wages." displayed
     Then I see text "Days where you paid or were liable to pay taxable or interstate should be less than or equal to the number of days in that particular filing period." shown
+    #		Then "<Item>" is displayed as "<ItemName>"
+    #| Item  | ItemName      |
+    #| item2 | Your Aus wide group wages (including ACT) must be equal to or greater than your ACT wages.    |
+    #| item3 | Days where you paid or were liable to pay taxable or interstate should be less than or equal to the number of days in that particular filing period.     |
     Then I click on "Payroll Tax"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
     Then I click on button "Discard"
@@ -2975,7 +3205,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | UserName2 |
-      | TSSAdmin        | jbradley | Dbresults1 | jscott    |
+      | Production  | TSSAdmin | Dbresults1 | jscott    |
   @review
   Scenario Outline: DTSP-676:  As a Payroll Tax Group Member, I want to be able to add/edit/remove 'Non-ACT Group Members' to my group
     Given I want to login to portal "<PortalName>"
@@ -3031,7 +3261,7 @@ Feature: Regression for TSS
     #Scenarios 5, 6 and 7 are best tested manually
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   @onhold
   Scenario Outline: DTSP-682: Update Country field in Pay Roll Tax Registration form
@@ -3136,7 +3366,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-758: As an end user, I want to be limited to only a month and year selection when I am creating/editing my Payroll Tax Group
@@ -3181,7 +3411,7 @@ Feature: Regression for TSS
     #Scenario 3
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 3 ################################################
@@ -3220,7 +3450,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
      @review
   Scenario Outline: DTSP-108: As an end user, I want to raise a Generic Request so that I don't need to contact customer service.
@@ -3271,7 +3501,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-574: As an end user I want to be able to see a summary of my payroll tax details on the dashboard so that I know if my information is up-to-date
@@ -3314,9 +3544,22 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
    Scenario Outline: DTSP-685: As an end user, I want all pre populated and non editable fields on the portal to be greyed out
+    #Scenario 1: Portal Registration
+    #Given I want to login to portal "<PortalName>"
+    #Then I click on "Create Account"
+    #Then I click on "Register as a Business"
+    #Then I enter the details as
+      #| Fields                  | Value       |
+      #| InputABNNumber_Business | 91098629095 |
+      #| InputCRNNumber_Business |      400004 |
+    #Then I click on button "TermsandConditionsCheckBox2"
+    #Then I click on button "RegistrationSubmit"
+    #Then I check "Column2_wtABN" is readonly
+    #Then I check "Column2_wtCRN" is readonly
+    #Then I check "Column2_wtBusinessName" is readonly
     #Scenario 2: All forms
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -3347,6 +3590,9 @@ Feature: Regression for TSS
     Then I check "PhoneNumber" is readonly
     Then I check "ContactPerson_Email" is readonly
     Then I check "Address_AddressLine" is readonly
+   # Then I check "Address_City4" is readonly
+   # Then I check "Address_PostCode" is readonly
+    # Then I check "CommunicationMethodId" is readonly
     Then I check "CountryId4" is readonly
     #Then I check "Address_State4" is readonly
     Then I click on "Generic Request"
@@ -3416,7 +3662,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
       
   @review
   Scenario Outline: DTSP-689: As a user I want to update the order of menu items on the left navigation panel
@@ -3466,7 +3712,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-690: As an end user, I want to be able to update my Business Trading Name on my Tax Registration so that I can keep my Tax Registration information up-to-date
@@ -3515,7 +3761,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
 
  @wip
@@ -3543,7 +3789,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
 
   @ignore_until_fixed
@@ -3612,9 +3858,8 @@ Feature: Regression for TSS
     #Bugged...?
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
- 
 
   @review
   Scenario Outline: DTSP-712: To update all wording on the portal from "Tax Payer" to the single word "Taxpayer"
@@ -3679,7 +3924,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-703: As an user, I want to fill in a declaration section when I fill in an Objection Request, so that I can verify that I have submitted this request
@@ -3716,7 +3961,45 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   |
-      | TSSAdmin        | jbradley | Dbresults1 |
+      | Production  | TSSAdmin | Dbresults1 |
+
+  #@review
+  # CAN NO LONGER AUTOMATE EXEMPTION REQUEST TESTS
+  #Scenario Outline: DTSP-733: As a user I should see front end validations for Exemption Request Form
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Service Requests"
+    #Then I click on "Exemption Request"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value     |
+      #| s2id_autogen1_search | DESIGNATE |
+    #Then I click on button "select2-results-1"
+    #Scenario 1: Start date doesn't equal present/future date
+    #Then I click on button "ExemptionStartDateInput"
+    #Then I click on "20170501"
+    #Then I click on button "calTriggerOut"
+    #Then I enter the details as
+      #| Fields             | Value |
+      #| JustificationInput | TEST  |
+    #Then I click on button with value "Next"
+    #Then I see text "Please enter valid dates for your Exemption Request." displayed
+    #Scenario 2: End date < start date
+    #Then I click on button "ExemptionStartDateInput"
+    #Then I click on "20170530"
+    #Then I click on button "ExemptionEndDateInput"
+    #Then I click on "20170528"
+    #Then I click on button "calTriggerOut"
+    #Then I click on button with value "Next"
+    #Then I see text "Please enter valid dates for your Exemption Request." displayed
+#
+    #Examples: 
+      #| PortalName | UserName | Password   |
+      #| Production  | TSSAdmin | Dbresults1 |
 
   @wip
   Scenario Outline: DTSP-770: To update the information sent to PSRM in the declaration section
@@ -3824,6 +4107,27 @@ Feature: Regression for TSS
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+    #Then I click on "Service Requests"
+    #Then I click on "Exemption Request"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value          |
+      #| s2id_autogen1_search | <Organisation> |
+    #Then I click on button "select2-results-1"
+    #Then I wait for "5000" millisecond
+    #Then I click on button "ExemptionStartDateInput"
+    #Then I click on "20170527"
+    #Then I enter the details as
+      #| Fields             | Value |
+      #| JustificationInput | TEST  |
+    #Then I click on button with value "Next"
+    #Then I wait for "5000" millisecond
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
     Then I click on "Service Requests"
     Then I click on "Objection Request"
     Then I click on button "select2-chosen-1"
@@ -3912,7 +4216,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation         | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | QUICK SINGLE PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | QUICK SINGLE PTY LTD | 04 5678 9767 | TSSAdmin@hotmail.com |
       
 
    
@@ -3970,6 +4274,14 @@ Feature: Regression for TSS
     Then I click on "PayrollNext"
     Then I click on button "Refunds_NO"
     Then I click on button "RefundDetailsBT"
+    #Then "<Item>" is displayed as "<ItemName>"
+    #| Item  | ItemName         |
+    #| item2 | First Name       |
+    #| item3 | Last Name        |
+    #| item4 | Organisation Name    |
+    #| item5 | Position         |
+    #| item5 | Contact Phone Number         |
+    #| item5 | Email Address         |
     Then I check "Declarer_FirstName" exists
     Then I check "Declarer_LastName" exists
     Then I check "Declarer_Organisation" exists
@@ -3980,7 +4292,7 @@ Feature: Regression for TSS
     #Scenarios 2-5 should be done manually
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
   @manual
   Scenario Outline: As an end user I want to see the Industry codes before Industry name in the Business Activity Category Drop down on Payroll Tax registration form
@@ -4028,7 +4340,7 @@ Feature: Regression for TSS
     #maybe this should be done manually...
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
   ###########################################################################################################
   #################################### PHASE 1.2 ITERATION 1.2 ################################################
@@ -4084,7 +4396,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-34: As an end user, I want to be able to submit a Energy Industry Levy Return form so that I can validate in PSRM
@@ -4153,7 +4465,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-38: As an end user, I want to be able to complete a Utilities(Network Facilities) Tax Return Form so that I can validate it in PSRM
@@ -4203,6 +4515,8 @@ Feature: Regression for TSS
     Then I enter the details as
       | Fields          | Value |
       | KMOfRouteLength |    50 |
+    #| SupplyDistributionSector_ActualMegawattHours       |    50 |
+    #| SupplyDistributionSector_MethodCalculateTotalMegaw | TeST  |
     Then I check "SaveAndNextToSummaryBT" is not readonly
     Then I check "AddBTN" is not readonly
     Then I check "RemoveBTN" is readonly
@@ -4219,7 +4533,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation    | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-151: As an end user, I want to be able to view my Return History for Network Utilities Tax Type
@@ -4250,6 +4564,13 @@ Feature: Regression for TSS
     #Scenario 2: PAYMENT DETAILS link
     Then I click on "DETAILS"
     Then I switch to frame "0"
+    #Then I see text "Please Note: Payment cannot be made directly through the Self-Serve portal. Please use the details below to make payment through your financial institution." displayed
+    #Then "<Item>" is displayed as "<ItemName>"
+    #| Item  | ItemName                        |
+    #| item | Amount |
+    #| item | Due Date |
+    #| item | Biller Code |
+    #| item | Reference Number |
     Then I click on button with value "CANCEL"
 
     Examples: 
@@ -4314,7 +4635,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
  
   @current
@@ -4360,6 +4681,12 @@ Feature: Regression for TSS
     Then I click on button "select2-results-1"
     Then I click on button "TaxTypeSelection"
     Then I click on "Utilities(Network Facilities) Tax"
+    #		Then I see text "Ambulance Levy" displayed
+    #		Then I see text "Energy Industry Levy" displayed
+    #		Then I see text "Income Tax Equivalent" displayed
+    #		Then I see text "Payroll Tax" displayed
+    #		Then I see text "Utilities(Network Facilities) Tax" displayed
+    #
     Then I click on button "ObjectionOutOfTimeYES"
     Then I enter the details as
       | Fields             | Value                  |
@@ -4392,7 +4719,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @current
   Scenario Outline: DTSP-743: As an end user I want to be able to update Exemption Request Form to cater for different Tax Types
@@ -4436,17 +4763,43 @@ Feature: Regression for TSS
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
+    #		Then I click on button "TaxTypeSelection"
+    #Then I click on "Income Tax Equivalent Tax"
+    #		Then I see text "Ambulance Levy" displayed
+    #		Then I see text "Energy Industry Levy" displayed
+    #		Then I see text "Income Tax Equivalent" displayed
+    #		Then I see text "Payroll Tax" displayed
+    #		Then I see text "Utilities(Network Facilities) Tax" displayed
     Then I enter the details as
       | Fields                  | Value  |
       | ExemptionStartDateInput | 020617 |
       | ExemptionEndDateInput   | 030617 |
+    #		Then I click on button "ExemptionStartDateInput"
+    #Then I click on "20170602"
+    #Then I click on button "calTriggerOut"
+    #Then I click on button "ExemptionEndDateInput"
+    #Then I click on "20170603"
+    # Then I click on button "calTriggerOut"
     Then I enter the details as
       | Fields             | Value |
       | JustificationInput | TEST  |
-  
+    #Then I click on button with value "Next"
+    #Then I check object with xpath "//*[contains(text(), 'Requested Exemption Start Date')]/..//following-sibling::td" contains "02 Jun 2017"
+    #Then I check object with xpath "//*[contains(text(), 'Requested Exemption End Date')]/..//following-sibling::td" contains "03 Jun 2017"
+    #Then I check object with xpath "//*[contains(text(), 'Tax Type')]//following-sibling::td" contains "Payroll Tax"
+    #Then I check object with xpath "//*[contains(text(), 'Exemption Request Justification')]/..//following-sibling::td" contains "TEST"
+    #Then I check I am on "Exemption Request Summary" page
+    #check declaration
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
+    #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @current
   Scenario Outline: DTSP-745: As an end user I want to be able to update Tax Registration Cancellation Form to cater for registration cancellation of different Tax Types
@@ -4518,7 +4871,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @current
   Scenario Outline: DTSP-788: As an end user, I want to be able to complete a Utilities(Network Facilities) Tax Return Form so that I can validate it in PSRM
@@ -4573,7 +4926,13 @@ Feature: Regression for TSS
     Then I check "AddBTN" is not readonly
     Then I check "RemoveBTN" is readonly
     Then I click on button "AddBTN"
-
+    #Then I click on button "AddBTN"
+    #Then I check "RemoveBTN" is readonly
+    #Then I select "Sewerage Network" from "NetworkDetail_UtilityTypeDropdown"
+    #Then I enter the details as
+    #| Fields                                             | Value |
+    #| KMOfRouteLength     |    50 |
+    #Then I check "SaveAndNextToSummaryBT" is not readonly
     Then I click on button "SaveAndNextToSummaryBT"
     Then I check I am on "Lodgement Summary" page
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
@@ -4602,7 +4961,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation    | ContactPhone | EmailAddress         |
-      | TSSAdmin   | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-792: As an end user, I want to be able to view the Ambulance Levy lodgement summary page
@@ -4659,6 +5018,14 @@ Feature: Regression for TSS
     Then I check object with xpath "//*[contains(text(), 'Amount Payable Per Week (Family Members)')]/..//following-sibling::td//div" contains "$48.40"
     Then I check object with xpath "//*[contains(text(), 'Total Amount Payable (Weekly)')]/..//following-sibling::td//div" contains "$72.60"
     Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$72.60"
+    #
+    #Then I check object with xpath "//*[contains(text(), 'Utility Type')]//following-sibling::td" contains "Gas Distribution Network"
+    #Then I check object with xpath "//*[contains(text(), 'Kilometres of Route Length')]//following-sibling::td" contains "50.00 KM"
+    #Then I check object with xpath "//*[contains(text(), 'Rate Per Kilometre')]//following-sibling::td" contains "$1,042.00 /KM"
+    #Then I check object with xpath "//*[contains(text(), 'Tax Payable')]//following-sibling::td" contains "$52,100.00"
+    #
+    #Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$52,100.00"
+    #
     Then I check object with xpath "//*[contains(text(), 'Organisation Name')]/..//following-sibling::td" contains "DESIGNATE PTY. LTD."
     Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "85085664197"
     Then I check object with xpath "//*[contains(text(), 'Client Reference Number (CRN)')]/..//following-sibling::td" contains "400107"
@@ -4675,7 +5042,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
  @current
   Scenario Outline: DTSP-796: As an end user, I want to be able to view the Energy Industry Levy lodgement summary page with all calculated fields for Energy Industry Levy
     #Scenario 1: Ambulance Levy  Lodgement
@@ -4755,7 +5122,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-836: As an end user, I want to be required to select a JRL if I have group members that are not lodging itselfs
@@ -4799,7 +5166,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-837: As a an end user creating/updating a group, I want to see a more detailed error message when I am prevented from adding a particular group member
@@ -4858,7 +5225,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-838: As an end user, I want to see instructions when I am submitting an Annual Lodgement request
@@ -4880,7 +5247,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @current
   Scenario Outline: DTSP-840: As a user I want to add Non-ACT members in my group using Radio buttons for overseas members
@@ -4933,7 +5300,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
   @review
   Scenario Outline: DTSP-850: As an end user, I want to update the Payroll Tax Registration form, so that it is easier to use
     Given I want to login to portal "<PortalName>"
@@ -5004,7 +5371,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-899: As an end user I want to see the "Activity Type" drop down on activity history updated to cater for all Tax types
@@ -5024,7 +5391,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-705: As an end user, I want to be able to raise aUpdate Liability Commencement Date Request on the portal so that I can disclose any changes in date for my tax registration for a chosen tax type
@@ -5074,6 +5441,12 @@ Feature: Regression for TSS
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[4]//td[2]" contains "<Position>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[5]//td[2]" contains "<ContactPhone>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
+    #Then I check object with xpath "//*[contains(text(), 'Utility Type')]//following-sibling::td" contains "Gas Distribution Network"
+    #Then I check object with xpath "//*[contains(text(), 'Kilometres of Route Length')]//following-sibling::td" contains "50.00 KM"
+    #Then I check object with xpath "//*[contains(text(), 'Rate Per Kilometre')]//following-sibling::td" contains "$1,042.00 /KM"
+    #Then I check object with xpath "//*[contains(text(), 'Tax Payable')]//following-sibling::td" contains "$52,100.00"
+    #
+    #Then I check object with xpath "//*[contains(text(), 'Total Amount Payable')]/..//following-sibling::td//div" contains "$52,100.00"
     Then I check object with xpath "//*[contains(text(), 'Organisation Name')]/..//following-sibling::td" contains "<Organisation>"
     Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "85085664197"
     Then I check object with xpath "//*[contains(text(), 'Client Reference Number (CRN)')]/..//following-sibling::td" contains "400107"
@@ -5087,7 +5460,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @current
   Scenario Outline: DTSP-706: As an end user, I want to be able to raise a Refund Request on the portal so that I can request a refund for the Carry forward amount to the Tax Office
@@ -5132,6 +5505,15 @@ Feature: Regression for TSS
     Then I click on button with value "Next"
     Then I see text "Amount to Carry Forward cannot be greater than Credit Amount" displayed
     Then I see text "There are outstanding filing/lodgments that the taxpayer is eligible for." displayed
+    #Then I click on button "TaxTypeSelection"
+    #		Then I see text "Ambulance Levy" displayed
+    #		Then I see text "Energy Industry Levy" displayed
+    #		Then I see text "Income Tax Equivalent" displayed
+    #		Then I see text "Payroll Tax" displayed
+    #Then I select "Payroll Tax" from "TaxTypeSelection"
+    #Scenario 3: Request details pass PSRM validation
+    #Then I check "NextBT" is not readonly
+    #Then I click on button "NextBT"
     #
     Then I click on button "CancelBT"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -5139,7 +5521,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   ###########################################################################################################
   #################################### PHASE 1.2 ITERATION 2 ################################################
@@ -5213,7 +5595,7 @@ Feature: Regression for TSS
    	
    Examples:
 		  | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
   @review
   Scenario Outline: DTSP-747: As an end user I want to be able to update refund details on Tax Registration updates for different tax types
     Given I want to login to portal "<PortalName>"
@@ -5247,6 +5629,16 @@ Feature: Regression for TSS
       | item2 | BSB                             |
       | item2 | Bank Account Number             |
       | item2 | Bank Account Name               |
+    #| item2 | Country |
+    #| item2 | Address |
+    #| item2 | Contact Person |
+    #| item2 | Postal Address |
+    #	Then I click on button "select2-chosen-1"
+    #	Then I enter the details as
+    #| Fields               | Value |
+    #| s2id_autogen1_search | <Organisation> |
+    #Then I click on button "select2-results-1"
+    #Then I wait for "5000" millisecond
     #Scenario 2: Drop down
     Then I click on button "TaxTypeSelection"
     Then I see text "Utilities (Network Facilities)" not displayed
@@ -5271,7 +5663,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
       @current
   Scenario Outline: DTSP-749: As an end user I want to be able to update refund details on Tax Registration updates for different tax types
@@ -5356,7 +5748,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ABN         | CRN    |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 85085664197 | 400107 |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 85085664197 | 400107 |
 
   @review
   Scenario Outline: DTSP-814: As an end user, I want to be able to amend my lodged Payroll Tax returns, so that I can fix any mistakes I have made
@@ -5378,7 +5770,10 @@ Feature: Regression for TSS
     Then I click on button "SubmitBT"
     Then I wait for "5000" millisecond
     Then I check I am on "Lodgement Summary" page
-
+    #Then I check object with xpath "//*[contains(text(), 'Organisation Name')]/..//following-sibling::td" contains "<Organisation>"
+    #Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "85085664197"
+    #Then I check object with xpath "//*[contains(text(), 'Client Reference Number (CRN)')]/..//following-sibling::td" contains "400107"
+    #
     Then I check object with xpath "//*[contains(@id, 'ACTWagesPaidorTaxable')]//tr[1]//td[2]" contains "$100,000.00"
     Then I check object with xpath "//*[contains(@id, 'ACTWagesPaidorTaxable')]//tr[2]//td[2]" contains "$0.00"
     Then I check object with xpath "//*[contains(@id, 'ACTWagesPaidorTaxable')]//tr[3]//td[2]" contains "$0.00"
@@ -5402,7 +5797,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-865: As a user I want to see changes made on Payroll tax lodgements, registration page and return history so that its consistent with additional tax types
@@ -5503,7 +5898,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-870: As an end user, I want to be able to amend my lodgements for Ambulance Levy, so that I can rectify errors  + DTSP-879: As an end user, I want to see a Summary Page, Confirmation Page, PDF and email notification for an Ambulance Levy Amendment
@@ -5551,7 +5946,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          | ABN         | CRN    |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
 
   @review
   Scenario Outline: DTSP-877: As an end user, I want to be able to amend my lodgements for Utilitites (Network Facilities) Tax, so that I can rectify errors + DTSP-884: As an end user, I want to be able to see the Summary Page, Confirmation Page, PDF, and email notification for Energy Industry Levy Amendments
@@ -5609,7 +6004,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          | ABN         | CRN    |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
 
    @wip
   Scenario Outline: DTSP-894: As an end user, I want to limit my options on the Generic Request form in the Request Type Dropdown
@@ -5638,7 +6033,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-895: As an end user, I want to see instructions on the Activity History page, so that I understand how to filter my entries
@@ -5654,7 +6049,51 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+
+  #@review
+  #Scenario Outline: DTSP-910: As an end user, I want to see more accurate error messages on the Service Request forms, so that I know how to fix my error
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Service Requests"
+    #Scenario 1: Cancellation
+    #Then I click on "Tax Registration Cancellation"
+    #Then I see text "Cancellation End Date" not displayed
+    #Scenario 2: Cancellation start date
+    #Then I see text "Cancellation Effective Date" displayed
+    #Then I check "CancellationStartDate" exists
+    #Scenario 3: Exemption error message
+    #Then I click on "Exemption Request"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value          |
+      #| s2id_autogen1_search | <Organisation> |
+    #Then I click on button "select2-results-1"
+    #Then I click on button "ExemptionStartDateInput"
+    #Then I click on "20170502"
+    #Then I click on button "calTriggerOut"
+    #Then I click on button "ExemptionEndDateInput"
+    #Then I click on "20170529"
+    #Then I enter the details as
+      #| Fields                  | Value  |
+      #| JustificationInput      | TEST   |
+      #| ExemptionStartDateInput | 120617 |
+      #| ExemptionEndDateInput   | 110617 |
+    #Then I upload file with path "C:\\Users\\CTang\\git\\SSCP\\CSSPhase1\\ConfigData.xlsx" to "DBResultsSG_Theme_wt59_block_wtMainContent_TSSAdminCore_wt78_block_wtPlaceholder1_TSSDropZone_wt54_block_wt14"
+    #Then I click on button with value "Next"
+    #Then I see text "The Requested Exemption End Date must be later than the Requested Exemption Start Date." displayed
+    #Scenario 4: Voluntary Disclosure
+    #Then I click on "Update Liability Commencement Date Request"
+    #Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Then I see text "Voluntary Disclosure" not displayed
+#
+    #Examples: 
+      #| PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
+      #| Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @wip
   Scenario Outline: DTSP-920: As an end user, I want to see an updated Return History for all tax types, so that I can select an obligation to amend
@@ -5679,7 +6118,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-962: As an end user, I want to see an updated portal, so that it is easier for me to use
@@ -5747,7 +6186,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-940: As an end user, I want to be displayed a message on forms if I do not have any ABNs linked to my account, so that I know why I cannot access them
@@ -5768,7 +6207,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-966: As a Business Taxpayer registering for Payroll Tax, I want to see an updated Taxpayer details section, so that it is easier to use
@@ -5793,7 +6232,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   @review
   Scenario Outline: DTSP-986: As an end user, I want to see updated date field on my Ambulance Levy Lodgement and Amendment forms, so that I know when my return is due
@@ -5846,11 +6285,14 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
 
   ###########################################################################################################
   #################################### MISSING ACTRO BUGS ################################################
   ###########################################################################################################
+
+
+ 
 
   @done
   Scenario Outline: Check if Update Refund Details form has the Organization section of the Declaration filled
@@ -5873,7 +6315,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 12121212121 | 21212121212 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 12121212121 | 21212121212 |
 
        
  @wip
@@ -5942,7 +6384,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
   @done
   Scenario Outline: Total Taxable Wages in Payroll Tax Registration dropdown bug
     Given I want to login to portal "<PortalName>"
@@ -5992,7 +6434,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
   @done
   Scenario Outline: Current Employer Status on Dashboard bug
@@ -6039,7 +6481,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
 
   
  @done
@@ -6096,7 +6538,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
   @wip
 
   Scenario Outline: <return period> / <employer status> / Group Number <group number> under wages section
@@ -6171,7 +6613,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
       
   @wip
   Scenario Outline: Group Management Create group with DGE bug
@@ -6196,4 +6638,4 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |

@@ -265,7 +265,8 @@ Feature: Outdated stuff
     #Bugged...?
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      
 
 @review
   Scenario Outline: DTSP-578: Update Portal Registration Form to re-enable front end validation on CRN
