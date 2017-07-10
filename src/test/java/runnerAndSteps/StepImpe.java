@@ -99,10 +99,10 @@ public class StepImpe {
 //		FirefoxOptions ffo =  new FirefoxOptions().setBinary(ffBinary).setProfile(firefoxProfile);
 
 		// use this if your Chrome is only at the latest version
-		//ChromeDriverManager.getInstance().setup();
+		ChromeDriverManager.getInstance().setup();
 		
 		// local only
-		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
 		
 		driver = new ChromeDriver();
 
