@@ -4,14 +4,13 @@ Feature: Regression for TSS in the Production Environment
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 1 ################################################
   ###########################################################################################################
+
   Scenario Outline: DTSP-54 : As a DB Portal Administrator I want to search for a message so that I can quickly access the message I want to view
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
-    And I hit Enter
-    Given I want to login to portal "<PortalName2>"
     And I hit Enter
     Given I want to login to portal "Production_MessageEdit"
     Then I see text "Feedback Message Text" displayed
@@ -47,7 +46,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | PortalName2 | SearchValue   | SearchDescription       | SearchValue2 | SearchDescription2                         | UserName | Password   |
-      | Production  | TSSUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | TSSAdmin | Dbresults1 |
+      | Production  | TSSUAP      | Invalid Email | Incorrect Email Format. | Success      | Your changes have been successfully saved. | TSSAdmin | Support123 |
 
   #alt username: hemant.shori
   #alt password: USBcoffee1
@@ -92,9 +91,9 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | DescriptionBefore                          | DescriptionAfter |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Support123 | FeedbackMsgText | Username Exists | Username already exists. Please try again. | TEST TEST TEST   |
 
-	  @updated
+	  @hotfix
   Scenario Outline: DTSP-56 :As a DB Portal Administrator I want to add a new message so that required messages are displayed in the portal
     #DTSP-57 :As a DB Portal Administrator I want to delete a message so that I can remove messages no longer required
     Given I want to login to portal "<PortalName>"
@@ -131,7 +130,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | DropDownName    | DropDownOption  | NewMessage              |
-      | TSSAdmin   | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | FeedbackMsgText | Username Exists | This is a test message! |
+      | Production   | UserNameInput | PasswordInput | TSSAdmin | Support123 | FeedbackMsgText | Username Exists | This is a test message! |
 
 
   @done
@@ -198,7 +197,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | NewDescription  | NewDescription2     |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | This is a test! | This is a test two! |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Support123 | This is a test! | This is a test two! |
   #@BEST_DONE_MANUALLY
   #Scenario Outline: DTSP-240 : As an end user, I want to be able to download the Tax Lodgement or Registration forms in PDF format, so that I can keep a record of my lodgements
   #Given I want to login to portal "<PortalName>"
@@ -234,7 +233,7 @@ Feature: Regression for TSS in the Production Environment
   #
   #Examples:
   #| PortalName | UserNameField | PasswordField | UserName | Password  | ButtonName1 | DropDownValue1 | DropDownField | DropDownValue2 | DropDownField2 | Message                                    |
-  #| Production  | UserNameInput | PasswordInput | TSSAdmin      | Dbresults1| TypeMonthly |           2012 | YearOfReturn  | September      | MonthOfReturn  | Your changes have been successfully saved. |
+  #| Production  | UserNameInput | PasswordInput | TSSAdmin      | Support123| TypeMonthly |           2012 | YearOfReturn  | September      | MonthOfReturn  | Your changes have been successfully saved. |
   @tss
   Scenario Outline: DTSP-358: As an end user, I want to be able to submit my Annual Payroll Tax Return Form
     Given I want to login to portal "<PortalName>"
@@ -307,7 +306,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation                           | ContactPhone | EmailAddress         |
-      | TSSAdmin   | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | COFFEE CORP PTY LTD                    | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production   | TSSAdmin | Support123 | TSS        | Admin  | Administrator | COFFEE CORP PTY LTD                    | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 2 ################################################
@@ -373,7 +372,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 12345678901 | 12345678901 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Support123 | 12345678901 | 12345678901 |
 
   #NOTE: Ensure that TSSAdmin has a current employee type selected in the data extensions page
   @tss_review
@@ -487,7 +486,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 98765123456 | 12345678902 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Support123 | 98765123456 | 12345678902 |
 
 		@update
   Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
@@ -518,7 +517,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName       |
-      | TSSAdmin   | TSSAdmin | Dbresults1 | Designate  |
+      | Production   | TSSAdmin | Support123 | Designate  |
 
 
 
@@ -526,7 +525,7 @@ Feature: Regression for TSS in the Production Environment
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 3 ################################################
   ###########################################################################################################
-     | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 96107641949 | 400066 |
+     | UserNameInput | PasswordInput | TSSAdmin | Support123 | 96107641949 | 400066 |
 
   @wip
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
@@ -585,7 +584,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Support123 |
 
 
   @current
@@ -615,7 +614,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 12121212121 | 21212121212 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Support123 | 12121212121 | 21212121212 |
 		
 
   @done
@@ -685,12 +684,12 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "EditBT"
     Then I enter the details as
       | Fields                   | Value                |
-      | Input_FirstName          | J                    |
-      | Input_LastName           | Bradley              |
+      | Input_FirstName          | TSS                   |
+      | Input_LastName           | Admin              |
       | Input_PhoneNumber        |           0456789767 |
-      | Input_Email              | TSSAdmin@hotmail.com |
-      | Input_NewPassword        | Dbresults1           |
-      | Input_NewpasswordConfirm | Dbresults1           |
+      | Input_Email              | jonathan.lui@dbresults.com.au |
+      | Input_NewPassword        | Support123           |
+      | Input_NewpasswordConfirm | Support123           |
       | Input_Hint               | DB RESULTS ONE       |
     #Scenario 9: User update's Tax Agent Details (Tax Agent registered and activated on the Portal)
     Then I click on button "Input_FirstName"
@@ -700,7 +699,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 12121212121 | 21212121212 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Support123 | 12121212121 | 21212121212 |
 
 
 
@@ -873,7 +872,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
   @done
   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
@@ -888,7 +887,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   #@review
   #Scenario Outline: DTSP-8
@@ -909,7 +908,7 @@ Feature: Regression for TSS in the Production Environment
   #
   #Examples:
   #| PortalName | UserNameField | PasswordField | UserName | Password   |
-  #| Production  | UserNameInput | PasswordInput | jscott   | Dbresults1 |
+  #| Production  | UserNameInput | PasswordInput | jscott   | Support123 |
   #
   #@review
   #Scenario Outline: DTSP-13, DTSP-14
@@ -927,7 +926,7 @@ Feature: Regression for TSS in the Production Environment
   #
   #Examples:
   #| PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-  #| Production  | UserNameInput | PasswordInput | jscott   | Dbresults1 | 12345678901 | 12345678901 |
+  #| Production  | UserNameInput | PasswordInput | jscott   | Support123 | 12345678901 | 12345678901 |
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 4 ################################################
   ###########################################################################################################
@@ -1103,7 +1102,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
 
    Scenario Outline: DTSP-537
@@ -1210,7 +1209,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | Password   |
-      | Production  | UserNameInput | PasswordInput | Dbresults1 |
+      | Production  | UserNameInput | PasswordInput | Support123 |
 
   @done
   Scenario Outline: DTSP-444: As an end user, I want to know my Payroll Tax Obligations (including Month and Year) which have not been lodged so I can lodge my monthly payroll tax accordingly
@@ -1262,7 +1261,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | Password   |
-      | Production  | UserNameInput | PasswordInput | Dbresults1 |
+      | Production  | UserNameInput | PasswordInput | Support123 |
 
  @done
   Scenario Outline: DTSP-501: As an end user, I want the Payroll Tax Registration Form to be updated for Ease of Use
@@ -1322,7 +1321,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
 
 
@@ -1461,12 +1460,10 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
  
 
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | UserName2 | Password2  |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | toyota    | Dbresults1 |
+
 
  @current
 	Scenario Outline: DTSP-392: As an end user, I want the Declaration section to be pre-populated on the Summary page so that I don't need to enter my details again
@@ -1520,7 +1517,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | DESIGNATE PTY. LTD. | Administrator   | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
 
   @done
@@ -1570,7 +1567,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
   @done
   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
     Given I want to login to portal "<PortalName>"
@@ -1584,7 +1581,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   @done
   Scenario Outline: DTSP-524: As an organisation, I want to force the user to key in every 'dollar' field on the Payroll Tax Lodgement Form so that the user won't miss out any of these fields
@@ -1637,7 +1634,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 1 ################################################
@@ -1760,7 +1757,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenario 11: TODO when 'View History' and 'Lodge Return' buttons have actual ids.
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
  
     @review
@@ -1826,7 +1823,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   
  @BLOCKED
@@ -1914,7 +1911,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |  
-      | Production  | TSSAdmin | Dbresults1 | DESIGNATE PTY. LTD. |
+      | Production  | TSSAdmin | Support123 | DESIGNATE PTY. LTD. |
 
   @review
   Scenario Outline: DTSP-522: As a end user I want the settings page updated so I can understand what the settings page is used for
@@ -1940,7 +1937,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   @wip
   Scenario Outline: DTSP-567: As an end user, I don't want to see any tax calculations while I am filling out the Payroll Tax Lodgement Form until they are retrieved from PSRM and populated on the Lodgement Summary page
@@ -1988,12 +1985,12 @@ Feature: Regression for TSS in the Production Environment
     #Scenario 3 is currently blocked by bug DTSP-684
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   
     Examples: 
       | PortalName | UserName | Password   | ABN         | CRN    |
-      | Production  | TSSAdmin | Dbresults1 | 13058370433 | 400014 |
+      | Production  | TSSAdmin | Support123 | 13058370433 | 400014 |
 
   @updated
   Scenario Outline: DTSP-583: As an end user, I want to be able to edit my Contact Person details on my Tax Registration form
@@ -2080,7 +2077,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |
-      | Production  | TSSAdmin | Dbresults1 | DESIGNATE PTY. LTD. |
+      | Production  | TSSAdmin | Support123 | DESIGNATE PTY. LTD. |
 
    @BLOCKED
   Scenario Outline: DTSP-592: As an end user, I want to be able to edit my Refund details on my Tax Registration form
@@ -2173,7 +2170,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | BusinessName |
-      | Production  | TSSAdmin | Dbresults1 | DESIGNATE PTY. LTD. |
+      | Production  | TSSAdmin | Support123 | DESIGNATE PTY. LTD. |
   @review
   Scenario Outline: DTSP-608: As a user I want to choose a Tax Payer's ABN so that those details are populated on forms
     #Scenario 2: Business Taxpayer associated with multiple ABNs
@@ -2306,7 +2303,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
  
   @BLOCKED
@@ -2365,7 +2362,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | SearchString |
-      | Production  | TSSAdmin | Dbresults1 | DB RESULTS   |
+      | Production  | TSSAdmin | Support123 | DB RESULTS   |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 2 ################################################
@@ -2447,7 +2444,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | DESIGNATE PTY. LTD. | Administrator   | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
  
 
@@ -2497,7 +2494,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Organisation | Position   | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | AQUA PTY LTD | Consultant | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | AQUA PTY LTD | Administrator | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @done
   Scenario Outline: DTSP-124: As an end user, I want to be able to submit an Annual Lodgement Request so that I can submit a request to change my lodgement frequency from monthly to annual
@@ -2562,7 +2559,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | DESIGNATE PTY. LTD. | Administrator   | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-127: As an end user, I want to be able to submit a Liquidation Advice service request
@@ -2665,7 +2662,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position            | Organisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | DESIGNATE PTY. LTD. | Administrator   | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
 
    @current
@@ -2773,7 +2770,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenarios 5, 6, 9, 10, 11 are best done manually
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
  
 
      @done
@@ -2862,7 +2859,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenarios 2, 3, 8, 9, 12 are best done manually
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin   | Dbresults1 |
+      | Production  | TSSAdmin   | Support123 |
 
  @onhold
   Scenario Outline: DTSP-646: Update phone number field validation rules to reflect Australian numbers and allow future dates selection in PayRoll Tax Registration form
@@ -2994,7 +2991,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenarios 3 and 4 are best done manuallyS
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
   @review
   Scenario Outline: DTSP-647: Update Payroll Tax Registration form for ease of use
@@ -3072,7 +3069,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
   @redo
   Scenario Outline: DTSP-649: Add Validation Rules and make other changes to the Payroll Tax Lodgement Form
@@ -3205,7 +3202,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | UserName2 |
-      | Production  | TSSAdmin | Dbresults1 | jscott    |
+      | Production  | TSSAdmin | Support123 | jscott    |
   @review
   Scenario Outline: DTSP-676:  As a Payroll Tax Group Member, I want to be able to add/edit/remove 'Non-ACT Group Members' to my group
     Given I want to login to portal "<PortalName>"
@@ -3261,7 +3258,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenarios 5, 6 and 7 are best tested manually
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   @onhold
   Scenario Outline: DTSP-682: Update Country field in Pay Roll Tax Registration form
@@ -3366,7 +3363,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
   @review
   Scenario Outline: DTSP-758: As an end user, I want to be limited to only a month and year selection when I am creating/editing my Payroll Tax Group
@@ -3411,7 +3408,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenario 3
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   ###########################################################################################################
   #################################### PHASE 1.1 ITERATION 3 ################################################
@@ -3450,7 +3447,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
      @review
   Scenario Outline: DTSP-108: As an end user, I want to raise a Generic Request so that I don't need to contact customer service.
@@ -3501,7 +3498,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   @review
   Scenario Outline: DTSP-574: As an end user I want to be able to see a summary of my payroll tax details on the dashboard so that I know if my information is up-to-date
@@ -3544,7 +3541,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
    Scenario Outline: DTSP-685: As an end user, I want all pre populated and non editable fields on the portal to be greyed out
     #Scenario 1: Portal Registration
@@ -3662,7 +3659,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
       
   @review
   Scenario Outline: DTSP-689: As a user I want to update the order of menu items on the left navigation panel
@@ -3712,7 +3709,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   @review
   Scenario Outline: DTSP-690: As an end user, I want to be able to update my Business Trading Name on my Tax Registration so that I can keep my Tax Registration information up-to-date
@@ -3761,7 +3758,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
 
  @wip
@@ -3789,7 +3786,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
 
   @ignore_until_fixed
@@ -3858,7 +3855,7 @@ Feature: Regression for TSS in the Production Environment
     #Bugged...?
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
 
   @review
@@ -3924,7 +3921,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   @review
   Scenario Outline: DTSP-703: As an user, I want to fill in a declaration section when I fill in an Objection Request, so that I can verify that I have submitted this request
@@ -3961,7 +3958,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Dbresults1 |
+      | Production  | TSSAdmin | Support123 |
 
   #@review
   # CAN NO LONGER AUTOMATE EXEMPTION REQUEST TESTS
@@ -3999,7 +3996,7 @@ Feature: Regression for TSS in the Production Environment
 #
     #Examples: 
       #| PortalName | UserName | Password   |
-      #| Production  | TSSAdmin | Dbresults1 |
+      #| Production  | TSSAdmin | Support123 |
 
   @wip
   Scenario Outline: DTSP-770: To update the information sent to PSRM in the declaration section
@@ -4216,7 +4213,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation         | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | QUICK SINGLE PTY LTD | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | QUICK SINGLE PTY LTD | 04 5678 9767 | jonathan.lui@dbresults.com.au |
       
 
    
@@ -4292,7 +4289,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenarios 2-5 should be done manually
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
   @manual
   Scenario Outline: As an end user I want to see the Industry codes before Industry name in the Business Activity Category Drop down on Payroll Tax registration form
@@ -4340,7 +4337,7 @@ Feature: Regression for TSS in the Production Environment
     #maybe this should be done manually...
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
   ###########################################################################################################
   #################################### PHASE 1.2 ITERATION 1.2 ################################################
@@ -4396,7 +4393,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-34: As an end user, I want to be able to submit a Energy Industry Levy Return form so that I can validate in PSRM
@@ -4465,7 +4462,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-38: As an end user, I want to be able to complete a Utilities(Network Facilities) Tax Return Form so that I can validate it in PSRM
@@ -4533,7 +4530,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation    | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-151: As an end user, I want to be able to view my Return History for Network Utilities Tax Type
@@ -4635,7 +4632,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
  
   @current
@@ -4719,7 +4716,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @current
   Scenario Outline: DTSP-743: As an end user I want to be able to update Exemption Request Form to cater for different Tax Types
@@ -4799,7 +4796,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @current
   Scenario Outline: DTSP-745: As an end user I want to be able to update Tax Registration Cancellation Form to cater for registration cancellation of different Tax Types
@@ -4871,7 +4868,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | AQUA PTY LTD | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @current
   Scenario Outline: DTSP-788: As an end user, I want to be able to complete a Utilities(Network Facilities) Tax Return Form so that I can validate it in PSRM
@@ -4961,7 +4958,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation    | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-792: As an end user, I want to be able to view the Ambulance Levy lodgement summary page
@@ -5042,7 +5039,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
  @current
   Scenario Outline: DTSP-796: As an end user, I want to be able to view the Energy Industry Levy lodgement summary page with all calculated fields for Energy Industry Levy
     #Scenario 1: Ambulance Levy  Lodgement
@@ -5122,7 +5119,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-836: As an end user, I want to be required to select a JRL if I have group members that are not lodging itselfs
@@ -5166,7 +5163,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-837: As a an end user creating/updating a group, I want to see a more detailed error message when I am prevented from adding a particular group member
@@ -5225,7 +5222,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-838: As an end user, I want to see instructions when I am submitting an Annual Lodgement request
@@ -5247,7 +5244,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @current
   Scenario Outline: DTSP-840: As a user I want to add Non-ACT members in my group using Radio buttons for overseas members
@@ -5300,7 +5297,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
   @review
   Scenario Outline: DTSP-850: As an end user, I want to update the Payroll Tax Registration form, so that it is easier to use
     Given I want to login to portal "<PortalName>"
@@ -5371,7 +5368,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-899: As an end user I want to see the "Activity Type" drop down on activity history updated to cater for all Tax types
@@ -5391,7 +5388,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-705: As an end user, I want to be able to raise aUpdate Liability Commencement Date Request on the portal so that I can disclose any changes in date for my tax registration for a chosen tax type
@@ -5460,7 +5457,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @current
   Scenario Outline: DTSP-706: As an end user, I want to be able to raise a Refund Request on the portal so that I can request a refund for the Carry forward amount to the Tax Office
@@ -5521,7 +5518,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   ###########################################################################################################
   #################################### PHASE 1.2 ITERATION 2 ################################################
@@ -5595,7 +5592,7 @@ Feature: Regression for TSS in the Production Environment
    	
    Examples:
 		  | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
   @review
   Scenario Outline: DTSP-747: As an end user I want to be able to update refund details on Tax Registration updates for different tax types
     Given I want to login to portal "<PortalName>"
@@ -5663,7 +5660,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
       @current
   Scenario Outline: DTSP-749: As an end user I want to be able to update refund details on Tax Registration updates for different tax types
@@ -5748,7 +5745,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ABN         | CRN    |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 85085664197 | 400107 |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 85085664197 | 400107 |
 
   @review
   Scenario Outline: DTSP-814: As an end user, I want to be able to amend my lodged Payroll Tax returns, so that I can fix any mistakes I have made
@@ -5797,7 +5794,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-865: As a user I want to see changes made on Payroll tax lodgements, registration page and return history so that its consistent with additional tax types
@@ -5898,7 +5895,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au | Dynamic Fire Pty Ltd |
 
   @review
   Scenario Outline: DTSP-870: As an end user, I want to be able to amend my lodgements for Ambulance Levy, so that I can rectify errors  + DTSP-879: As an end user, I want to see a Summary Page, Confirmation Page, PDF and email notification for an Ambulance Levy Amendment
@@ -5946,7 +5943,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          | ABN         | CRN    |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
 
   @review
   Scenario Outline: DTSP-877: As an end user, I want to be able to amend my lodgements for Utilitites (Network Facilities) Tax, so that I can rectify errors + DTSP-884: As an end user, I want to be able to see the Summary Page, Confirmation Page, PDF, and email notification for Energy Industry Levy Amendments
@@ -6004,7 +6001,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         | CompanyName          | ABN         | CRN    |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au | Dynamic Fire Pty Ltd | 85085664197 | 400107 |
 
    @wip
   Scenario Outline: DTSP-894: As an end user, I want to limit my options on the Generic Request form in the Request Type Dropdown
@@ -6033,7 +6030,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-895: As an end user, I want to see instructions on the Activity History page, so that I understand how to filter my entries
@@ -6049,7 +6046,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   #@review
   #Scenario Outline: DTSP-910: As an end user, I want to see more accurate error messages on the Service Request forms, so that I know how to fix my error
@@ -6093,7 +6090,7 @@ Feature: Regression for TSS in the Production Environment
 #
     #Examples: 
       #| PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      #| Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      #| Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @wip
   Scenario Outline: DTSP-920: As an end user, I want to see an updated Return History for all tax types, so that I can select an obligation to amend
@@ -6118,7 +6115,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-962: As an end user, I want to see an updated portal, so that it is easier for me to use
@@ -6186,7 +6183,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-940: As an end user, I want to be displayed a message on forms if I do not have any ABNs linked to my account, so that I know why I cannot access them
@@ -6207,7 +6204,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-966: As a Business Taxpayer registering for Payroll Tax, I want to see an updated Taxpayer details section, so that it is easier to use
@@ -6232,7 +6229,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-986: As an end user, I want to see updated date field on my Ambulance Levy Lodgement and Amendment forms, so that I know when my return is due
@@ -6285,7 +6282,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | TSSAdmin@hotmail.com |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   ###########################################################################################################
   #################################### MISSING ACTRO BUGS ################################################
@@ -6315,7 +6312,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
-      | Production  | UserNameInput | PasswordInput | TSSAdmin | Dbresults1 | 12121212121 | 21212121212 |
+      | Production  | UserNameInput | PasswordInput | TSSAdmin | Support123 | 12121212121 | 21212121212 |
 
        
  @wip
@@ -6384,7 +6381,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
   @done
   Scenario Outline: Total Taxable Wages in Payroll Tax Registration dropdown bug
     Given I want to login to portal "<PortalName>"
@@ -6434,7 +6431,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
   @done
   Scenario Outline: Current Employer Status on Dashboard bug
@@ -6481,7 +6478,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
 
   
  @done
@@ -6538,7 +6535,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
   @wip
 
   Scenario Outline: <return period> / <employer status> / Group Number <group number> under wages section
@@ -6613,7 +6610,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
       
   @wip
   Scenario Outline: Group Management Create group with DGE bug
@@ -6638,4 +6635,4 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Dbresults1 |
+      | Production  | Dynamic Fire Pty Ltd | 80134834334 | TSSAdmin | Support123 |
