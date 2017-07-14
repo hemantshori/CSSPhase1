@@ -175,7 +175,7 @@ Feature: Regression for TSS in the Production Environment
       | PageText_Description | <NewDescription> |
     Then I select "EmailSignature" from "PageText_TextCode"
     Then I click on button with value "Save"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     And I enter the details as
       | Fields      | Value |
       | SearchInput | a     |
@@ -242,7 +242,7 @@ Feature: Regression for TSS in the Production Environment
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName   |
       | item9 | Lodgements |
@@ -263,7 +263,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
     Then I select "2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                                         | Value  |
       | SalariesAndWages                               | 100000 |
@@ -323,7 +323,7 @@ Feature: Regression for TSS in the Production Environment
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName   |
       | item9 | Lodgements |
@@ -342,7 +342,7 @@ Feature: Regression for TSS in the Production Environment
       | s2id_autogen1_search | Designate |
     Then I click on button "select2-results-1"
     Then I click on button "LodgePayrollAnswer_TypeAnnual"
-    Then I select "01 Jul 2012 - 30 Jun 2013" from "AnnualObligationSelect"
+    Then I select "2015" from "AnnualObligationSelect"
     Then I click on button "NextSection"
     Then I click on button "ClaimingACTProportion_Yes"
     #Scenario 2: Aus wide wages is not greater than ACT Taxable wages
@@ -383,7 +383,7 @@ Feature: Regression for TSS in the Production Environment
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    And I check I am on "Home" page
+    Then I click on "Home"
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName   |
       | item9 | Lodgements |
@@ -481,7 +481,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                             | Value |
       | LodgePayrollAnswer_DaysPaidTaxable |     1 |
     Then I click on button "Submit"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Payroll Tax Lodgement Summary" page
 
     Examples: 
@@ -507,7 +507,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "select2-results-1"
     
     Then I click on button "LodgePayrollAnswer_TypeAnnual2"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "MonthlyObligationSelect"
     Then I click on "2017"
    # Then I select "2017" from "MonthlyObligationSelect"
@@ -529,13 +529,13 @@ Feature: Regression for TSS in the Production Environment
 
   @wip
   Scenario Outline: DTSP-318: As a Customer Portal Administrator (CPA), I want to be able to search for taxpayer tips on Manage Tips page so that I can find the tips I need
-    Given I want to login to portal "TSS_Tooltips"
+    Given I want to login to portal "Production_Tooltips"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | <UserName> |
       | PasswordInput | <Password> |
     And I hit Enter
-    Given I want to login to portal "TSS_Tooltips"
+    Given I want to login to portal "Production_Tooltips"
     # Scenario 1: CPA access the 'Manage Tips' page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName             |
@@ -663,7 +663,7 @@ Feature: Regression for TSS in the Production Environment
       | Input_NewPassword        | adsfasdfaf            |
       | Input_NewpasswordConfirm | asfsadfsadf           |
       | Input_Hint               | testsetsetwetstsetset |
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "Input_FirstName"
     Then I click on button "Submit"
     #Then I see text "Please enter a valid email address" displayed
@@ -784,15 +784,15 @@ Feature: Regression for TSS in the Production Environment
       | PasswordInput | <Password> |
     And I hit Enter
     Then I click on "Payroll Tax Registration"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "Label_AustralianBusinessNumber_ABN" has CSS property "content" with value ""*""
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I select "Company" from "SelectBusinessTypeCode"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "Label_SelectBusinessType" has CSS property "content" with value ""*""
     Then I check "Label_EmployerName" has CSS property "content" with value ""*""
     Then I check "Label_BusinessTradingName" has CSS property "content" with value ""*""
@@ -803,7 +803,7 @@ Feature: Regression for TSS in the Production Environment
       | EmployerName        | <CompanyName> |
       | BusinessTradingName | <CompanyName> |
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "Label_BusinessAdress_Country" has CSS property "content" with value ""*""
     Then I check "Label_BusinessAddress_AddressLine1" has CSS property "content" with value ""*""
     Then I check "Label_BusinessAdress_Suburb" has CSS property "content" with value ""*""
@@ -834,14 +834,14 @@ Feature: Regression for TSS in the Production Environment
     # Then I see text "Title" not displayed
     Then I click on button "OrgDetailsNextBt"
     Then I check "Label_BusinessActivityCategory" has CSS property "content" with value ""*""
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value        |
       | s2id_autogen1_search | Turf Growing |
     Then I click on button "select2-results-1"
     Then I click on button "ACTWagesPaidNext"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "Label_DateBusinessCommencedEmployinginACT" has CSS property "content" with value ""*""
     Then I check "Label_DateBusinessBecameLiableintheACT" has CSS property "content" with value ""*""
     Then I check "Label_NumberofEmployeesinyourACTBusiness" has CSS property "content" with value ""*""
@@ -857,7 +857,7 @@ Feature: Regression for TSS in the Production Environment
       | DateBusinessLiable | 28517 |
     Then I click on button "AnnualLodgementApproval_NO"
     Then I click on button "PayrollNext"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "Label_BSB" has CSS property "content" with value ""*""
     Then I check "Label_BankAccountNumber" has CSS property "content" with value ""*""
     Then I check "Label_BankAccountName" has CSS property "content" with value ""*""
@@ -949,13 +949,13 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on "Monthly Return"
     Then I select "May 2017" from "MonthlyObligationSelect"
     Then I click on "May 2017"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Save and Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "SubmitBT" is readonly
     Then I click on button "ClaimingACTProportion_Yes"
     Then I enter the details as
@@ -1013,12 +1013,12 @@ Feature: Regression for TSS in the Production Environment
     #Tax Registration Form
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                 | Value         |
       | EmployerName           | <CompanyName> |
@@ -1027,7 +1027,7 @@ Feature: Regression for TSS in the Production Environment
     Then I select "Government" from "SelectBusinessTypeCode"
     #Then I check "RegistrationAnswer_ACN" is empty
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
@@ -1051,7 +1051,7 @@ Feature: Regression for TSS in the Production Environment
       | ContactPerson_PhoneNumber | 1234567890 |
     Then I click on button "AddressLine1"
     Then I click on button "OrgDetailsNext"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "ACTWagesPaidNextBt" is readonly
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -1121,11 +1121,11 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value |
       | s2id_autogen1_search | QUICK |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button with value "Save and Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / [\w|\s|\W|\(|\)]+\)"
     Then I click on "Payroll Tax"
     Then I click on button with value "Discard"
@@ -1135,15 +1135,15 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value |
       | s2id_autogen1_search | QUICK |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Annual Reconciliation Return" displayed
     #Scenario 5: Days paid wage group Australia-wide" field removed from Payroll Tax
     Then I see text "Days paid wage group Australia-wide" not displayed
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / [\w|\s|\W|\(|\)]+\)"
     #Scenario 3: Monthly Return
     Then I click on "Payroll Tax"
@@ -1153,10 +1153,10 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I select "May 2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Scenario 4: Exempt wages question updated
     Then I see text "ACT wages not included on this return" displayed
     #Scenario 6: (Designated group employer for a group and lodging for itself’) Rename the field ‘Days where you paid or were liable to pay taxable or interstate wages’ to ‘Days where 1 group member paid or was liable to pay taxable or interstate wages’
@@ -1167,11 +1167,11 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "ClaimingACTProportion_Yes"
     Then I enter the details as
       | Fields                                         | Value   |
@@ -1200,7 +1200,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button "NextSection"
@@ -1280,7 +1280,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                 | Value         |
       | RegistrationAnswer_EmployerName           | <CompanyName> |
@@ -1288,7 +1288,7 @@ Feature: Regression for TSS in the Production Environment
       | RegistrationAnswer_ACN | NO            |
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
@@ -1301,14 +1301,14 @@ Feature: Regression for TSS in the Production Environment
       | ContactPerson_Email       | TEST@TEST.com |
     #Then I select "AL" from "Address_State"
     Then I click on button "OrgDetailsNextBt"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value        |
       | s2id_autogen1_search | Turf Growing |
     Then I click on button "select2-results-1"
     Then I click on button "ACTWagesPaidNextBt"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Scenario 1: Contact Person for Payroll Tax
     Then I see text "Same as Business Contact Person" displayed
     Then I click on "Same as Business Contact Person"
@@ -1339,7 +1339,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 85613104316 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I select "Other" from "SelectBusinessTypeCode"
     #Then I select "Mr" from "ContactPerson_Title"
     #Then I select "Direct Post" from "CommunicationMethodId"
@@ -1359,7 +1359,7 @@ Feature: Regression for TSS in the Production Environment
       | EmployerName        | CODAVALLI, AARADHANA |
       | BusinessTradingName | CODAVALLI, AARADHANA |
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -1370,14 +1370,14 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 99999999999 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I enter the details as
       | Fields              | Value |
       | EmployerName        | TEST  |
       | BusinessTradingName | TEST  |
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -1386,16 +1386,16 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value |
       | RegistrationAnswer_ABN | <ABN> |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I enter the details as
       | Fields              | Value                       |
       | EmployerName        | The Fire Company Pty Limite |
       | BusinessTradingName | The Fire Company Pty Limite |
     Then I click on button "RegistrationAnswer_ACN"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -1404,14 +1404,14 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 71583328324 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value          |
       | EmployerName        | PSALTIS, COSMA |
       | BusinessTradingName | PSALTIS, COSMA |
     Then I select "Other" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
@@ -1420,7 +1420,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 71583328324 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value           |
       | EmployerName        | PSALTIS, COSMAS |
@@ -1442,7 +1442,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value |
       | RegistrationAnswer_ABN | <ABN> |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -1484,7 +1484,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on "Monthly Return"
     Then I select "2017" from "tMonthlyObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                                         | Value    |
       | SalariesAndWages                               | 10000000 |
@@ -1529,19 +1529,19 @@ Feature: Regression for TSS in the Production Environment
       | PasswordInput | <Password> |
     And I hit Enter
     Then I click on "Payroll Tax Registration"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Direct Post" from "CommunicationMethodId"
     #Then I select "AL" from "Address_State"
     Then I enter the details as
@@ -1555,7 +1555,7 @@ Feature: Regression for TSS in the Production Environment
       | ContactPerson_Email       | TEST@TEST.com |
     Then I click on button "AddressLine1"
     Then I click on button "OrgDetailsNext"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "ACTWagesPaidNextBt" is readonly
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -1666,11 +1666,11 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value  |
-      | s2id_autogen1_search | DUSTER |
-    Then I click on button "select2-results-1"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value  |
+      #| s2id_autogen1_search | DUSTER |
+    #Then I click on button "select2-results-1"
     Then I click on "Sign Out"
     #Scenario 2: Business Taxpayer associated with only 1 ABN
     #Given I want to login to portal "<PortalName>"
@@ -1888,7 +1888,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields           | Value |
       | Address_PostCode |    33 |
     Then I click on button "NextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I see text "Invalid Post Code, should have length 4 and should contain only digits." displayed
     Then I see text "Invalid Postcode. Postcode should be 4 Digits. Please try again." displayed
     #		Scenario 8: User clicks 'Back' on the 'Tax Registration Updates' Summary page
@@ -1987,10 +1987,6 @@ Feature: Regression for TSS in the Production Environment
       | PortalName | UserName | Password   |
       | Production  | TSSAdmin | Support123 |
 
-  
-    Examples: 
-      | PortalName | UserName | Password   | ABN         | CRN    |
-      | Production  | TSSAdmin | Support123 | 13058370433 | 400014 |
 
   @updated
   Scenario Outline: DTSP-583: As an end user, I want to be able to edit my Contact Person details on my Tax Registration form
@@ -2055,7 +2051,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields            | Value |
       | Address_PostCode4 |    33 |
     Then I click on button "NextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Invalid Post Code, should have length 4 and should contain only digits." displayed
     #		Scenario 8: User clicks 'Back' on the 'Tax Registration Updates' Summary page
     Then I enter the details as
@@ -2117,7 +2113,7 @@ Feature: Regression for TSS in the Production Environment
     #Then I check "Address_State" is not readonly
     #Then I check "Address_PostCode" is not readonly
     Then I click on button "NextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #		Scenario 5: User views 'Tax Registration Update ' Summary page
     Then "<Item>" is displayed as "<ItemName>"
       | Item  | ItemName      |
@@ -2128,7 +2124,7 @@ Feature: Regression for TSS in the Production Environment
     #		Scenario 6: Submit 'Tax Registration Update ' data to PSRM without errors
     Then I click on button "CorrectInfoDeclared"
     Then I click on button with value "Submit"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Your Payroll Tax Update Refund Details Request has been successfully submitted. An email has been sent to you for your reference." displayed
     Then I see text "To download the details you have submitted, please click the button below." displayed
     #		Scenario 7: Submit 'Tax Registration Updates 'data to PSRM with errors
@@ -2147,7 +2143,7 @@ Feature: Regression for TSS in the Production Environment
       | Answer_BankAccountNumber | 2342354234 |
       | Answer_BankAccountName   | TEST       |
     Then I click on button "NextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I see text "Invalid BSB. BSB Should be 6 digits. Please try again." displayed
     Then I see text "Invalid BSB. BSB Should be 6 digits. Please try again." displayed
     #		Scenario 8: User clicks 'Back' on the 'Tax Registration Updates' Summary page
@@ -2171,139 +2167,139 @@ Feature: Regression for TSS in the Production Environment
     Examples: 
       | PortalName | UserName | Password   | BusinessName |
       | Production  | TSSAdmin | Support123 | DESIGNATE PTY. LTD. |
-  @review
-  Scenario Outline: DTSP-608: As a user I want to choose a Tax Payer's ABN so that those details are populated on forms
+  #@review
+  #Scenario Outline: DTSP-608: As a user I want to choose a Tax Payer's ABN so that those details are populated on forms
     #Scenario 2: Business Taxpayer associated with multiple ABNs
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Payroll Tax Lodgement"
-    Then I click on button with value "Discard"
-    Then "<Item>" is displayed as "<ItemName>"
-      | Item  | ItemName                         |
-      | text1 | Tax Payer Details                |
-      | text1 | Choose a Tax Payer ABN           |
-      | text2 | Organisational Name              |
-      | text2 | Australian Business Number (ABN) |
-      | text2 | Client Reference Number (CRN)    |
-      | text2 | Return Type                      |
-      | text2 | Monthly Return                   |
-      | text2 | Annual Reconciliation            |
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value         |
-      | s2id_autogen1_search | Active Bottle |
-    Then I click on button "select2-results-1"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value    |
-      | s2id_autogen1_search | NAVY PTY |
-    Then I click on button "select2-results-1"
-    Then I click on "Sign Out"
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Payroll Tax Lodgement"
+    #Then I click on button with value "Discard"
+    #Then "<Item>" is displayed as "<ItemName>"
+      #| Item  | ItemName                         |
+      #| text1 | Tax Payer Details                |
+      #| text1 | Choose a Tax Payer ABN           |
+      #| text2 | Organisational Name              |
+      #| text2 | Australian Business Number (ABN) |
+      #| text2 | Client Reference Number (CRN)    |
+      #| text2 | Return Type                      |
+      #| text2 | Monthly Return                   |
+      #| text2 | Annual Reconciliation            |
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value         |
+      #| s2id_autogen1_search | Active Bottle |
+    #Then I click on button "select2-results-1"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value    |
+      #| s2id_autogen1_search | NAVY PTY |
+    #Then I click on button "select2-results-1"
+    #Then I click on "Sign Out"
     #Scenario 3: Business Taxpayer associated with ONLY one ABN
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | camido     |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Payroll Tax Lodgement"
-    Then I click on button with value "Discard"
-    Then I check "select2-chosen-1" is readonly
-    Then "Answer_OrganizationalName" displays "AUTOLINE PTY LTD" by default
-    Then I check "Answer_ABN" contains "50600468817"
-    Then I check "Answer_CRN" contains "400011"
-    Then I click on "Sign Out"
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | camido     |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Payroll Tax Lodgement"
+    #Then I click on button with value "Discard"
+    #Then I check "select2-chosen-1" is readonly
+    #Then "Answer_OrganizationalName" displays "AUTOLINE PTY LTD" by default
+    #Then I check "Answer_ABN" contains "50600468817"
+    #Then I check "Answer_CRN" contains "400011"
+    #Then I click on "Sign Out"
     #Scenario 4: Tax Agent associated with multiple ABN (i.e. clients)
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value          |
-      | UserNameInput | test_taxagent1 |
-      | PasswordInput | <Password>     |
-    And I hit Enter
-    Then I click on "Payroll Tax Lodgement"
-    Then I click on button with value "Discard"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value |
-      | s2id_autogen1_search | Green |
-    Then I click on button "select2-results-1"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value  |
-      | s2id_autogen1_search | Domain |
-    Then I click on button "select2-results-1"
-    Then I click on "Sign Out"
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value          |
+      #| UserNameInput | test_taxagent1 |
+      #| PasswordInput | <Password>     |
+    #And I hit Enter
+    #Then I click on "Payroll Tax Lodgement"
+    #Then I click on button with value "Discard"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value |
+      #| s2id_autogen1_search | Green |
+    #Then I click on button "select2-results-1"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value  |
+      #| s2id_autogen1_search | Domain |
+    #Then I click on button "select2-results-1"
+    #Then I click on "Sign Out"
     #Scenario 5: Tax Agent associated with ONLY one ABN (i.e. clients)
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | camido     |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Payroll Tax Lodgement"
-    Then I click on button with value "Discard"
-    Then I check "select2-chosen-1" is readonly
-    Then "Answer_OrganizationalName" displays "AUTOLINE PTY LTD" by default
-    Then I check "Answer_ABN" contains "50600468817"
-    Then I check "Answer_CRN" contains "400011"
-    Then I click on "Sign Out"
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | camido     |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Payroll Tax Lodgement"
+    #Then I click on button with value "Discard"
+    #Then I check "select2-chosen-1" is readonly
+    #Then "Answer_OrganizationalName" displays "AUTOLINE PTY LTD" by default
+    #Then I check "Answer_ABN" contains "50600468817"
+    #Then I check "Answer_CRN" contains "400011"
+    #Then I click on "Sign Out"
     #Scenario 6:
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Payroll Tax Lodgement"
-    Then I click on button with value "Discard"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value         |
-      | s2id_autogen1_search | Active Bottle |
-    Then I click on button "select2-results-1"
-    Then I click on button "select2-chosen-1"
-    Then I enter the details as
-      | Fields               | Value    |
-      | s2id_autogen1_search | NAVY PTY |
-    Then I click on button "select2-results-1"
-    Then I click on "Annual Reconciliation"
-    Then I select "2015" from "AnnualObligationSelect"
-    Then I click on button "NextSection"
-    Then I click on button "MonthlyReturnBackBt"
-    Then I check "Answer_OrganizationalName" is readonly
-    Then I check "Answer_ABN" is readonly
-    Then I check "Answer_CRN" is readonly
-    Then I click on "Sign Out"
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | <UserName> |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Payroll Tax Lodgement"
+    #Then I click on button with value "Discard"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value         |
+      #| s2id_autogen1_search | Active Bottle |
+    #Then I click on button "select2-results-1"
+    #Then I click on button "select2-chosen-1"
+    #Then I enter the details as
+      #| Fields               | Value    |
+      #| s2id_autogen1_search | NAVY PTY |
+    #Then I click on button "select2-results-1"
+    #Then I click on "Annual Reconciliation"
+    #Then I select "2015" from "AnnualObligationSelect"
+    #Then I click on button "NextSection"
+    #Then I click on button "MonthlyReturnBackBt"
+    #Then I check "Answer_OrganizationalName" is readonly
+    #Then I check "Answer_ABN" is readonly
+    #Then I check "Answer_CRN" is readonly
+    #Then I click on "Sign Out"
     #Scenario 7: Business Tax Payer views Payroll Tax Lodgement with no associated ABN's
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | ccover     |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Payroll Tax Lodgement"
-    Then I see text "Please note, as there are no ABN's associated to your account, we are unable to display any information." displayed
-    Then I see text "Add an ABN to my Account" displayed
-    Then I click on "Sign Out"
-    #Scenario 8: Tax Agent views Payroll Tax Lodgement with no associated ABN's
-    Given I want to login to portal "<PortalName>"
-    And I enter the details as
-      | Fields        | Value          |
-      | UserNameInput | test_taxagent3 |
-      | PasswordInput | <Password>     |
-    And I hit Enter
-    Then I click on "Payroll Tax Lodgement"
-    Then I see text "Please note, as there are no ABN's associated to your account, we are unable to display any information." displayed
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value      |
+      #| UserNameInput | ccover     |
+      #| PasswordInput | <Password> |
+    #And I hit Enter
+    #Then I click on "Payroll Tax Lodgement"
+    #Then I see text "Please note, as there are no ABN's associated to your account, we are unable to display any information." displayed
     #Then I see text "Add an ABN to my Account" displayed
-    Then I click on "Sign Out"
-
-    Examples: 
-      | PortalName | UserName | Password   |
-      | Production  | TSSAdmin | Support123 |
+    #Then I click on "Sign Out"
+    #Scenario 8: Tax Agent views Payroll Tax Lodgement with no associated ABN's
+    #Given I want to login to portal "<PortalName>"
+    #And I enter the details as
+      #| Fields        | Value          |
+      #| UserNameInput | test_taxagent3 |
+      #| PasswordInput | <Password>     |
+    #And I hit Enter
+    #Then I click on "Payroll Tax Lodgement"
+    #Then I see text "Please note, as there are no ABN's associated to your account, we are unable to display any information." displayed
+    #Then I see text "Add an ABN to my Account" displayed
+    #Then I click on "Sign Out"
+#
+    #Examples: 
+      #| PortalName | UserName | Password   |
+      #| Production  | TSSAdmin | Support123 |
 
  
   @BLOCKED
@@ -2487,7 +2483,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
     Then I click on button "CorrectInfoDeclared"
     Then I click on button with value "Submit"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I see text "Your Payroll Tax Registration Cancellation Request has been successfully submitted. An email has been sent to you for your reference." displayed
     Then I see text "To download the details you have submitted, please click the button below." displayed
     Then I check I am on "Tax Cancellation Request Confirmation" page
@@ -2552,7 +2548,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[6]//td[2]" contains "<EmailAddress>"
     Then I click on button "CorrectInfoDeclared"
     Then I click on button with value "Submit"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I see text "Your Payroll Tax Registration Cancellation Request has been successfully submitted. An email has been sent to you for your reference." displayed
     #Then I see text "To download the details you have submitted, please click the button below." displayed
     Then I check I am on "Annual Lodgement Request Confirmation" page
@@ -2657,7 +2653,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenario 5: Payroll Tax Cancellation Submission
     #Then I click on button "CorrectInfoDeclared"
     #Then I click on button with value "Submit"
-    #Then I wait for "5000" millisecond
+    #Then I wait for "3000" millisecond
     #Then I see text "Liquidation Advice Confirmation" displayed
 
     Examples: 
@@ -2677,13 +2673,13 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value         |
-      | s2id_autogen1_search | QUICK SINGLE PTY LTD |
+      | s2id_autogen1_search | Bye Debts |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Scenario 1: Display "Add ACT Group Member" button
     #Scenario 2: Display "Add ACT Group Member" button
     Then I click on button with value "Create Group"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I switch to frame "1"
     Then I click on button "GroupRoleComboBox"
     Then I click on "Group Member"
@@ -2709,7 +2705,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenario 5: Successfully validated ABN in PSRM
     Then I click on button "PopUpSaveBT"
     #Scenario 6: Unsuccessfully validated ABN in PSRM
-    Then I wait for "4000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "AddACTPopUp"
     Then I switch to frame "1"
     Then I click on button "GroupRoleComboBox"
@@ -2721,7 +2717,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "PopUpSaveBT"
     Then I see text "Please enter an ABN that is registered for Payroll Tax" displayed
     #Scenario 14: Adding a Group Member validations
-    Then I wait for "4000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "AddACTPopUp"
     Then I switch to frame "1"
     Then I click on button "GroupRoleComboBox"
@@ -2731,7 +2727,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields        | Value       |
       | GrpMember_ABN | 85085664197 |
     Then I click on button "PopUpSaveBT"
-    Then I wait for "4000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Please enter an ABN that is not already part of a Payroll Tax Group." displayed
     #Scenario 15: Group Member (lodging for itself)
     #Then I click on button "l03_wtPopupLink"
@@ -2773,7 +2769,7 @@ Feature: Regression for TSS in the Production Environment
       | Production  | TSSAdmin | Support123 |
  
 
-     @done
+     @testing
   Scenario Outline: DTSP-596: As a Payroll Tax Group member, I want to be able to view the details of my Payroll Tax Group
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -2792,7 +2788,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value    |
-      | s2id_autogen1_search | DESIGNATE |
+      | s2id_autogen1_search | AQUA |
     Then I click on button "select2-results-1"
     #Scenario 4: "Group Management" "Update Group" button
     Then I click on button with value "Update Group"
@@ -2809,7 +2805,7 @@ Feature: Regression for TSS in the Production Environment
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
     Then I click on button with value "Update Group"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Scenario 5: View no "ACT Group Members"
      Then I click on object with xpath "(//table[contains(@id, 'TableACTGroupMembers')]//tr//td//a)[2]"
     Then I see "Do you really want to remove the organisation from your Payroll Tax Group?" displayed on popup and I click "OK"
@@ -2829,7 +2825,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "select2-results-1"
     Then I see text "You are not currently a part of a Payroll Tax Group" displayed
     Then I click on button with value "Create Group"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I switch to frame "1"
     Then I click on button "GroupRoleComboBox"
     Then I click on "Group Member (lodging itself)"
@@ -2845,7 +2841,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "select2-results-1"
     #Scenario 10: Adding selected ABN to group first
     Then I click on button with value "Create Group"
-     Then I wait for "5000" millisecond
+     Then I wait for "3000" millisecond
     Then I switch to frame "1"
     Then I check "GrpMember_ABN" contains "22150972535"
     Then I check "RichWidgets_wt18_block_wtMainContent_wt13" contains "Bye Debts Pty Ltd"
@@ -2871,12 +2867,12 @@ Feature: Regression for TSS in the Production Environment
     And I hit Enter
     #Scenario 1: User enters Phone Number on any TSS forms
     Then I click on "Payroll Tax Registration"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -2909,12 +2905,12 @@ Feature: Regression for TSS in the Production Environment
     #Then I click on button "ACTWagesPaidBackBt"
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -3003,12 +2999,12 @@ Feature: Regression for TSS in the Production Environment
     And I hit Enter
     #Scenario 3:The User should not see any Title field on the Payroll Tax Registration Form
     Then I click on "Payroll Tax Registration"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -3215,11 +3211,11 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value        |
-      | s2id_autogen1_search | QUICK SINGLE |
+      | s2id_autogen1_search | ABCAD |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Create Group"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I switch to frame "1"
     Then I select "Group Member" from "GroupRoleComboBox"
     Then I select "Common Control" from "GroupReasonComboBox"
@@ -3236,7 +3232,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check "AddNonActPopUp" exists
     #Scenario 3: Pop up
     Then I click on button "AddNonActPopUp"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I switch to frame "1"
     Then I check "OverseasRadioButtonYES" exists
     Then I check "OverseasRadioButtonNO" exists
@@ -3314,7 +3310,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -3379,6 +3375,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     Then I click on button with value "Update Group"
     #Scenario 1
     Then I click on button "YearCombo"
@@ -3471,7 +3468,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Scenario 2: "Request Details" section displayed on the "Generic Request" Form
     Then I check "OrganizationalName" is readonly
     Then I check "PayrollAnswer_ABN" is readonly
@@ -3488,10 +3485,10 @@ Feature: Regression for TSS in the Production Environment
       | Fields                         | Value |
       | GenericRequest_RequestComments | TEST  |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Generic Request Summary" page
     Then I click on button with value "Submit"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Generic Request Confirmation" page
     Then I see text "Your Generic Request has been successfully submitted. An email has been sent to you for your reference." displayed
     Then I see text "To download the details you have submitted, please click the button below." displayed
@@ -3536,7 +3533,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value |
       | s2id_autogen1_search | NIGHT |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'TableRecords1')]//tbody//tr/td[4]/div" contents match regex "\(\$[\d|,|\.|]+\)"
 
     Examples: 
@@ -3751,7 +3748,7 @@ Feature: Regression for TSS in the Production Environment
     #Scenario 5: Update Business Trading Name Submission
     Then I click on button "CorrectInfoDeclared"
     Then I click on button with value "Submit"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Update Complete" page
     Then I see text "Your Update Business Trading Name Request has been successfully submitted. An email has been sent to you for your reference." displayed
     Then I see text "To download the details you have submitted, please click the button below." displayed
@@ -3802,7 +3799,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -3835,14 +3832,14 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 13058370433 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "This ABN is already registered for Payroll Tax" shown
     #Scenario 4: User has not registered for any tax
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 32421342134 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -4019,7 +4016,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on "Monthly Return"
     Then I select "Nov 2016" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I click on button "TaxPayerDetailsNext"
     Then I enter the details as
       | Fields                                         | Value   |
@@ -4036,7 +4033,7 @@ Feature: Regression for TSS in the Production Environment
       | LodgePayrollAnswer_OtherTaxablePayment         |       1 |
       | LodgePayrollAnswer_ExemptWages                 |       1 |
     Then I click on button "wtSubmitBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Payroll Tax Lodgement Summary" page
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
@@ -4051,9 +4048,9 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4066,7 +4063,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "NextBT"
 
     #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
@@ -4081,7 +4078,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Next"
     #BUG FOUND: Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
@@ -4095,9 +4092,9 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4111,14 +4108,14 @@ Feature: Regression for TSS in the Production Environment
       #| Fields               | Value          |
       #| s2id_autogen1_search | <Organisation> |
     #Then I click on button "select2-results-1"
-    #Then I wait for "5000" millisecond
+    #Then I wait for "3000" millisecond
     #Then I click on button "ExemptionStartDateInput"
     #Then I click on "20170527"
     #Then I enter the details as
       #| Fields             | Value |
       #| JustificationInput | TEST  |
     #Then I click on button with value "Next"
-    #Then I wait for "5000" millisecond
+    #Then I wait for "3000" millisecond
     #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     #Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4137,7 +4134,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields             | Value |
       | Objection_Comments | TEST  |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4156,7 +4153,7 @@ Feature: Regression for TSS in the Production Environment
      	| CancellationStartDate | 27517 |
     Then I click on button "ReasonDescription"
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "AQUA PTY LTD"
@@ -4176,7 +4173,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                              | Value |
       | AnnualLodgementRequestJustification | TEST  |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<Organisation>"
@@ -4189,14 +4186,14 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | DESIGNATE PTY. LTD. |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Update Group"
     Then I select "2018" from "YearCombo"
     Then I click on button "MonthCombo"
     Then I click on "Jan"
     Then I click on button "CheckboxJRL"
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[1]//td[2]" contains "<FirstName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[2]//td[2]" contains "<LastName>"
     Then I check object with xpath "//*[contains(@id, 'DeclarationData')]//tr[3]//td[2]" contains "<DESIGNATE PTY. LTD."
@@ -4230,7 +4227,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check label "Label_EmployerName" contains "Organisation Name"
     Then I enter the details as
       | Fields              | Value         |
@@ -4238,7 +4235,7 @@ Feature: Regression for TSS in the Production Environment
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Mr" from "ContactPerson_Title"
     #  Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
@@ -4252,7 +4249,7 @@ Feature: Regression for TSS in the Production Environment
       | ContactPerson_PhoneNumber |    1234567890 |
     Then I click on button "OrgDetailsNextBt"
     Then I check "ContactPerson_PhoneNumber" contents match regex "\d\d \d\d\d\d \d\d\d\d"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "ACTWagesPaidNextBt" is readonly
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -4304,7 +4301,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check label "Label_EmployerName" contains "Organisation Name"
     Then I enter the details as
       | Fields              | Value         |
@@ -4312,7 +4309,7 @@ Feature: Regression for TSS in the Production Environment
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Mr" from "ContactPerson_Title"
     # Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
@@ -4325,7 +4322,7 @@ Feature: Regression for TSS in the Production Environment
       | PostCode                  |          3333 |
       | ContactPerson_PhoneNumber |    1234567890 |
     Then I click on button "OrgDetailsNextBt"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "ACTWagesPaidNextBt" is readonly
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -4462,7 +4459,7 @@ Feature: Regression for TSS in the Production Environment
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | WrongOrganisation | CorrectOrganisation | ContactPhone | EmailAddress         |
-      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | AQUA PTY LTD      | DESIGNATE PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
+      | Production  | TSSAdmin | Support123 | TSS        | Admin  | Administrator | AQUA PTY LTD      | JOINT ACTION PTY. LTD. | 04 5678 9767 | jonathan.lui@dbresults.com.au |
 
   @review
   Scenario Outline: DTSP-38: As an end user, I want to be able to complete a Utilities(Network Facilities) Tax Return Form so that I can validate it in PSRM
@@ -4508,7 +4505,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check "SaveAndNextToSummaryBT" is readonly
     #Scenario 5: PSRM validation
     Then I select "Water Network" from "NetworkDetail_UtilityTypeDropdown"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields          | Value |
       | KMOfRouteLength |    50 |
@@ -4548,7 +4545,7 @@ Feature: Regression for TSS in the Production Environment
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
     Then I click on "Utilities (Network Facilities)"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "RETURN PERIOD" displayed
     Then I see text "PAYMENT DUE DATE" displayed
     Then I see text "TAX PAYABLE" displayed
@@ -4594,7 +4591,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check object with xpath "//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')][4]" contains "Energy Industry Levy"
     Then I check object with xpath "//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')]//*[contains(@id, 'TSSAccountMgmtCore_wtTaxTypesTabBar')][5]" contains "Income Tax Equivalent"
     Then I click on "Payroll"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "RETURN PERIOD" displayed
     Then I see text "PAYMENT DUE DATE" displayed
     Then I see text "TAX PAYABLE" displayed
@@ -4991,7 +4988,7 @@ Feature: Regression for TSS in the Production Environment
     Then I select "2014" from "ObligationsDropdown"
     #Scenario 4: Buttons
     Then I click on button "SaveNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "SaveAndNextToSummaryBT" is readonly
     #Scenario 5: PSRM validation
     Then I enter the details as
@@ -5135,7 +5132,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Update Group"
     #Scenario 1: Group members without a JRL
     #Click on ticked box
@@ -5143,7 +5140,7 @@ Feature: Regression for TSS in the Production Environment
     Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "You must nominate a group member as a DGE and/or JRL if you have any group members with a Group Role as 'Group Member'" displayed
     Then I click on "Group Management"
     #Scenario 2: DGE is the only ACT Group Member in a 'Group Member' Group Role
@@ -5152,13 +5149,13 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Update Group"
     Then I click on button "ctl03_wt49"
     Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Payroll Tax Group Update Summary" page
 
     Examples: 
@@ -5179,11 +5176,11 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Scenario 1: Not valid in PSRM
     Then I click on button with value "Update Group"
     Then I click on button with value "Add Act Group Member"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I switch to frame "0"
     Then I click on button "GroupRoleComboBox"
     Then I click on "Group Member"
@@ -5194,9 +5191,9 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "PopUpSaveBT"
     Then I see text "Please enter an ABN that is registered for Payroll Tax" displayed
     #Scenario 2: In another group
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Add Act Group Member"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I switch to frame "0"
     #Then I select "Group Member" from "GroupRoleComboBox"
     Then I click on button "GroupRoleComboBox"
@@ -5209,7 +5206,7 @@ Feature: Regression for TSS in the Production Environment
     Then I see text "Please enter an ABN that is not already part of a Payroll Tax Group." displayed
     #Scenario 3: Adding a Non-ACT Group Member
     Then I click on button "AddNonActPopUp"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I switch to frame "0"
     Then I enter the details as
       | Fields                     | Value        |
@@ -5260,12 +5257,12 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button with value "Update Group"
     #Scenario 1: Pop up
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "AddNonActPopUp"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I switch to frame "1"
     Then I click on button "OverseasRadioButtonYES"
     Then I enter the details as
@@ -5312,7 +5309,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 17118795716 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "You are already registered for another tax type, please provide your Customer Reference Number (CRN) below to continue registering for Payroll Tax" displayed
     Then I check "RegistrationAnswer_CRN" exists
     Then I check "SelectBusinessTypeCode" does not exist
@@ -5339,12 +5336,12 @@ Feature: Regression for TSS in the Production Environment
     #Scenario 4: Successful ABR Validation
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    And I wait for "5000" millisecond
+    And I wait for "3000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check label "Label_EmployerName" contains "Organisation Name"
     Then I enter the details as
       | Fields              | Value         |
@@ -5352,7 +5349,7 @@ Feature: Regression for TSS in the Production Environment
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Mr" from "ContactPerson_Title"
     #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
@@ -5563,7 +5560,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Scenario 2: Drop down 
     
     Then I click on button "TaxTypeSelection"
@@ -5586,7 +5583,7 @@ Feature: Regression for TSS in the Production Environment
 		Then I check I am on "Update Contact Details Summary" page
 		 Then I click on button "CorrectInfoDeclared"
     Then I click on button with value "Submit" 
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Update Complete" page
     
    	
@@ -5635,7 +5632,7 @@ Feature: Regression for TSS in the Production Environment
     #| Fields               | Value |
     #| s2id_autogen1_search | <Organisation> |
     #Then I click on button "select2-results-1"
-    #Then I wait for "5000" millisecond
+    #Then I wait for "3000" millisecond
     #Scenario 2: Drop down
     Then I click on button "TaxTypeSelection"
     Then I see text "Utilities (Network Facilities)" not displayed
@@ -5655,7 +5652,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check I am on "Update Refund Details Summary" page
     Then I click on button "CorrectInfoDeclared"
     Then I click on button with value "Submit"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Update Complete" page
 
     Examples: 
@@ -5765,7 +5762,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on "AMEND"
     Then I click on button with value "Next"
     Then I click on button "SubmitBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check I am on "Lodgement Summary" page
     #Then I check object with xpath "//*[contains(text(), 'Organisation Name')]/..//following-sibling::td" contains "<Organisation>"
     #Then I check object with xpath "//*[contains(text(), 'Australian Business Number (ABN)')]/..//following-sibling::td" contains "85085664197"
@@ -5811,16 +5808,16 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "ReturnPeriod2" contents match regex "\w{3} \d{4}"
     #Scenario 2: Changes to Payroll Tax Registration page
     Then I click on "Payroll Tax Registration"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -5858,7 +5855,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on "Lodgements"
     Then I click on "Payroll Tax"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "GeneralDiscardBt"
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -5871,7 +5868,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value        |
       | s2id_autogen1_search | QUICK SINGLE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on "Annual Reconciliation"
     Then I select "2016" from "AnnualObligationSelect"
     Then I click on button with value "Save and Next"
@@ -5911,7 +5908,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on object with xpath "(//a[contains(@id, 'TaxTypesTabBar')])[3]"
     #Scenario 1: Pre populated fields
     Then I click on "AMEND"
@@ -5959,7 +5956,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "(//a[contains(@id, 'TaxTypesTabBar')])[4]" contains "Energy Industry Levy"
     Then I click on object with xpath "(//a[contains(@id, 'TaxTypesTabBar')])[4]"
     Then I click on "AMEND"
@@ -5969,7 +5966,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check "LodgePayrollAnswer_CRN" contains "<CRN>"
     Then I check "ObligationToAmend" is not empty
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "EstMegawattHrs2" is not empty
     Then I check "ActMegawattHrs2" is not empty
     Then I click on button "SaveAndNextToSummaryBT"
@@ -6145,7 +6142,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check I am on "Tax Cancellation Request Summary" page
     Then I check object with xpath "//*[contains(text(), 'Cancellation Effective Date')]/..//following-sibling::td" contains "16 Jun 2017"
     Then I click on button with value "Back"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                | Value      |
       | CancellationStartDate | 16-06-2017 |
@@ -6154,7 +6151,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check I am on "Tax Cancellation Request Summary" page
     Then I check object with xpath "//*[contains(text(), 'Cancellation Effective Date')]/..//following-sibling::td" contains "16 Jun 2017"
     Then I click on button with value "Back"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                | Value    |
       | CancellationStartDate | 16-06-17 |
@@ -6163,7 +6160,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check I am on "Tax Cancellation Request Summary" page
     Then I check object with xpath "//*[contains(text(), 'Cancellation Effective Date')]/..//following-sibling::td" contains "16 Jun 2017"
     Then I click on button with value "Back"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                | Value |
       | CancellationStartDate | 16617 |
@@ -6172,7 +6169,7 @@ Feature: Regression for TSS in the Production Environment
     Then I check I am on "Tax Cancellation Request Summary" page
     Then I check object with xpath "//*[contains(text(), 'Cancellation Effective Date')]/..//following-sibling::td" contains "16 Jun 2017"
     Then I click on button with value "Back"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                | Value    |
       | CancellationStartDate | 16062017 |
@@ -6223,7 +6220,7 @@ Feature: Regression for TSS in the Production Environment
       | RegistrationAnswer_ABN | 17118795716 |
     Then I click on button with value "Next"
     #Scenario 2: instructions
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "You are already registered for another tax type, please provide your Customer Reference Number (CRN) below to continue registering for Payroll Tax" displayed
     Then I check "RegistrationAnswer_CRN" exists
 
@@ -6266,7 +6263,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value          |
       | s2id_autogen1_search | <Organisation> |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on object with xpath "(//a[contains(@id, 'TaxTypesTabBar')])[3]"
     #Scenario 1: Pre populated fields
     Then I click on "AMEND"
@@ -6328,16 +6325,16 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | <ABN> |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check "RegistrationAnswer_ACN" is empty
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                  | Value         |
       | AddressLine1            | TEST          |
@@ -6353,7 +6350,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | <ABN> |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                 | Value                   |
       | EmployerName           | sadfasdfadsf            |
@@ -6361,7 +6358,7 @@ Feature: Regression for TSS in the Production Environment
       | RegistrationAnswer_ACN | 27349832721342134124302 |
     Then I select "Company" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
     Then I see text "Your ACN doesn't match with your ABN. Please try again." shown
     Then I enter the details as
@@ -6370,7 +6367,7 @@ Feature: Regression for TSS in the Production Environment
       | BusinessTradingName    | <CompanyName> |
       | RegistrationAnswer_ACN |  134834334 |
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields                  | Value         |
       | AddressLine1            | TEST          |
@@ -6395,7 +6392,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I enter the details as
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
@@ -6403,7 +6400,7 @@ Feature: Regression for TSS in the Production Environment
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I check "RegistrationAnswer_ACN" is empty
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Mr" from "ContactPerson_Title"
     # Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
@@ -6416,7 +6413,7 @@ Feature: Regression for TSS in the Production Environment
       | PostCode                  |          3333 |
       | ContactPerson_PhoneNumber |    1234567890 |
     Then I click on button "OrgDetailsNextBt"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "select2-chosen"
     Then I enter the details as
       | Fields               | Value |
@@ -6448,7 +6445,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value            |
       | s2id_autogen1_search | Late Cut Pty Ltd |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #change these to regex matches and find them by id once Jonathan makes the fix
     Then I check object with xpath "//*[contains(@id, 'EmployerStatus')]//div//div[2]" contains "Independent Employer"
     #Group Member
@@ -6457,7 +6454,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value                    |
       | s2id_autogen1_search | MEMBER CHECK PTY LIMITED |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'EmployerStatus')]//div//div[2]" contains "Group Member in Group Number: 19"
     #DGE
     Then I click on button "select2-chosen-1"
@@ -6465,7 +6462,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'EmployerStatus')]//div//div[2]" contains "DGE in Group Number: 19"
     #DGE and JRL
     Then I click on button "select2-chosen-1"
@@ -6473,7 +6470,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields               | Value        |
       | s2id_autogen1_search | JOINT ACTION |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'EmployerStatus')]//div//div[2]" contains "DGE and JRL in Group Number: 20"
 
     Examples: 
@@ -6494,7 +6491,7 @@ Feature: Regression for TSS in the Production Environment
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check label "Label_EmployerName" contains "Organisation Name"
     Then I enter the details as
       | Fields              | Value         |
@@ -6502,7 +6499,7 @@ Feature: Regression for TSS in the Production Environment
       | BusinessTradingName | <CompanyName> |
     Then I select "Government" from "SelectBusinessTypeCode"
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     #Then I select "Mr" from "ContactPerson_Title"
     #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
@@ -6529,7 +6526,7 @@ Feature: Regression for TSS in the Production Environment
     
     Then I click on button "PayrollNext"
     Then I click on button "Refunds_NO"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I click on button "RefundDetailsBT"
     Then I check label "Label_Declarer_Organisation" contains "Organisation Name"
 
@@ -6557,7 +6554,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
     Then I select "May 2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)\)"
     Then I click on button with value "Discard"
     Given I want to login to portal "<PortalName>"
@@ -6573,7 +6570,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
     Then I select "May 2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)\)"
     Then I click on button with value "Discard"
     Given I want to login to portal "<PortalName>"
@@ -6589,7 +6586,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "LodgePayrollAnswer_TypeMonthly"
     Then I select "May 2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)|([\w|\s|\W]+)\)"
     Then I click on button with value "Discard"
     Given I want to login to portal "<PortalName>"
@@ -6605,7 +6602,7 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "LodgePayrollAnswer_TypeAnnual"
     Then I select "01 Jul 2014 - 30 Jun 2015" from "AnnualObligationSelect"
     Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)\)"
 
     Examples: 
@@ -6624,10 +6621,10 @@ Feature: Regression for TSS in the Production Environment
     Then I click on button "select2-chosen-1"
     Then I enter the details as
       | Fields               | Value     |
-      | s2id_autogen1_search | DESIGNATE |
+      | s2id_autogen1_search | JOINT ACTION |
     Then I click on button "select2-results-1"
     Then I click on button with value "Update Group"
-    Then I wait for "5000" millisecond
+    Then I wait for "3000" millisecond
     Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
     Then I click on button with value "Next"

@@ -411,8 +411,7 @@ Feature: Regression for TSS
       | PortalName | UserNameField | PasswordField | UserName | Password   | CRN         | ABN         |
       | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | 98765123456 | 12345678902 |
 
-		@update
-  Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
+Scenario Outline: DTSP-401: As an end user, I should not be able to view/select the 'Return Type' section on the Payroll Tax Lodgement forms when I am on subsequent sections after clicking 'Next'
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -428,20 +427,19 @@ Feature: Regression for TSS
       | Fields               | Value          |
       | s2id_autogen1_search | <BusinessName> |
     Then I click on button "select2-results-1"
-    
     Then I click on button "LodgePayrollAnswer_TypeAnnual2"
     Then I wait for "5000" millisecond
-    Then I click on button "MonthlyObligationSelect"
-    Then I click on "2017"
-   # Then I select "2017" from "MonthlyObligationSelect"
+    Then I click on button "LodgePayrollAnswer_TypeMonthly"
+    #Then I click on "2017"
+    Then I select "2017" from "MonthlyObligationSelect"
     Then I click on button "NextSection"
     Then I click on button with value "Back"
     Then I check "MonthlyObligationSelect" is readonly
 
     Examples: 
-      | PortalName | UserName | Password   | BusinessName       |
-      | TSSAdmin        | jbradley | Dbresults1 | Designate  |
-
+      | PortalName | UserName | Password   | BusinessName |
+      | TSSAdmin   | jbradley | Dbresults1 | Designate    |
+	
 
 
 
@@ -621,7 +619,7 @@ Feature: Regression for TSS
 
   #NOTE: Ensure that jbradley has a current employee type selected in the data extensions page
 
-  @done
+   @done
   Scenario Outline: DTSP-463: Display all the mandatory fields with an Asterisk (*)
     #On hold until a clear standard for the mandatory field asterisks can be made
     #PART 1: Login Screen
@@ -679,6 +677,7 @@ Feature: Regression for TSS
       | Fields              | Value         |
       | EmployerName        | <CompanyName> |
       | BusinessTradingName | <CompanyName> |
+    Then I click on button "RegistrationAnswer_ACN"  
     Then I click on button "TaxPayerDetailsNextBT"
     Then I wait for "5000" millisecond
     Then I check "Label_BusinessAdress_Country" has CSS property "content" with value ""*""
@@ -744,7 +743,7 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 | 
 
   @done
   Scenario Outline: DTSP-508: As an end user, I want to see a reminder message on the top of the Payroll Tax Registration form so I know I cannot save an incomplete form
@@ -765,7 +764,7 @@ Feature: Regression for TSS
   ###########################################################################################################
   #################################### PHASE 1 ITERATION 4 ################################################
   ###########################################################################################################
-    @current
+     @wip
     Scenario Outline: DTSP-523
     # Part of this story is automatically tested by others...
     Given I want to login to portal "<PortalName>"
@@ -784,13 +783,13 @@ Feature: Regression for TSS
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "6000" millisecond
     Then I click on "Monthly Return"
     Then I select "May 2017" from "MonthlyObligationSelect"
     Then I click on "May 2017"
-    Then I wait for "5000" millisecond
+    Then I wait for "6000" millisecond
     Then I click on button with value "Save and Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "6000" millisecond
     Then I check "SubmitBT" is readonly
     Then I click on button "ClaimingACTProportion_Yes"
     Then I enter the details as
@@ -848,12 +847,12 @@ Feature: Regression for TSS
     #Tax Registration Form
     Then I click on "Payroll Tax Registration"
     Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    Then I wait for "5000" millisecond
+    Then I wait for "6000" millisecond
     And I enter the details as
       | Fields                 | Value       |
       | RegistrationAnswer_ABN | 80134834334 |
     Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
+    Then I wait for "6000" millisecond
     Then I enter the details as
       | Fields                 | Value         |
       | EmployerName           | <CompanyName> |
@@ -862,7 +861,7 @@ Feature: Regression for TSS
     Then I select "Government" from "SelectBusinessTypeCode"
     #Then I check "RegistrationAnswer_ACN" is empty
     Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
+    Then I wait for "6000" millisecond
     #Then I select "Direct Post" from "CommunicationMethodId"
     Then I enter the details as
       | Fields                    | Value         |
@@ -886,7 +885,7 @@ Feature: Regression for TSS
       | ContactPerson_PhoneNumber | 1234567890 |
     Then I click on button "AddressLine1"
     Then I click on button "OrgDetailsNext"
-    Then I wait for "5000" millisecond
+    Then I wait for "6000" millisecond
     Then I check "ACTWagesPaidNextBt" is readonly
     Then I click on button "select2-chosen-1"
     Then I enter the details as
@@ -938,6 +937,7 @@ Feature: Regression for TSS
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
+
 
 
    Scenario Outline: DTSP-537
@@ -1160,135 +1160,7 @@ Feature: Regression for TSS
 
 
 
-  @redo
-  Scenario Outline: DTSP-526, 531: Update the ABN LookUp Rules for Payroll Tax Registration Form / Update the first page of the Portal Registration process
-    Given I want to login to portal "<PortalName>"
-    #This user has the ABN 12345678933, but since it's a tax agent user it isn't shown in the lodgement form
-    And I enter the details as
-      | Fields        | Value      |
-      | UserNameInput | <UserName> |
-      | PasswordInput | <Password> |
-    And I hit Enter
-    Then I click on "Payroll Tax Registration"
-    And I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 85613104316 |
-    Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
-    Then I select "Other" from "SelectBusinessTypeCode"
-    #Scenario 7: ABN Lookup for Inactive ABN
-    Then I enter the details as
-      | Fields              | Value                |
-      | EmployerName        | CODAVALLI, AARADHANA |
-      | BusinessTradingName | CODAVALLI, AARADHANA |
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
-    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Then I click on button "EmployerName"
-    #Then I click on button "TaxPayerDetailsNext"
-    #Scenario 8:ABN Lookup for Invalid ABN
-    And I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 99999999999 |
-    Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I enter the details as
-      | Fields              | Value |
-      | EmployerName        | TEST  |
-      | BusinessTradingName | TEST  |
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
-    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Scenario 6: ABN Lookup for Tax Agent with an active ABN, incorrect Registered Business Name, and Entity Type is not 'Individual'
-    And I enter the details as
-      | Fields                 | Value |
-      | RegistrationAnswer_ABN | <ABN> |
-    Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I enter the details as
-      | Fields              | Value                       |
-      | EmployerName        | The Fire Company Pty Limite |
-      | BusinessTradingName | The Fire Company Pty Limite |
-    Then I click on button "RegistrationAnswer_ACN"
-    Then I wait for "5000" millisecond
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
-    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Scenario 4: ABN Lookup for Tax Agent with an active ABN, incorrect Registered Business Name, and Entity Type = Individual
-    And I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 71583328324 |
-    Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields              | Value          |
-      | EmployerName        | PSALTIS, COSMA |
-      | BusinessTradingName | PSALTIS, COSMA |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I wait for "5000" millisecond
-    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Scenario 3: ABN Lookup for Tax Agent with an active ABN, correct Registered Business Name, and Entity Type = Individual
-    And I enter the details as
-      | Fields                 | Value       |
-      | RegistrationAnswer_ABN | 71583328324 |
-    Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields              | Value           |
-      | EmployerName        | PSALTIS, COSMAS |
-      | BusinessTradingName | PSALTIS, COSMAS |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I enter the details as
-      | Fields                    | Value      |
-      | AddressLine1              | TEST       |
-      | Address_City              | TEST       |
-      | PostCode                  |       3333 |
-      | ContactPerson_FirstName   | TEST       |
-      | ContactPerson_LastName    | TEST       |
-      | ContactPerson_PhoneNumber | 1234567890 |
-    Then I click on "Payroll Tax Registration"
-    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
-    #Scenario 5: ABN Lookup for Tax Agent with an active ABN, correct Registered Business Name, and Entity Type is not 'Individual'
-    And I enter the details as
-      | Fields                 | Value |
-      | RegistrationAnswer_ABN | <ABN> |
-    Then I click on button with value "Next"
-    Then I wait for "5000" millisecond
-    Then I enter the details as
-      | Fields              | Value         |
-      | EmployerName        | <CompanyName> |
-      | BusinessTradingName | <CompanyName> |
-    Then I select "Other" from "SelectBusinessTypeCode"
-    Then I click on button "TaxPayerDetailsNextBT"
-    Then I enter the details as
-      | Fields                    | Value      |
-      | AddressLine1              | TEST       |
-      | Address_City              | TEST       |
-      | PostCode                  |       3333 |
-      | ContactPerson_FirstName   | TEST       |
-      | ContactPerson_LastName    | TEST       |
-      | ContactPerson_PhoneNumber | 1234567890 |
 
-    Examples: 
-      | PortalName | CompanyName          | ABN         | UserName | Password   |
-      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
- 
-
-    Examples: 
-      | PortalName | UserNameField | PasswordField | UserName | Password   | UserName2 | Password2  |
-      | TSSAdmin        | UserNameInput | PasswordInput | jbradley | Dbresults1 | toyota    | Dbresults1 |
 
  @current
 	Scenario Outline: DTSP-392: As an end user, I want the Declaration section to be pre-populated on the Summary page so that I don't need to enter my details again
@@ -2476,7 +2348,6 @@ Feature: Regression for TSS
       | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | DESIGNATE PTY. LTD. | Consultant   | 04 5678 9767 | jbradley@hotmail.com |
 
 
-   @current
   Scenario Outline: DTSP-595: As an end user, I want to be able to add/edit/remove ACT group members to my Payroll Tax Group
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -2545,7 +2416,14 @@ Feature: Regression for TSS
     Then I wait for "4000" millisecond
     Then I see text "Please enter an ABN that is not already part of a Payroll Tax Group." displayed
     #Scenario 15: Group Member (lodging for itself)
-
+    #Then I click on button "l03_wtPopupLink"
+    #Then I switch to frame "1"
+    #Then I click on button "GroupRoleComboBox"
+    #Then I click on "Group Member (lodging itself)"
+    #Then I select "Common Control" from "GroupReasonComboBox"
+    #Then I click on button "PopUpSaveBT"
+    #Then I click on button "ctl03_wt83"
+    #Then I see text "The nominated DGE cannot have a Group Role of 'Group Member (lodging itself)" displayed
     #Scenario 7: Remove ACT Group Member
     Then I click on object with xpath "(//table[contains(@id, 'TableACTGroupMembers')]//tr//td//a)[2]"
     Then I see "Do you really want to remove the organisation from your Payroll Tax Group?" displayed on popup and I click "OK"
@@ -2553,7 +2431,17 @@ Feature: Regression for TSS
     Then I click on object with xpath "(//table[contains(@id, 'TableACTGroupMembers')]//tr//td//a)[2]"
     Then I see "Do you really want to remove the organisation from your Payroll Tax Group?" displayed on popup and I click "OK"
     #Scenario 16: DGE
-
+    #Then I click on button "l03_wtPopupLink"
+    #
+    #Then I switch to frame "1"
+    #Then I click on button "GroupRoleComboBox"
+    #Then I click on "Group Member (lodging itself)"
+    #Then I select "Common Control" from "GroupReasonComboBox"
+    #Then I click on button "PopUpSaveBT"
+    #Then I click on button "ctl03_wt83"
+    #Then I see text "The nominated DGE cannot have a Group Role of 'Group Member (lodging itself)" displayed
+    #
+    #
     #Scenario 12: User attempts to remove themselves
     Then I select "2018" from "YearCombo"
     Then I select "Jan" from "MonthCombo"
@@ -2566,7 +2454,7 @@ Feature: Regression for TSS
       | PortalName | UserName | Password   |
       | TSSAdmin        | jbradley | Dbresults1 |
  
-
+ 
      @done
   Scenario Outline: DTSP-596: As a Payroll Tax Group member, I want to be able to view the details of my Payroll Tax Group
     Given I want to login to portal "<PortalName>"
@@ -2588,6 +2476,7 @@ Feature: Regression for TSS
       | Fields               | Value    |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     #Scenario 4: "Group Management" "Update Group" button
     Then I click on button with value "Update Group"
     Then I click on button with value "Add Act Group Member"
@@ -2602,6 +2491,7 @@ Feature: Regression for TSS
       | Fields               | Value  |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     Then I click on button with value "Update Group"
     Then I wait for "5000" millisecond
     #Scenario 5: View no "ACT Group Members"
@@ -2621,6 +2511,7 @@ Feature: Regression for TSS
       | Fields               | Value |
       | s2id_autogen1_search | Bye Debts   |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     Then I see text "You are not currently a part of a Payroll Tax Group" displayed
     Then I click on button with value "Create Group"
     Then I wait for "5000" millisecond
@@ -2637,6 +2528,7 @@ Feature: Regression for TSS
       | Fields               | Value |
       | s2id_autogen1_search | Bye Debts   |
     Then I click on button "select2-results-1"
+    Then I wait for "5000" millisecond
     #Scenario 10: Adding selected ABN to group first
     Then I click on button with value "Create Group"
      Then I wait for "5000" millisecond
@@ -2649,7 +2541,6 @@ Feature: Regression for TSS
     Examples: 
       | PortalName | UserName | Password   |
       | TSSAdmin        | jbradley   | Dbresults1 |
-
  @onhold
   Scenario Outline: DTSP-646: Update phone number field validation rules to reflect Australian numbers and allow future dates selection in PayRoll Tax Registration form
     Given I want to login to portal "<PortalName>"
@@ -2976,8 +2867,9 @@ Feature: Regression for TSS
     Examples: 
       | PortalName | UserName | Password   | UserName2 |
       | TSSAdmin        | jbradley | Dbresults1 | jscott    |
-  @review
-  Scenario Outline: DTSP-676:  As a Payroll Tax Group Member, I want to be able to add/edit/remove 'Non-ACT Group Members' to my group
+      
+
+ Scenario Outline: DTSP-676:  As a Payroll Tax Group Member, I want to be able to add/edit/remove 'Non-ACT Group Members' to my group
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -2990,9 +2882,9 @@ Feature: Regression for TSS
       | Fields               | Value        |
       | s2id_autogen1_search | QUICK SINGLE |
     Then I click on button "select2-results-1"
-    Then I wait for "5000" millisecond
+    Then I wait for "4000" millisecond
     Then I click on button with value "Create Group"
-    Then I wait for "5000" millisecond
+    Then I wait for "4000" millisecond
     Then I switch to frame "1"
     Then I select "Group Member" from "GroupRoleComboBox"
     Then I select "Common Control" from "GroupReasonComboBox"
@@ -3005,11 +2897,12 @@ Feature: Regression for TSS
       | Fields               | Value     |
       | s2id_autogen1_search | DESIGNATE |
     Then I click on button "select2-results-1"
+    Then I wait for "4000" millisecond
     Then I click on button with value "Update Group"
     Then I check "AddNonActPopUp" exists
     #Scenario 3: Pop up
     Then I click on button "AddNonActPopUp"
-    Then I wait for "5000" millisecond
+    Then I wait for "4000" millisecond
     Then I switch to frame "1"
     Then I check "OverseasRadioButtonYES" exists
     Then I check "OverseasRadioButtonNO" exists
@@ -5214,7 +5107,7 @@ Feature: Regression for TSS
    Examples:
 		  | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation | ContactPhone | EmailAddress         |
       | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
-  @review
+
   Scenario Outline: DTSP-747: As an end user I want to be able to update refund details on Tax Registration updates for different tax types
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -5247,6 +5140,16 @@ Feature: Regression for TSS
       | item2 | BSB                             |
       | item2 | Bank Account Number             |
       | item2 | Bank Account Name               |
+    #| item2 | Country |
+    #| item2 | Address |
+    #| item2 | Contact Person |
+    #| item2 | Postal Address |
+    #	Then I click on button "select2-chosen-1"
+    #	Then I enter the details as
+    #| Fields               | Value |
+    #| s2id_autogen1_search | <Organisation> |
+    #Then I click on button "select2-results-1"
+    #Then I wait for "4000" millisecond
     #Scenario 2: Drop down
     Then I click on button "TaxTypeSelection"
     Then I see text "Utilities (Network Facilities)" not displayed
@@ -5266,7 +5169,7 @@ Feature: Regression for TSS
     Then I check I am on "Update Refund Details Summary" page
     Then I click on button "CorrectInfoDeclared"
     Then I click on button with value "Submit"
-    Then I wait for "5000" millisecond
+    Then I wait for "4000" millisecond
     Then I check I am on "Update Complete" page
 
     Examples: 
@@ -5749,7 +5652,6 @@ Feature: Regression for TSS
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
       | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
 
-  @review
   Scenario Outline: DTSP-940: As an end user, I want to be displayed a message on forms if I do not have any ABNs linked to my account, so that I know why I cannot access them
     Given I want to login to portal "<PortalName>"
     And I enter the details as
@@ -5759,6 +5661,7 @@ Feature: Regression for TSS
     And I hit Enter
     Then I see text "Please note, as there are currently no taxpayer accounts associated with your login, there is no information to display." displayed
     Then I click on "Sign Out"
+    Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
       | UserNameInput | Test2      |
@@ -5768,7 +5671,133 @@ Feature: Regression for TSS
 
     Examples: 
       | PortalName | UserName | Password   | FirstName | LastName | Position   | Organisation        | ContactPhone | EmailAddress         |
-      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.com |
+      | TSSAdmin        | jbradley | Dbresults1 | J         | Bradley  | Consultant | DESIGNATE PTY. LTD. | 04 5678 9767 | jbradley@hotmail.c |
+      
+      
+        @redo
+  Scenario Outline: DTSP-526, 531: Update the ABN LookUp Rules for Payroll Tax Registration Form / Update the first page of the Portal Registration process
+    Given I want to login to portal "<PortalName>"
+    #This user has the ABN 12345678933, but since it's a tax agent user it isn't shown in the lodgement form
+    And I enter the details as
+      | Fields        | Value      |
+      | UserNameInput | <UserName> |
+      | PasswordInput | <Password> |
+    And I hit Enter
+    Then I click on "Payroll Tax Registration"
+    And I enter the details as
+      | Fields                 | Value       |
+      | RegistrationAnswer_ABN | 85613104316 |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
+    #Scenario 7: ABN Lookup for Inactive ABN
+    Then I enter the details as
+      | Fields              | Value                |
+      | EmployerName        | CODAVALLI, AARADHANA |
+      | BusinessTradingName | CODAVALLI, AARADHANA |
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Then I click on button "EmployerName"
+    #Then I click on button "TaxPayerDetailsNext"
+    #Scenario 8:ABN Lookup for Invalid ABN
+    And I enter the details as
+      | Fields                 | Value       |
+      | RegistrationAnswer_ABN | 99999999999 |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I enter the details as
+      | Fields              | Value |
+      | EmployerName        | TEST  |
+      | BusinessTradingName | TEST  |
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Your ABN is not valid. Please enter a valid ABN." displayed
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Scenario 6: ABN Lookup for Tax Agent with an active ABN, incorrect Registered Business Name, and Entity Type is not 'Individual'
+    And I enter the details as
+      | Fields                 | Value |
+      | RegistrationAnswer_ABN | <ABN> |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I enter the details as
+      | Fields              | Value                       |
+      | EmployerName        | The Fire Company Pty Limite |
+      | BusinessTradingName | The Fire Company Pty Limite |
+    Then I click on button "RegistrationAnswer_ACN"
+    Then I wait for "5000" millisecond
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Scenario 4: ABN Lookup for Tax Agent with an active ABN, incorrect Registered Business Name, and Entity Type = Individual
+    And I enter the details as
+      | Fields                 | Value       |
+      | RegistrationAnswer_ABN | 71583328324 |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I enter the details as
+      | Fields              | Value          |
+      | EmployerName        | PSALTIS, COSMA |
+      | BusinessTradingName | PSALTIS, COSMA |
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I wait for "5000" millisecond
+    Then I see text "Your Organisation Name doesn't match with your ABN. Please try again." displayed
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Scenario 3: ABN Lookup for Tax Agent with an active ABN, correct Registered Business Name, and Entity Type = Individual
+    And I enter the details as
+      | Fields                 | Value       |
+      | RegistrationAnswer_ABN | 71583328324 |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I enter the details as
+      | Fields              | Value           |
+      | EmployerName        | PSALTIS, COSMAS |
+      | BusinessTradingName | PSALTIS, COSMAS |
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I enter the details as
+      | Fields                    | Value      |
+      | AddressLine1              | TEST       |
+      | Address_City              | TEST       |
+      | PostCode                  |       3333 |
+      | ContactPerson_FirstName   | TEST       |
+      | ContactPerson_LastName    | TEST       |
+      | ContactPerson_PhoneNumber | 1234567890 |
+    Then I click on "Payroll Tax Registration"
+    Then I see "Are you sure you want to discard changes made?" displayed on popup and I click "OK"
+    #Scenario 5: ABN Lookup for Tax Agent with an active ABN, correct Registered Business Name, and Entity Type is not 'Individual'
+    And I enter the details as
+      | Fields                 | Value |
+      | RegistrationAnswer_ABN | <ABN> |
+    Then I click on button with value "Next"
+    Then I wait for "5000" millisecond
+    Then I enter the details as
+      | Fields              | Value         |
+      | EmployerName        | <CompanyName> |
+      | BusinessTradingName | <CompanyName> |
+    Then I select "Other" from "SelectBusinessTypeCode"
+    Then I click on button "TaxPayerDetailsNextBT"
+    Then I enter the details as
+      | Fields                    | Value      |
+      | AddressLine1              | TEST       |
+      | Address_City              | TEST       |
+      | PostCode                  |       3333 |
+      | ContactPerson_FirstName   | TEST       |
+      | ContactPerson_LastName    | TEST       |
+      | ContactPerson_PhoneNumber | 1234567890 |
+
+    Examples: 
+      | PortalName | CompanyName          | ABN         | UserName | Password   |
+      | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
 
   @review
   Scenario Outline: DTSP-966: As a Business Taxpayer registering for Payroll Tax, I want to see an updated Taxpayer details section, so that it is easier to use
@@ -6097,9 +6126,8 @@ Feature: Regression for TSS
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |
       | TSSAdmin        | Dynamic Fire Pty Ltd | 80134834334 | jbradley | Dbresults1 |
-  @wip
-
-  Scenario Outline: <return period> / <employer status> / Group Number <group number> under wages section
+  	@wip
+   Scenario Outline: <return period> / <employer status> / Group Number <group number> under wages section
     Given I want to login to portal "<PortalName>"
     And I enter the details as
       | Fields        | Value      |
@@ -6159,15 +6187,15 @@ Feature: Regression for TSS
     Then I click on button with value "Discard"
     Then I click on button "select2-chosen-1"
     #Independent employer (non-group) lodging for itself
-    Then I enter the details as
-      | Fields               | Value |
-      | s2id_autogen1_search | JOINT |
-    Then I click on button "select2-results-1"
-    Then I click on button "LodgePayrollAnswer_TypeAnnual"
-    Then I select "01 Jul 2014 - 30 Jun 2015" from "AnnualObligationSelect"
-    Then I click on button "NextSection"
-    Then I wait for "5000" millisecond
-    Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)\)"
+    #Then I enter the details as
+      #| Fields               | Value |
+      #| s2id_autogen1_search | JOINT |
+    #Then I click on button "select2-results-1"
+    #Then I click on button "LodgePayrollAnswer_TypeAnnual"
+    #Then I select "01 Jul 2014 - 30 Jun 2015" from "AnnualObligationSelect"
+    #Then I click on button "NextSection"
+    #Then I wait for "5000" millisecond
+    #Then I check object with xpath "//*[contains(@id, 'Titlewages')]//div[3]" contents match regex "\(\d{2} \w+ \d{4} - \d{2} \w+ \d{4} / ([\w|\s|\W]+ / [\w|\s]+:\s\d+)\)"
 
     Examples: 
       | PortalName | CompanyName          | ABN         | UserName | Password   |

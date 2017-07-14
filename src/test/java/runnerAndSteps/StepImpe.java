@@ -99,10 +99,10 @@ public class StepImpe {
 //		FirefoxOptions ffo =  new FirefoxOptions().setBinary(ffBinary).setProfile(firefoxProfile);
 
 		// use this if your Chrome is only at the latest version
-		ChromeDriverManager.getInstance().setup();
+		//ChromeDriverManager.getInstance().setup();
 		
 		// local only
-		//System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Automation Tools\\Drivers\\chromedriver.exe");
 		
 		driver = new ChromeDriver();
 
@@ -119,7 +119,7 @@ public class StepImpe {
 
 	@After()
 	public void tearDown() {	
-		driver.quit();
+		//driver.quit();
 	}
 	//******************************************************************************   
 	    
@@ -322,7 +322,7 @@ public class StepImpe {
 	public void i_check_is_not_readonly(String arg1) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
 		String myXpath = createXpath.xpathMakerById(arg1);
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		WebElement some_element = driver.findElement(By.xpath(myXpath));
 		Assert.assertTrue(some_element.isEnabled());
 	}
@@ -352,7 +352,7 @@ public class StepImpe {
 	public void i_Check_contains(String arg1, String arg2) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
 		String myxpath = createXpath.xpathMakerById(arg1);
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		WebElement inputBox = driver.findElement(By.xpath(myxpath));
 		String boxContents = inputBox.getAttribute("value");
 		System.out.println("boxContents: " + boxContents);
@@ -393,7 +393,7 @@ public class StepImpe {
 		
 		boxContents = null;
 		inputBox = null;
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 
 	}
 	
@@ -402,7 +402,7 @@ public class StepImpe {
 	public void i_Check_label_contains(String arg1, String arg2) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
 		String myxpath = createXpath.xpathMakerById(arg1);
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		WebElement contents = driver.findElement(By.xpath(myxpath));
 		String labelContents = contents.getText();
 		System.out.println("labelContents: " + labelContents);
@@ -516,7 +516,7 @@ public class StepImpe {
 	@And("^I hit Enter$")
     public LandingPage I_hit_Enter() throws InterruptedException {
 		PageFactory.initElements(driver, LandingPage.class).hitEnter();
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		
 		return PageFactory.initElements(driver, LandingPage.class);
 	}
@@ -531,7 +531,7 @@ public class StepImpe {
 		
 	@And("^I click on button \"(.*?)\"$")
 	public void i_click_on_button(String arg1) throws Throwable {
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the calendar popup
 		String myXpath = null;
 		DBUtilities createXpath = new DBUtilities(driver);
@@ -565,14 +565,14 @@ public class StepImpe {
 				driver.findElement(By.xpath(myXpath)).click();
 			}
 		}
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 
 	}
 	
 	// clicks an object based on the 'value' attribute
 	@And("^I click on button with value \"(.*?)\"$")
 	public void i_click_on_button_with_value(String arg1) throws Throwable {
-		Thread.sleep(2500 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		String myXpath = null;
 		DBUtilities createXpath = new DBUtilities(driver);
 		myXpath = createXpath.xpathMakerByValue(arg1);
@@ -602,7 +602,7 @@ public class StepImpe {
 	public void i_click_on(String arg1) throws Throwable {
 		
 		// give time for page loading
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		Pattern datePattern = Pattern.compile("\\d\\d\\d\\d\\d\\d\\d\\d"); // date pattern as used in the old calendar popup
 
 		// this if block was used to click on the calendar popup; it is now depreciated
@@ -630,7 +630,7 @@ public class StepImpe {
 			String myxpath = createXpath.xpathMaker(arg1);
 			System.out.println("cliclking on " +myxpath);
 			Assert.assertTrue(driver.findElement(By.xpath(myxpath)).isDisplayed());
-			Thread.sleep(2000 * sleepMultiplier);
+			Thread.sleep(3000 * sleepMultiplier);
 			driver.findElement(By.xpath(myxpath)).click();
 			
 		}
@@ -642,7 +642,7 @@ public class StepImpe {
 	// doesn't always work, be careful
 	@Given("^I select \"(.*?)\" from \"(.*?)\"$")
 	public void i_select_from(String arg1, String arg2) throws Throwable {
-		Thread.sleep(sleepMultiplier * 2000);
+		Thread.sleep(sleepMultiplier * 3000);
 		if(arg1.equals("SetGoal")){
 			String myxpath = PageFactory.initElements(driver, GoalsAndTargetsPage.class).xpathMakerById1AndId2(arg1, arg2);
 			WebElement element = driver.findElement(By.xpath(myxpath));
@@ -690,7 +690,7 @@ public class StepImpe {
 	
 	@Then("^I check \"(.*?)\" exists$")
 	public void i_check_exists(String arg1) throws Throwable {
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		DBUtilities checkElementDisplayed = new DBUtilities(driver);
 		try {
 			String myxpath = checkElementDisplayed.xpathMakerById(arg1);
@@ -729,7 +729,7 @@ public class StepImpe {
 	//*********************************************** read popup message********************************************
 	@Then("^I see \"(.*?)\" displayed on popup and I click \"(.*?)\"$")
 	public void i_see_displayed_on_popup_and_I_click(String arg1, String arg2) throws Throwable {
-   Thread.sleep(2000);
+   Thread.sleep(3000);
 		PageFactory.initElements(driver, DBUtilities.class).checkPopUpMessage(arg1);
 		PageFactory.initElements(driver, DBUtilities.class).clickOnPopUP(arg2);
 
@@ -767,14 +767,14 @@ public class StepImpe {
 		
 		Assert.assertTrue(driver.findElement(By.xpath("//*[contains(text(),arg1)]")).isDisplayed());
 		System.out.println("Message sucessfully displayed as " +arg1);
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 	}
 
 	
 	@When("^I view the left hand panel of screen$")
 	public void i_view_the_left_hand_panel_of_screen() throws Throwable {
 		System.out.println("Checking UI Elements on LHS of screen");
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 	}
 
 	@Then("^I see \"(.*?)\" displayed$")
@@ -788,7 +788,7 @@ public class StepImpe {
       LandingPage AU = PageFactory.initElements(driver, LandingPage.class);
 
       DBUtilities checkElementDisplayed = new DBUtilities(driver);
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
 		System.out.println("checking for text " +myxpath);
 		Assert.assertTrue(driver.getPageSource().contains(arg1)); // other methods may not work
@@ -798,7 +798,7 @@ public class StepImpe {
 	@Then("^I see text \"(.*?)\" shown$")
 	public void i_see_text_shown(String arg1) throws Throwable {
       LandingPage AU = PageFactory.initElements(driver, LandingPage.class);
-      Thread.sleep(2000 * sleepMultiplier);
+      Thread.sleep(3000 * sleepMultiplier);
       DBUtilities checkElementDisplayed = new DBUtilities(driver);
 		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
 		System.out.println("checking for text " +myxpath);
@@ -810,7 +810,7 @@ public class StepImpe {
 	@Then("^I see text \"(.*?)\" not displayed$")
 	public void i_see_text_not_displayed(String arg1) throws Throwable {
 		DBUtilities checkElementDisplayed = new DBUtilities(driver);
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		String myxpath = checkElementDisplayed.xpathMakerContainsText(arg1);                                // keep an eye...changed because of 520
 		System.out.println("Checking for text: " +myxpath);
 	
@@ -1070,7 +1070,7 @@ public class StepImpe {
 	
 	@Then("^I check object with xpath \"(.*?)\" exists$")
 	public void i_check_object_with_xpath_exists(String arg1) throws Throwable {
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		DBUtilities checkElementDisplayed = new DBUtilities(driver);
 	
 		WebElement object = driver.findElement(By.xpath(arg1));
@@ -1084,7 +1084,7 @@ public class StepImpe {
 	public void i_check_object_with_xpath_contains(String arg1, String arg2) throws Throwable {
 		DBUtilities createXpath = new DBUtilities(driver);
 		String myxpath = arg1;
-		Thread.sleep(2000 * sleepMultiplier);
+		Thread.sleep(3000 * sleepMultiplier);
 		WebElement inputBox = driver.findElement(By.xpath(myxpath));
 		String contents = inputBox.getText().trim();
 		System.out.println("boxContents: " + contents);
